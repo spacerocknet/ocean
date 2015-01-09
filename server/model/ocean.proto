@@ -1,0 +1,76 @@
+import "model.proto";
+import "type.proto";
+
+package ocean;
+
+/************************************************* Entities *************************************************/
+message Game
+{
+	extend model.Entity	 { optional Game GAME = 4; }
+	required string name = 1;
+	optional string description = 2;
+	required int32 state = 3;
+	required uint32 player_count = 4;
+
+}
+
+message Session
+{
+	extend model.Entity	 { optional Session SESSION = 5; }
+	required bytes game = 1;
+	required string name = 2;
+	optional string code = 3;
+}
+
+message Player
+{
+	extend model.Entity	 { optional Player PLAYER = 6; }
+	required string name = 1;
+	required string email = 2;
+	required string password = 3;
+	optional bytes avatar = 4;
+}
+
+message Administrator
+{
+	extend model.Entity	 { optional Administrator ADMIN = 7; }
+	required string name = 1;
+	required string email = 2;
+	required string password = 3;
+}
+
+/*----------------RELATION---------------------- */
+
+/*----------------EVENT---------------------- */
+message Update
+{
+	extend model.Event { optional Update UPDATE = 4;}
+	required bytes id = 1;
+	optional bytes updater = 2;
+	optional Game game = 3;
+	optional Session session = 5;
+	optional Player player = 7;
+}
+
+message JoinSession
+{
+	extend model.Event { optional JoinSession JOIN_SESSION = 5; }
+	required bytes session_id = 1;
+	required bytes player_id = 2;
+}
+
+message LeaveSession
+{
+	extend model.Event { optional LeaveSession LEAVE_SESSION = 6; }
+	required bytes session_id = 1;
+	required bytes player_id = 2;
+}
+
+message UpdateSession
+{
+	extend model.Event { optional UpdateSession UPDATE_SESSION = 7; }
+	required bytes session_id = 1;
+	required bytes player_id = 2;
+	optional bytes data = 3;
+}
+
