@@ -45,117 +45,6 @@ public:
 		return code;
 	}
 
-	/*
-	 * get hash code from a buffer terminated by '\0'
-	 */
-	inline static uint32_t hash_code(const char* s)
-	{
-		uint32_t h = *s;
-		if (h) for (++s; *s; ++s)
-		{
-			h = (h << 5) - h + *s;
-		}
-		return h;
-		//		uint32_t ret;
-		//		MurmurHash3_x86_32(s, strlen(s),0, &ret);
-		//		return ret;
-	}
-
-	/*
-	 * check email format
-	 * Note: use regular expression
-	 */
-	static bool normalize_email(string &email)
-	{
-		static sregex rex = sregex::compile("(\\w+)(\\.)*(\\w*)@(\\w+)(\\.(\\w+))+");
-		if (email.empty()) return false;
-		boost::algorithm::to_lower(email);
-
-		if (regex_match(email, rex)) return true;
-		else return false;
-	}
-
-	static bool check_password(string &pwd)
-	{
-		/*TODO: implement*/
-		return true;
-	}
-
-	/*
-	 * Check and normalize telephone number
-	 */
-	static bool normalize_tel(string &tel)
-	{
-		static sregex rex = sregex::compile("(\\+84)(9(\\d{8})|(1\\d{9}))");
-		static sregex rex1 = sregex::compile("((09\\d{8})|(01\\d{9}))");
-
-		if (tel.empty()) return false;
-		if (regex_match(tel, rex)) return true;
-		if (regex_match(tel, rex1))
-		{
-			tel = tel.erase(0, 1);
-			tel = tel.insert(0, "+84");
-			return true;
-		}
-		else return false;
-	}
-
-	static bool is_valid_url(string url)
-	{
-		return true;
-	}
-	/*
-	 * Validate DOB ( Date Of Birth )
-	 */
-	static bool is_valid_dob(string dob)
-	{
-		/* dd-mm-yyyy format */
-		static sregex rex = sregex::compile("((0[1-9])|([12][0-9])|(3[01]))[- /.]((0[1-9])|(1[012]))[- /.](19|20)(\\d\\d)");
-		if (dob.empty()) return false;
-
-		if (regex_match(dob, rex)) return true;
-		else return false;
-	}
-
-	static bool normalize_dob(string &dob)
-	{
-		trim(dob);
-		if (dob.empty()) return false;
-
-		/* dd-mm-yyyy format */
-		static sregex rex = sregex::compile("((0[1-9])|([12][0-9])|(3[01]))[- /.]((0[1-9])|(1[012]))[- /.](19|20)(\\d\\d)");
-
-		if (regex_match(dob, rex)) return true;
-		else return false;
-	}
-
-	static bool is_valid_reg_time(string dob)
-	{
-
-		// TODO: check reg_time in format dd/mm/yyyy
-		return true;
-	}
-
-	static bool is_valid_reg_deadline_time(string dob)
-	{
-
-		// TODO: check reg_deadline_time
-		return true;
-	}
-
-	static bool normalize_time(string &time)
-	{
-		return true;
-	}
-
-	/*
-	 * 	Validate password
-	 */
-	static bool is_valid_password(string password)
-	{
-		return true;
-	}
-
 	static string pack_uuid(const uuid_t &uuid)
 	{
 		uuid_t out;
@@ -274,42 +163,11 @@ public:
 		return uuid_encode(input);
 	}
 
-	static string generate_session_id2()
-	{
-		uuid_t uuid;
-		char uuid_string[37];
-		uuid_generate_time(uuid);
-		string s((char*) uuid, 16);
-		uuid_unparse(uuid, uuid_string);
-		return string(uuid_string);
-//		typedef base64_from_binary<transform_width<string::const_iterator, 6, 8> > base64_t;
-//		string base64(base64_t(s.begin()), base64_t(s.end()));
-//		return base64;
-	}
-
 	static bool normalize_string(string &str)
 	{
 		trim(str);
 		if (str.empty()) return false;
 		return true;
-	}
-
-	// only digital, character, - , _
-	static bool normalize_code(string &str)
-	{
-		if (str.empty()) return false;
-
-		// additional condition check
-
-		// default
-		return true;
-	}
-
-	static bool has_suffix(const std::string &str, const std::string &suffix)
-	{
-		if (str.size() <= suffix.size()) return false;
-		string s = str.substr(str.size() - suffix.size(), suffix.size());
-		return boost::iequals(s, suffix);
 	}
 };
 
