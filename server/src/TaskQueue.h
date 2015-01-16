@@ -41,8 +41,10 @@ public:
 	virtual ~Task()
 	{
 	}
-	/* return true if this task need to be deleted after execute, otherwise return false */
-	virtual bool execute(Worker* worker)=0;
+	int get_type()
+	{
+		return type;
+	}
 private:
 	int type;
 	context_ptr context;
