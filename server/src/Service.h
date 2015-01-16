@@ -9,45 +9,34 @@
 #define SERVICE_H_
 
 #include <string>
+#include "TaskQueue.h"
 #include <boost/smart_ptr/shared_ptr.hpp>
 
-class Context
-{
-};
+class Server;
 
 class Service
 {
 protected:
-	bool _activated;
+	int type;
+	Server* server;
 public:
-	Service()
+	Service(int type, Server* server)
 	{
+		this->type = type;
+		this->server = server;
+	}
+
+	int get_type()
+	{
+		return type;
 	}
 
 	virtual ~Service()
 	{
 	}
 
-	bool activated()
-	{
-		return _activated;
-	}
-
-	/* initialize service if necessary and set _activated flag to true */
-	virtual bool activate()
-	{
-		_activated = true;
-		return true;
-	}
-
-	/* something need to be done before deactivate service and set _activated flag to false */
-	virtual void deactivate()
-	{
-		_activated = false;
-	}
-
 	/* return true if message match service, else return false */
-	virtual bool process(Context& context)=0;
+	virtual bool process(context_ptr context)=0;
 };
 
 typedef boost::shared_ptr<Service> service_ptr;

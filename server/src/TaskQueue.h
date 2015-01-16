@@ -16,17 +16,36 @@
 #include "Worker.h"
 using namespace std;
 
+class Context
+{
+	Context()
+	{
+
+	}
+	virtual ~Context()
+	{
+
+	}
+};
+
+typedef boost::shared_ptr<Context> context_ptr;
+
 class Task
 {
 public:
-	Task()
+	Task(int type, context_ptr context)
 	{
+		this->type = type;
+		this->context = context;
 	}
 	virtual ~Task()
 	{
 	}
 	/* return true if this task need to be deleted after execute, otherwise return false */
 	virtual bool execute(Worker* worker)=0;
+private:
+	int type;
+	context_ptr context;
 };
 
 typedef Task* task_ptr;

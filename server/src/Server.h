@@ -28,7 +28,6 @@ class Server
 public:
 	Server();
 	virtual ~Server();
-	Server& get_instance();
 
 	/* service */
 	void register_service(service_ptr service);
@@ -36,12 +35,15 @@ public:
 	void register_component(component_ptr component);
 	component_ptr get_component(std::string id);
 
-
-
+	void start();
+	void stop();
+	void process_task();
+	bool running();
 private:
 	service_vec services;
 	worker_vec workers;
 	component_map components;
+	TaskQueue tasks;
 };
 
 #endif /* SERVER_H_ */

@@ -10,14 +10,18 @@
 
 #include "commons/ThreadBase.h"
 #include <list>
+#include <glog/logging.h>
+
 using namespace std;
 
+class Server;
 class Worker: public ThreadBase
 {
 private:
 	int id;
+	Server* server;
 public:
-	Worker(int id);
+	Worker(int id, Server* server);
 	virtual ~Worker();
 	void run();
 };
