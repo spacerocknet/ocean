@@ -34,40 +34,40 @@ void  protobuf_AddDesc_comm_2eproto();
 void protobuf_AssignDesc_comm_2eproto();
 void protobuf_ShutdownFile_comm_2eproto();
 
-class ServiceType;
+class Service;
 class Request;
 class Reply;
 class HelloRequest;
 
-enum ServiceType_Type {
-  ServiceType_Type_HELLO = 1,
-  ServiceType_Type_PING = 2
+enum Service_Type {
+  Service_Type_HELLO = 1,
+  Service_Type_PING = 2
 };
-bool ServiceType_Type_IsValid(int value);
-const ServiceType_Type ServiceType_Type_Type_MIN = ServiceType_Type_HELLO;
-const ServiceType_Type ServiceType_Type_Type_MAX = ServiceType_Type_PING;
-const int ServiceType_Type_Type_ARRAYSIZE = ServiceType_Type_Type_MAX + 1;
+bool Service_Type_IsValid(int value);
+const Service_Type Service_Type_Type_MIN = Service_Type_HELLO;
+const Service_Type Service_Type_Type_MAX = Service_Type_PING;
+const int Service_Type_Type_ARRAYSIZE = Service_Type_Type_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ServiceType_Type_descriptor();
-inline const ::std::string& ServiceType_Type_Name(ServiceType_Type value) {
+const ::google::protobuf::EnumDescriptor* Service_Type_descriptor();
+inline const ::std::string& Service_Type_Name(Service_Type value) {
   return ::google::protobuf::internal::NameOfEnum(
-    ServiceType_Type_descriptor(), value);
+    Service_Type_descriptor(), value);
 }
-inline bool ServiceType_Type_Parse(
-    const ::std::string& name, ServiceType_Type* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ServiceType_Type>(
-    ServiceType_Type_descriptor(), name, value);
+inline bool Service_Type_Parse(
+    const ::std::string& name, Service_Type* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<Service_Type>(
+    Service_Type_descriptor(), name, value);
 }
 // ===================================================================
 
-class ServiceType : public ::google::protobuf::Message {
+class Service : public ::google::protobuf::Message {
  public:
-  ServiceType();
-  virtual ~ServiceType();
+  Service();
+  virtual ~Service();
 
-  ServiceType(const ServiceType& from);
+  Service(const Service& from);
 
-  inline ServiceType& operator=(const ServiceType& from) {
+  inline Service& operator=(const Service& from) {
     CopyFrom(from);
     return *this;
   }
@@ -81,17 +81,17 @@ class ServiceType : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ServiceType& default_instance();
+  static const Service& default_instance();
 
-  void Swap(ServiceType* other);
+  void Swap(Service* other);
 
   // implements Message ----------------------------------------------
 
-  ServiceType* New() const;
+  Service* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ServiceType& from);
-  void MergeFrom(const ServiceType& from);
+  void CopyFrom(const Service& from);
+  void MergeFrom(const Service& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -112,33 +112,33 @@ class ServiceType : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
-  typedef ServiceType_Type Type;
-  static const Type HELLO = ServiceType_Type_HELLO;
-  static const Type PING = ServiceType_Type_PING;
+  typedef Service_Type Type;
+  static const Type HELLO = Service_Type_HELLO;
+  static const Type PING = Service_Type_PING;
   static inline bool Type_IsValid(int value) {
-    return ServiceType_Type_IsValid(value);
+    return Service_Type_IsValid(value);
   }
   static const Type Type_MIN =
-    ServiceType_Type_Type_MIN;
+    Service_Type_Type_MIN;
   static const Type Type_MAX =
-    ServiceType_Type_Type_MAX;
+    Service_Type_Type_MAX;
   static const int Type_ARRAYSIZE =
-    ServiceType_Type_Type_ARRAYSIZE;
+    Service_Type_Type_ARRAYSIZE;
   static inline const ::google::protobuf::EnumDescriptor*
   Type_descriptor() {
-    return ServiceType_Type_descriptor();
+    return Service_Type_descriptor();
   }
   static inline const ::std::string& Type_Name(Type value) {
-    return ServiceType_Type_Name(value);
+    return Service_Type_Name(value);
   }
   static inline bool Type_Parse(const ::std::string& name,
       Type* value) {
-    return ServiceType_Type_Parse(name, value);
+    return Service_Type_Parse(name, value);
   }
 
   // accessors -------------------------------------------------------
 
-  // @@protoc_insertion_point(class_scope:comm.ServiceType)
+  // @@protoc_insertion_point(class_scope:comm.Service)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
@@ -152,7 +152,7 @@ class ServiceType : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_comm_2eproto();
 
   void InitAsDefaultInstance();
-  static ServiceType* default_instance_;
+  static Service* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -430,7 +430,7 @@ class HelloRequest : public ::google::protobuf::Message {
 
 // ===================================================================
 
-// ServiceType
+// Service
 
 // -------------------------------------------------------------------
 
@@ -686,8 +686,8 @@ namespace google {
 namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::comm::ServiceType_Type>() {
-  return ::comm::ServiceType_Type_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::comm::Service_Type>() {
+  return ::comm::Service_Type_descriptor();
 }
 
 }  // namespace google

@@ -20,10 +20,10 @@ namespace comm {
 
 namespace {
 
-const ::google::protobuf::Descriptor* ServiceType_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* Service_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  ServiceType_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* ServiceType_Type_descriptor_ = NULL;
+  Service_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* Service_Type_descriptor_ = NULL;
 const ::google::protobuf::Descriptor* Request_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Request_reflection_ = NULL;
@@ -43,21 +43,21 @@ void protobuf_AssignDesc_comm_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "comm.proto");
   GOOGLE_CHECK(file != NULL);
-  ServiceType_descriptor_ = file->message_type(0);
-  static const int ServiceType_offsets_[1] = {
+  Service_descriptor_ = file->message_type(0);
+  static const int Service_offsets_[1] = {
   };
-  ServiceType_reflection_ =
+  Service_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      ServiceType_descriptor_,
-      ServiceType::default_instance_,
-      ServiceType_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServiceType, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServiceType, _unknown_fields_),
+      Service_descriptor_,
+      Service::default_instance_,
+      Service_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Service, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Service, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(ServiceType));
-  ServiceType_Type_descriptor_ = ServiceType_descriptor_->enum_type(0);
+      sizeof(Service));
+  Service_Type_descriptor_ = Service_descriptor_->enum_type(0);
   Request_descriptor_ = file->message_type(1);
   static const int Request_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Request, id_),
@@ -117,7 +117,7 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    ServiceType_descriptor_, &ServiceType::default_instance());
+    Service_descriptor_, &Service::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Request_descriptor_, &Request::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -129,8 +129,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
 }  // namespace
 
 void protobuf_ShutdownFile_comm_2eproto() {
-  delete ServiceType::default_instance_;
-  delete ServiceType_reflection_;
+  delete Service::default_instance_;
+  delete Service_reflection_;
   delete Request::default_instance_;
   delete Request_reflection_;
   delete Reply::default_instance_;
@@ -146,17 +146,17 @@ void protobuf_AddDesc_comm_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\ncomm.proto\022\004comm\"*\n\013ServiceType\"\033\n\004Typ"
-    "e\022\t\n\005HELLO\020\001\022\010\n\004PING\020\002\"\025\n\007Request\022\n\n\002id\030"
-    "\001 \002(\014\"!\n\005Reply\022\014\n\004type\030\001 \002(\r\022\n\n\002id\030\002 \001(\014"
-    "\"\034\n\014HelloRequest\022\014\n\004text\030\001 \002(\t", 150);
+    "\n\ncomm.proto\022\004comm\"&\n\007Service\"\033\n\004Type\022\t\n"
+    "\005HELLO\020\001\022\010\n\004PING\020\002\"\025\n\007Request\022\n\n\002id\030\001 \002("
+    "\014\"!\n\005Reply\022\014\n\004type\030\001 \002(\r\022\n\n\002id\030\002 \001(\014\"\034\n\014"
+    "HelloRequest\022\014\n\004text\030\001 \002(\t", 146);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "comm.proto", &protobuf_RegisterTypes);
-  ServiceType::default_instance_ = new ServiceType();
+  Service::default_instance_ = new Service();
   Request::default_instance_ = new Request();
   Reply::default_instance_ = new Reply();
   HelloRequest::default_instance_ = new HelloRequest();
-  ServiceType::default_instance_->InitAsDefaultInstance();
+  Service::default_instance_->InitAsDefaultInstance();
   Request::default_instance_->InitAsDefaultInstance();
   Reply::default_instance_->InitAsDefaultInstance();
   HelloRequest::default_instance_->InitAsDefaultInstance();
@@ -172,11 +172,11 @@ struct StaticDescriptorInitializer_comm_2eproto {
 
 // ===================================================================
 
-const ::google::protobuf::EnumDescriptor* ServiceType_Type_descriptor() {
+const ::google::protobuf::EnumDescriptor* Service_Type_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return ServiceType_Type_descriptor_;
+  return Service_Type_descriptor_;
 }
-bool ServiceType_Type_IsValid(int value) {
+bool Service_Type_IsValid(int value) {
   switch(value) {
     case 1:
     case 2:
@@ -187,70 +187,70 @@ bool ServiceType_Type_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
-const ServiceType_Type ServiceType::HELLO;
-const ServiceType_Type ServiceType::PING;
-const ServiceType_Type ServiceType::Type_MIN;
-const ServiceType_Type ServiceType::Type_MAX;
-const int ServiceType::Type_ARRAYSIZE;
+const Service_Type Service::HELLO;
+const Service_Type Service::PING;
+const Service_Type Service::Type_MIN;
+const Service_Type Service::Type_MAX;
+const int Service::Type_ARRAYSIZE;
 #endif  // _MSC_VER
 #ifndef _MSC_VER
 #endif  // !_MSC_VER
 
-ServiceType::ServiceType()
+Service::Service()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void ServiceType::InitAsDefaultInstance() {
+void Service::InitAsDefaultInstance() {
 }
 
-ServiceType::ServiceType(const ServiceType& from)
+Service::Service(const Service& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void ServiceType::SharedCtor() {
+void Service::SharedCtor() {
   _cached_size_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-ServiceType::~ServiceType() {
+Service::~Service() {
   SharedDtor();
 }
 
-void ServiceType::SharedDtor() {
+void Service::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-void ServiceType::SetCachedSize(int size) const {
+void Service::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* ServiceType::descriptor() {
+const ::google::protobuf::Descriptor* Service::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return ServiceType_descriptor_;
+  return Service_descriptor_;
 }
 
-const ServiceType& ServiceType::default_instance() {
+const Service& Service::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_comm_2eproto();
   return *default_instance_;
 }
 
-ServiceType* ServiceType::default_instance_ = NULL;
+Service* Service::default_instance_ = NULL;
 
-ServiceType* ServiceType::New() const {
-  return new ServiceType;
+Service* Service::New() const {
+  return new Service;
 }
 
-void ServiceType::Clear() {
+void Service::Clear() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
 
-bool ServiceType::MergePartialFromCodedStream(
+bool Service::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
@@ -266,7 +266,7 @@ bool ServiceType::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void ServiceType::SerializeWithCachedSizes(
+void Service::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
@@ -274,7 +274,7 @@ void ServiceType::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* ServiceType::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* Service::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
@@ -283,7 +283,7 @@ void ServiceType::SerializeWithCachedSizes(
   return target;
 }
 
-int ServiceType::ByteSize() const {
+int Service::ByteSize() const {
   int total_size = 0;
 
   if (!unknown_fields().empty()) {
@@ -297,10 +297,10 @@ int ServiceType::ByteSize() const {
   return total_size;
 }
 
-void ServiceType::MergeFrom(const ::google::protobuf::Message& from) {
+void Service::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const ServiceType* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const ServiceType*>(
+  const Service* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const Service*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -309,40 +309,40 @@ void ServiceType::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void ServiceType::MergeFrom(const ServiceType& from) {
+void Service::MergeFrom(const Service& from) {
   GOOGLE_CHECK_NE(&from, this);
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void ServiceType::CopyFrom(const ::google::protobuf::Message& from) {
+void Service::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void ServiceType::CopyFrom(const ServiceType& from) {
+void Service::CopyFrom(const Service& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool ServiceType::IsInitialized() const {
+bool Service::IsInitialized() const {
 
   return true;
 }
 
-void ServiceType::Swap(ServiceType* other) {
+void Service::Swap(Service* other) {
   if (other != this) {
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
-::google::protobuf::Metadata ServiceType::GetMetadata() const {
+::google::protobuf::Metadata Service::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = ServiceType_descriptor_;
-  metadata.reflection = ServiceType_reflection_;
+  metadata.descriptor = Service_descriptor_;
+  metadata.reflection = Service_reflection_;
   return metadata;
 }
 

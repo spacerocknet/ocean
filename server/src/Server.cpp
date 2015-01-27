@@ -63,7 +63,7 @@ void Server::process_task()
 
 	auto it = services.find(task->get_type());
 
-	if (it == services.end())
+	if (it != services.end())
 	{
 		auto context = task->get_context();
 		auto reply = it->second->process(context);
@@ -83,10 +83,6 @@ void Server::process_task()
 		{
 			/* tcp context */
 		}
-	}
-	else
-	{
-		/**/
 	}
 	delete task;
 }

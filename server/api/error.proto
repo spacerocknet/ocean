@@ -1,0 +1,5 @@
+enum ErrorCode
+{
+	OK = 0;
+	REQUEST_INVALID = 1;
+}

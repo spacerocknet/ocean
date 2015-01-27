@@ -1,6 +1,6 @@
 package comm;
 
-message ServiceType
+message Service
 {
 	enum Type
 	{
