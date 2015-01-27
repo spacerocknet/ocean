@@ -25,8 +25,8 @@ void Worker::run()
 
 	while (server->running())
 	{
-		DLOG(INFO)<<"Worker:"<<id;
 		server->process_task();
+		DLOG(INFO)<<"Worker:"<<id;
 	}
 	DLOG(INFO) << "Worker " << id << " is stopped";
 }

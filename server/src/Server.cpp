@@ -22,7 +22,7 @@ Server::Server(cppcms::service &srv) :
 		workers.push_back(boost::make_shared<Worker>(i, this));
 	}
 	end = true;
-//	dispatcher().assign("/o/(.+)", &Server::get_object, this, 1);
+	//dispatcher().assign("/r/([0-9]+)", &Server::push_task, this, 1, 2);
 }
 
 Server::~Server()
@@ -52,11 +52,14 @@ void Server::process_task()
 	if (task==nullptr) return;
 
 	auto it = services.find(task->get_type());
+
 	if (it == services.end())
 	{
+		/**/
 	}
 	else
 	{
+		/**/
 	}
 	delete task;
 }

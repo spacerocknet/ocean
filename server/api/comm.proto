@@ -1,0 +1,28 @@
+package comm;
+
+message ServiceType
+{
+	enum Type
+	{
+		HELLO = 1;
+		PING = 2;
+	}
+}
+
+/* general request */
+message Request
+{
+	required bytes id = 1;
+}
+
+/* general reply */
+message Reply
+{
+	required uint32 type = 1;
+	optional bytes id = 2;
+}
+
+message HelloRequest
+{
+	required string text = 1;
+}
