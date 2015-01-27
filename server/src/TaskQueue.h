@@ -32,6 +32,10 @@ public:
 	{
 		return type;
 	}
+	context_ptr get_context()
+	{
+		return context;
+	}
 private:
 	int type;
 	context_ptr context;

@@ -47,4 +47,17 @@ private:
 	http_context context;
 };
 
+class TcpContext: public Context
+{
+public:
+	TcpContext()
+	{
+	}
+
+	virtual ~TcpContext()
+	{
+	}
+};
+
+
 #endif /* CONTEXT_H_ */

@@ -58,14 +58,31 @@ void Server::push_http_task(string type)
 
 void Server::process_task()
 {
-	task_ptr task = tasks.dequeue();
-	if (task==nullptr) return;
+	auto task = tasks.dequeue();
+	if (task == nullptr) return;
 
 	auto it = services.find(task->get_type());
 
 	if (it == services.end())
 	{
-		/**/
+		auto context = task->get_context();
+		auto reply = it->second->process(context);
+
+		auto hc = dynamic_cast<HttpContext*>(context.get());
+		if (hc != nullptr)
+		{
+			/* http context */
+			auto c = hc->get_context();
+			if (!reply.empty())
+			{
+				c->response().out() << reply;
+				c->async_complete_response();
+			}
+		}
+		else
+		{
+			/* tcp context */
+		}
 	}
 	else
 	{

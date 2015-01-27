@@ -34,9 +34,7 @@ public:
 	virtual ~Service()
 	{
 	}
-
-	/* return true if message match service, else return false */
-	virtual bool process(context_ptr context)=0;
+	virtual string process(context_ptr context)=0;
 };
 
 typedef boost::shared_ptr<Service> service_ptr;
