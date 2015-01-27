@@ -27,8 +27,7 @@ int main(int argc, char **argv)
 //		server->register_component(dao);
 
 		/* register services */
-//		server->register_service(boost::make_shared<uki3d::SigninService>(server.get()));
-//		server->register_service(boost::make_shared<uki3d::SignoutService>(server.get()));
+		server->register_service(boost::make_shared<HelloService>(server.get()));
 
 		service.applications_pool().mount(server);
 		DLOG(INFO)<<"Server is running...";
