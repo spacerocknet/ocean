@@ -14,8 +14,30 @@
 #include <google/dense_hash_map>
 #include <list>
 #include "Worker.h"
-#include "Task.h"
+#include "Context.h"
 using namespace std;
+
+class Task
+{
+public:
+	Task(int type, context_ptr context)
+	{
+		this->type = type;
+		this->context = context;
+	}
+	virtual ~Task()
+	{
+	}
+	int get_type()
+	{
+		return type;
+	}
+private:
+	int type;
+	context_ptr context;
+};
+
+typedef Task* task_ptr;
 
 class TaskQueue
 {

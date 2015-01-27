@@ -8,6 +8,7 @@
 #include "Server.h"
 #include "Worker.h"
 #include <boost/smart_ptr/make_shared.hpp>
+#include <boost/lexical_cast.hpp>
 
 Server::Server(cppcms::service &srv) :
 		cppcms::application(srv), service(srv)
@@ -22,7 +23,7 @@ Server::Server(cppcms::service &srv) :
 		workers.push_back(boost::make_shared<Worker>(i, this));
 	}
 	end = true;
-	//dispatcher().assign("/r/([0-9]+)", &Server::push_task, this, 1, 2);
+	dispatcher().assign("/r/([0-9]+)", &Server::push_http_task, this, 1);
 }
 
 Server::~Server()
@@ -44,6 +45,15 @@ component_ptr Server::get_component(std::string id)
 	component_map::iterator it = components.find(id);
 	if (it != components.end()) return it->second;
 	return component_ptr();
+}
+
+void Server::push_http_task(string type)
+{
+	DLOG(INFO)<<"Push http task:"<<type<< " from:"<< request().remote_addr();
+	http_context c = this->release_context();
+	context_ptr context = boost::make_shared<HttpContext>(c);
+	task_ptr t = new Task(boost::lexical_cast<int>(type),context);
+	tasks.enqueue(t);
 }
 
 void Server::process_task()

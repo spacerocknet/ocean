@@ -49,6 +49,7 @@ public:
 
 	void start();
 	void stop();
+	void push_http_task(string type);
 	void process_task();
 	bool running();
 private:

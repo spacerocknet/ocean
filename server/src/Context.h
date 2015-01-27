@@ -8,8 +8,12 @@
 #ifndef CONTEXT_H_
 #define CONTEXT_H_
 
+#include <cppcms/http_context.h>
+#include <booster/intrusive_ptr.h>
+
 class Context
 {
+public:
 	Context()
 	{
 
@@ -21,6 +25,26 @@ class Context
 };
 
 typedef boost::shared_ptr<Context> context_ptr;
+typedef booster::shared_ptr<cppcms::http::context> http_context;
 
+class HttpContext: public Context
+{
+public:
+	HttpContext(http_context context)
+	{
+		this->context = context;
+	}
+
+	virtual ~HttpContext()
+	{
+	}
+
+	http_context get_context()
+	{
+		return context;
+	}
+private:
+	http_context context;
+};
 
 #endif /* CONTEXT_H_ */
