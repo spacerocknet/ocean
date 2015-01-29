@@ -12,6 +12,7 @@
 #include "Utils.h"
 #include "../Service.h"
 #include "../Server.h"
+#include "service.pb.h"
 
 /******************************************************************************************************************/
 #define SERVICE_DEC(name, type) \

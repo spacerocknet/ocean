@@ -20,14 +20,12 @@ void HelloService::process(context_ptr context)
 	try
 	{
 		auto data = c->request().raw_post_data();
-		if (data.second>0)
-		{
-			std::istringstream ss(std::string(reinterpret_cast<char const *>(data.first),data.second));
-			if(!request.load(ss,true)) throw EXCEPTION(1);
-		}
-
+		if (data.second == 0) throw EXCEPTION(ErrorType::INVALID_REQUEST);
+		std::istringstream ss(std::string(reinterpret_cast<char const *>(data.first), data.second));
+		if (!request.load(ss, true) || request["text"].is_undefined()) throw EXCEPTION(ErrorType::INVALID_REQUEST);
 		reply["type"] = 0;
-		reply["text"] = request["text"];
+		reply["text"] = "Hello " + request["text"].str();
+		DLOG(INFO)<<reply["text"].str();
 	}
 	catch (Exception &e)
 	{

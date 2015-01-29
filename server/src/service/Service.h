@@ -11,7 +11,7 @@
 #include "Template.h"
 #include "Exception.h"
 
-SERVICE_DEC(HelloService,1);
+SERVICE_DEC(HelloService,ServiceType::HELLO);
 
 
 #endif /* SERVICES_H_ */

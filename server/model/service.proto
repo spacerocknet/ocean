@@ -1,0 +1,15 @@
+message ServiceType
+{
+	enum Type
+	{
+		HELLO =1;
+	}
+}
+
+message ErrorType
+{
+	enum Type
+	{
+		INVALID_REQUEST = 1;
+	}
+}
