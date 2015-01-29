@@ -12,7 +12,6 @@
 #include "Utils.h"
 #include "../Service.h"
 #include "../Server.h"
-#include "service.pb.h"
 
 /******************************************************************************************************************/
 #define HTTP_SERVICE_DEC(name, type) \

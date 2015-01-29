@@ -16,7 +16,7 @@
 #include <cppcms/http_request.h>
 #include <cppcms/json.h>
 #include "Exception.h"
-#include "service.pb.h"
+#include "Type.h"
 
 class Server;
 

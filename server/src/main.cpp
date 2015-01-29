@@ -7,7 +7,6 @@
 #include <glog/logging.h>
 #include "Server.h"
 #include <boost/smart_ptr/make_shared.hpp>
-#include "db/Database.h"
 #include <boost/filesystem.hpp>
 #include "service/Service.h"
 
