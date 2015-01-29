@@ -12,6 +12,12 @@
 #include "TaskQueue.h"
 #include <boost/smart_ptr/shared_ptr.hpp>
 
+#include <cppcms/http_response.h>
+#include <cppcms/http_request.h>
+#include <cppcms/json.h>
+#include "Exception.h"
+#include "service.pb.h"
+
 class Server;
 
 class Service
@@ -38,5 +44,46 @@ public:
 };
 
 typedef boost::shared_ptr<Service> service_ptr;
+
+class HttpService: public Service
+{
+public:
+	HttpService(int type, Server* server): Service(type,server)
+	{
+	}
+
+	virtual ~HttpService()
+	{
+	}
+
+	virtual void process(context_ptr context)
+	{
+		cppcms::json::value request;
+		cppcms::json::value reply;
+
+		auto hc = dynamic_cast<HttpContext*>(context.get());
+		if (hc == nullptr) return;
+		auto c = hc->get_context();
+
+		try
+		{
+			auto data = c->request().raw_post_data();
+			if (data.second == 0) throw EXCEPTION(ErrorType::INVALID_REQUEST);
+			std::istringstream ss(std::string(reinterpret_cast<char const *>(data.first), data.second));
+			if (!request.load(ss, true)) throw EXCEPTION(ErrorType::INVALID_REQUEST);
+			execute(request, reply);
+		}
+		catch (Exception &e)
+		{
+			DLOG(INFO)<<"Exception "<<e.get_type();
+			reply["type"] = e.get_type();
+		}
+
+		c->response().out() << reply;
+		c->async_complete_response();
+	}
+
+	virtual void execute(cppcms::json::value& request, cppcms::json::value& reply) = 0;
+};
 
 #endif /* SERVICE_H_ */

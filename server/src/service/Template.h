@@ -15,17 +15,17 @@
 #include "service.pb.h"
 
 /******************************************************************************************************************/
-#define SERVICE_DEC(name, type) \
-class name: public Service \
+#define HTTP_SERVICE_DEC(name, type) \
+class name: public HttpService \
 {\
 public:\
-	name(Server* server) : Service(type, server)\
+	name(Server* server) : HttpService(type, server)\
 	{\
 	}\
 	virtual ~name()\
 	{\
 	}\
-	void process(context_ptr context);\
+	void execute(cppcms::json::value& request, cppcms::json::value& reply);\
 };
 /******************************************************************************************************************/
 
