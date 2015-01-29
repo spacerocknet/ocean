@@ -10,10 +10,8 @@
 
 #include "Template.h"
 #include "Exception.h"
-#include "comm.pb.h"
-#include "error.pb.h"
 
-SERVICE_DEC(HelloService,comm::Service::HELLO);
+SERVICE_DEC(HelloService,1);
 
 
 #endif /* SERVICES_H_ */

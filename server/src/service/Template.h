@@ -12,7 +12,6 @@
 #include "Utils.h"
 #include "../Service.h"
 #include "../Server.h"
-#include "comm.pb.h"
 
 /******************************************************************************************************************/
 #define SERVICE_DEC(name, type) \
@@ -25,7 +24,7 @@ public:\
 	virtual ~name()\
 	{\
 	}\
-	string process(context_ptr context);\
+	void process(context_ptr context);\
 };
 /******************************************************************************************************************/
 

@@ -7,27 +7,35 @@
 
 #include "Service.h"
 
-string HelloService::process(context_ptr context)
+void HelloService::process(context_ptr context)
 {
+	cppcms::json::value request;
+	cppcms::json::value reply;
+
+	DLOG(INFO)<<"Receive HelloRequest";
 	auto hc = dynamic_cast<HttpContext*>(context.get());
-	if (hc == nullptr) return "";
+	if (hc == nullptr) return;
 	auto c = hc->get_context();
-	std::pair<void*, size_t> data = c->request().raw_post_data();
-	comm::HelloRequest request;
-	comm::Reply reply;
 
 	try
 	{
-		if ((!data.first) || (!request.ParseFromArray(data.first, data.second))) throw EXCEPTION(REQUEST_INVALID);
-		reply.set_type(OK);
+		auto data = c->request().raw_post_data();
+		if (data.second>0)
+		{
+			std::istringstream ss(std::string(reinterpret_cast<char const *>(data.first),data.second));
+			if(!request.load(ss,true)) throw EXCEPTION(1);
+		}
 
+		reply["type"] = 0;
+		reply["text"] = request["text"];
 	}
 	catch (Exception &e)
 	{
-		reply.set_type(e.get_type());
 		DLOG(INFO)<<"Exception "<<e.get_type();
+		reply["type"] = e.get_type();
 	}
 
-	return reply.SerializeAsString();
+	c->response().out() << reply;
+	c->async_complete_response();
 }
 

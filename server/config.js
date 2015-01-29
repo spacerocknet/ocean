@@ -4,7 +4,7 @@
 		"port" : 8088
 	},
 	"http" : {
-		"script" : "/u3d"
+		"script" : "/ocean"
 	},
 	"file_server" : {
 		"enable" : true,

@@ -66,23 +66,7 @@ void Server::process_task()
 	if (it != services.end())
 	{
 		auto context = task->get_context();
-		auto reply = it->second->process(context);
-
-		auto hc = dynamic_cast<HttpContext*>(context.get());
-		if (hc != nullptr)
-		{
-			/* http context */
-			auto c = hc->get_context();
-			if (!reply.empty())
-			{
-				c->response().out() << reply;
-				c->async_complete_response();
-			}
-		}
-		else
-		{
-			/* tcp context */
-		}
+		it->second->process(context);
 	}
 	delete task;
 }
