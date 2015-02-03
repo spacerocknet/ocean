@@ -1,7 +1,8 @@
 {
 	"service" : {
 		"api" : "http",
-		"port" : 8088
+		"port" : 8088,
+		"disable_global_exit_handling" : true
 	},
 	"http" : {
 		"script" : "/ocean"

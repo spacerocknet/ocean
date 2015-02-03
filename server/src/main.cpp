@@ -10,7 +10,17 @@
 #include <boost/filesystem.hpp>
 #include "service/Service.h"
 
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <signal.h>
+
 using namespace boost::filesystem;
+
+boost::function<void(int)> myCb;
+void CallCb( int value )
+{
+	myCb(value);
+}
 
 int main(int argc, char **argv)
 {
@@ -30,6 +40,22 @@ int main(int argc, char **argv)
 
 		service.applications_pool().mount(server);
 		DLOG(INFO)<<"Server is running...";
+
+		/* Hook SIGTERM (kill) and SIGINT (Ctrl-C) */
+		struct sigaction act;
+		memset(&act, 0, sizeof(act));
+		myCb = boost::bind(&Server::interrupt_cb, server.get(), _1);
+		act.sa_handler = CallCb;
+		if (sigaction(SIGINT, &act, 0))
+		{
+			DLOG(ERROR)<< "Sigint action error";
+		}
+		if (sigaction(SIGTERM, &act, 0))
+		{
+			DLOG(ERROR)<< "Sigterm action error";
+		}
+
+		/* start server */
 		server->start();
 		server->stop();
 		DLOG(INFO)<<"Server is stopped";

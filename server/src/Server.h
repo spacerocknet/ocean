@@ -26,6 +26,7 @@
 #include "Worker.h"
 #include "TaskQueue.h"
 #include "Service.h"
+#include "Connection.h"
 
 #define WORKER_COUNT 10
 #define QUEUE_SIZE   1000
@@ -34,6 +35,27 @@ typedef boost::shared_ptr<Component> component_ptr;
 typedef google::dense_hash_map<int, service_ptr> service_map;
 typedef std::vector<worker_ptr> worker_vec;
 typedef google::dense_hash_map<std::string, component_ptr> component_map;
+typedef google::dense_hash_set<int> listenfd_set;
+typedef google::dense_hash_map<int, connection_ptr> connection_map;
+
+class HttpLauncher: public ThreadBase
+{
+public:
+	HttpLauncher(cppcms::service& service): service(service)
+	{
+	}
+	virtual ~HttpLauncher()
+	{
+
+	}
+
+	void run()
+	{
+		service.run();
+	}
+private:
+	cppcms::service& service;
+};
 
 class Server: public cppcms::application
 {
@@ -52,13 +74,34 @@ public:
 	void push_http_task(string type);
 	void process_task();
 	bool running();
+
+	/*tcp connection*/
+	bool watch(int fd);
+	void tcp_loop();
+	connection_ptr open_connection(std::string host, int port);
+	connection_ptr add_connection(int fd);
+	void close_connection(int fd);
+	connection_ptr get_connection(int fd);
+	int listen_connection(std::string host, int port);
+	void interrupt_cb(int sig);
+
 private:
 	service_map services;
 	worker_vec workers;
 	component_map components;
 	TaskQueue tasks;
 	bool end;
+
+	/* http */
 	cppcms::service& service;
+	HttpLauncher* launcher;
+
+	/* tcp */
+	int epoll_fd;
+	int max_event;
+	listenfd_set fds;
+	connection_map connections;
+	boost::mutex connection_mutex;
 };
 
 #endif /* SERVER_H_ */
