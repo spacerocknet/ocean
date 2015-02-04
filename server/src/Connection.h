@@ -12,12 +12,18 @@
 #include <boost/thread/condition.hpp>
 #include <queue>
 #include "Message.h"
+#include "Context.h"
+#include "TaskQueue.h"
 
-class Message;
-
-enum ConnectionType
+class Connection;
+class ReadContext: public Context
 {
-        CT_C2S, CT_S2S
+public:
+	ReadContext(Connection* connection);
+	virtual ~ReadContext();
+	Connection* get_connection();
+private:
+	Connection* connection;
 };
 
 class Connection
@@ -32,10 +38,9 @@ private:
 	message_ptr reading_message;
 	int fd;
 	int watch_dog;
-
+	task_ptr task;
 public:
 	boost::weak_ptr<Connection> me;
-	ConnectionType type;
 
 	Connection(int fd);
 	virtual ~Connection();
@@ -43,6 +48,7 @@ public:
 	int send(char* data, size_t size);
 	int send_message(message_ptr const & message);
 	bool alive();
+	void push_read_task(TaskQueue& tasks);
 };
 
 typedef boost::shared_ptr<Connection> connection_ptr;

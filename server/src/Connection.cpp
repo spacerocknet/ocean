@@ -18,10 +18,22 @@ Connection::Connection(int fd)
 	received = 0;
 	processing = false;
 	some_event_come = false;
+	task = new Task(0, boost::make_shared<ReadContext>(this));
 }
 
 Connection::~Connection()
 {
+}
+
+void Connection::push_read_task(TaskQueue& tasks)
+{
+	boost::mutex::scoped_lock lock(check_mutex);
+	if (processing) watch_dog++;
+	else
+	{
+		tasks.enqueue(task);
+		processing = true;
+	}
 }
 
 int Connection::get_socket()
@@ -72,5 +84,18 @@ bool Connection::alive()
 	socklen_t len = sizeof(error);
 	int retval = getsockopt(fd, SOL_SOCKET, SO_ERROR, &error, &len);
 	return (retval == 0);
+}
+
+ReadContext::ReadContext(Connection* connection)
+{
+	this->connection = connection;
+}
+ReadContext::~ReadContext()
+{
+}
+
+Connection* ReadContext::get_connection()
+{
+	return connection;
 }
 

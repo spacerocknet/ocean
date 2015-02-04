@@ -83,7 +83,6 @@ public:
 	void close_connection(int fd);
 	connection_ptr get_connection(int fd);
 	int listen_connection(std::string host, int port);
-	void interrupt_cb(int sig);
 
 private:
 	service_map services;

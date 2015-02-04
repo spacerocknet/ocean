@@ -7,6 +7,7 @@
 #include <glog/logging.h>
 #include "Server.h"
 #include <boost/smart_ptr/make_shared.hpp>
+#include <boost/smart_ptr/shared_ptr.hpp>
 #include <boost/filesystem.hpp>
 #include "service/Service.h"
 
@@ -16,10 +17,10 @@
 
 using namespace boost::filesystem;
 
-boost::function<void(int)> myCb;
-void CallCb( int value )
+boost::function<void(void)> stop_server;
+void interrupt_cb( int value )
 {
-	myCb(value);
+	stop_server();
 }
 
 int main(int argc, char **argv)
@@ -29,6 +30,7 @@ int main(int argc, char **argv)
 
 	try
 	{
+
 		cppcms::service service(argc, argv);
 		booster::intrusive_ptr<Server> server = new Server(service);
 
@@ -37,15 +39,13 @@ int main(int argc, char **argv)
 
 		/* register services */
 		server->register_service(boost::make_shared<HelloService>(server.get()));
-
 		service.applications_pool().mount(server);
-		DLOG(INFO)<<"Server is running...";
 
-		/* Hook SIGTERM (kill) and SIGINT (Ctrl-C) */
+		/* hook SIGTERM (kill) and SIGINT (Ctrl-C) */
 		struct sigaction act;
 		memset(&act, 0, sizeof(act));
-		myCb = boost::bind(&Server::interrupt_cb, server.get(), _1);
-		act.sa_handler = CallCb;
+		stop_server = boost::bind(&Server::stop, server.get());
+		act.sa_handler = interrupt_cb;
 		if (sigaction(SIGINT, &act, 0))
 		{
 			DLOG(ERROR)<< "Sigint action error";
@@ -56,6 +56,7 @@ int main(int argc, char **argv)
 		}
 
 		/* start server */
+		DLOG(INFO)<<"Server is running...";
 		server->start();
 		server->stop();
 		DLOG(INFO)<<"Server is stopped";

@@ -111,6 +111,8 @@ void Server::start()
 	{
 		w->start();
 	}
+
+	listen_connection("127.0.0.1",1234);
 	//service.run();
 	launcher = new HttpLauncher(service);
 	launcher->start();
@@ -215,9 +217,8 @@ void Server::tcp_loop()
 			else
 			{
 				/* push event to queue */
-				//DLOG(INFO) << "new read event";
 				connection_ptr con = get_connection(events[i].data.fd);
-				//TODO: if (con != NULL) con->notify_read();
+				if (con != NULL) con->push_read_task(tasks);
 			}
 		}
 	}
@@ -312,12 +313,6 @@ connection_ptr Server::get_connection(int fd)
 	connection_map::iterator it = connections.find(fd);
 	if (it == connections.end()) return connection_ptr();
 	return it->second;
-}
-
-void Server::interrupt_cb(int sig)
-{
-	DLOG(INFO)<<"Stop by SIGINT";
-	this->stop();
 }
 
 
