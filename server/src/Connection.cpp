@@ -135,7 +135,7 @@ bool Connection::read_message(Server* server)
 				size = (header[2] << 8) + header[3]; // 2 bytes for size
 				type = (header[4] << 16) + (header[5] << 8) + header[6];//3 bytes for type
 
-				reading_message = boost::make_shared<BufferMessage>(size, type);
+				reading_message = boost::make_shared<Message>(size, type);
 				memcpy(reading_message->get_data(), header, PACKET_HEADER_SIZE);
 			}
 		}

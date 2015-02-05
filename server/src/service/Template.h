@@ -26,6 +26,20 @@ public:\
 	}\
 	void execute(cppcms::json::value& request, cppcms::json::value& reply);\
 };
+
+#define TCP_SERVICE_DEC(name, type) \
+class name: public TcpService \
+{\
+public:\
+	name(Server* server) : TcpService(type, server)\
+	{\
+	}\
+	virtual ~name()\
+	{\
+	}\
+	void execute(cppcms::json::value& request, cppcms::json::value& reply);\
+};
+
 /******************************************************************************************************************/
 
 

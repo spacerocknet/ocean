@@ -12,7 +12,6 @@
 #include <boost/thread/condition.hpp>
 #include <queue>
 #include "Message.h"
-//#include "Context.h"
 
 class Server;
 class Task;
