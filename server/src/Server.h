@@ -72,6 +72,8 @@ public:
 	void start();
 	void stop();
 	void push_http_task(string type);
+	void push_tcp_task(message_ptr message, Connection* connection);
+
 	void process_task();
 	bool running();
 
@@ -83,6 +85,8 @@ public:
 	void close_connection(int fd);
 	connection_ptr get_connection(int fd);
 	int listen_connection(std::string host, int port);
+
+	TaskQueue& get_tasks();
 
 private:
 	service_map services;

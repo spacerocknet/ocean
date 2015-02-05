@@ -10,6 +10,7 @@
 #include "Message.h"
 #include <boost/make_shared.hpp>
 #include "commons/SocketUtil.h"
+#include "Server.h"
 #define MAXTRIES 100
 
 Connection::Connection(int fd)
@@ -25,8 +26,9 @@ Connection::~Connection()
 {
 }
 
-void Connection::push_read_task(TaskQueue& tasks)
+void Connection::push_read_task(Server* server)
 {
+	TaskQueue& tasks = server->get_tasks();
 	boost::mutex::scoped_lock lock(check_mutex);
 	if (processing) watch_dog++;
 	else
@@ -86,16 +88,139 @@ bool Connection::alive()
 	return (retval == 0);
 }
 
-ReadContext::ReadContext(Connection* connection)
+bool Connection::read_message(Server* server)
 {
-	this->connection = connection;
-}
-ReadContext::~ReadContext()
-{
-}
+	TaskQueue& tasks = server->get_tasks();
 
-Connection* ReadContext::get_connection()
-{
-	return connection;
-}
+	while (1) //loop until no more data in socket
+	{
+		watch_dog = 0;
+		if (received < PACKET_HEADER_SIZE)
+		{
+			/* read header data */
+			int count = read(fd, header, PACKET_HEADER_SIZE - received);
+			if (count == 0)
+			{
+				DLOG(INFO)<< "Close connection:" << fd;
+				server->close_connection(fd);
+				return false;
+			}
+			else if (count == -1)
+			{
+				if (errno != EAGAIN)
+				{
+					DLOG(ERROR) << "Something wrong with connection:" << fd;
+					return false;
+				}
+				else
+				{
+					boost::mutex::scoped_lock lock(check_mutex);
+					if (watch_dog == 0)
+					{
+						processing = false;
+						break;
+					}
+					else continue;
+				}
+			}
 
+			received += count;
+			if (received == PACKET_HEADER_SIZE)
+			{
+				if (header[0] != PACKET_MAGIC || header[1] != PACKET_MAGIC)
+				{
+					DLOG(ERROR)<< "Magic bytes are not matched";
+					//TODO: handle error
+				}
+
+				int size, type;
+				size = (header[2] << 8) + header[3]; // 2 bytes for size
+				type = (header[4] << 16) + (header[5] << 8) + header[6];//3 bytes for type
+
+				reading_message = boost::make_shared<BufferMessage>(size, type);
+				memcpy(reading_message->get_data(), header, PACKET_HEADER_SIZE);
+			}
+		}
+		else if (received < reading_message->size) //size here mean packet size not content size
+		{
+			/* read message data */
+			int count = read(fd, reading_message->get_data() + received, reading_message->size - received);
+			if (count == 0)
+			{
+				//DLOG(INFO) << "Close connection:" << ev->fd;
+				reading_message.reset();
+				return false;
+			}
+			else if (count == -1)
+			{
+				if (errno != EAGAIN)
+				{
+					DLOG(ERROR) << "Something wrong with connection:" << fd;
+					reading_message.reset();
+					return false;
+				}
+				else
+				{
+					boost::mutex::scoped_lock lock(check_mutex);
+					if (watch_dog == 0)
+					{
+						processing = false;
+						break;
+					}
+					else continue;
+				}
+			}
+
+			received += count;
+		}
+		else if (received == reading_message->size)
+		{
+			/* decode message_id and streaming type*/
+			bool has_id, has_okey;
+			has_okey = ((header[7] & 0x01) == 1);
+			has_id = ((header[7] & 0x02) == 2);
+
+			unsigned char* tmp_data = (unsigned char*) (reading_message->get_data() + 8);
+
+			if (has_okey)
+			{
+				uint32_t okey = tmp_data[0];
+				okey <<= 8;
+				okey += tmp_data[1];
+				okey <<= 8;
+				okey += tmp_data[2];
+				okey <<= 8;
+				okey += tmp_data[3];
+				tmp_data += 4;
+				reading_message->okey = okey;
+			}
+			else reading_message->okey = 0;
+
+			if (has_id)
+			{
+				uint64_t message_id = tmp_data[0];
+				message_id <<= 8;
+				message_id += tmp_data[1];
+				message_id <<= 8;
+				message_id += tmp_data[2];
+				message_id <<= 8;
+				message_id += tmp_data[3];
+				message_id <<= 8;
+				message_id += tmp_data[4];
+				message_id <<= 8;
+				message_id += tmp_data[5];
+				message_id <<= 8;
+				message_id += tmp_data[6];
+				message_id <<= 8;
+				message_id += tmp_data[7];
+				reading_message->id = message_id;
+			}
+			else reading_message->id = 0;
+			server->push_tcp_task(reading_message, this);
+			received = 0;//ready for new packet
+			reading_message.reset();
+		}
+	}
+
+	return true;
+}

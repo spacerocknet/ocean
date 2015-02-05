@@ -57,12 +57,24 @@ component_ptr Server::get_component(std::string id)
 	return component_ptr();
 }
 
+TaskQueue& Server::get_tasks()
+{
+	return tasks;
+}
+
 void Server::push_http_task(string type)
 {
 	DLOG(INFO)<<"Push http task:"<<type<< " from:"<< request().remote_addr();
-	http_context c = this->release_context();
-	context_ptr context = boost::make_shared<HttpContext>(c);
-	task_ptr t = new Task(boost::lexical_cast<int>(type),context);
+	auto c = this->release_context();
+	auto context = boost::make_shared<HttpContext>(c);
+	auto t = new Task(boost::lexical_cast<int>(type),context);
+	tasks.enqueue(t);
+}
+
+void Server::push_tcp_task(message_ptr message, Connection* connection)
+{
+	auto context = boost::make_shared<TcpContext>(message, connection);
+	auto t = new Task(message->type,context);
 	tasks.enqueue(t);
 }
 
@@ -218,13 +230,11 @@ void Server::tcp_loop()
 			{
 				/* push event to queue */
 				connection_ptr con = get_connection(events[i].data.fd);
-				if (con != NULL) con->push_read_task(tasks);
+				if (con != NULL) con->push_read_task(this);
 			}
 		}
 	}
-
 	free(events);
-
 }
 
 connection_ptr Server::open_connection(std::string host, int port)
@@ -300,13 +310,11 @@ connection_ptr Server::add_connection(int fd)
 		return connection_ptr();
 	}
 	connection_ptr conn = boost::make_shared<Connection>(fd);
-	conn->me = conn;
 	connection_mutex.lock();
 	connections[fd] = conn;
 	connection_mutex.unlock();
 	return conn;
 }
-
 connection_ptr Server::get_connection(int fd)
 {
 	boost::mutex::scoped_lock lock(connection_mutex);
@@ -314,6 +322,4 @@ connection_ptr Server::get_connection(int fd)
 	if (it == connections.end()) return connection_ptr();
 	return it->second;
 }
-
-
 

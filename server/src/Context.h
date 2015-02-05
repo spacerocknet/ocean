@@ -10,6 +10,8 @@
 
 #include <cppcms/http_context.h>
 #include <booster/intrusive_ptr.h>
+#include "Message.h"
+#include "Connection.h"
 
 class Context
 {
@@ -50,14 +52,37 @@ private:
 class TcpContext: public Context
 {
 public:
-	TcpContext()
+	TcpContext(message_ptr message, Connection* connection)
 	{
+		this->message= message;
+		this->connection = connection;
 	}
 
 	virtual ~TcpContext()
 	{
 	}
+private:
+	message_ptr message;
+	Connection* connection;
 };
 
+class ReadContext: public Context
+{
+public:
+	ReadContext(Connection* connection)
+	{
+		this->connection = connection;
+	}
+	virtual ~ReadContext()
+	{
+
+	}
+	Connection* get_connection()
+	{
+		return connection;
+	}
+private:
+	Connection* connection;
+};
 
 #endif /* CONTEXT_H_ */
