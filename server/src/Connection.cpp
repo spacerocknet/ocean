@@ -46,7 +46,7 @@ int Connection::get_socket()
 int Connection::send(char* data, size_t size)
 {
 	boost::mutex::scoped_lock slock(send_mutex);
-	int sent = 0;
+	size_t sent = 0;
 	int tries = 0;
 	while (sent < size)
 	{
@@ -90,8 +90,6 @@ bool Connection::alive()
 
 bool Connection::read_message(Server* server)
 {
-	TaskQueue& tasks = server->get_tasks();
-
 	while (1) //loop until no more data in socket
 	{
 		watch_dog = 0;
@@ -176,25 +174,10 @@ bool Connection::read_message(Server* server)
 		else if (received == reading_message->size)
 		{
 			/* decode message_id and streaming type*/
-			bool has_id, has_okey;
-			has_okey = ((header[7] & 0x01) == 1);
+			bool has_id;
 			has_id = ((header[7] & 0x02) == 2);
 
 			unsigned char* tmp_data = (unsigned char*) (reading_message->get_data() + 8);
-
-			if (has_okey)
-			{
-				uint32_t okey = tmp_data[0];
-				okey <<= 8;
-				okey += tmp_data[1];
-				okey <<= 8;
-				okey += tmp_data[2];
-				okey <<= 8;
-				okey += tmp_data[3];
-				tmp_data += 4;
-				reading_message->okey = okey;
-			}
-			else reading_message->okey = 0;
 
 			if (has_id)
 			{

@@ -24,12 +24,10 @@ public:
 	int size;
 	int type;
 	uint64_t id;
-	uint32_t okey;
 
 	Message()
 	{
 		id = 0;
-		okey = 0;
 	}
 
 	virtual ~Message()
@@ -40,7 +38,6 @@ public:
 	char* get_content_data()
 	{
 		char* ret = get_data() + PACKET_HEADER_SIZE;
-		if (okey > 0) ret += 4;
 		if (id > 0) ret += 8;
 		return ret;
 	}
@@ -48,13 +45,12 @@ public:
 	int get_content_size()
 	{
 		int ret = size - PACKET_HEADER_SIZE;
-		if (okey > 0) ret -= 4;
 		if (id > 0) ret -= 8;
 		return ret;
 	}
 
 	template<class ProtoMessage>
-	static message_ptr pb_encode(ProtoMessage & pmessage, int type, uint64_t message_id = 0, uint32_t okey = 0);
+	static message_ptr pb_encode(ProtoMessage & pmessage, int type, uint64_t message_id = 0);
 
 	template<class ProtoMessage>
 	static bool pb_decode(ProtoMessage & pmessage, message_ptr const & message);
@@ -66,9 +62,8 @@ class BufferMessage: public Message
 private:
 	char* data;
 public:
-	BufferMessage(int size, int type, uint64_t message_id = 0, uint32_t okey = 0)
+	BufferMessage(int size, int type, uint64_t message_id = 0)
 	{
-		this->okey = okey;
 		this->id = message_id;
 		this->size = size;
 		this->type = type;
@@ -87,12 +82,11 @@ public:
 };
 
 template<class ProtoMessage>
-message_ptr Message::pb_encode(ProtoMessage& pmessage, int type, uint64_t message_id, uint32_t okey)
+message_ptr Message::pb_encode(ProtoMessage& pmessage, int type, uint64_t message_id)
 {
 	std::string data = pmessage.SerializeAsString();
 	int size = data.size() + PACKET_HEADER_SIZE;
 	if (message_id > 0) size += 8;
-	if (okey > 0) size += 4;
 	message_ptr ret = boost::make_shared<BufferMessage>(size, type);
 	unsigned char* buf = (unsigned char*) ret->get_data();
 	buf[0] = PACKET_MAGIC;
@@ -107,15 +101,6 @@ message_ptr Message::pb_encode(ProtoMessage& pmessage, int type, uint64_t messag
 	buf[7] = 0;
 
 	int offset = PACKET_HEADER_SIZE;
-
-	if (okey > 0)
-	{
-		buf[7] += 1;
-		buf[offset++] = ((okey >> 24) & 0xFF);
-		buf[offset++] = ((okey >> 16) & 0xFF);
-		buf[offset++] = ((okey >> 8) & 0xFF);
-		buf[offset++] = (okey & 0xFF);
-	}
 
 	if (message_id > 0)
 	{
