@@ -83,14 +83,22 @@ void Server::process_task()
 	auto task = tasks.dequeue();
 	if (task == nullptr) return;
 
-	auto it = services.find(task->get_type());
-
-	if (it != services.end())
+	if (task->get_type()==0)
 	{
-		auto context = task->get_context();
-		it->second->process(context);
+		auto context = static_cast<ReadContext*>(task->get_context().get());
+		context->get_connection()->read_message(this);
 	}
-	delete task;
+	else
+	{
+		auto it = services.find(task->get_type());
+
+		if (it != services.end())
+		{
+			auto context = task->get_context();
+			it->second->process(context);
+		}
+		delete task;
+	}
 }
 
 bool Server::running()

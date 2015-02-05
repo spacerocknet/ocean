@@ -61,6 +61,16 @@ public:
 	virtual ~TcpContext()
 	{
 	}
+
+	message_ptr get_message()
+	{
+		return message;
+	}
+
+	Connection* get_connection()
+	{
+		return connection;
+	}
 private:
 	message_ptr message;
 	Connection* connection;
