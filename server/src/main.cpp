@@ -14,13 +14,32 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
-
 using namespace boost::filesystem;
+
+#define REG_SERVICE(name)\
+server->register_service(boost::make_shared<name>(server.get()));\
+DLOG(INFO)<<"Service '" << #name << "' is registered";
 
 boost::function<void(void)> stop_server;
 void interrupt_cb( int value )
 {
 	stop_server();
+}
+void hook_interrupt(Server* server)
+{
+	/* hook SIGTERM (kill) and SIGINT (Ctrl-C) */
+	struct sigaction act;
+	memset(&act, 0, sizeof(act));
+	stop_server = boost::bind(&Server::stop, server);
+	act.sa_handler = interrupt_cb;
+	if (sigaction(SIGINT, &act, 0))
+	{
+		DLOG(ERROR)<< "Sigint action error";
+	}
+	if (sigaction(SIGTERM, &act, 0))
+	{
+		DLOG(ERROR)<< "Sigterm action error";
+	}
 }
 
 int main(int argc, char **argv)
@@ -30,32 +49,16 @@ int main(int argc, char **argv)
 
 	try
 	{
-
 		cppcms::service service(argc, argv);
 		booster::intrusive_ptr<Server> server = new Server(service);
-
-//		component_ptr dao = boost::make_shared<uki3d::DAO>((db::Database*) database.get());
-//		server->register_component(dao);
+		hook_interrupt(server.get());
 
 		/* register services */
-		server->register_service(boost::make_shared<HelloService>(server.get()));
-		service.applications_pool().mount(server);
-
-		/* hook SIGTERM (kill) and SIGINT (Ctrl-C) */
-		struct sigaction act;
-		memset(&act, 0, sizeof(act));
-		stop_server = boost::bind(&Server::stop, server.get());
-		act.sa_handler = interrupt_cb;
-		if (sigaction(SIGINT, &act, 0))
-		{
-			DLOG(ERROR)<< "Sigint action error";
-		}
-		if (sigaction(SIGTERM, &act, 0))
-		{
-			DLOG(ERROR)<< "Sigterm action error";
-		}
+		REG_SERVICE(HelloService);
+		REG_SERVICE(PingPongService);
 
 		/* start server */
+		service.applications_pool().mount(server);
 		DLOG(INFO)<<"Server is running...";
 		server->start();
 		server->stop();

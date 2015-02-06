@@ -12,6 +12,7 @@
 #include "Exception.h"
 
 HTTP_SERVICE_DEC(HelloService,ServiceType::HELLO);
+TCP_SERVICE_DEC(PingPongService,ServiceType::PINGPONG);
 
 
 #endif /* SERVICES_H_ */

@@ -13,7 +13,8 @@ class ServiceType
 public:
 	enum
 	{
-		HELLO = 1
+		HELLO = 1,
+		PINGPONG = 2
 	};
 };
 
