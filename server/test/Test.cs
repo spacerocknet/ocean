@@ -3,46 +3,56 @@ using System.Net;
 using System.IO;
 using System.Text;
 using System.Net.Sockets;
+using System.Threading;
 
-namespace test_ocean
+namespace Ocean
 {
-	class OceanClient
+	class Client
 	{
+		private int id = 100;
 		public TcpClient client;
-		Stream stream;
-		OceanClient()
+		public Stream stream;
+		public Client(string host, int port)
 		{
 			client= new TcpClient();
-			Console.WriteLine("Connecting.....");
-			client.Connect("127.0.0.1",5678);
-			Console.WriteLine("Connected");
+			client.Connect(host,port);
 			stream = client.GetStream ();
 		}
 
 		void Close()
 		{
+			stream.Close ();
 			client.Close();
 		}
-		public void SayHello(string name)
+		public string HttpRequest(int type, string message)
 		{
-			var request = System.Net.HttpWebRequest.Create("http://127.0.0.1:8088/ocean/r/1");
+			string url = "http://127.0.0.1:8088/ocean/r/" + type;
+			var request = System.Net.HttpWebRequest.Create(url);
 			request.Method ="POST";
 			request.ContentType = "application/json";
 			var requestStream = request.GetRequestStream();
-			string r = "{\"text\":\"NGUYEN Hong San\"}";
-
-			byte[] bytes = Encoding.UTF8.GetBytes(r);
-
+			byte[] bytes = Encoding.UTF8.GetBytes(message);
 			requestStream.Write(bytes, 0, bytes.Length);
 			requestStream.Close ();
+
 			HttpWebResponse response = (HttpWebResponse)request.GetResponse ();
 			Stream receiveStream = response.GetResponseStream();
 			StreamReader reader = new StreamReader(receiveStream);
 			string text = reader.ReadToEnd ();
-			Console.WriteLine (text);
+			return text;
 		}
 
-		public byte[] encode_message(int message_id, int type, string data)
+		public string TcpRequest(int type, string data)
+		{
+			byte[] buf = EncodeMessage (id++, type, data);
+			stream.Write(buf,0,buf.Length);
+			byte[] bb=new byte[1024];
+			int k = stream.Read(bb,0,1024);
+			string s = DecodeMessage(bb, k);
+			return s;
+		}
+
+		public byte[] EncodeMessage(int message_id, int type, string data)
 		{
 			int size = 8 + data.Length;
 			if (message_id != 0) size += 8;
@@ -76,7 +86,7 @@ namespace test_ocean
 			Array.Copy (bytes, 0, buf, offset, bytes.Length);
 			return buf;
 		}
-		public string decode_message(byte[] data, int length)
+		public string DecodeMessage(byte[] data, int length)
 		{
 			int offset = 8;
 			int size = ((int)data[2]<<8) + data[3];
@@ -88,21 +98,22 @@ namespace test_ocean
 			return s;
 		}
 
+		public void SayHello()
+		{
+			string text = HttpRequest (1, "{\"text\":\"NGUYEN Hong San\"}");
+			Console.WriteLine (text);
+		}
+
 		public void PingPong()
 		{
-			byte[] msg = this.encode_message (1234, 2, "{\"text\":\"PING\"}");
-			stream.Write(msg,0,msg.Length);
-
-			byte[] bb=new byte[1024];
-			int k = stream.Read(bb,0,1024);
-			string s = decode_message (bb, k);
-			Console.WriteLine (s);
+			string text = TcpRequest (2, "{\"text\":\"PING\"}");
+			Console.WriteLine (text);
 		}
 
 		public static void Main (string[] args)
 		{
-			OceanClient c = new OceanClient ();
-			c.SayHello("NGUYEN Hong San");
+			Client c = new Client ("127.0.0.1", 5678);
+			c.SayHello();
 			c.PingPong();
 			c.Close ();
 		}
