@@ -46,9 +46,7 @@ public:
 	}
 	virtual ~HttpLauncher()
 	{
-
 	}
-
 	void run()
 	{
 		service.run();

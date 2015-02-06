@@ -15,6 +15,7 @@
 Server::Server(cppcms::service &srv) :
 		cppcms::application(srv), service(srv)
 {
+	max_event = 512;
 	services.set_deleted_key(-1);
 	services.set_empty_key(-2);
 
@@ -132,8 +133,7 @@ void Server::start()
 		w->start();
 	}
 
-	listen_connection("127.0.0.1",1234);
-	//service.run();
+	listen_connection("127.0.0.1",5678);
 	launcher = new HttpLauncher(service);
 	launcher->start();
 	tcp_loop();
@@ -242,6 +242,7 @@ void Server::tcp_loop()
 			}
 		}
 	}
+	DLOG(INFO)<< "End main loop";
 	free(events);
 }
 
