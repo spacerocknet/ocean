@@ -123,7 +123,7 @@ public:
 		if (!reply.is_null())
 		{
 			/*FIXME: need define type of reply message */
-			auto rep = Message::encode(reply.str(),0, msg->id);
+			auto rep = Message::encode(reply.save(),0, msg->id);
 			con->send_message(rep);
 		}
 	}

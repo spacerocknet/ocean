@@ -74,12 +74,28 @@ namespace test_ocean
 			Array.Copy (bytes, 0, buf, offset, bytes.Length);
 			return buf;
 		}
+		public string decode_message(byte[] data, int length)
+		{
+			int offset = 8;
+			int size = ((int)data[2]<<8) + data[3];
+			if (data [7] == 2) offset += 8;
+
+			byte[] content = new byte[size];
+			Array.Copy (data, offset, content, 0, size);
+			string s = Encoding.UTF8.GetString(content, 0, content.Length);
+			return s;
+		}
 
 		public void PingPong()
 		{
-			byte[] msg = this.encode_message (1234, 2, "{}");
+			byte[] msg = this.encode_message (1234, 2, "{\"text\":\"PING\"}");
 			Stream stm = client.GetStream();
 			stm.Write(msg,0,msg.Length);
+
+			byte[] bb=new byte[1024];
+			int k = stm.Read(bb,0,1024);
+			string s = decode_message (bb, k);
+			Console.WriteLine (s);
 		}
 
 		public static void Main (string[] args)
