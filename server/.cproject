@@ -42,7 +42,6 @@
 									<listOptionValue builtIn="false" value="booster"/>
 									<listOptionValue builtIn="false" value="boost_thread"/>
 									<listOptionValue builtIn="false" value="boost_system"/>
-									<listOptionValue builtIn="false" value="uuid"/>
 									<listOptionValue builtIn="false" value="glog"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1040397391" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
