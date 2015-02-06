@@ -6,15 +6,17 @@ using System.Net.Sockets;
 
 namespace test_ocean
 {
-	class MainClass
+	class OceanClient
 	{
 		public TcpClient client;
-		MainClass()
+		Stream stream;
+		OceanClient()
 		{
 			client= new TcpClient();
 			Console.WriteLine("Connecting.....");
 			client.Connect("127.0.0.1",5678);
 			Console.WriteLine("Connected");
+			stream = client.GetStream ();
 		}
 
 		void Close()
@@ -89,18 +91,17 @@ namespace test_ocean
 		public void PingPong()
 		{
 			byte[] msg = this.encode_message (1234, 2, "{\"text\":\"PING\"}");
-			Stream stm = client.GetStream();
-			stm.Write(msg,0,msg.Length);
+			stream.Write(msg,0,msg.Length);
 
 			byte[] bb=new byte[1024];
-			int k = stm.Read(bb,0,1024);
+			int k = stream.Read(bb,0,1024);
 			string s = decode_message (bb, k);
 			Console.WriteLine (s);
 		}
 
 		public static void Main (string[] args)
 		{
-			MainClass c = new MainClass ();
+			OceanClient c = new OceanClient ();
 			c.SayHello("NGUYEN Hong San");
 			c.PingPong();
 			c.Close ();
