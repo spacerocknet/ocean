@@ -40,6 +40,7 @@
 								<option id="gnu.cpp.link.option.paths.426327637" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths"/>
 								<option id="gnu.cpp.link.option.libs.1580383820" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="protobuf"/>
+									<listOptionValue builtIn="false" value="uuid"/>
 									<listOptionValue builtIn="false" value="cppcms"/>
 									<listOptionValue builtIn="false" value="booster"/>
 									<listOptionValue builtIn="false" value="boost_thread"/>

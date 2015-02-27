@@ -16,11 +16,12 @@ namespace Ocean
 		public Stream stream;
 		private Thread thread;
 
-		public string id;
+		private string id;
 		bool running;
 
-		public Session ()
+		public Session (string id)
 		{
+			this.id = id;
 			running = false;
 		}
 

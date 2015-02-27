@@ -10,21 +10,8 @@ namespace Ocean
 {
 	class Client
 	{
-		Session session;
-		public Client()
-		{
-			session = new Session ();
-		}
-
-		public void Close()
-		{
-			if (session.IsOpened ()) session.Close ();
-		}
-		public Session Session()
-		{
-			return session;
-		}
-		public byte[] SendHttpRequest(int type, byte[] data)
+		public string token = "12345678";
+		public byte[] Post(int type, byte[] data)
 		{
 			string url = "http://127.0.0.1:8088/ocean/r/" + type;
 			var request = System.Net.HttpWebRequest.Create(url);
@@ -53,19 +40,45 @@ namespace Ocean
 			MemoryStream stream = new MemoryStream ();
 			req.WriteTo(stream);
 			byte[] data1 = stream.ToArray();
-			byte[] data2 = SendHttpRequest (1, data1);
+			byte[] data2 = Post((int)Service.HELLO, data1);
 			HelloReply rep  = HelloReply.CreateBuilder().MergeFrom(data2).BuildPartial();
 			Console.WriteLine (rep.Text);
+		}
+
+		public Session CreateSession()
+		{
+			CreateSessionRequest.Builder tmp = CreateSessionRequest.CreateBuilder ();
+			var ran = new Random ();
+			tmp.SetName ("Session" + ran.Next(1000));
+			tmp.SetToken (token);
+			CreateSessionRequest req = tmp.BuildPartial();
+			MemoryStream stream = new MemoryStream ();
+			req.WriteTo(stream);
+			byte[] data1 = stream.ToArray();
+			byte[] data2 = Post((int)comm.Service.CREATE_SESSION, data1);
+			CreateSessionReply rep  = CreateSessionReply.CreateBuilder().MergeFrom(data2).BuildPartial();
+
+			if (rep.Type == (int)Error.OK)
+			{
+				Session ret = new Session (rep.Sid);
+				ret.Open (rep.Host, rep.Port);
+				return ret;
+			}
+
+			/* TODO: join session here */
+			return null;
 		}
 
 		public static void Main (string[] args)
 		{
 			Client c = new Client ();
 			c.SayHello();
-			Session s = c.Session ();
-			s.Open ("127.0.0.1", 5678);
-			s.PingPong ();
-			c.Close ();
+			//Session session = c.CreateSession("127.0.0.1", 5678);
+			Session session = c.CreateSession();
+			if (session != null) 
+			{
+				session.PingPong ();
+			}
 		}
 	}
 }

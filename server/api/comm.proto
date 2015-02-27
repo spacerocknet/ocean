@@ -1,21 +1,20 @@
 package comm;
 
 /* service type */
-message Service
+enum Service
 {
-	enum Type
-	{
-		HELLO = 1;
-		PINGPONG = 2;
-	}
+	HELLO = 1;
+	PINGPONG = 2;
+
+	CREATE_SESSION = 100;
+	JOIN_SESSION = 101;
+	LEAVE_SESSION = 102;
 }
-message Error
+
+enum Error
 {
-	enum Type
-	{
-		OK = 0;
-		INVALID_REQUEST = 2;
-	}
+	OK = 0;
+	INVALID_REQUEST = 2;
 }
 
 message HelloRequest
@@ -25,7 +24,7 @@ message HelloRequest
 
 message HelloReply
 {
-	required uint32 type = 1;
+	required int32 type = 1;
 	required string text = 2;
 }
 
@@ -36,7 +35,7 @@ message PingpongRequest
 
 message PingpongReply
 {
-	required uint32 type = 1;
+	required int32 type = 1;
 	required string text = 2;
 }
 
@@ -49,34 +48,35 @@ message SigninRequest
 
 message SigninReply
 {
-	required uint32 type = 1;
-	required bytes auth = 2;
+	required int32 type = 1;
+	required string token = 2;
 }
 
 message CreateSessionRequest
 {
-	required bytes auth = 1;
+	required string token = 1;
 	required string name = 2;
 }
 
 message CreateSessionReply
 {
-	required uint32 type = 1;
-	required bytes sid = 2;
+	required int32 type = 1;
+	required string sid = 2;
 	required string host = 3;
-	required uint32 port = 4;
+	required int32 port = 4;
 }
 
 message JoinSessionRequest
 {
-	required bytes auth = 1;
+	required string token = 1;
 	required bytes sid = 2;
 }
 
 message JoinSessionReply
 {
-	required string name = 1;
-	repeated group Player = 2
+	required int32 type = 1;
+	required string name = 2;
+	repeated group Player = 3
 	{
 		required bytes uid = 1;
 		required string name = 2;
@@ -86,19 +86,19 @@ message JoinSessionReply
 
 message ListSessionRequest
 {
-	required bytes auth = 1;
+	required string token = 1;
 	optional uint32 count = 2;
 }
 
 message ListSessionReply
 {
-	required uint32 type = 1;
+	required int32 type = 1;
 	repeated group Session = 2
 	{
 		required string name = 1;
 		required string host = 2;
-		required uint32 port = 3;
-		required uint32 player_count = 4;
+		required int32 port = 3;
+		required int32 player_count = 4;
 	}
 }
 

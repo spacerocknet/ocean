@@ -20,14 +20,6 @@ namespace comm {
 
 namespace {
 
-const ::google::protobuf::Descriptor* Service_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  Service_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* Service_Type_descriptor_ = NULL;
-const ::google::protobuf::Descriptor* Error_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  Error_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* Error_Type_descriptor_ = NULL;
 const ::google::protobuf::Descriptor* HelloRequest_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   HelloRequest_reflection_ = NULL;
@@ -76,6 +68,8 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* LeaveSessionReply_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   LeaveSessionReply_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* Service_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* Error_descriptor_ = NULL;
 
 }  // namespace
 
@@ -86,37 +80,7 @@ void protobuf_AssignDesc_comm_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "comm.proto");
   GOOGLE_CHECK(file != NULL);
-  Service_descriptor_ = file->message_type(0);
-  static const int Service_offsets_[1] = {
-  };
-  Service_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      Service_descriptor_,
-      Service::default_instance_,
-      Service_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Service, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Service, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(Service));
-  Service_Type_descriptor_ = Service_descriptor_->enum_type(0);
-  Error_descriptor_ = file->message_type(1);
-  static const int Error_offsets_[1] = {
-  };
-  Error_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      Error_descriptor_,
-      Error::default_instance_,
-      Error_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Error, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Error, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(Error));
-  Error_Type_descriptor_ = Error_descriptor_->enum_type(0);
-  HelloRequest_descriptor_ = file->message_type(2);
+  HelloRequest_descriptor_ = file->message_type(0);
   static const int HelloRequest_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HelloRequest, name_),
   };
@@ -131,7 +95,7 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(HelloRequest));
-  HelloReply_descriptor_ = file->message_type(3);
+  HelloReply_descriptor_ = file->message_type(1);
   static const int HelloReply_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HelloReply, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HelloReply, text_),
@@ -147,7 +111,7 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(HelloReply));
-  PingpongRequest_descriptor_ = file->message_type(4);
+  PingpongRequest_descriptor_ = file->message_type(2);
   static const int PingpongRequest_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PingpongRequest, text_),
   };
@@ -162,7 +126,7 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PingpongRequest));
-  PingpongReply_descriptor_ = file->message_type(5);
+  PingpongReply_descriptor_ = file->message_type(3);
   static const int PingpongReply_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PingpongReply, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PingpongReply, text_),
@@ -178,7 +142,7 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PingpongReply));
-  SigninRequest_descriptor_ = file->message_type(6);
+  SigninRequest_descriptor_ = file->message_type(4);
   static const int SigninRequest_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SigninRequest, uid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SigninRequest, password_),
@@ -194,10 +158,10 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(SigninRequest));
-  SigninReply_descriptor_ = file->message_type(7);
+  SigninReply_descriptor_ = file->message_type(5);
   static const int SigninReply_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SigninReply, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SigninReply, auth_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SigninReply, token_),
   };
   SigninReply_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -210,9 +174,9 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(SigninReply));
-  CreateSessionRequest_descriptor_ = file->message_type(8);
+  CreateSessionRequest_descriptor_ = file->message_type(6);
   static const int CreateSessionRequest_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CreateSessionRequest, auth_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CreateSessionRequest, token_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CreateSessionRequest, name_),
   };
   CreateSessionRequest_reflection_ =
@@ -226,7 +190,7 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CreateSessionRequest));
-  CreateSessionReply_descriptor_ = file->message_type(9);
+  CreateSessionReply_descriptor_ = file->message_type(7);
   static const int CreateSessionReply_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CreateSessionReply, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CreateSessionReply, sid_),
@@ -244,9 +208,9 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CreateSessionReply));
-  JoinSessionRequest_descriptor_ = file->message_type(10);
+  JoinSessionRequest_descriptor_ = file->message_type(8);
   static const int JoinSessionRequest_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinSessionRequest, auth_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinSessionRequest, token_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinSessionRequest, sid_),
   };
   JoinSessionRequest_reflection_ =
@@ -260,8 +224,9 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(JoinSessionRequest));
-  JoinSessionReply_descriptor_ = file->message_type(11);
-  static const int JoinSessionReply_offsets_[2] = {
+  JoinSessionReply_descriptor_ = file->message_type(9);
+  static const int JoinSessionReply_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinSessionReply, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinSessionReply, name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinSessionReply, player_),
   };
@@ -293,9 +258,9 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(JoinSessionReply_Player));
-  ListSessionRequest_descriptor_ = file->message_type(12);
+  ListSessionRequest_descriptor_ = file->message_type(10);
   static const int ListSessionRequest_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ListSessionRequest, auth_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ListSessionRequest, token_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ListSessionRequest, count_),
   };
   ListSessionRequest_reflection_ =
@@ -309,7 +274,7 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ListSessionRequest));
-  ListSessionReply_descriptor_ = file->message_type(13);
+  ListSessionReply_descriptor_ = file->message_type(11);
   static const int ListSessionReply_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ListSessionReply, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ListSessionReply, session_),
@@ -343,7 +308,7 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ListSessionReply_Session));
-  LeaveSessionRequest_descriptor_ = file->message_type(14);
+  LeaveSessionRequest_descriptor_ = file->message_type(12);
   static const int LeaveSessionRequest_offsets_[1] = {
   };
   LeaveSessionRequest_reflection_ =
@@ -357,7 +322,7 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(LeaveSessionRequest));
-  LeaveSessionReply_descriptor_ = file->message_type(15);
+  LeaveSessionReply_descriptor_ = file->message_type(13);
   static const int LeaveSessionReply_offsets_[1] = {
   };
   LeaveSessionReply_reflection_ =
@@ -371,6 +336,8 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(LeaveSessionReply));
+  Service_descriptor_ = file->enum_type(0);
+  Error_descriptor_ = file->enum_type(1);
 }
 
 namespace {
@@ -383,10 +350,6 @@ inline void protobuf_AssignDescriptorsOnce() {
 
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Service_descriptor_, &Service::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Error_descriptor_, &Error::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     HelloRequest_descriptor_, &HelloRequest::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -424,10 +387,6 @@ void protobuf_RegisterTypes(const ::std::string&) {
 }  // namespace
 
 void protobuf_ShutdownFile_comm_2eproto() {
-  delete Service::default_instance_;
-  delete Service_reflection_;
-  delete Error::default_instance_;
-  delete Error_reflection_;
   delete HelloRequest::default_instance_;
   delete HelloRequest_reflection_;
   delete HelloReply::default_instance_;
@@ -469,33 +428,33 @@ void protobuf_AddDesc_comm_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\ncomm.proto\022\004comm\"*\n\007Service\"\037\n\004Type\022\t\n"
-    "\005HELLO\020\001\022\014\n\010PINGPONG\020\002\",\n\005Error\"#\n\004Type\022"
-    "\006\n\002OK\020\000\022\023\n\017INVALID_REQUEST\020\002\"\034\n\014HelloReq"
-    "uest\022\014\n\004name\030\001 \002(\t\"(\n\nHelloReply\022\014\n\004type"
-    "\030\001 \002(\r\022\014\n\004text\030\002 \002(\t\"\037\n\017PingpongRequest\022"
-    "\014\n\004text\030\001 \002(\t\"+\n\rPingpongReply\022\014\n\004type\030\001"
-    " \002(\r\022\014\n\004text\030\002 \002(\t\".\n\rSigninRequest\022\013\n\003u"
-    "id\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\")\n\013SigninRepl"
-    "y\022\014\n\004type\030\001 \002(\r\022\014\n\004auth\030\002 \002(\014\"2\n\024CreateS"
-    "essionRequest\022\014\n\004auth\030\001 \002(\014\022\014\n\004name\030\002 \002("
-    "\t\"K\n\022CreateSessionReply\022\014\n\004type\030\001 \002(\r\022\013\n"
-    "\003sid\030\002 \002(\014\022\014\n\004host\030\003 \002(\t\022\014\n\004port\030\004 \002(\r\"/"
-    "\n\022JoinSessionRequest\022\014\n\004auth\030\001 \002(\014\022\013\n\003si"
-    "d\030\002 \002(\014\"\204\001\n\020JoinSessionReply\022\014\n\004name\030\001 \002"
-    "(\t\022-\n\006player\030\002 \003(\n2\035.comm.JoinSessionRep"
-    "ly.Player\0323\n\006Player\022\013\n\003uid\030\001 \002(\014\022\014\n\004name"
-    "\030\002 \002(\t\022\016\n\006avatar\030\003 \001(\t\"1\n\022ListSessionReq"
-    "uest\022\014\n\004auth\030\001 \002(\014\022\r\n\005count\030\002 \001(\r\"\234\001\n\020Li"
-    "stSessionReply\022\014\n\004type\030\001 \002(\r\022/\n\007session\030"
-    "\002 \003(\n2\036.comm.ListSessionReply.Session\032I\n"
-    "\007Session\022\014\n\004name\030\001 \002(\t\022\014\n\004host\030\002 \002(\t\022\014\n\004"
-    "port\030\003 \002(\r\022\024\n\014player_count\030\004 \002(\r\"\025\n\023Leav"
-    "eSessionRequest\"\023\n\021LeaveSessionReply", 916);
+    "\n\ncomm.proto\022\004comm\"\034\n\014HelloRequest\022\014\n\004na"
+    "me\030\001 \002(\t\"(\n\nHelloReply\022\014\n\004type\030\001 \002(\005\022\014\n\004"
+    "text\030\002 \002(\t\"\037\n\017PingpongRequest\022\014\n\004text\030\001 "
+    "\002(\t\"+\n\rPingpongReply\022\014\n\004type\030\001 \002(\005\022\014\n\004te"
+    "xt\030\002 \002(\t\".\n\rSigninRequest\022\013\n\003uid\030\001 \002(\t\022\020"
+    "\n\010password\030\002 \002(\t\"*\n\013SigninReply\022\014\n\004type\030"
+    "\001 \002(\005\022\r\n\005token\030\002 \002(\t\"3\n\024CreateSessionReq"
+    "uest\022\r\n\005token\030\001 \002(\t\022\014\n\004name\030\002 \002(\t\"K\n\022Cre"
+    "ateSessionReply\022\014\n\004type\030\001 \002(\005\022\013\n\003sid\030\002 \002"
+    "(\t\022\014\n\004host\030\003 \002(\t\022\014\n\004port\030\004 \002(\005\"0\n\022JoinSe"
+    "ssionRequest\022\r\n\005token\030\001 \002(\t\022\013\n\003sid\030\002 \002(\014"
+    "\"\222\001\n\020JoinSessionReply\022\014\n\004type\030\001 \002(\005\022\014\n\004n"
+    "ame\030\002 \002(\t\022-\n\006player\030\003 \003(\n2\035.comm.JoinSes"
+    "sionReply.Player\0323\n\006Player\022\013\n\003uid\030\001 \002(\014\022"
+    "\014\n\004name\030\002 \002(\t\022\016\n\006avatar\030\003 \001(\t\"2\n\022ListSes"
+    "sionRequest\022\r\n\005token\030\001 \002(\t\022\r\n\005count\030\002 \001("
+    "\r\"\234\001\n\020ListSessionReply\022\014\n\004type\030\001 \002(\005\022/\n\007"
+    "session\030\002 \003(\n2\036.comm.ListSessionReply.Se"
+    "ssion\032I\n\007Session\022\014\n\004name\030\001 \002(\t\022\014\n\004host\030\002"
+    " \002(\t\022\014\n\004port\030\003 \002(\005\022\024\n\014player_count\030\004 \002(\005"
+    "\"\025\n\023LeaveSessionRequest\"\023\n\021LeaveSessionR"
+    "eply*[\n\007Service\022\t\n\005HELLO\020\001\022\014\n\010PINGPONG\020\002"
+    "\022\022\n\016CREATE_SESSION\020d\022\020\n\014JOIN_SESSION\020e\022\021"
+    "\n\rLEAVE_SESSION\020f*$\n\005Error\022\006\n\002OK\020\000\022\023\n\017IN"
+    "VALID_REQUEST\020\002", 975);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "comm.proto", &protobuf_RegisterTypes);
-  Service::default_instance_ = new Service();
-  Error::default_instance_ = new Error();
   HelloRequest::default_instance_ = new HelloRequest();
   HelloReply::default_instance_ = new HelloReply();
   PingpongRequest::default_instance_ = new PingpongRequest();
@@ -512,8 +471,6 @@ void protobuf_AddDesc_comm_2eproto() {
   ListSessionReply_Session::default_instance_ = new ListSessionReply_Session();
   LeaveSessionRequest::default_instance_ = new LeaveSessionRequest();
   LeaveSessionReply::default_instance_ = new LeaveSessionReply();
-  Service::default_instance_->InitAsDefaultInstance();
-  Error::default_instance_->InitAsDefaultInstance();
   HelloRequest::default_instance_->InitAsDefaultInstance();
   HelloReply::default_instance_->InitAsDefaultInstance();
   PingpongRequest::default_instance_->InitAsDefaultInstance();
@@ -539,191 +496,28 @@ struct StaticDescriptorInitializer_comm_2eproto {
     protobuf_AddDesc_comm_2eproto();
   }
 } static_descriptor_initializer_comm_2eproto_;
-
-// ===================================================================
-
-const ::google::protobuf::EnumDescriptor* Service_Type_descriptor() {
+const ::google::protobuf::EnumDescriptor* Service_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Service_Type_descriptor_;
+  return Service_descriptor_;
 }
-bool Service_Type_IsValid(int value) {
+bool Service_IsValid(int value) {
   switch(value) {
     case 1:
     case 2:
+    case 100:
+    case 101:
+    case 102:
       return true;
     default:
       return false;
   }
 }
 
-#ifndef _MSC_VER
-const Service_Type Service::HELLO;
-const Service_Type Service::PINGPONG;
-const Service_Type Service::Type_MIN;
-const Service_Type Service::Type_MAX;
-const int Service::Type_ARRAYSIZE;
-#endif  // _MSC_VER
-#ifndef _MSC_VER
-#endif  // !_MSC_VER
-
-Service::Service()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-}
-
-void Service::InitAsDefaultInstance() {
-}
-
-Service::Service(const Service& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void Service::SharedCtor() {
-  _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-Service::~Service() {
-  SharedDtor();
-}
-
-void Service::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void Service::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* Service::descriptor() {
+const ::google::protobuf::EnumDescriptor* Error_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Service_descriptor_;
+  return Error_descriptor_;
 }
-
-const Service& Service::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_comm_2eproto();
-  return *default_instance_;
-}
-
-Service* Service::default_instance_ = NULL;
-
-Service* Service::New() const {
-  return new Service;
-}
-
-void Service::Clear() {
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool Service::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-      return true;
-    }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, mutable_unknown_fields()));
-  }
-  return true;
-#undef DO_
-}
-
-void Service::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-}
-
-::google::protobuf::uint8* Service::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  return target;
-}
-
-int Service::ByteSize() const {
-  int total_size = 0;
-
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void Service::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const Service* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Service*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void Service::MergeFrom(const Service& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void Service::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void Service::CopyFrom(const Service& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool Service::IsInitialized() const {
-
-  return true;
-}
-
-void Service::Swap(Service* other) {
-  if (other != this) {
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata Service::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = Service_descriptor_;
-  metadata.reflection = Service_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-const ::google::protobuf::EnumDescriptor* Error_Type_descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return Error_Type_descriptor_;
-}
-bool Error_Type_IsValid(int value) {
+bool Error_IsValid(int value) {
   switch(value) {
     case 0:
     case 2:
@@ -731,166 +525,6 @@ bool Error_Type_IsValid(int value) {
     default:
       return false;
   }
-}
-
-#ifndef _MSC_VER
-const Error_Type Error::OK;
-const Error_Type Error::INVALID_REQUEST;
-const Error_Type Error::Type_MIN;
-const Error_Type Error::Type_MAX;
-const int Error::Type_ARRAYSIZE;
-#endif  // _MSC_VER
-#ifndef _MSC_VER
-#endif  // !_MSC_VER
-
-Error::Error()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-}
-
-void Error::InitAsDefaultInstance() {
-}
-
-Error::Error(const Error& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void Error::SharedCtor() {
-  _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-Error::~Error() {
-  SharedDtor();
-}
-
-void Error::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void Error::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* Error::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return Error_descriptor_;
-}
-
-const Error& Error::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_comm_2eproto();
-  return *default_instance_;
-}
-
-Error* Error::default_instance_ = NULL;
-
-Error* Error::New() const {
-  return new Error;
-}
-
-void Error::Clear() {
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool Error::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-      return true;
-    }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, mutable_unknown_fields()));
-  }
-  return true;
-#undef DO_
-}
-
-void Error::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-}
-
-::google::protobuf::uint8* Error::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  return target;
-}
-
-int Error::ByteSize() const {
-  int total_size = 0;
-
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void Error::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const Error* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Error*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void Error::MergeFrom(const Error& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void Error::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void Error::CopyFrom(const Error& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool Error::IsInitialized() const {
-
-  return true;
-}
-
-void Error::Swap(Error* other) {
-  if (other != this) {
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata Error::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = Error_descriptor_;
-  metadata.reflection = Error_reflection_;
-  return metadata;
 }
 
 
@@ -1143,7 +777,7 @@ HelloReply::HelloReply(const HelloReply& from)
 
 void HelloReply::SharedCtor() {
   _cached_size_ = 0;
-  type_ = 0u;
+  type_ = 0;
   text_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -1183,7 +817,7 @@ HelloReply* HelloReply::New() const {
 
 void HelloReply::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    type_ = 0u;
+    type_ = 0;
     if (has_text()) {
       if (text_ != &::google::protobuf::internal::kEmptyString) {
         text_->clear();
@@ -1200,12 +834,12 @@ bool HelloReply::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 type = 1;
+      // required int32 type = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &type_)));
           set_has_type();
         } else {
@@ -1250,9 +884,9 @@ bool HelloReply::MergePartialFromCodedStream(
 
 void HelloReply::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required uint32 type = 1;
+  // required int32 type = 1;
   if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->type(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->type(), output);
   }
 
   // required string text = 2;
@@ -1272,9 +906,9 @@ void HelloReply::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* HelloReply::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required uint32 type = 1;
+  // required int32 type = 1;
   if (has_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->type(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->type(), target);
   }
 
   // required string text = 2;
@@ -1298,10 +932,10 @@ int HelloReply::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required uint32 type = 1;
+    // required int32 type = 1;
     if (has_type()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->type());
     }
 
@@ -1635,7 +1269,7 @@ PingpongReply::PingpongReply(const PingpongReply& from)
 
 void PingpongReply::SharedCtor() {
   _cached_size_ = 0;
-  type_ = 0u;
+  type_ = 0;
   text_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -1675,7 +1309,7 @@ PingpongReply* PingpongReply::New() const {
 
 void PingpongReply::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    type_ = 0u;
+    type_ = 0;
     if (has_text()) {
       if (text_ != &::google::protobuf::internal::kEmptyString) {
         text_->clear();
@@ -1692,12 +1326,12 @@ bool PingpongReply::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 type = 1;
+      // required int32 type = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &type_)));
           set_has_type();
         } else {
@@ -1742,9 +1376,9 @@ bool PingpongReply::MergePartialFromCodedStream(
 
 void PingpongReply::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required uint32 type = 1;
+  // required int32 type = 1;
   if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->type(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->type(), output);
   }
 
   // required string text = 2;
@@ -1764,9 +1398,9 @@ void PingpongReply::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* PingpongReply::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required uint32 type = 1;
+  // required int32 type = 1;
   if (has_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->type(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->type(), target);
   }
 
   // required string text = 2;
@@ -1790,10 +1424,10 @@ int PingpongReply::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required uint32 type = 1;
+    // required int32 type = 1;
     if (has_type()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->type());
     }
 
@@ -2165,7 +1799,7 @@ void SigninRequest::Swap(SigninRequest* other) {
 
 #ifndef _MSC_VER
 const int SigninReply::kTypeFieldNumber;
-const int SigninReply::kAuthFieldNumber;
+const int SigninReply::kTokenFieldNumber;
 #endif  // !_MSC_VER
 
 SigninReply::SigninReply()
@@ -2184,8 +1818,8 @@ SigninReply::SigninReply(const SigninReply& from)
 
 void SigninReply::SharedCtor() {
   _cached_size_ = 0;
-  type_ = 0u;
-  auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  type_ = 0;
+  token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -2194,8 +1828,8 @@ SigninReply::~SigninReply() {
 }
 
 void SigninReply::SharedDtor() {
-  if (auth_ != &::google::protobuf::internal::kEmptyString) {
-    delete auth_;
+  if (token_ != &::google::protobuf::internal::kEmptyString) {
+    delete token_;
   }
   if (this != default_instance_) {
   }
@@ -2224,10 +1858,10 @@ SigninReply* SigninReply::New() const {
 
 void SigninReply::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    type_ = 0u;
-    if (has_auth()) {
-      if (auth_ != &::google::protobuf::internal::kEmptyString) {
-        auth_->clear();
+    type_ = 0;
+    if (has_token()) {
+      if (token_ != &::google::protobuf::internal::kEmptyString) {
+        token_->clear();
       }
     }
   }
@@ -2241,28 +1875,31 @@ bool SigninReply::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 type = 1;
+      // required int32 type = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &type_)));
           set_has_type();
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_auth;
+        if (input->ExpectTag(18)) goto parse_token;
         break;
       }
 
-      // required bytes auth = 2;
+      // required string token = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_auth:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_auth()));
+         parse_token:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_token()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->token().data(), this->token().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -2288,15 +1925,18 @@ bool SigninReply::MergePartialFromCodedStream(
 
 void SigninReply::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required uint32 type = 1;
+  // required int32 type = 1;
   if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->type(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->type(), output);
   }
 
-  // required bytes auth = 2;
-  if (has_auth()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      2, this->auth(), output);
+  // required string token = 2;
+  if (has_token()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->token().data(), this->token().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->token(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -2307,16 +1947,19 @@ void SigninReply::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* SigninReply::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required uint32 type = 1;
+  // required int32 type = 1;
   if (has_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->type(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->type(), target);
   }
 
-  // required bytes auth = 2;
-  if (has_auth()) {
+  // required string token = 2;
+  if (has_token()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->token().data(), this->token().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        2, this->auth(), target);
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->token(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2330,18 +1973,18 @@ int SigninReply::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required uint32 type = 1;
+    // required int32 type = 1;
     if (has_type()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->type());
     }
 
-    // required bytes auth = 2;
-    if (has_auth()) {
+    // required string token = 2;
+    if (has_token()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->auth());
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->token());
     }
 
   }
@@ -2374,8 +2017,8 @@ void SigninReply::MergeFrom(const SigninReply& from) {
     if (from.has_type()) {
       set_type(from.type());
     }
-    if (from.has_auth()) {
-      set_auth(from.auth());
+    if (from.has_token()) {
+      set_token(from.token());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -2402,7 +2045,7 @@ bool SigninReply::IsInitialized() const {
 void SigninReply::Swap(SigninReply* other) {
   if (other != this) {
     std::swap(type_, other->type_);
-    std::swap(auth_, other->auth_);
+    std::swap(token_, other->token_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -2421,7 +2064,7 @@ void SigninReply::Swap(SigninReply* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int CreateSessionRequest::kAuthFieldNumber;
+const int CreateSessionRequest::kTokenFieldNumber;
 const int CreateSessionRequest::kNameFieldNumber;
 #endif  // !_MSC_VER
 
@@ -2441,7 +2084,7 @@ CreateSessionRequest::CreateSessionRequest(const CreateSessionRequest& from)
 
 void CreateSessionRequest::SharedCtor() {
   _cached_size_ = 0;
-  auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -2451,8 +2094,8 @@ CreateSessionRequest::~CreateSessionRequest() {
 }
 
 void CreateSessionRequest::SharedDtor() {
-  if (auth_ != &::google::protobuf::internal::kEmptyString) {
-    delete auth_;
+  if (token_ != &::google::protobuf::internal::kEmptyString) {
+    delete token_;
   }
   if (name_ != &::google::protobuf::internal::kEmptyString) {
     delete name_;
@@ -2484,9 +2127,9 @@ CreateSessionRequest* CreateSessionRequest::New() const {
 
 void CreateSessionRequest::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_auth()) {
-      if (auth_ != &::google::protobuf::internal::kEmptyString) {
-        auth_->clear();
+    if (has_token()) {
+      if (token_ != &::google::protobuf::internal::kEmptyString) {
+        token_->clear();
       }
     }
     if (has_name()) {
@@ -2505,12 +2148,15 @@ bool CreateSessionRequest::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required bytes auth = 1;
+      // required string token = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_auth()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_token()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->token().data(), this->token().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -2553,10 +2199,13 @@ bool CreateSessionRequest::MergePartialFromCodedStream(
 
 void CreateSessionRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required bytes auth = 1;
-  if (has_auth()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      1, this->auth(), output);
+  // required string token = 1;
+  if (has_token()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->token().data(), this->token().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      1, this->token(), output);
   }
 
   // required string name = 2;
@@ -2576,11 +2225,14 @@ void CreateSessionRequest::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* CreateSessionRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required bytes auth = 1;
-  if (has_auth()) {
+  // required string token = 1;
+  if (has_token()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->token().data(), this->token().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->auth(), target);
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->token(), target);
   }
 
   // required string name = 2;
@@ -2604,11 +2256,11 @@ int CreateSessionRequest::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required bytes auth = 1;
-    if (has_auth()) {
+    // required string token = 1;
+    if (has_token()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->auth());
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->token());
     }
 
     // required string name = 2;
@@ -2645,8 +2297,8 @@ void CreateSessionRequest::MergeFrom(const ::google::protobuf::Message& from) {
 void CreateSessionRequest::MergeFrom(const CreateSessionRequest& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_auth()) {
-      set_auth(from.auth());
+    if (from.has_token()) {
+      set_token(from.token());
     }
     if (from.has_name()) {
       set_name(from.name());
@@ -2675,7 +2327,7 @@ bool CreateSessionRequest::IsInitialized() const {
 
 void CreateSessionRequest::Swap(CreateSessionRequest* other) {
   if (other != this) {
-    std::swap(auth_, other->auth_);
+    std::swap(token_, other->token_);
     std::swap(name_, other->name_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
@@ -2717,10 +2369,10 @@ CreateSessionReply::CreateSessionReply(const CreateSessionReply& from)
 
 void CreateSessionReply::SharedCtor() {
   _cached_size_ = 0;
-  type_ = 0u;
+  type_ = 0;
   sid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   host_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  port_ = 0u;
+  port_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -2762,7 +2414,7 @@ CreateSessionReply* CreateSessionReply::New() const {
 
 void CreateSessionReply::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    type_ = 0u;
+    type_ = 0;
     if (has_sid()) {
       if (sid_ != &::google::protobuf::internal::kEmptyString) {
         sid_->clear();
@@ -2773,7 +2425,7 @@ void CreateSessionReply::Clear() {
         host_->clear();
       }
     }
-    port_ = 0u;
+    port_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -2785,12 +2437,12 @@ bool CreateSessionReply::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 type = 1;
+      // required int32 type = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &type_)));
           set_has_type();
         } else {
@@ -2800,13 +2452,16 @@ bool CreateSessionReply::MergePartialFromCodedStream(
         break;
       }
 
-      // required bytes sid = 2;
+      // required string sid = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_sid:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_sid()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->sid().data(), this->sid().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -2831,13 +2486,13 @@ bool CreateSessionReply::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 port = 4;
+      // required int32 port = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_port:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &port_)));
           set_has_port();
         } else {
@@ -2865,14 +2520,17 @@ bool CreateSessionReply::MergePartialFromCodedStream(
 
 void CreateSessionReply::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required uint32 type = 1;
+  // required int32 type = 1;
   if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->type(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->type(), output);
   }
 
-  // required bytes sid = 2;
+  // required string sid = 2;
   if (has_sid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->sid().data(), this->sid().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
       2, this->sid(), output);
   }
 
@@ -2885,9 +2543,9 @@ void CreateSessionReply::SerializeWithCachedSizes(
       3, this->host(), output);
   }
 
-  // required uint32 port = 4;
+  // required int32 port = 4;
   if (has_port()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->port(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->port(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -2898,15 +2556,18 @@ void CreateSessionReply::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* CreateSessionReply::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required uint32 type = 1;
+  // required int32 type = 1;
   if (has_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->type(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->type(), target);
   }
 
-  // required bytes sid = 2;
+  // required string sid = 2;
   if (has_sid()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->sid().data(), this->sid().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         2, this->sid(), target);
   }
 
@@ -2920,9 +2581,9 @@ void CreateSessionReply::SerializeWithCachedSizes(
         3, this->host(), target);
   }
 
-  // required uint32 port = 4;
+  // required int32 port = 4;
   if (has_port()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(4, this->port(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->port(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2936,17 +2597,17 @@ int CreateSessionReply::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required uint32 type = 1;
+    // required int32 type = 1;
     if (has_type()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->type());
     }
 
-    // required bytes sid = 2;
+    // required string sid = 2;
     if (has_sid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
+        ::google::protobuf::internal::WireFormatLite::StringSize(
           this->sid());
     }
 
@@ -2957,10 +2618,10 @@ int CreateSessionReply::ByteSize() const {
           this->host());
     }
 
-    // required uint32 port = 4;
+    // required int32 port = 4;
     if (has_port()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->port());
     }
 
@@ -3049,7 +2710,7 @@ void CreateSessionReply::Swap(CreateSessionReply* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int JoinSessionRequest::kAuthFieldNumber;
+const int JoinSessionRequest::kTokenFieldNumber;
 const int JoinSessionRequest::kSidFieldNumber;
 #endif  // !_MSC_VER
 
@@ -3069,7 +2730,7 @@ JoinSessionRequest::JoinSessionRequest(const JoinSessionRequest& from)
 
 void JoinSessionRequest::SharedCtor() {
   _cached_size_ = 0;
-  auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   sid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -3079,8 +2740,8 @@ JoinSessionRequest::~JoinSessionRequest() {
 }
 
 void JoinSessionRequest::SharedDtor() {
-  if (auth_ != &::google::protobuf::internal::kEmptyString) {
-    delete auth_;
+  if (token_ != &::google::protobuf::internal::kEmptyString) {
+    delete token_;
   }
   if (sid_ != &::google::protobuf::internal::kEmptyString) {
     delete sid_;
@@ -3112,9 +2773,9 @@ JoinSessionRequest* JoinSessionRequest::New() const {
 
 void JoinSessionRequest::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_auth()) {
-      if (auth_ != &::google::protobuf::internal::kEmptyString) {
-        auth_->clear();
+    if (has_token()) {
+      if (token_ != &::google::protobuf::internal::kEmptyString) {
+        token_->clear();
       }
     }
     if (has_sid()) {
@@ -3133,12 +2794,15 @@ bool JoinSessionRequest::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required bytes auth = 1;
+      // required string token = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_auth()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_token()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->token().data(), this->token().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -3178,10 +2842,13 @@ bool JoinSessionRequest::MergePartialFromCodedStream(
 
 void JoinSessionRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required bytes auth = 1;
-  if (has_auth()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      1, this->auth(), output);
+  // required string token = 1;
+  if (has_token()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->token().data(), this->token().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      1, this->token(), output);
   }
 
   // required bytes sid = 2;
@@ -3198,11 +2865,14 @@ void JoinSessionRequest::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* JoinSessionRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required bytes auth = 1;
-  if (has_auth()) {
+  // required string token = 1;
+  if (has_token()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->token().data(), this->token().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->auth(), target);
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->token(), target);
   }
 
   // required bytes sid = 2;
@@ -3223,11 +2893,11 @@ int JoinSessionRequest::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required bytes auth = 1;
-    if (has_auth()) {
+    // required string token = 1;
+    if (has_token()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->auth());
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->token());
     }
 
     // required bytes sid = 2;
@@ -3264,8 +2934,8 @@ void JoinSessionRequest::MergeFrom(const ::google::protobuf::Message& from) {
 void JoinSessionRequest::MergeFrom(const JoinSessionRequest& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_auth()) {
-      set_auth(from.auth());
+    if (from.has_token()) {
+      set_token(from.token());
     }
     if (from.has_sid()) {
       set_sid(from.sid());
@@ -3294,7 +2964,7 @@ bool JoinSessionRequest::IsInitialized() const {
 
 void JoinSessionRequest::Swap(JoinSessionRequest* other) {
   if (other != this) {
-    std::swap(auth_, other->auth_);
+    std::swap(token_, other->token_);
     std::swap(sid_, other->sid_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
@@ -3645,6 +3315,7 @@ void JoinSessionReply_Player::Swap(JoinSessionReply_Player* other) {
 // -------------------------------------------------------------------
 
 #ifndef _MSC_VER
+const int JoinSessionReply::kTypeFieldNumber;
 const int JoinSessionReply::kNameFieldNumber;
 const int JoinSessionReply::kPlayerFieldNumber;
 #endif  // !_MSC_VER
@@ -3665,6 +3336,7 @@ JoinSessionReply::JoinSessionReply(const JoinSessionReply& from)
 
 void JoinSessionReply::SharedCtor() {
   _cached_size_ = 0;
+  type_ = 0;
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -3704,6 +3376,7 @@ JoinSessionReply* JoinSessionReply::New() const {
 
 void JoinSessionReply::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    type_ = 0;
     if (has_name()) {
       if (name_ != &::google::protobuf::internal::kEmptyString) {
         name_->clear();
@@ -3721,10 +3394,26 @@ bool JoinSessionReply::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string name = 1;
+      // required int32 type = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &type_)));
+          set_has_type();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_name;
+        break;
+      }
+
+      // required string name = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_name:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_name()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
@@ -3733,21 +3422,21 @@ bool JoinSessionReply::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(19)) goto parse_player;
+        if (input->ExpectTag(27)) goto parse_player;
         break;
       }
 
-      // repeated group Player = 2 {
-      case 2: {
+      // repeated group Player = 3 {
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_START_GROUP) {
          parse_player:
           DO_(::google::protobuf::internal::WireFormatLite::ReadGroupNoVirtual(
-                2, input, add_player()));
+                3, input, add_player()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(19)) goto parse_player;
+        if (input->ExpectTag(27)) goto parse_player;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -3770,19 +3459,24 @@ bool JoinSessionReply::MergePartialFromCodedStream(
 
 void JoinSessionReply::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string name = 1;
+  // required int32 type = 1;
+  if (has_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->type(), output);
+  }
+
+  // required string name = 2;
   if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->name().data(), this->name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->name(), output);
+      2, this->name(), output);
   }
 
-  // repeated group Player = 2 {
+  // repeated group Player = 3 {
   for (int i = 0; i < this->player_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteGroupMaybeToArray(
-      2, this->player(i), output);
+      3, this->player(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -3793,21 +3487,26 @@ void JoinSessionReply::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* JoinSessionReply::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required string name = 1;
+  // required int32 type = 1;
+  if (has_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->type(), target);
+  }
+
+  // required string name = 2;
   if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->name().data(), this->name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->name(), target);
+        2, this->name(), target);
   }
 
-  // repeated group Player = 2 {
+  // repeated group Player = 3 {
   for (int i = 0; i < this->player_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteGroupNoVirtualToArray(
-        2, this->player(i), target);
+        3, this->player(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -3821,7 +3520,14 @@ int JoinSessionReply::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string name = 1;
+    // required int32 type = 1;
+    if (has_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->type());
+    }
+
+    // required string name = 2;
     if (has_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -3829,7 +3535,7 @@ int JoinSessionReply::ByteSize() const {
     }
 
   }
-  // repeated group Player = 2 {
+  // repeated group Player = 3 {
   total_size += 2 * this->player_size();
   for (int i = 0; i < this->player_size(); i++) {
     total_size +=
@@ -3864,6 +3570,9 @@ void JoinSessionReply::MergeFrom(const JoinSessionReply& from) {
   GOOGLE_CHECK_NE(&from, this);
   player_.MergeFrom(from.player_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_type()) {
+      set_type(from.type());
+    }
     if (from.has_name()) {
       set_name(from.name());
     }
@@ -3884,7 +3593,7 @@ void JoinSessionReply::CopyFrom(const JoinSessionReply& from) {
 }
 
 bool JoinSessionReply::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   for (int i = 0; i < player_size(); i++) {
     if (!this->player(i).IsInitialized()) return false;
@@ -3894,6 +3603,7 @@ bool JoinSessionReply::IsInitialized() const {
 
 void JoinSessionReply::Swap(JoinSessionReply* other) {
   if (other != this) {
+    std::swap(type_, other->type_);
     std::swap(name_, other->name_);
     player_.Swap(&other->player_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -3914,7 +3624,7 @@ void JoinSessionReply::Swap(JoinSessionReply* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int ListSessionRequest::kAuthFieldNumber;
+const int ListSessionRequest::kTokenFieldNumber;
 const int ListSessionRequest::kCountFieldNumber;
 #endif  // !_MSC_VER
 
@@ -3934,7 +3644,7 @@ ListSessionRequest::ListSessionRequest(const ListSessionRequest& from)
 
 void ListSessionRequest::SharedCtor() {
   _cached_size_ = 0;
-  auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   count_ = 0u;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -3944,8 +3654,8 @@ ListSessionRequest::~ListSessionRequest() {
 }
 
 void ListSessionRequest::SharedDtor() {
-  if (auth_ != &::google::protobuf::internal::kEmptyString) {
-    delete auth_;
+  if (token_ != &::google::protobuf::internal::kEmptyString) {
+    delete token_;
   }
   if (this != default_instance_) {
   }
@@ -3974,9 +3684,9 @@ ListSessionRequest* ListSessionRequest::New() const {
 
 void ListSessionRequest::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_auth()) {
-      if (auth_ != &::google::protobuf::internal::kEmptyString) {
-        auth_->clear();
+    if (has_token()) {
+      if (token_ != &::google::protobuf::internal::kEmptyString) {
+        token_->clear();
       }
     }
     count_ = 0u;
@@ -3991,12 +3701,15 @@ bool ListSessionRequest::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required bytes auth = 1;
+      // required string token = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_auth()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_token()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->token().data(), this->token().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -4038,10 +3751,13 @@ bool ListSessionRequest::MergePartialFromCodedStream(
 
 void ListSessionRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required bytes auth = 1;
-  if (has_auth()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      1, this->auth(), output);
+  // required string token = 1;
+  if (has_token()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->token().data(), this->token().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      1, this->token(), output);
   }
 
   // optional uint32 count = 2;
@@ -4057,11 +3773,14 @@ void ListSessionRequest::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ListSessionRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required bytes auth = 1;
-  if (has_auth()) {
+  // required string token = 1;
+  if (has_token()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->token().data(), this->token().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->auth(), target);
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->token(), target);
   }
 
   // optional uint32 count = 2;
@@ -4080,11 +3799,11 @@ int ListSessionRequest::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required bytes auth = 1;
-    if (has_auth()) {
+    // required string token = 1;
+    if (has_token()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->auth());
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->token());
     }
 
     // optional uint32 count = 2;
@@ -4121,8 +3840,8 @@ void ListSessionRequest::MergeFrom(const ::google::protobuf::Message& from) {
 void ListSessionRequest::MergeFrom(const ListSessionRequest& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_auth()) {
-      set_auth(from.auth());
+    if (from.has_token()) {
+      set_token(from.token());
     }
     if (from.has_count()) {
       set_count(from.count());
@@ -4151,7 +3870,7 @@ bool ListSessionRequest::IsInitialized() const {
 
 void ListSessionRequest::Swap(ListSessionRequest* other) {
   if (other != this) {
-    std::swap(auth_, other->auth_);
+    std::swap(token_, other->token_);
     std::swap(count_, other->count_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
@@ -4195,8 +3914,8 @@ void ListSessionReply_Session::SharedCtor() {
   _cached_size_ = 0;
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   host_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  port_ = 0u;
-  player_count_ = 0u;
+  port_ = 0;
+  player_count_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -4248,8 +3967,8 @@ void ListSessionReply_Session::Clear() {
         host_->clear();
       }
     }
-    port_ = 0u;
-    player_count_ = 0u;
+    port_ = 0;
+    player_count_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -4294,13 +4013,13 @@ bool ListSessionReply_Session::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 port = 3;
+      // required int32 port = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_port:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &port_)));
           set_has_port();
         } else {
@@ -4310,13 +4029,13 @@ bool ListSessionReply_Session::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 player_count = 4;
+      // required int32 player_count = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_player_count:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &player_count_)));
           set_has_player_count();
         } else {
@@ -4362,14 +4081,14 @@ void ListSessionReply_Session::SerializeWithCachedSizes(
       2, this->host(), output);
   }
 
-  // required uint32 port = 3;
+  // required int32 port = 3;
   if (has_port()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->port(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->port(), output);
   }
 
-  // required uint32 player_count = 4;
+  // required int32 player_count = 4;
   if (has_player_count()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->player_count(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->player_count(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -4400,14 +4119,14 @@ void ListSessionReply_Session::SerializeWithCachedSizes(
         2, this->host(), target);
   }
 
-  // required uint32 port = 3;
+  // required int32 port = 3;
   if (has_port()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->port(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->port(), target);
   }
 
-  // required uint32 player_count = 4;
+  // required int32 player_count = 4;
   if (has_player_count()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(4, this->player_count(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->player_count(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -4435,17 +4154,17 @@ int ListSessionReply_Session::ByteSize() const {
           this->host());
     }
 
-    // required uint32 port = 3;
+    // required int32 port = 3;
     if (has_port()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->port());
     }
 
-    // required uint32 player_count = 4;
+    // required int32 player_count = 4;
     if (has_player_count()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->player_count());
     }
 
@@ -4554,7 +4273,7 @@ ListSessionReply::ListSessionReply(const ListSessionReply& from)
 
 void ListSessionReply::SharedCtor() {
   _cached_size_ = 0;
-  type_ = 0u;
+  type_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -4590,7 +4309,7 @@ ListSessionReply* ListSessionReply::New() const {
 
 void ListSessionReply::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    type_ = 0u;
+    type_ = 0;
   }
   session_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -4603,12 +4322,12 @@ bool ListSessionReply::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 type = 1;
+      // required int32 type = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &type_)));
           set_has_type();
         } else {
@@ -4651,9 +4370,9 @@ bool ListSessionReply::MergePartialFromCodedStream(
 
 void ListSessionReply::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required uint32 type = 1;
+  // required int32 type = 1;
   if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->type(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->type(), output);
   }
 
   // repeated group Session = 2 {
@@ -4670,9 +4389,9 @@ void ListSessionReply::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ListSessionReply::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required uint32 type = 1;
+  // required int32 type = 1;
   if (has_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->type(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->type(), target);
   }
 
   // repeated group Session = 2 {
@@ -4693,10 +4412,10 @@ int ListSessionReply::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required uint32 type = 1;
+    // required int32 type = 1;
     if (has_type()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->type());
     }
 

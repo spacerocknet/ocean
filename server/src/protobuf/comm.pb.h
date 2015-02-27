@@ -34,8 +34,6 @@ void  protobuf_AddDesc_comm_2eproto();
 void protobuf_AssignDesc_comm_2eproto();
 void protobuf_ShutdownFile_comm_2eproto();
 
-class Service;
-class Error;
 class HelloRequest;
 class HelloReply;
 class PingpongRequest;
@@ -53,237 +51,48 @@ class ListSessionReply_Session;
 class LeaveSessionRequest;
 class LeaveSessionReply;
 
-enum Service_Type {
-  Service_Type_HELLO = 1,
-  Service_Type_PINGPONG = 2
+enum Service {
+  HELLO = 1,
+  PINGPONG = 2,
+  CREATE_SESSION = 100,
+  JOIN_SESSION = 101,
+  LEAVE_SESSION = 102
 };
-bool Service_Type_IsValid(int value);
-const Service_Type Service_Type_Type_MIN = Service_Type_HELLO;
-const Service_Type Service_Type_Type_MAX = Service_Type_PINGPONG;
-const int Service_Type_Type_ARRAYSIZE = Service_Type_Type_MAX + 1;
+bool Service_IsValid(int value);
+const Service Service_MIN = HELLO;
+const Service Service_MAX = LEAVE_SESSION;
+const int Service_ARRAYSIZE = Service_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* Service_Type_descriptor();
-inline const ::std::string& Service_Type_Name(Service_Type value) {
+const ::google::protobuf::EnumDescriptor* Service_descriptor();
+inline const ::std::string& Service_Name(Service value) {
   return ::google::protobuf::internal::NameOfEnum(
-    Service_Type_descriptor(), value);
+    Service_descriptor(), value);
 }
-inline bool Service_Type_Parse(
-    const ::std::string& name, Service_Type* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Service_Type>(
-    Service_Type_descriptor(), name, value);
+inline bool Service_Parse(
+    const ::std::string& name, Service* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<Service>(
+    Service_descriptor(), name, value);
 }
-enum Error_Type {
-  Error_Type_OK = 0,
-  Error_Type_INVALID_REQUEST = 2
+enum Error {
+  OK = 0,
+  INVALID_REQUEST = 2
 };
-bool Error_Type_IsValid(int value);
-const Error_Type Error_Type_Type_MIN = Error_Type_OK;
-const Error_Type Error_Type_Type_MAX = Error_Type_INVALID_REQUEST;
-const int Error_Type_Type_ARRAYSIZE = Error_Type_Type_MAX + 1;
+bool Error_IsValid(int value);
+const Error Error_MIN = OK;
+const Error Error_MAX = INVALID_REQUEST;
+const int Error_ARRAYSIZE = Error_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* Error_Type_descriptor();
-inline const ::std::string& Error_Type_Name(Error_Type value) {
+const ::google::protobuf::EnumDescriptor* Error_descriptor();
+inline const ::std::string& Error_Name(Error value) {
   return ::google::protobuf::internal::NameOfEnum(
-    Error_Type_descriptor(), value);
+    Error_descriptor(), value);
 }
-inline bool Error_Type_Parse(
-    const ::std::string& name, Error_Type* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Error_Type>(
-    Error_Type_descriptor(), name, value);
+inline bool Error_Parse(
+    const ::std::string& name, Error* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<Error>(
+    Error_descriptor(), name, value);
 }
 // ===================================================================
-
-class Service : public ::google::protobuf::Message {
- public:
-  Service();
-  virtual ~Service();
-
-  Service(const Service& from);
-
-  inline Service& operator=(const Service& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const Service& default_instance();
-
-  void Swap(Service* other);
-
-  // implements Message ----------------------------------------------
-
-  Service* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Service& from);
-  void MergeFrom(const Service& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  typedef Service_Type Type;
-  static const Type HELLO = Service_Type_HELLO;
-  static const Type PINGPONG = Service_Type_PINGPONG;
-  static inline bool Type_IsValid(int value) {
-    return Service_Type_IsValid(value);
-  }
-  static const Type Type_MIN =
-    Service_Type_Type_MIN;
-  static const Type Type_MAX =
-    Service_Type_Type_MAX;
-  static const int Type_ARRAYSIZE =
-    Service_Type_Type_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  Type_descriptor() {
-    return Service_Type_descriptor();
-  }
-  static inline const ::std::string& Type_Name(Type value) {
-    return Service_Type_Name(value);
-  }
-  static inline bool Type_Parse(const ::std::string& name,
-      Type* value) {
-    return Service_Type_Parse(name, value);
-  }
-
-  // accessors -------------------------------------------------------
-
-  // @@protoc_insertion_point(class_scope:comm.Service)
- private:
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[1];
-
-  friend void  protobuf_AddDesc_comm_2eproto();
-  friend void protobuf_AssignDesc_comm_2eproto();
-  friend void protobuf_ShutdownFile_comm_2eproto();
-
-  void InitAsDefaultInstance();
-  static Service* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class Error : public ::google::protobuf::Message {
- public:
-  Error();
-  virtual ~Error();
-
-  Error(const Error& from);
-
-  inline Error& operator=(const Error& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const Error& default_instance();
-
-  void Swap(Error* other);
-
-  // implements Message ----------------------------------------------
-
-  Error* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Error& from);
-  void MergeFrom(const Error& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  typedef Error_Type Type;
-  static const Type OK = Error_Type_OK;
-  static const Type INVALID_REQUEST = Error_Type_INVALID_REQUEST;
-  static inline bool Type_IsValid(int value) {
-    return Error_Type_IsValid(value);
-  }
-  static const Type Type_MIN =
-    Error_Type_Type_MIN;
-  static const Type Type_MAX =
-    Error_Type_Type_MAX;
-  static const int Type_ARRAYSIZE =
-    Error_Type_Type_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  Type_descriptor() {
-    return Error_Type_descriptor();
-  }
-  static inline const ::std::string& Type_Name(Type value) {
-    return Error_Type_Name(value);
-  }
-  static inline bool Type_Parse(const ::std::string& name,
-      Type* value) {
-    return Error_Type_Parse(name, value);
-  }
-
-  // accessors -------------------------------------------------------
-
-  // @@protoc_insertion_point(class_scope:comm.Error)
- private:
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[1];
-
-  friend void  protobuf_AddDesc_comm_2eproto();
-  friend void protobuf_AssignDesc_comm_2eproto();
-  friend void protobuf_ShutdownFile_comm_2eproto();
-
-  void InitAsDefaultInstance();
-  static Error* default_instance_;
-};
-// -------------------------------------------------------------------
 
 class HelloRequest : public ::google::protobuf::Message {
  public:
@@ -426,12 +235,12 @@ class HelloReply : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required uint32 type = 1;
+  // required int32 type = 1;
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
-  inline ::google::protobuf::uint32 type() const;
-  inline void set_type(::google::protobuf::uint32 value);
+  inline ::google::protobuf::int32 type() const;
+  inline void set_type(::google::protobuf::int32 value);
 
   // required string text = 2;
   inline bool has_text() const;
@@ -455,7 +264,7 @@ class HelloReply : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* text_;
-  ::google::protobuf::uint32 type_;
+  ::google::protobuf::int32 type_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -610,12 +419,12 @@ class PingpongReply : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required uint32 type = 1;
+  // required int32 type = 1;
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
-  inline ::google::protobuf::uint32 type() const;
-  inline void set_type(::google::protobuf::uint32 value);
+  inline ::google::protobuf::int32 type() const;
+  inline void set_type(::google::protobuf::int32 value);
 
   // required string text = 2;
   inline bool has_text() const;
@@ -639,7 +448,7 @@ class PingpongReply : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* text_;
-  ::google::protobuf::uint32 type_;
+  ::google::protobuf::int32 type_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -809,36 +618,36 @@ class SigninReply : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required uint32 type = 1;
+  // required int32 type = 1;
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
-  inline ::google::protobuf::uint32 type() const;
-  inline void set_type(::google::protobuf::uint32 value);
+  inline ::google::protobuf::int32 type() const;
+  inline void set_type(::google::protobuf::int32 value);
 
-  // required bytes auth = 2;
-  inline bool has_auth() const;
-  inline void clear_auth();
-  static const int kAuthFieldNumber = 2;
-  inline const ::std::string& auth() const;
-  inline void set_auth(const ::std::string& value);
-  inline void set_auth(const char* value);
-  inline void set_auth(const void* value, size_t size);
-  inline ::std::string* mutable_auth();
-  inline ::std::string* release_auth();
-  inline void set_allocated_auth(::std::string* auth);
+  // required string token = 2;
+  inline bool has_token() const;
+  inline void clear_token();
+  static const int kTokenFieldNumber = 2;
+  inline const ::std::string& token() const;
+  inline void set_token(const ::std::string& value);
+  inline void set_token(const char* value);
+  inline void set_token(const char* value, size_t size);
+  inline ::std::string* mutable_token();
+  inline ::std::string* release_token();
+  inline void set_allocated_token(::std::string* token);
 
   // @@protoc_insertion_point(class_scope:comm.SigninReply)
  private:
   inline void set_has_type();
   inline void clear_has_type();
-  inline void set_has_auth();
-  inline void clear_has_auth();
+  inline void set_has_token();
+  inline void clear_has_token();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* auth_;
-  ::google::protobuf::uint32 type_;
+  ::std::string* token_;
+  ::google::protobuf::int32 type_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -906,17 +715,17 @@ class CreateSessionRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required bytes auth = 1;
-  inline bool has_auth() const;
-  inline void clear_auth();
-  static const int kAuthFieldNumber = 1;
-  inline const ::std::string& auth() const;
-  inline void set_auth(const ::std::string& value);
-  inline void set_auth(const char* value);
-  inline void set_auth(const void* value, size_t size);
-  inline ::std::string* mutable_auth();
-  inline ::std::string* release_auth();
-  inline void set_allocated_auth(::std::string* auth);
+  // required string token = 1;
+  inline bool has_token() const;
+  inline void clear_token();
+  static const int kTokenFieldNumber = 1;
+  inline const ::std::string& token() const;
+  inline void set_token(const ::std::string& value);
+  inline void set_token(const char* value);
+  inline void set_token(const char* value, size_t size);
+  inline ::std::string* mutable_token();
+  inline ::std::string* release_token();
+  inline void set_allocated_token(::std::string* token);
 
   // required string name = 2;
   inline bool has_name() const;
@@ -932,14 +741,14 @@ class CreateSessionRequest : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:comm.CreateSessionRequest)
  private:
-  inline void set_has_auth();
-  inline void clear_has_auth();
+  inline void set_has_token();
+  inline void clear_has_token();
   inline void set_has_name();
   inline void clear_has_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* auth_;
+  ::std::string* token_;
   ::std::string* name_;
 
   mutable int _cached_size_;
@@ -1008,21 +817,21 @@ class CreateSessionReply : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required uint32 type = 1;
+  // required int32 type = 1;
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
-  inline ::google::protobuf::uint32 type() const;
-  inline void set_type(::google::protobuf::uint32 value);
+  inline ::google::protobuf::int32 type() const;
+  inline void set_type(::google::protobuf::int32 value);
 
-  // required bytes sid = 2;
+  // required string sid = 2;
   inline bool has_sid() const;
   inline void clear_sid();
   static const int kSidFieldNumber = 2;
   inline const ::std::string& sid() const;
   inline void set_sid(const ::std::string& value);
   inline void set_sid(const char* value);
-  inline void set_sid(const void* value, size_t size);
+  inline void set_sid(const char* value, size_t size);
   inline ::std::string* mutable_sid();
   inline ::std::string* release_sid();
   inline void set_allocated_sid(::std::string* sid);
@@ -1039,12 +848,12 @@ class CreateSessionReply : public ::google::protobuf::Message {
   inline ::std::string* release_host();
   inline void set_allocated_host(::std::string* host);
 
-  // required uint32 port = 4;
+  // required int32 port = 4;
   inline bool has_port() const;
   inline void clear_port();
   static const int kPortFieldNumber = 4;
-  inline ::google::protobuf::uint32 port() const;
-  inline void set_port(::google::protobuf::uint32 value);
+  inline ::google::protobuf::int32 port() const;
+  inline void set_port(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:comm.CreateSessionReply)
  private:
@@ -1060,8 +869,8 @@ class CreateSessionReply : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* sid_;
-  ::google::protobuf::uint32 type_;
-  ::google::protobuf::uint32 port_;
+  ::google::protobuf::int32 type_;
+  ::google::protobuf::int32 port_;
   ::std::string* host_;
 
   mutable int _cached_size_;
@@ -1130,17 +939,17 @@ class JoinSessionRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required bytes auth = 1;
-  inline bool has_auth() const;
-  inline void clear_auth();
-  static const int kAuthFieldNumber = 1;
-  inline const ::std::string& auth() const;
-  inline void set_auth(const ::std::string& value);
-  inline void set_auth(const char* value);
-  inline void set_auth(const void* value, size_t size);
-  inline ::std::string* mutable_auth();
-  inline ::std::string* release_auth();
-  inline void set_allocated_auth(::std::string* auth);
+  // required string token = 1;
+  inline bool has_token() const;
+  inline void clear_token();
+  static const int kTokenFieldNumber = 1;
+  inline const ::std::string& token() const;
+  inline void set_token(const ::std::string& value);
+  inline void set_token(const char* value);
+  inline void set_token(const char* value, size_t size);
+  inline ::std::string* mutable_token();
+  inline ::std::string* release_token();
+  inline void set_allocated_token(::std::string* token);
 
   // required bytes sid = 2;
   inline bool has_sid() const;
@@ -1156,14 +965,14 @@ class JoinSessionRequest : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:comm.JoinSessionRequest)
  private:
-  inline void set_has_auth();
-  inline void clear_has_auth();
+  inline void set_has_token();
+  inline void clear_has_token();
   inline void set_has_sid();
   inline void clear_has_sid();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* auth_;
+  ::std::string* token_;
   ::std::string* sid_;
 
   mutable int _cached_size_;
@@ -1351,10 +1160,17 @@ class JoinSessionReply : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string name = 1;
+  // required int32 type = 1;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline ::google::protobuf::int32 type() const;
+  inline void set_type(::google::protobuf::int32 value);
+
+  // required string name = 2;
   inline bool has_name() const;
   inline void clear_name();
-  static const int kNameFieldNumber = 1;
+  static const int kNameFieldNumber = 2;
   inline const ::std::string& name() const;
   inline void set_name(const ::std::string& value);
   inline void set_name(const char* value);
@@ -1363,10 +1179,10 @@ class JoinSessionReply : public ::google::protobuf::Message {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
-  // repeated group Player = 2 {
+  // repeated group Player = 3 {
   inline int player_size() const;
   inline void clear_player();
-  static const int kPlayerFieldNumber = 2;
+  static const int kPlayerFieldNumber = 3;
   inline const ::comm::JoinSessionReply_Player& player(int index) const;
   inline ::comm::JoinSessionReply_Player* mutable_player(int index);
   inline ::comm::JoinSessionReply_Player* add_player();
@@ -1377,6 +1193,8 @@ class JoinSessionReply : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:comm.JoinSessionReply)
  private:
+  inline void set_has_type();
+  inline void clear_has_type();
   inline void set_has_name();
   inline void clear_has_name();
 
@@ -1384,9 +1202,10 @@ class JoinSessionReply : public ::google::protobuf::Message {
 
   ::std::string* name_;
   ::google::protobuf::RepeatedPtrField< ::comm::JoinSessionReply_Player > player_;
+  ::google::protobuf::int32 type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_comm_2eproto();
   friend void protobuf_AssignDesc_comm_2eproto();
@@ -1451,17 +1270,17 @@ class ListSessionRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required bytes auth = 1;
-  inline bool has_auth() const;
-  inline void clear_auth();
-  static const int kAuthFieldNumber = 1;
-  inline const ::std::string& auth() const;
-  inline void set_auth(const ::std::string& value);
-  inline void set_auth(const char* value);
-  inline void set_auth(const void* value, size_t size);
-  inline ::std::string* mutable_auth();
-  inline ::std::string* release_auth();
-  inline void set_allocated_auth(::std::string* auth);
+  // required string token = 1;
+  inline bool has_token() const;
+  inline void clear_token();
+  static const int kTokenFieldNumber = 1;
+  inline const ::std::string& token() const;
+  inline void set_token(const ::std::string& value);
+  inline void set_token(const char* value);
+  inline void set_token(const char* value, size_t size);
+  inline ::std::string* mutable_token();
+  inline ::std::string* release_token();
+  inline void set_allocated_token(::std::string* token);
 
   // optional uint32 count = 2;
   inline bool has_count() const;
@@ -1472,14 +1291,14 @@ class ListSessionRequest : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:comm.ListSessionRequest)
  private:
-  inline void set_has_auth();
-  inline void clear_has_auth();
+  inline void set_has_token();
+  inline void clear_has_token();
   inline void set_has_count();
   inline void clear_has_count();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* auth_;
+  ::std::string* token_;
   ::google::protobuf::uint32 count_;
 
   mutable int _cached_size_;
@@ -1572,19 +1391,19 @@ class ListSessionReply_Session : public ::google::protobuf::Message {
   inline ::std::string* release_host();
   inline void set_allocated_host(::std::string* host);
 
-  // required uint32 port = 3;
+  // required int32 port = 3;
   inline bool has_port() const;
   inline void clear_port();
   static const int kPortFieldNumber = 3;
-  inline ::google::protobuf::uint32 port() const;
-  inline void set_port(::google::protobuf::uint32 value);
+  inline ::google::protobuf::int32 port() const;
+  inline void set_port(::google::protobuf::int32 value);
 
-  // required uint32 player_count = 4;
+  // required int32 player_count = 4;
   inline bool has_player_count() const;
   inline void clear_player_count();
   static const int kPlayerCountFieldNumber = 4;
-  inline ::google::protobuf::uint32 player_count() const;
-  inline void set_player_count(::google::protobuf::uint32 value);
+  inline ::google::protobuf::int32 player_count() const;
+  inline void set_player_count(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:comm.ListSessionReply.Session)
  private:
@@ -1601,8 +1420,8 @@ class ListSessionReply_Session : public ::google::protobuf::Message {
 
   ::std::string* name_;
   ::std::string* host_;
-  ::google::protobuf::uint32 port_;
-  ::google::protobuf::uint32 player_count_;
+  ::google::protobuf::int32 port_;
+  ::google::protobuf::int32 player_count_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
@@ -1672,12 +1491,12 @@ class ListSessionReply : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required uint32 type = 1;
+  // required int32 type = 1;
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
-  inline ::google::protobuf::uint32 type() const;
-  inline void set_type(::google::protobuf::uint32 value);
+  inline ::google::protobuf::int32 type() const;
+  inline void set_type(::google::protobuf::int32 value);
 
   // repeated group Session = 2 {
   inline int session_size() const;
@@ -1699,7 +1518,7 @@ class ListSessionReply : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::RepeatedPtrField< ::comm::ListSessionReply_Session > session_;
-  ::google::protobuf::uint32 type_;
+  ::google::protobuf::int32 type_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -1860,14 +1679,6 @@ class LeaveSessionReply : public ::google::protobuf::Message {
 
 // ===================================================================
 
-// Service
-
-// -------------------------------------------------------------------
-
-// Error
-
-// -------------------------------------------------------------------
-
 // HelloRequest
 
 // required string name = 1;
@@ -1944,7 +1755,7 @@ inline void HelloRequest::set_allocated_name(::std::string* name) {
 
 // HelloReply
 
-// required uint32 type = 1;
+// required int32 type = 1;
 inline bool HelloReply::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1955,13 +1766,13 @@ inline void HelloReply::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void HelloReply::clear_type() {
-  type_ = 0u;
+  type_ = 0;
   clear_has_type();
 }
-inline ::google::protobuf::uint32 HelloReply::type() const {
+inline ::google::protobuf::int32 HelloReply::type() const {
   return type_;
 }
-inline void HelloReply::set_type(::google::protobuf::uint32 value) {
+inline void HelloReply::set_type(::google::protobuf::int32 value) {
   set_has_type();
   type_ = value;
 }
@@ -2114,7 +1925,7 @@ inline void PingpongRequest::set_allocated_text(::std::string* text) {
 
 // PingpongReply
 
-// required uint32 type = 1;
+// required int32 type = 1;
 inline bool PingpongReply::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -2125,13 +1936,13 @@ inline void PingpongReply::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PingpongReply::clear_type() {
-  type_ = 0u;
+  type_ = 0;
   clear_has_type();
 }
-inline ::google::protobuf::uint32 PingpongReply::type() const {
+inline ::google::protobuf::int32 PingpongReply::type() const {
   return type_;
 }
-inline void PingpongReply::set_type(::google::protobuf::uint32 value) {
+inline void PingpongReply::set_type(::google::protobuf::int32 value) {
   set_has_type();
   type_ = value;
 }
@@ -2354,7 +2165,7 @@ inline void SigninRequest::set_allocated_password(::std::string* password) {
 
 // SigninReply
 
-// required uint32 type = 1;
+// required int32 type = 1;
 inline bool SigninReply::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -2365,84 +2176,84 @@ inline void SigninReply::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void SigninReply::clear_type() {
-  type_ = 0u;
+  type_ = 0;
   clear_has_type();
 }
-inline ::google::protobuf::uint32 SigninReply::type() const {
+inline ::google::protobuf::int32 SigninReply::type() const {
   return type_;
 }
-inline void SigninReply::set_type(::google::protobuf::uint32 value) {
+inline void SigninReply::set_type(::google::protobuf::int32 value) {
   set_has_type();
   type_ = value;
 }
 
-// required bytes auth = 2;
-inline bool SigninReply::has_auth() const {
+// required string token = 2;
+inline bool SigninReply::has_token() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void SigninReply::set_has_auth() {
+inline void SigninReply::set_has_token() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void SigninReply::clear_has_auth() {
+inline void SigninReply::clear_has_token() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void SigninReply::clear_auth() {
-  if (auth_ != &::google::protobuf::internal::kEmptyString) {
-    auth_->clear();
+inline void SigninReply::clear_token() {
+  if (token_ != &::google::protobuf::internal::kEmptyString) {
+    token_->clear();
   }
-  clear_has_auth();
+  clear_has_token();
 }
-inline const ::std::string& SigninReply::auth() const {
-  return *auth_;
+inline const ::std::string& SigninReply::token() const {
+  return *token_;
 }
-inline void SigninReply::set_auth(const ::std::string& value) {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline void SigninReply::set_token(const ::std::string& value) {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  auth_->assign(value);
+  token_->assign(value);
 }
-inline void SigninReply::set_auth(const char* value) {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline void SigninReply::set_token(const char* value) {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  auth_->assign(value);
+  token_->assign(value);
 }
-inline void SigninReply::set_auth(const void* value, size_t size) {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline void SigninReply::set_token(const char* value, size_t size) {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  auth_->assign(reinterpret_cast<const char*>(value), size);
+  token_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* SigninReply::mutable_auth() {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline ::std::string* SigninReply::mutable_token() {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  return auth_;
+  return token_;
 }
-inline ::std::string* SigninReply::release_auth() {
-  clear_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* SigninReply::release_token() {
+  clear_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = auth_;
-    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = token_;
+    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void SigninReply::set_allocated_auth(::std::string* auth) {
-  if (auth_ != &::google::protobuf::internal::kEmptyString) {
-    delete auth_;
+inline void SigninReply::set_allocated_token(::std::string* token) {
+  if (token_ != &::google::protobuf::internal::kEmptyString) {
+    delete token_;
   }
-  if (auth) {
-    set_has_auth();
-    auth_ = auth;
+  if (token) {
+    set_has_token();
+    token_ = token;
   } else {
-    clear_has_auth();
-    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_token();
+    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
@@ -2450,73 +2261,73 @@ inline void SigninReply::set_allocated_auth(::std::string* auth) {
 
 // CreateSessionRequest
 
-// required bytes auth = 1;
-inline bool CreateSessionRequest::has_auth() const {
+// required string token = 1;
+inline bool CreateSessionRequest::has_token() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void CreateSessionRequest::set_has_auth() {
+inline void CreateSessionRequest::set_has_token() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void CreateSessionRequest::clear_has_auth() {
+inline void CreateSessionRequest::clear_has_token() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void CreateSessionRequest::clear_auth() {
-  if (auth_ != &::google::protobuf::internal::kEmptyString) {
-    auth_->clear();
+inline void CreateSessionRequest::clear_token() {
+  if (token_ != &::google::protobuf::internal::kEmptyString) {
+    token_->clear();
   }
-  clear_has_auth();
+  clear_has_token();
 }
-inline const ::std::string& CreateSessionRequest::auth() const {
-  return *auth_;
+inline const ::std::string& CreateSessionRequest::token() const {
+  return *token_;
 }
-inline void CreateSessionRequest::set_auth(const ::std::string& value) {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline void CreateSessionRequest::set_token(const ::std::string& value) {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  auth_->assign(value);
+  token_->assign(value);
 }
-inline void CreateSessionRequest::set_auth(const char* value) {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline void CreateSessionRequest::set_token(const char* value) {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  auth_->assign(value);
+  token_->assign(value);
 }
-inline void CreateSessionRequest::set_auth(const void* value, size_t size) {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline void CreateSessionRequest::set_token(const char* value, size_t size) {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  auth_->assign(reinterpret_cast<const char*>(value), size);
+  token_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* CreateSessionRequest::mutable_auth() {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline ::std::string* CreateSessionRequest::mutable_token() {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  return auth_;
+  return token_;
 }
-inline ::std::string* CreateSessionRequest::release_auth() {
-  clear_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* CreateSessionRequest::release_token() {
+  clear_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = auth_;
-    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = token_;
+    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void CreateSessionRequest::set_allocated_auth(::std::string* auth) {
-  if (auth_ != &::google::protobuf::internal::kEmptyString) {
-    delete auth_;
+inline void CreateSessionRequest::set_allocated_token(::std::string* token) {
+  if (token_ != &::google::protobuf::internal::kEmptyString) {
+    delete token_;
   }
-  if (auth) {
-    set_has_auth();
-    auth_ = auth;
+  if (token) {
+    set_has_token();
+    token_ = token;
   } else {
-    clear_has_auth();
-    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_token();
+    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
@@ -2594,7 +2405,7 @@ inline void CreateSessionRequest::set_allocated_name(::std::string* name) {
 
 // CreateSessionReply
 
-// required uint32 type = 1;
+// required int32 type = 1;
 inline bool CreateSessionReply::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -2605,18 +2416,18 @@ inline void CreateSessionReply::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void CreateSessionReply::clear_type() {
-  type_ = 0u;
+  type_ = 0;
   clear_has_type();
 }
-inline ::google::protobuf::uint32 CreateSessionReply::type() const {
+inline ::google::protobuf::int32 CreateSessionReply::type() const {
   return type_;
 }
-inline void CreateSessionReply::set_type(::google::protobuf::uint32 value) {
+inline void CreateSessionReply::set_type(::google::protobuf::int32 value) {
   set_has_type();
   type_ = value;
 }
 
-// required bytes sid = 2;
+// required string sid = 2;
 inline bool CreateSessionReply::has_sid() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -2649,7 +2460,7 @@ inline void CreateSessionReply::set_sid(const char* value) {
   }
   sid_->assign(value);
 }
-inline void CreateSessionReply::set_sid(const void* value, size_t size) {
+inline void CreateSessionReply::set_sid(const char* value, size_t size) {
   set_has_sid();
   if (sid_ == &::google::protobuf::internal::kEmptyString) {
     sid_ = new ::std::string;
@@ -2756,7 +2567,7 @@ inline void CreateSessionReply::set_allocated_host(::std::string* host) {
   }
 }
 
-// required uint32 port = 4;
+// required int32 port = 4;
 inline bool CreateSessionReply::has_port() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -2767,13 +2578,13 @@ inline void CreateSessionReply::clear_has_port() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void CreateSessionReply::clear_port() {
-  port_ = 0u;
+  port_ = 0;
   clear_has_port();
 }
-inline ::google::protobuf::uint32 CreateSessionReply::port() const {
+inline ::google::protobuf::int32 CreateSessionReply::port() const {
   return port_;
 }
-inline void CreateSessionReply::set_port(::google::protobuf::uint32 value) {
+inline void CreateSessionReply::set_port(::google::protobuf::int32 value) {
   set_has_port();
   port_ = value;
 }
@@ -2782,73 +2593,73 @@ inline void CreateSessionReply::set_port(::google::protobuf::uint32 value) {
 
 // JoinSessionRequest
 
-// required bytes auth = 1;
-inline bool JoinSessionRequest::has_auth() const {
+// required string token = 1;
+inline bool JoinSessionRequest::has_token() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void JoinSessionRequest::set_has_auth() {
+inline void JoinSessionRequest::set_has_token() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void JoinSessionRequest::clear_has_auth() {
+inline void JoinSessionRequest::clear_has_token() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void JoinSessionRequest::clear_auth() {
-  if (auth_ != &::google::protobuf::internal::kEmptyString) {
-    auth_->clear();
+inline void JoinSessionRequest::clear_token() {
+  if (token_ != &::google::protobuf::internal::kEmptyString) {
+    token_->clear();
   }
-  clear_has_auth();
+  clear_has_token();
 }
-inline const ::std::string& JoinSessionRequest::auth() const {
-  return *auth_;
+inline const ::std::string& JoinSessionRequest::token() const {
+  return *token_;
 }
-inline void JoinSessionRequest::set_auth(const ::std::string& value) {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline void JoinSessionRequest::set_token(const ::std::string& value) {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  auth_->assign(value);
+  token_->assign(value);
 }
-inline void JoinSessionRequest::set_auth(const char* value) {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline void JoinSessionRequest::set_token(const char* value) {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  auth_->assign(value);
+  token_->assign(value);
 }
-inline void JoinSessionRequest::set_auth(const void* value, size_t size) {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline void JoinSessionRequest::set_token(const char* value, size_t size) {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  auth_->assign(reinterpret_cast<const char*>(value), size);
+  token_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* JoinSessionRequest::mutable_auth() {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline ::std::string* JoinSessionRequest::mutable_token() {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  return auth_;
+  return token_;
 }
-inline ::std::string* JoinSessionRequest::release_auth() {
-  clear_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* JoinSessionRequest::release_token() {
+  clear_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = auth_;
-    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = token_;
+    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void JoinSessionRequest::set_allocated_auth(::std::string* auth) {
-  if (auth_ != &::google::protobuf::internal::kEmptyString) {
-    delete auth_;
+inline void JoinSessionRequest::set_allocated_token(::std::string* token) {
+  if (token_ != &::google::protobuf::internal::kEmptyString) {
+    delete token_;
   }
-  if (auth) {
-    set_has_auth();
-    auth_ = auth;
+  if (token) {
+    set_has_token();
+    token_ = token;
   } else {
-    clear_has_auth();
-    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_token();
+    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
@@ -3140,15 +2951,37 @@ inline void JoinSessionReply_Player::set_allocated_avatar(::std::string* avatar)
 
 // JoinSessionReply
 
-// required string name = 1;
-inline bool JoinSessionReply::has_name() const {
+// required int32 type = 1;
+inline bool JoinSessionReply::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void JoinSessionReply::set_has_name() {
+inline void JoinSessionReply::set_has_type() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void JoinSessionReply::clear_has_name() {
+inline void JoinSessionReply::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void JoinSessionReply::clear_type() {
+  type_ = 0;
+  clear_has_type();
+}
+inline ::google::protobuf::int32 JoinSessionReply::type() const {
+  return type_;
+}
+inline void JoinSessionReply::set_type(::google::protobuf::int32 value) {
+  set_has_type();
+  type_ = value;
+}
+
+// required string name = 2;
+inline bool JoinSessionReply::has_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void JoinSessionReply::set_has_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void JoinSessionReply::clear_has_name() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void JoinSessionReply::clear_name() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
@@ -3210,7 +3043,7 @@ inline void JoinSessionReply::set_allocated_name(::std::string* name) {
   }
 }
 
-// repeated group Player = 2 {
+// repeated group Player = 3 {
 inline int JoinSessionReply::player_size() const {
   return player_.size();
 }
@@ -3239,73 +3072,73 @@ JoinSessionReply::mutable_player() {
 
 // ListSessionRequest
 
-// required bytes auth = 1;
-inline bool ListSessionRequest::has_auth() const {
+// required string token = 1;
+inline bool ListSessionRequest::has_token() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ListSessionRequest::set_has_auth() {
+inline void ListSessionRequest::set_has_token() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ListSessionRequest::clear_has_auth() {
+inline void ListSessionRequest::clear_has_token() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ListSessionRequest::clear_auth() {
-  if (auth_ != &::google::protobuf::internal::kEmptyString) {
-    auth_->clear();
+inline void ListSessionRequest::clear_token() {
+  if (token_ != &::google::protobuf::internal::kEmptyString) {
+    token_->clear();
   }
-  clear_has_auth();
+  clear_has_token();
 }
-inline const ::std::string& ListSessionRequest::auth() const {
-  return *auth_;
+inline const ::std::string& ListSessionRequest::token() const {
+  return *token_;
 }
-inline void ListSessionRequest::set_auth(const ::std::string& value) {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline void ListSessionRequest::set_token(const ::std::string& value) {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  auth_->assign(value);
+  token_->assign(value);
 }
-inline void ListSessionRequest::set_auth(const char* value) {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline void ListSessionRequest::set_token(const char* value) {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  auth_->assign(value);
+  token_->assign(value);
 }
-inline void ListSessionRequest::set_auth(const void* value, size_t size) {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline void ListSessionRequest::set_token(const char* value, size_t size) {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  auth_->assign(reinterpret_cast<const char*>(value), size);
+  token_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* ListSessionRequest::mutable_auth() {
-  set_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
-    auth_ = new ::std::string;
+inline ::std::string* ListSessionRequest::mutable_token() {
+  set_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
+    token_ = new ::std::string;
   }
-  return auth_;
+  return token_;
 }
-inline ::std::string* ListSessionRequest::release_auth() {
-  clear_has_auth();
-  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* ListSessionRequest::release_token() {
+  clear_has_token();
+  if (token_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = auth_;
-    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = token_;
+    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void ListSessionRequest::set_allocated_auth(::std::string* auth) {
-  if (auth_ != &::google::protobuf::internal::kEmptyString) {
-    delete auth_;
+inline void ListSessionRequest::set_allocated_token(::std::string* token) {
+  if (token_ != &::google::protobuf::internal::kEmptyString) {
+    delete token_;
   }
-  if (auth) {
-    set_has_auth();
-    auth_ = auth;
+  if (token) {
+    set_has_token();
+    token_ = token;
   } else {
-    clear_has_auth();
-    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_token();
+    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
@@ -3475,7 +3308,7 @@ inline void ListSessionReply_Session::set_allocated_host(::std::string* host) {
   }
 }
 
-// required uint32 port = 3;
+// required int32 port = 3;
 inline bool ListSessionReply_Session::has_port() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -3486,18 +3319,18 @@ inline void ListSessionReply_Session::clear_has_port() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void ListSessionReply_Session::clear_port() {
-  port_ = 0u;
+  port_ = 0;
   clear_has_port();
 }
-inline ::google::protobuf::uint32 ListSessionReply_Session::port() const {
+inline ::google::protobuf::int32 ListSessionReply_Session::port() const {
   return port_;
 }
-inline void ListSessionReply_Session::set_port(::google::protobuf::uint32 value) {
+inline void ListSessionReply_Session::set_port(::google::protobuf::int32 value) {
   set_has_port();
   port_ = value;
 }
 
-// required uint32 player_count = 4;
+// required int32 player_count = 4;
 inline bool ListSessionReply_Session::has_player_count() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -3508,13 +3341,13 @@ inline void ListSessionReply_Session::clear_has_player_count() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void ListSessionReply_Session::clear_player_count() {
-  player_count_ = 0u;
+  player_count_ = 0;
   clear_has_player_count();
 }
-inline ::google::protobuf::uint32 ListSessionReply_Session::player_count() const {
+inline ::google::protobuf::int32 ListSessionReply_Session::player_count() const {
   return player_count_;
 }
-inline void ListSessionReply_Session::set_player_count(::google::protobuf::uint32 value) {
+inline void ListSessionReply_Session::set_player_count(::google::protobuf::int32 value) {
   set_has_player_count();
   player_count_ = value;
 }
@@ -3523,7 +3356,7 @@ inline void ListSessionReply_Session::set_player_count(::google::protobuf::uint3
 
 // ListSessionReply
 
-// required uint32 type = 1;
+// required int32 type = 1;
 inline bool ListSessionReply::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -3534,13 +3367,13 @@ inline void ListSessionReply::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void ListSessionReply::clear_type() {
-  type_ = 0u;
+  type_ = 0;
   clear_has_type();
 }
-inline ::google::protobuf::uint32 ListSessionReply::type() const {
+inline ::google::protobuf::int32 ListSessionReply::type() const {
   return type_;
 }
-inline void ListSessionReply::set_type(::google::protobuf::uint32 value) {
+inline void ListSessionReply::set_type(::google::protobuf::int32 value) {
   set_has_type();
   type_ = value;
 }
@@ -3588,12 +3421,12 @@ namespace google {
 namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::comm::Service_Type>() {
-  return ::comm::Service_Type_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::comm::Service>() {
+  return ::comm::Service_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::comm::Error_Type>() {
-  return ::comm::Error_Type_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::comm::Error>() {
+  return ::comm::Error_descriptor();
 }
 
 }  // namespace google

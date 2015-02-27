@@ -56,6 +56,7 @@ int main(int argc, char **argv)
 		/* register services */
 		REG_SERVICE(HelloService);
 		REG_SERVICE(PingPongService);
+		REG_SERVICE(CreateSessionService);
 
 		/* start server */
 		service.applications_pool().mount(server);
