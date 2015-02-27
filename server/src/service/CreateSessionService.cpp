@@ -14,6 +14,8 @@ void CreateSessionService::execute(comm::CreateSessionRequest& request, comm::Cr
 	reply.set_host("127.0.0.1");
 	reply.set_port(5678);
 	reply.set_sid(Utils::generate_session_id());
+
+	/* TODO: validate and put session to SessionManager */
 }
 
 

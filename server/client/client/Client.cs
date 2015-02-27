@@ -69,6 +69,15 @@ namespace Ocean
 			return null;
 		}
 
+		public Session JoinSession(string sid, string host, int port)
+		{
+			Session ret = new Session (sid);
+			ret.Open (host, port);
+			/* TODO: join session here */
+
+			return ret;
+		}
+
 		public static void Main (string[] args)
 		{
 			Client c = new Client ();

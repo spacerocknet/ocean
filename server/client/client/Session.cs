@@ -23,6 +23,7 @@ namespace Ocean
 		{
 			this.id = id;
 			running = false;
+			Console.WriteLine (this.id);
 		}
 
 		public void Open(string host, int port)
@@ -88,17 +89,16 @@ namespace Ocean
 					if (header [7] == 2) offset += 8;
 					byte[] buf = new byte[size - offset];
 					Array.Copy (content, offset, buf, 0, buf.Length);
-					string s = Encoding.UTF8.GetString(buf, 0, buf.Length);
-					this.MessageReceived (type, s); 
+					this.MessageReceived (type, buf); 
 					received = 0;
 				}
 			}
 			Console.WriteLine ("End of loop");
 		}
 
-		public void MessageReceived(int type, string data)
+		public void MessageReceived(int type, byte[] data)
 		{
-			Console.WriteLine ("Message received:"+data);
+			Console.WriteLine ("Message received");
 		}
 
 		public string SendTcpRequest(int type, byte[] data)
@@ -120,6 +120,10 @@ namespace Ocean
 			stream.Write(buf,0,buf.Length);
 			//TODO: wait for reply here and return
 			return "";
+		}
+
+		public bool Join()
+		{
 		}
 
 		public void PingPong()
