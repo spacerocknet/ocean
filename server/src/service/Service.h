@@ -11,8 +11,8 @@
 #include "Template.h"
 #include "Exception.h"
 
-HTTP_SERVICE_DEC(HelloService,ServiceType::HELLO);
-TCP_SERVICE_DEC(PingPongService,ServiceType::PINGPONG);
+HTTP_SERVICE_DEC(HelloService,comm::Service::HELLO, comm::HelloRequest, comm::HelloReply);
+TCP_SERVICE_DEC(PingPongService,comm::Service::PINGPONG, comm::PingpongRequest, comm::PingpongReply);
 
 
 #endif /* SERVICES_H_ */

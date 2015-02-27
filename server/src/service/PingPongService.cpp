@@ -7,13 +7,11 @@
 
 #include "Service.h"
 
-void PingPongService::execute(cppcms::json::value& request, cppcms::json::value& reply)
+void PingPongService::execute(comm::PingpongRequest& request, comm::PingpongReply& reply)
 {
 	DLOG(INFO)<<"Receive PingPongRequest";
-	if (request["text"].is_undefined()) throw EXCEPTION(ErrorType::INVALID_REQUEST);
-	DLOG(INFO)<<request["text"].str();
-	reply["type"] = 0;
-	reply["text"] = "PONG";
+	reply.set_type(0);
+	reply.set_text("PONG");
 }
 
 

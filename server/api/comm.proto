@@ -1,0 +1,112 @@
+package comm;
+
+/* service type */
+message Service
+{
+	enum Type
+	{
+		HELLO = 1;
+		PINGPONG = 2;
+	}
+}
+message Error
+{
+	enum Type
+	{
+		OK = 0;
+		INVALID_REQUEST = 2;
+	}
+}
+
+message HelloRequest
+{
+	required string name = 1;
+}
+
+message HelloReply
+{
+	required uint32 type = 1;
+	required string text = 2;
+}
+
+message PingpongRequest
+{
+	required string text = 1;
+}
+
+message PingpongReply
+{
+	required uint32 type = 1;
+	required string text = 2;
+}
+
+/**/
+message SigninRequest
+{
+	required string uid = 1;
+	required string password = 2;
+}
+
+message SigninReply
+{
+	required uint32 type = 1;
+	required bytes auth = 2;
+}
+
+message CreateSessionRequest
+{
+	required bytes auth = 1;
+	required string name = 2;
+}
+
+message CreateSessionReply
+{
+	required uint32 type = 1;
+	required bytes sid = 2;
+	required string host = 3;
+	required uint32 port = 4;
+}
+
+message JoinSessionRequest
+{
+	required bytes auth = 1;
+	required bytes sid = 2;
+}
+
+message JoinSessionReply
+{
+	required string name = 1;
+	repeated group Player = 2
+	{
+		required bytes uid = 1;
+		required string name = 2;
+		optional string avatar = 3;
+	}
+}
+
+message ListSessionRequest
+{
+	required bytes auth = 1;
+	optional uint32 count = 2;
+}
+
+message ListSessionReply
+{
+	required uint32 type = 1;
+	repeated group Session = 2
+	{
+		required string name = 1;
+		required string host = 2;
+		required uint32 port = 3;
+		required uint32 player_count = 4;
+	}
+}
+
+message LeaveSessionRequest
+{
+}
+
+message LeaveSessionReply
+{
+
+}

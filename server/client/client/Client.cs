@@ -4,15 +4,16 @@ using System.IO;
 using System.Text;
 using System.Net.Sockets;
 using System.Threading;
+using comm;
 
 namespace Ocean
 {
 	class Client
 	{
 		Session session;
-		public Client(string host, int port)
+		public Client()
 		{
-			session = new Session (host, port);
+			session = new Session ();
 		}
 
 		public void Close()
@@ -23,36 +24,46 @@ namespace Ocean
 		{
 			return session;
 		}
-		public string SendHttpRequest(int type, string message)
+		public byte[] SendHttpRequest(int type, byte[] data)
 		{
 			string url = "http://127.0.0.1:8088/ocean/r/" + type;
 			var request = System.Net.HttpWebRequest.Create(url);
 			request.Method ="POST";
 			request.ContentType = "application/json";
 			var requestStream = request.GetRequestStream();
-			byte[] bytes = Encoding.UTF8.GetBytes(message);
-			requestStream.Write(bytes, 0, bytes.Length);
+			requestStream.Write(data, 0, data.Length);
 			requestStream.Close ();
 
 			HttpWebResponse response = (HttpWebResponse)request.GetResponse ();
+
 			Stream receiveStream = response.GetResponseStream();
-			StreamReader reader = new StreamReader(receiveStream);
-			string text = reader.ReadToEnd ();
-			return text;
+
+			using (MemoryStream ms = new MemoryStream())
+			{
+				receiveStream.CopyTo(ms);
+				return ms.ToArray();
+			}
 		}
 
 		public void SayHello()
 		{
-			string text = SendHttpRequest (1, "{\"text\":\"NGUYEN Hong San\"}");
-			Console.WriteLine (text);
+			HelloRequest.Builder tmp = HelloRequest.CreateBuilder ();
+			tmp.SetName ("NGUYEN Hong San");
+			HelloRequest req = tmp.BuildPartial();
+			MemoryStream stream = new MemoryStream ();
+			req.WriteTo(stream);
+			byte[] data1 = stream.ToArray();
+			byte[] data2 = SendHttpRequest (1, data1);
+			HelloReply rep  = HelloReply.CreateBuilder().MergeFrom(data2).BuildPartial();
+			Console.WriteLine (rep.Text);
 		}
 
 		public static void Main (string[] args)
 		{
-			Client c = new Client ("127.0.0.1", 5678);
+			Client c = new Client ();
 			c.SayHello();
 			Session s = c.Session ();
-			s.Open ();
+			s.Open ("127.0.0.1", 5678);
 			s.PingPong ();
 			c.Close ();
 		}

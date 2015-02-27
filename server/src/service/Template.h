@@ -12,10 +12,11 @@
 #include "Utils.h"
 #include "../Service.h"
 #include "../Server.h"
+#include "comm.pb.h"
 
 /******************************************************************************************************************/
-#define HTTP_SERVICE_DEC(name, type) \
-class name: public HttpService \
+#define HTTP_SERVICE_DEC(name, type, REQUEST, REPLY) \
+class name: public HttpService<REQUEST, REPLY> \
 {\
 public:\
 	name(Server* server) : HttpService(type, server)\
@@ -24,11 +25,11 @@ public:\
 	virtual ~name()\
 	{\
 	}\
-	void execute(cppcms::json::value& request, cppcms::json::value& reply);\
+	void execute(REQUEST& request, REPLY& reply);\
 };
 
-#define TCP_SERVICE_DEC(name, type) \
-class name: public TcpService \
+#define TCP_SERVICE_DEC(name, type, REQUEST, REPLY) \
+class name: public TcpService<REQUEST, REPLY> \
 {\
 public:\
 	name(Server* server) : TcpService(type, server)\
@@ -37,7 +38,7 @@ public:\
 	virtual ~name()\
 	{\
 	}\
-	void execute(cppcms::json::value& request, cppcms::json::value& reply);\
+	void execute(REQUEST& request, REPLY& reply);\
 };
 
 /******************************************************************************************************************/

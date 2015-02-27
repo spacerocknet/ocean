@@ -7,12 +7,11 @@
 
 #include "Service.h"
 
-void HelloService::execute(cppcms::json::value& request, cppcms::json::value& reply)
+void HelloService::execute(comm::HelloRequest& request, comm::HelloReply& reply)
 {
 	DLOG(INFO)<<"Receive HelloRequest";
-	if (request["text"].is_undefined()) throw EXCEPTION(ErrorType::INVALID_REQUEST);
-	reply["type"] = 0;
-	reply["text"] = "Hello " + request["text"].str();
-	DLOG(INFO)<<reply["text"].str();
+	reply.set_type(0);
+	reply.set_text("Hello: " + request.name());
+	DLOG(INFO)<<reply.text();
 }
 

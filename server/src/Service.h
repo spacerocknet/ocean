@@ -16,7 +16,7 @@
 #include <cppcms/http_request.h>
 #include <cppcms/json.h>
 #include "Exception.h"
-#include "Type.h"
+#include "comm.pb.h"
 
 class Server;
 
@@ -45,6 +45,7 @@ public:
 
 typedef boost::shared_ptr<Service> service_ptr;
 
+template<class Request, class Reply>
 class HttpService: public Service
 {
 public:
@@ -58,8 +59,8 @@ public:
 
 	virtual void process(context_ptr context)
 	{
-		cppcms::json::value request;
-		cppcms::json::value reply;
+		Request request;
+		Reply reply;
 
 		auto hc = dynamic_cast<HttpContext*>(context.get());
 		if (hc == nullptr) return;
@@ -68,25 +69,24 @@ public:
 		try
 		{
 			auto data = c->request().raw_post_data();
-			if (data.second == 0) throw EXCEPTION(ErrorType::INVALID_REQUEST);
-			std::istringstream ss(std::string(reinterpret_cast<char const *>(data.first), data.second));
-			if (!request.load(ss, true)) throw EXCEPTION(ErrorType::INVALID_REQUEST);
+			if (data.second == 0) throw EXCEPTION(comm::Error::INVALID_REQUEST);
+			if (!request.ParseFromArray(data.first, data.second)) throw EXCEPTION(comm::Error::INVALID_REQUEST);
 			execute(request, reply);
 		}
 		catch (Exception &e)
 		{
 			DLOG(INFO)<<"Exception "<<e.get_type();
-			reply["type"] = e.get_type();
+			reply.set_type(e.get_type());
 		}
 
-		c->response().out() << reply;
+		c->response().out() << reply.SerializeAsString();
 		c->async_complete_response();
 	}
 
-	virtual void execute(cppcms::json::value& request, cppcms::json::value& reply) = 0;
+	virtual void execute(Request& request, Reply& reply) = 0;
 };
 
-
+template<class Request, class Reply>
 class TcpService: public Service
 {
 public:
@@ -100,35 +100,31 @@ public:
 
 	virtual void process(context_ptr context)
 	{
-		cppcms::json::value request;
-		cppcms::json::value reply;
+		Request request;
+		Reply reply;
 
 		auto tc = dynamic_cast<TcpContext*>(context.get());
 		if (tc == nullptr) return;
 		auto con = tc->get_connection();
 		auto msg = tc->get_message();
 
+
 		try
 		{
-			std::istringstream ss(std::string(reinterpret_cast<char const *>(msg->get_content_data()), msg->get_content_size()));
-			if (!request.load(ss, true)) throw EXCEPTION(ErrorType::INVALID_REQUEST);
+			if (!request.ParseFromArray(msg->get_content_data(), msg->get_content_size())) throw EXCEPTION(comm::Error::INVALID_REQUEST);
 			execute(request, reply);
 		}
 		catch (Exception &e)
 		{
 			DLOG(INFO)<<"Exception "<<e.get_type();
-			reply["type"] = e.get_type();
+			reply.set_type(e.get_type());
 		}
 
-		if (!reply.is_null())
-		{
-			/*FIXME: need define type of reply message */
-			auto rep = Message::encode(reply.save(),0, msg->id);
-			con->send_message(rep);
-		}
+		auto rep = Message::encode(reply.SerializeAsString(),0, msg->id);
+		con->send_message(rep);
 	}
 
-	virtual void execute(cppcms::json::value& request, cppcms::json::value& reply) = 0;
+	virtual void execute(Request& request, Reply& reply) = 0;
 };
 
 #endif /* SERVICE_H_ */

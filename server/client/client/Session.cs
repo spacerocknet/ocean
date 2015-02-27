@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Net.Sockets;
 using System.Threading;
+using comm;
 
 namespace Ocean
 {
@@ -15,19 +16,15 @@ namespace Ocean
 		public Stream stream;
 		private Thread thread;
 
-		public string host;
-		public int port;
 		public string id;
 		bool running;
 
-		public Session (string host, int port)
+		public Session ()
 		{
-			this.host = host;
-			this.port = port;
 			running = false;
 		}
 
-		public void Open()
+		public void Open(string host, int port)
 		{
 			client= new TcpClient();
 			client.Connect(host,port);
@@ -38,13 +35,15 @@ namespace Ocean
 		}
 		public void Close()
 		{
-			/*			if (running) 
+			/*
+			if (running) 
 			{
 				running = false;
 				thread.Join ();
 			}
 			stream.Close ();
-			client.Close();*/
+			client.Close();
+			 */
 		}
 
 		public bool IsOpened()
@@ -101,7 +100,7 @@ namespace Ocean
 			Console.WriteLine ("Message received:"+data);
 		}
 
-		public string SendTcpRequest(int type, string data)
+		public string SendTcpRequest(int type, byte[] data)
 		{
 			int size = HEADER_LENGTH + data.Length;
 			byte[] buf = new byte[size];
@@ -116,8 +115,7 @@ namespace Ocean
 			buf[6] = (byte)(type & 0xFF);
 			buf[7] = 0;
 			int offset = 8;
-			byte[] bytes = Encoding.UTF8.GetBytes(data);
-			Array.Copy (bytes, 0, buf, offset, bytes.Length);
+			Array.Copy (data, 0, buf, offset, data.Length);
 			stream.Write(buf,0,buf.Length);
 			//TODO: wait for reply here and return
 			return "";
@@ -125,7 +123,14 @@ namespace Ocean
 
 		public void PingPong()
 		{
-			string text = SendTcpRequest (2, "{\"text\":\"PING\"}");
+			PingpongRequest.Builder tmp = PingpongRequest.CreateBuilder ();
+			tmp.SetText("PING");
+			PingpongRequest req = tmp.BuildPartial();
+			MemoryStream stream = new MemoryStream ();
+			req.WriteTo(stream);
+			byte[] data1 = stream.ToArray();
+
+			string text = SendTcpRequest (2, data1);
 			Console.WriteLine (text);
 		}
 	}
