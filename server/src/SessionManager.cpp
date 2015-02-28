@@ -9,12 +9,10 @@
 
 SessionManager::SessionManager()
 {
-	// TODO Auto-generated constructor stub
 
 }
 
 SessionManager::~SessionManager()
 {
-	// TODO Auto-generated destructor stub
 }
 

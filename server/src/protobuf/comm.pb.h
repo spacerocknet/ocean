@@ -50,11 +50,14 @@ class LeaveSessionReply;
 enum Service {
   CREATE_SESSION = 100,
   JOIN_SESSION = 101,
-  LEAVE_SESSION = 102
+  LEAVE_SESSION = 102,
+  START_GAME = 103,
+  END_GAME = 104,
+  TTT_MOVE = 200
 };
 bool Service_IsValid(int value);
 const Service Service_MIN = CREATE_SESSION;
-const Service Service_MAX = LEAVE_SESSION;
+const Service Service_MAX = TTT_MOVE;
 const int Service_ARRAYSIZE = Service_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Service_descriptor();
@@ -85,6 +88,24 @@ inline bool Error_Parse(
     const ::std::string& name, Error* value) {
   return ::google::protobuf::internal::ParseNamedEnum<Error>(
     Error_descriptor(), name, value);
+}
+enum Game {
+  TICTACTOE = 1
+};
+bool Game_IsValid(int value);
+const Game Game_MIN = TICTACTOE;
+const Game Game_MAX = TICTACTOE;
+const int Game_ARRAYSIZE = Game_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* Game_descriptor();
+inline const ::std::string& Game_Name(Game value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    Game_descriptor(), value);
+}
+inline bool Game_Parse(
+    const ::std::string& name, Game* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<Game>(
+    Game_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -353,29 +374,24 @@ class CreateSessionRequest : public ::google::protobuf::Message {
   inline ::std::string* release_token();
   inline void set_allocated_token(::std::string* token);
 
-  // required string name = 2;
-  inline bool has_name() const;
-  inline void clear_name();
-  static const int kNameFieldNumber = 2;
-  inline const ::std::string& name() const;
-  inline void set_name(const ::std::string& value);
-  inline void set_name(const char* value);
-  inline void set_name(const char* value, size_t size);
-  inline ::std::string* mutable_name();
-  inline ::std::string* release_name();
-  inline void set_allocated_name(::std::string* name);
+  // required int32 game = 2;
+  inline bool has_game() const;
+  inline void clear_game();
+  static const int kGameFieldNumber = 2;
+  inline ::google::protobuf::int32 game() const;
+  inline void set_game(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:comm.CreateSessionRequest)
  private:
   inline void set_has_token();
   inline void clear_has_token();
-  inline void set_has_name();
-  inline void clear_has_name();
+  inline void set_has_game();
+  inline void clear_has_game();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* token_;
-  ::std::string* name_;
+  ::google::protobuf::int32 game_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -793,18 +809,6 @@ class JoinSessionReply : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 type() const;
   inline void set_type(::google::protobuf::int32 value);
 
-  // required string name = 2;
-  inline bool has_name() const;
-  inline void clear_name();
-  static const int kNameFieldNumber = 2;
-  inline const ::std::string& name() const;
-  inline void set_name(const ::std::string& value);
-  inline void set_name(const char* value);
-  inline void set_name(const char* value, size_t size);
-  inline ::std::string* mutable_name();
-  inline ::std::string* release_name();
-  inline void set_allocated_name(::std::string* name);
-
   // repeated group Player = 3 {
   inline int player_size() const;
   inline void clear_player();
@@ -821,17 +825,14 @@ class JoinSessionReply : public ::google::protobuf::Message {
  private:
   inline void set_has_type();
   inline void clear_has_type();
-  inline void set_has_name();
-  inline void clear_has_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* name_;
   ::google::protobuf::RepeatedPtrField< ::comm::JoinSessionReply_Player > player_;
   ::google::protobuf::int32 type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   friend void  protobuf_AddDesc_comm_2eproto();
   friend void protobuf_AssignDesc_comm_2eproto();
@@ -993,17 +994,29 @@ class ListSessionReply_Session : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string name = 1;
-  inline bool has_name() const;
-  inline void clear_name();
-  static const int kNameFieldNumber = 1;
-  inline const ::std::string& name() const;
-  inline void set_name(const ::std::string& value);
-  inline void set_name(const char* value);
-  inline void set_name(const char* value, size_t size);
-  inline ::std::string* mutable_name();
-  inline ::std::string* release_name();
-  inline void set_allocated_name(::std::string* name);
+  // required string creator_id = 1;
+  inline bool has_creator_id() const;
+  inline void clear_creator_id();
+  static const int kCreatorIdFieldNumber = 1;
+  inline const ::std::string& creator_id() const;
+  inline void set_creator_id(const ::std::string& value);
+  inline void set_creator_id(const char* value);
+  inline void set_creator_id(const char* value, size_t size);
+  inline ::std::string* mutable_creator_id();
+  inline ::std::string* release_creator_id();
+  inline void set_allocated_creator_id(::std::string* creator_id);
+
+  // required string creator_name = 5;
+  inline bool has_creator_name() const;
+  inline void clear_creator_name();
+  static const int kCreatorNameFieldNumber = 5;
+  inline const ::std::string& creator_name() const;
+  inline void set_creator_name(const ::std::string& value);
+  inline void set_creator_name(const char* value);
+  inline void set_creator_name(const char* value, size_t size);
+  inline ::std::string* mutable_creator_name();
+  inline ::std::string* release_creator_name();
+  inline void set_allocated_creator_name(::std::string* creator_name);
 
   // required string host = 2;
   inline bool has_host() const;
@@ -1033,8 +1046,10 @@ class ListSessionReply_Session : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:comm.ListSessionReply.Session)
  private:
-  inline void set_has_name();
-  inline void clear_has_name();
+  inline void set_has_creator_id();
+  inline void clear_has_creator_id();
+  inline void set_has_creator_name();
+  inline void clear_has_creator_name();
   inline void set_has_host();
   inline void clear_has_host();
   inline void set_has_port();
@@ -1044,13 +1059,14 @@ class ListSessionReply_Session : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* name_;
+  ::std::string* creator_id_;
+  ::std::string* creator_name_;
   ::std::string* host_;
   ::google::protobuf::int32 port_;
   ::google::protobuf::int32 player_count_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_comm_2eproto();
   friend void protobuf_AssignDesc_comm_2eproto();
@@ -1284,14 +1300,24 @@ class LeaveSessionReply : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
+  // required int32 type = 1;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline ::google::protobuf::int32 type() const;
+  inline void set_type(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:comm.LeaveSessionReply)
  private:
+  inline void set_has_type();
+  inline void clear_has_type();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::google::protobuf::int32 type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[1];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
   friend void  protobuf_AddDesc_comm_2eproto();
   friend void protobuf_AssignDesc_comm_2eproto();
@@ -1617,74 +1643,26 @@ inline void CreateSessionRequest::set_allocated_token(::std::string* token) {
   }
 }
 
-// required string name = 2;
-inline bool CreateSessionRequest::has_name() const {
+// required int32 game = 2;
+inline bool CreateSessionRequest::has_game() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void CreateSessionRequest::set_has_name() {
+inline void CreateSessionRequest::set_has_game() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void CreateSessionRequest::clear_has_name() {
+inline void CreateSessionRequest::clear_has_game() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void CreateSessionRequest::clear_name() {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    name_->clear();
-  }
-  clear_has_name();
+inline void CreateSessionRequest::clear_game() {
+  game_ = 0;
+  clear_has_game();
 }
-inline const ::std::string& CreateSessionRequest::name() const {
-  return *name_;
+inline ::google::protobuf::int32 CreateSessionRequest::game() const {
+  return game_;
 }
-inline void CreateSessionRequest::set_name(const ::std::string& value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(value);
-}
-inline void CreateSessionRequest::set_name(const char* value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(value);
-}
-inline void CreateSessionRequest::set_name(const char* value, size_t size) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* CreateSessionRequest::mutable_name() {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  return name_;
-}
-inline ::std::string* CreateSessionRequest::release_name() {
-  clear_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = name_;
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void CreateSessionRequest::set_allocated_name(::std::string* name) {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    delete name_;
-  }
-  if (name) {
-    set_has_name();
-    name_ = name;
-  } else {
-    clear_has_name();
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
+inline void CreateSessionRequest::set_game(::google::protobuf::int32 value) {
+  set_has_game();
+  game_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -2259,76 +2237,6 @@ inline void JoinSessionReply::set_type(::google::protobuf::int32 value) {
   type_ = value;
 }
 
-// required string name = 2;
-inline bool JoinSessionReply::has_name() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void JoinSessionReply::set_has_name() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void JoinSessionReply::clear_has_name() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void JoinSessionReply::clear_name() {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    name_->clear();
-  }
-  clear_has_name();
-}
-inline const ::std::string& JoinSessionReply::name() const {
-  return *name_;
-}
-inline void JoinSessionReply::set_name(const ::std::string& value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(value);
-}
-inline void JoinSessionReply::set_name(const char* value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(value);
-}
-inline void JoinSessionReply::set_name(const char* value, size_t size) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* JoinSessionReply::mutable_name() {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  return name_;
-}
-inline ::std::string* JoinSessionReply::release_name() {
-  clear_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = name_;
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void JoinSessionReply::set_allocated_name(::std::string* name) {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    delete name_;
-  }
-  if (name) {
-    set_has_name();
-    name_ = name;
-  } else {
-    clear_has_name();
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
 // repeated group Player = 3 {
 inline int JoinSessionReply::player_size() const {
   return player_.size();
@@ -2454,85 +2362,155 @@ inline void ListSessionRequest::set_count(::google::protobuf::uint32 value) {
 
 // ListSessionReply_Session
 
-// required string name = 1;
-inline bool ListSessionReply_Session::has_name() const {
+// required string creator_id = 1;
+inline bool ListSessionReply_Session::has_creator_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ListSessionReply_Session::set_has_name() {
+inline void ListSessionReply_Session::set_has_creator_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ListSessionReply_Session::clear_has_name() {
+inline void ListSessionReply_Session::clear_has_creator_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ListSessionReply_Session::clear_name() {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    name_->clear();
+inline void ListSessionReply_Session::clear_creator_id() {
+  if (creator_id_ != &::google::protobuf::internal::kEmptyString) {
+    creator_id_->clear();
   }
-  clear_has_name();
+  clear_has_creator_id();
 }
-inline const ::std::string& ListSessionReply_Session::name() const {
-  return *name_;
+inline const ::std::string& ListSessionReply_Session::creator_id() const {
+  return *creator_id_;
 }
-inline void ListSessionReply_Session::set_name(const ::std::string& value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
+inline void ListSessionReply_Session::set_creator_id(const ::std::string& value) {
+  set_has_creator_id();
+  if (creator_id_ == &::google::protobuf::internal::kEmptyString) {
+    creator_id_ = new ::std::string;
   }
-  name_->assign(value);
+  creator_id_->assign(value);
 }
-inline void ListSessionReply_Session::set_name(const char* value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
+inline void ListSessionReply_Session::set_creator_id(const char* value) {
+  set_has_creator_id();
+  if (creator_id_ == &::google::protobuf::internal::kEmptyString) {
+    creator_id_ = new ::std::string;
   }
-  name_->assign(value);
+  creator_id_->assign(value);
 }
-inline void ListSessionReply_Session::set_name(const char* value, size_t size) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
+inline void ListSessionReply_Session::set_creator_id(const char* value, size_t size) {
+  set_has_creator_id();
+  if (creator_id_ == &::google::protobuf::internal::kEmptyString) {
+    creator_id_ = new ::std::string;
   }
-  name_->assign(reinterpret_cast<const char*>(value), size);
+  creator_id_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* ListSessionReply_Session::mutable_name() {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
+inline ::std::string* ListSessionReply_Session::mutable_creator_id() {
+  set_has_creator_id();
+  if (creator_id_ == &::google::protobuf::internal::kEmptyString) {
+    creator_id_ = new ::std::string;
   }
-  return name_;
+  return creator_id_;
 }
-inline ::std::string* ListSessionReply_Session::release_name() {
-  clear_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* ListSessionReply_Session::release_creator_id() {
+  clear_has_creator_id();
+  if (creator_id_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = name_;
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = creator_id_;
+    creator_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void ListSessionReply_Session::set_allocated_name(::std::string* name) {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    delete name_;
+inline void ListSessionReply_Session::set_allocated_creator_id(::std::string* creator_id) {
+  if (creator_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete creator_id_;
   }
-  if (name) {
-    set_has_name();
-    name_ = name;
+  if (creator_id) {
+    set_has_creator_id();
+    creator_id_ = creator_id;
   } else {
-    clear_has_name();
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_creator_id();
+    creator_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string creator_name = 5;
+inline bool ListSessionReply_Session::has_creator_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ListSessionReply_Session::set_has_creator_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ListSessionReply_Session::clear_has_creator_name() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ListSessionReply_Session::clear_creator_name() {
+  if (creator_name_ != &::google::protobuf::internal::kEmptyString) {
+    creator_name_->clear();
+  }
+  clear_has_creator_name();
+}
+inline const ::std::string& ListSessionReply_Session::creator_name() const {
+  return *creator_name_;
+}
+inline void ListSessionReply_Session::set_creator_name(const ::std::string& value) {
+  set_has_creator_name();
+  if (creator_name_ == &::google::protobuf::internal::kEmptyString) {
+    creator_name_ = new ::std::string;
+  }
+  creator_name_->assign(value);
+}
+inline void ListSessionReply_Session::set_creator_name(const char* value) {
+  set_has_creator_name();
+  if (creator_name_ == &::google::protobuf::internal::kEmptyString) {
+    creator_name_ = new ::std::string;
+  }
+  creator_name_->assign(value);
+}
+inline void ListSessionReply_Session::set_creator_name(const char* value, size_t size) {
+  set_has_creator_name();
+  if (creator_name_ == &::google::protobuf::internal::kEmptyString) {
+    creator_name_ = new ::std::string;
+  }
+  creator_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ListSessionReply_Session::mutable_creator_name() {
+  set_has_creator_name();
+  if (creator_name_ == &::google::protobuf::internal::kEmptyString) {
+    creator_name_ = new ::std::string;
+  }
+  return creator_name_;
+}
+inline ::std::string* ListSessionReply_Session::release_creator_name() {
+  clear_has_creator_name();
+  if (creator_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = creator_name_;
+    creator_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ListSessionReply_Session::set_allocated_creator_name(::std::string* creator_name) {
+  if (creator_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete creator_name_;
+  }
+  if (creator_name) {
+    set_has_creator_name();
+    creator_name_ = creator_name;
+  } else {
+    clear_has_creator_name();
+    creator_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
 // required string host = 2;
 inline bool ListSessionReply_Session::has_host() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void ListSessionReply_Session::set_has_host() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void ListSessionReply_Session::clear_has_host() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void ListSessionReply_Session::clear_host() {
   if (host_ != &::google::protobuf::internal::kEmptyString) {
@@ -2596,13 +2574,13 @@ inline void ListSessionReply_Session::set_allocated_host(::std::string* host) {
 
 // required int32 port = 3;
 inline bool ListSessionReply_Session::has_port() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void ListSessionReply_Session::set_has_port() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void ListSessionReply_Session::clear_has_port() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void ListSessionReply_Session::clear_port() {
   port_ = 0;
@@ -2618,13 +2596,13 @@ inline void ListSessionReply_Session::set_port(::google::protobuf::int32 value) 
 
 // required int32 player_count = 4;
 inline bool ListSessionReply_Session::has_player_count() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void ListSessionReply_Session::set_has_player_count() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void ListSessionReply_Session::clear_has_player_count() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void ListSessionReply_Session::clear_player_count() {
   player_count_ = 0;
@@ -2697,6 +2675,28 @@ ListSessionReply::mutable_session() {
 
 // LeaveSessionReply
 
+// required int32 type = 1;
+inline bool LeaveSessionReply::has_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void LeaveSessionReply::set_has_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void LeaveSessionReply::clear_has_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void LeaveSessionReply::clear_type() {
+  type_ = 0;
+  clear_has_type();
+}
+inline ::google::protobuf::int32 LeaveSessionReply::type() const {
+  return type_;
+}
+inline void LeaveSessionReply::set_type(::google::protobuf::int32 value) {
+  set_has_type();
+  type_ = value;
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -2713,6 +2713,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::comm::Service>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::comm::Error>() {
   return ::comm::Error_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::comm::Game>() {
+  return ::comm::Game_descriptor();
 }
 
 }  // namespace google

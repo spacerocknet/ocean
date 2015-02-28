@@ -6,14 +6,27 @@ enum Service
 	CREATE_SESSION = 100;
 	JOIN_SESSION = 101;
 	LEAVE_SESSION = 102;
+	START_GAME = 103;
+	END_GAME = 104;
+
+	/* TIC TAC TOE */
+	TTT_MOVE = 200;
 }
 
+/* error type */
 enum Error
 {
 	OK = 0;
 	INVALID_REQUEST = 2;
 }
 
+/* game type */
+enum Game
+{
+	TICTACTOE = 1;
+}
+
+/* SIGNIN */
 message SigninRequest
 {
 	required string uid = 1;
@@ -26,10 +39,11 @@ message SigninReply
 	required string token = 2;
 }
 
+/* CREATE_SESSION*/
 message CreateSessionRequest
 {
 	required string token = 1;
-	required string name = 2;
+	required int32 game = 2;
 }
 
 message CreateSessionReply
@@ -40,6 +54,7 @@ message CreateSessionReply
 	required int32 port = 4;
 }
 
+/* JOIN_SESSION */
 message JoinSessionRequest
 {
 	required string token = 1;
@@ -49,7 +64,6 @@ message JoinSessionRequest
 message JoinSessionReply
 {
 	required int32 type = 1;
-	required string name = 2;
 	repeated group Player = 3
 	{
 		required bytes uid = 1;
@@ -58,6 +72,7 @@ message JoinSessionReply
 	}
 }
 
+/* LIST_SESSION */
 message ListSessionRequest
 {
 	required string token = 1;
@@ -69,18 +84,21 @@ message ListSessionReply
 	required int32 type = 1;
 	repeated group Session = 2
 	{
-		required string name = 1;
+		required string creator_id = 1;
+		required string creator_name = 5;
 		required string host = 2;
 		required int32 port = 3;
 		required int32 player_count = 4;
 	}
 }
 
+/* LEAVE_SESSION */
 message LeaveSessionRequest
 {
+
 }
 
 message LeaveSessionReply
 {
-
+	required int32 type = 1;
 }

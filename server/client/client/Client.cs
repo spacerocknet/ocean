@@ -55,9 +55,8 @@ namespace Ocean
 		public Session CreateSession()
 		{
 			CreateSessionRequest.Builder tmp = CreateSessionRequest.CreateBuilder ();
-			var ran = new Random ();
-			tmp.SetName ("Session" + ran.Next(1000));
 			tmp.SetToken (token);
+			tmp.SetGame ((int)Game.TICTACTOE);
 			CreateSessionRequest req = tmp.BuildPartial();
 			MemoryStream stream = new MemoryStream ();
 			req.WriteTo(stream);

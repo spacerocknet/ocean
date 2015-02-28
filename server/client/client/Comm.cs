@@ -52,21 +52,23 @@ namespace comm {
           "Cgpjb21tLnByb3RvEgRjb21tIi4KDVNpZ25pblJlcXVlc3QSCwoDdWlkGAEg" + 
           "AigJEhAKCHBhc3N3b3JkGAIgAigJIioKC1NpZ25pblJlcGx5EgwKBHR5cGUY" + 
           "ASACKAUSDQoFdG9rZW4YAiACKAkiMwoUQ3JlYXRlU2Vzc2lvblJlcXVlc3QS" + 
-          "DQoFdG9rZW4YASACKAkSDAoEbmFtZRgCIAIoCSJLChJDcmVhdGVTZXNzaW9u" + 
+          "DQoFdG9rZW4YASACKAkSDAoEZ2FtZRgCIAIoBSJLChJDcmVhdGVTZXNzaW9u" + 
           "UmVwbHkSDAoEdHlwZRgBIAIoBRILCgNzaWQYAiACKAkSDAoEaG9zdBgDIAIo" + 
           "CRIMCgRwb3J0GAQgAigFIjAKEkpvaW5TZXNzaW9uUmVxdWVzdBINCgV0b2tl" + 
-          "bhgBIAIoCRILCgNzaWQYAiACKAkikgEKEEpvaW5TZXNzaW9uUmVwbHkSDAoE" + 
-          "dHlwZRgBIAIoBRIMCgRuYW1lGAIgAigJEi0KBnBsYXllchgDIAMoCjIdLmNv" + 
-          "bW0uSm9pblNlc3Npb25SZXBseS5QbGF5ZXIaMwoGUGxheWVyEgsKA3VpZBgB" + 
-          "IAIoDBIMCgRuYW1lGAIgAigJEg4KBmF2YXRhchgDIAEoCSIyChJMaXN0U2Vz" + 
-          "c2lvblJlcXVlc3QSDQoFdG9rZW4YASACKAkSDQoFY291bnQYAiABKA0inAEK" + 
-          "EExpc3RTZXNzaW9uUmVwbHkSDAoEdHlwZRgBIAIoBRIvCgdzZXNzaW9uGAIg" + 
-          "AygKMh4uY29tbS5MaXN0U2Vzc2lvblJlcGx5LlNlc3Npb24aSQoHU2Vzc2lv" + 
-          "bhIMCgRuYW1lGAEgAigJEgwKBGhvc3QYAiACKAkSDAoEcG9ydBgDIAIoBRIU" + 
-          "CgxwbGF5ZXJfY291bnQYBCACKAUiFQoTTGVhdmVTZXNzaW9uUmVxdWVzdCIT" + 
-          "ChFMZWF2ZVNlc3Npb25SZXBseSpCCgdTZXJ2aWNlEhIKDkNSRUFURV9TRVNT" + 
-          "SU9OEGQSEAoMSk9JTl9TRVNTSU9OEGUSEQoNTEVBVkVfU0VTU0lPThBmKiQK" + 
-          "BUVycm9yEgYKAk9LEAASEwoPSU5WQUxJRF9SRVFVRVNUEAI=");
+          "bhgBIAIoCRILCgNzaWQYAiACKAkihAEKEEpvaW5TZXNzaW9uUmVwbHkSDAoE" + 
+          "dHlwZRgBIAIoBRItCgZwbGF5ZXIYAyADKAoyHS5jb21tLkpvaW5TZXNzaW9u" + 
+          "UmVwbHkuUGxheWVyGjMKBlBsYXllchILCgN1aWQYASACKAwSDAoEbmFtZRgC" + 
+          "IAIoCRIOCgZhdmF0YXIYAyABKAkiMgoSTGlzdFNlc3Npb25SZXF1ZXN0Eg0K" + 
+          "BXRva2VuGAEgAigJEg0KBWNvdW50GAIgASgNIrgBChBMaXN0U2Vzc2lvblJl" + 
+          "cGx5EgwKBHR5cGUYASACKAUSLwoHc2Vzc2lvbhgCIAMoCjIeLmNvbW0uTGlz" + 
+          "dFNlc3Npb25SZXBseS5TZXNzaW9uGmUKB1Nlc3Npb24SEgoKY3JlYXRvcl9p" + 
+          "ZBgBIAIoCRIUCgxjcmVhdG9yX25hbWUYBSACKAkSDAoEaG9zdBgCIAIoCRIM" + 
+          "CgRwb3J0GAMgAigFEhQKDHBsYXllcl9jb3VudBgEIAIoBSIVChNMZWF2ZVNl" + 
+          "c3Npb25SZXF1ZXN0IiEKEUxlYXZlU2Vzc2lvblJlcGx5EgwKBHR5cGUYASAC" + 
+          "KAUqbwoHU2VydmljZRISCg5DUkVBVEVfU0VTU0lPThBkEhAKDEpPSU5fU0VT" + 
+          "U0lPThBlEhEKDUxFQVZFX1NFU1NJT04QZhIOCgpTVEFSVF9HQU1FEGcSDAoI" + 
+          "RU5EX0dBTUUQaBINCghUVFRfTU9WRRDIASokCgVFcnJvchIGCgJPSxAAEhMK" + 
+          "D0lOVkFMSURfUkVRVUVTVBACKhUKBEdhbWUSDQoJVElDVEFDVE9FEAE=");
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_comm_SigninRequest__Descriptor = Descriptor.MessageTypes[0];
@@ -80,7 +82,7 @@ namespace comm {
         internal__static_comm_CreateSessionRequest__Descriptor = Descriptor.MessageTypes[2];
         internal__static_comm_CreateSessionRequest__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::comm.CreateSessionRequest, global::comm.CreateSessionRequest.Builder>(internal__static_comm_CreateSessionRequest__Descriptor,
-                new string[] { "Token", "Name", });
+                new string[] { "Token", "Game", });
         internal__static_comm_CreateSessionReply__Descriptor = Descriptor.MessageTypes[3];
         internal__static_comm_CreateSessionReply__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::comm.CreateSessionReply, global::comm.CreateSessionReply.Builder>(internal__static_comm_CreateSessionReply__Descriptor,
@@ -92,7 +94,7 @@ namespace comm {
         internal__static_comm_JoinSessionReply__Descriptor = Descriptor.MessageTypes[5];
         internal__static_comm_JoinSessionReply__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::comm.JoinSessionReply, global::comm.JoinSessionReply.Builder>(internal__static_comm_JoinSessionReply__Descriptor,
-                new string[] { "Type", "Name", "Player", });
+                new string[] { "Type", "Player", });
         internal__static_comm_JoinSessionReply_Player__Descriptor = internal__static_comm_JoinSessionReply__Descriptor.NestedTypes[0];
         internal__static_comm_JoinSessionReply_Player__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::comm.JoinSessionReply.Types.Player, global::comm.JoinSessionReply.Types.Player.Builder>(internal__static_comm_JoinSessionReply_Player__Descriptor,
@@ -108,7 +110,7 @@ namespace comm {
         internal__static_comm_ListSessionReply_Session__Descriptor = internal__static_comm_ListSessionReply__Descriptor.NestedTypes[0];
         internal__static_comm_ListSessionReply_Session__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::comm.ListSessionReply.Types.Session, global::comm.ListSessionReply.Types.Session.Builder>(internal__static_comm_ListSessionReply_Session__Descriptor,
-                new string[] { "Name", "Host", "Port", "PlayerCount", });
+                new string[] { "CreatorId", "CreatorName", "Host", "Port", "PlayerCount", });
         internal__static_comm_LeaveSessionRequest__Descriptor = Descriptor.MessageTypes[8];
         internal__static_comm_LeaveSessionRequest__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::comm.LeaveSessionRequest, global::comm.LeaveSessionRequest.Builder>(internal__static_comm_LeaveSessionRequest__Descriptor,
@@ -116,7 +118,7 @@ namespace comm {
         internal__static_comm_LeaveSessionReply__Descriptor = Descriptor.MessageTypes[9];
         internal__static_comm_LeaveSessionReply__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::comm.LeaveSessionReply, global::comm.LeaveSessionReply.Builder>(internal__static_comm_LeaveSessionReply__Descriptor,
-                new string[] { });
+                new string[] { "Type", });
         return null;
       };
       pbd::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
@@ -131,11 +133,18 @@ namespace comm {
     CREATE_SESSION = 100,
     JOIN_SESSION = 101,
     LEAVE_SESSION = 102,
+    START_GAME = 103,
+    END_GAME = 104,
+    TTT_MOVE = 200,
   }
   
   public enum Error {
     OK = 0,
     INVALID_REQUEST = 2,
+  }
+  
+  public enum Game {
+    TICTACTOE = 1,
   }
   
   #endregion
@@ -778,8 +787,8 @@ namespace comm {
   public sealed partial class CreateSessionRequest : pb::GeneratedMessage<CreateSessionRequest, CreateSessionRequest.Builder> {
     private CreateSessionRequest() { }
     private static readonly CreateSessionRequest defaultInstance = new CreateSessionRequest().MakeReadOnly();
-    private static readonly string[] _createSessionRequestFieldNames = new string[] { "name", "token" };
-    private static readonly uint[] _createSessionRequestFieldTags = new uint[] { 18, 10 };
+    private static readonly string[] _createSessionRequestFieldNames = new string[] { "game", "token" };
+    private static readonly uint[] _createSessionRequestFieldTags = new uint[] { 16, 10 };
     public static CreateSessionRequest DefaultInstance {
       get { return defaultInstance; }
     }
@@ -810,20 +819,20 @@ namespace comm {
       get { return token_; }
     }
     
-    public const int NameFieldNumber = 2;
-    private bool hasName;
-    private string name_ = "";
-    public bool HasName {
-      get { return hasName; }
+    public const int GameFieldNumber = 2;
+    private bool hasGame;
+    private int game_;
+    public bool HasGame {
+      get { return hasGame; }
     }
-    public string Name {
-      get { return name_; }
+    public int Game {
+      get { return game_; }
     }
     
     public override bool IsInitialized {
       get {
         if (!hasToken) return false;
-        if (!hasName) return false;
+        if (!hasGame) return false;
         return true;
       }
     }
@@ -834,8 +843,8 @@ namespace comm {
       if (hasToken) {
         output.WriteString(1, field_names[1], Token);
       }
-      if (hasName) {
-        output.WriteString(2, field_names[0], Name);
+      if (hasGame) {
+        output.WriteInt32(2, field_names[0], Game);
       }
       UnknownFields.WriteTo(output);
     }
@@ -850,8 +859,8 @@ namespace comm {
         if (hasToken) {
           size += pb::CodedOutputStream.ComputeStringSize(1, Token);
         }
-        if (hasName) {
-          size += pb::CodedOutputStream.ComputeStringSize(2, Name);
+        if (hasGame) {
+          size += pb::CodedOutputStream.ComputeInt32Size(2, Game);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -980,8 +989,8 @@ namespace comm {
         if (other.HasToken) {
           Token = other.Token;
         }
-        if (other.HasName) {
-          Name = other.Name;
+        if (other.HasGame) {
+          Game = other.Game;
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -1030,8 +1039,8 @@ namespace comm {
               result.hasToken = input.ReadString(ref result.token_);
               break;
             }
-            case 18: {
-              result.hasName = input.ReadString(ref result.name_);
+            case 16: {
+              result.hasGame = input.ReadInt32(ref result.game_);
               break;
             }
           }
@@ -1065,24 +1074,23 @@ namespace comm {
         return this;
       }
       
-      public bool HasName {
-        get { return result.hasName; }
+      public bool HasGame {
+        get { return result.hasGame; }
       }
-      public string Name {
-        get { return result.Name; }
-        set { SetName(value); }
+      public int Game {
+        get { return result.Game; }
+        set { SetGame(value); }
       }
-      public Builder SetName(string value) {
-        pb::ThrowHelper.ThrowIfNull(value, "value");
+      public Builder SetGame(int value) {
         PrepareBuilder();
-        result.hasName = true;
-        result.name_ = value;
+        result.hasGame = true;
+        result.game_ = value;
         return this;
       }
-      public Builder ClearName() {
+      public Builder ClearGame() {
         PrepareBuilder();
-        result.hasName = false;
-        result.name_ = "";
+        result.hasGame = false;
+        result.game_ = 0;
         return this;
       }
     }
@@ -1817,8 +1825,8 @@ namespace comm {
   public sealed partial class JoinSessionReply : pb::GeneratedMessage<JoinSessionReply, JoinSessionReply.Builder> {
     private JoinSessionReply() { }
     private static readonly JoinSessionReply defaultInstance = new JoinSessionReply().MakeReadOnly();
-    private static readonly string[] _joinSessionReplyFieldNames = new string[] { "name", "player", "type" };
-    private static readonly uint[] _joinSessionReplyFieldTags = new uint[] { 18, 27, 8 };
+    private static readonly string[] _joinSessionReplyFieldNames = new string[] { "player", "type" };
+    private static readonly uint[] _joinSessionReplyFieldTags = new uint[] { 27, 8 };
     public static JoinSessionReply DefaultInstance {
       get { return defaultInstance; }
     }
@@ -2216,16 +2224,6 @@ namespace comm {
       get { return type_; }
     }
     
-    public const int NameFieldNumber = 2;
-    private bool hasName;
-    private string name_ = "";
-    public bool HasName {
-      get { return hasName; }
-    }
-    public string Name {
-      get { return name_; }
-    }
-    
     public const int PlayerFieldNumber = 3;
     private pbc::PopsicleList<global::comm.JoinSessionReply.Types.Player> player_ = new pbc::PopsicleList<global::comm.JoinSessionReply.Types.Player>();
     public scg::IList<global::comm.JoinSessionReply.Types.Player> PlayerList {
@@ -2241,7 +2239,6 @@ namespace comm {
     public override bool IsInitialized {
       get {
         if (!hasType) return false;
-        if (!hasName) return false;
         return true;
       }
     }
@@ -2250,13 +2247,10 @@ namespace comm {
       int size = SerializedSize;
       string[] field_names = _joinSessionReplyFieldNames;
       if (hasType) {
-        output.WriteInt32(1, field_names[2], Type);
-      }
-      if (hasName) {
-        output.WriteString(2, field_names[0], Name);
+        output.WriteInt32(1, field_names[1], Type);
       }
       if (player_.Count > 0) {
-        output.WriteGroupArray(3, field_names[1], player_);
+        output.WriteGroupArray(3, field_names[0], player_);
       }
       UnknownFields.WriteTo(output);
     }
@@ -2270,9 +2264,6 @@ namespace comm {
         size = 0;
         if (hasType) {
           size += pb::CodedOutputStream.ComputeInt32Size(1, Type);
-        }
-        if (hasName) {
-          size += pb::CodedOutputStream.ComputeStringSize(2, Name);
         }
         foreach (global::comm.JoinSessionReply.Types.Player element in PlayerList) {
           size += pb::CodedOutputStream.ComputeGroupSize(3, element);
@@ -2405,9 +2396,6 @@ namespace comm {
         if (other.HasType) {
           Type = other.Type;
         }
-        if (other.HasName) {
-          Name = other.Name;
-        }
         if (other.player_.Count != 0) {
           result.player_.Add(other.player_);
         }
@@ -2458,10 +2446,6 @@ namespace comm {
               result.hasType = input.ReadInt32(ref result.type_);
               break;
             }
-            case 18: {
-              result.hasName = input.ReadString(ref result.name_);
-              break;
-            }
             case 27: {
               input.ReadGroupArray(tag, field_name, result.player_, global::comm.JoinSessionReply.Types.Player.DefaultInstance, extensionRegistry);
               break;
@@ -2493,27 +2477,6 @@ namespace comm {
         PrepareBuilder();
         result.hasType = false;
         result.type_ = 0;
-        return this;
-      }
-      
-      public bool HasName {
-        get { return result.hasName; }
-      }
-      public string Name {
-        get { return result.Name; }
-        set { SetName(value); }
-      }
-      public Builder SetName(string value) {
-        pb::ThrowHelper.ThrowIfNull(value, "value");
-        PrepareBuilder();
-        result.hasName = true;
-        result.name_ = value;
-        return this;
-      }
-      public Builder ClearName() {
-        PrepareBuilder();
-        result.hasName = false;
-        result.name_ = "";
         return this;
       }
       
@@ -2917,8 +2880,8 @@ namespace comm {
       public sealed partial class Session : pb::GeneratedMessage<Session, Session.Builder> {
         private Session() { }
         private static readonly Session defaultInstance = new Session().MakeReadOnly();
-        private static readonly string[] _sessionFieldNames = new string[] { "host", "name", "player_count", "port" };
-        private static readonly uint[] _sessionFieldTags = new uint[] { 18, 10, 32, 24 };
+        private static readonly string[] _sessionFieldNames = new string[] { "creator_id", "creator_name", "host", "player_count", "port" };
+        private static readonly uint[] _sessionFieldTags = new uint[] { 10, 42, 18, 32, 24 };
         public static Session DefaultInstance {
           get { return defaultInstance; }
         }
@@ -2939,14 +2902,24 @@ namespace comm {
           get { return global::comm.Comm.internal__static_comm_ListSessionReply_Session__FieldAccessorTable; }
         }
         
-        public const int NameFieldNumber = 1;
-        private bool hasName;
-        private string name_ = "";
-        public bool HasName {
-          get { return hasName; }
+        public const int CreatorIdFieldNumber = 1;
+        private bool hasCreatorId;
+        private string creatorId_ = "";
+        public bool HasCreatorId {
+          get { return hasCreatorId; }
         }
-        public string Name {
-          get { return name_; }
+        public string CreatorId {
+          get { return creatorId_; }
+        }
+        
+        public const int CreatorNameFieldNumber = 5;
+        private bool hasCreatorName;
+        private string creatorName_ = "";
+        public bool HasCreatorName {
+          get { return hasCreatorName; }
+        }
+        public string CreatorName {
+          get { return creatorName_; }
         }
         
         public const int HostFieldNumber = 2;
@@ -2981,7 +2954,8 @@ namespace comm {
         
         public override bool IsInitialized {
           get {
-            if (!hasName) return false;
+            if (!hasCreatorId) return false;
+            if (!hasCreatorName) return false;
             if (!hasHost) return false;
             if (!hasPort) return false;
             if (!hasPlayerCount) return false;
@@ -2992,17 +2966,20 @@ namespace comm {
         public override void WriteTo(pb::ICodedOutputStream output) {
           int size = SerializedSize;
           string[] field_names = _sessionFieldNames;
-          if (hasName) {
-            output.WriteString(1, field_names[1], Name);
+          if (hasCreatorId) {
+            output.WriteString(1, field_names[0], CreatorId);
           }
           if (hasHost) {
-            output.WriteString(2, field_names[0], Host);
+            output.WriteString(2, field_names[2], Host);
           }
           if (hasPort) {
-            output.WriteInt32(3, field_names[3], Port);
+            output.WriteInt32(3, field_names[4], Port);
           }
           if (hasPlayerCount) {
-            output.WriteInt32(4, field_names[2], PlayerCount);
+            output.WriteInt32(4, field_names[3], PlayerCount);
+          }
+          if (hasCreatorName) {
+            output.WriteString(5, field_names[1], CreatorName);
           }
           UnknownFields.WriteTo(output);
         }
@@ -3014,8 +2991,11 @@ namespace comm {
             if (size != -1) return size;
             
             size = 0;
-            if (hasName) {
-              size += pb::CodedOutputStream.ComputeStringSize(1, Name);
+            if (hasCreatorId) {
+              size += pb::CodedOutputStream.ComputeStringSize(1, CreatorId);
+            }
+            if (hasCreatorName) {
+              size += pb::CodedOutputStream.ComputeStringSize(5, CreatorName);
             }
             if (hasHost) {
               size += pb::CodedOutputStream.ComputeStringSize(2, Host);
@@ -3150,8 +3130,11 @@ namespace comm {
           public override Builder MergeFrom(Session other) {
             if (other == global::comm.ListSessionReply.Types.Session.DefaultInstance) return this;
             PrepareBuilder();
-            if (other.HasName) {
-              Name = other.Name;
+            if (other.HasCreatorId) {
+              CreatorId = other.CreatorId;
+            }
+            if (other.HasCreatorName) {
+              CreatorName = other.CreatorName;
             }
             if (other.HasHost) {
               Host = other.Host;
@@ -3206,7 +3189,7 @@ namespace comm {
                   break;
                 }
                 case 10: {
-                  result.hasName = input.ReadString(ref result.name_);
+                  result.hasCreatorId = input.ReadString(ref result.creatorId_);
                   break;
                 }
                 case 18: {
@@ -3221,6 +3204,10 @@ namespace comm {
                   result.hasPlayerCount = input.ReadInt32(ref result.playerCount_);
                   break;
                 }
+                case 42: {
+                  result.hasCreatorName = input.ReadString(ref result.creatorName_);
+                  break;
+                }
               }
             }
             
@@ -3231,24 +3218,45 @@ namespace comm {
           }
           
           
-          public bool HasName {
-            get { return result.hasName; }
+          public bool HasCreatorId {
+            get { return result.hasCreatorId; }
           }
-          public string Name {
-            get { return result.Name; }
-            set { SetName(value); }
+          public string CreatorId {
+            get { return result.CreatorId; }
+            set { SetCreatorId(value); }
           }
-          public Builder SetName(string value) {
+          public Builder SetCreatorId(string value) {
             pb::ThrowHelper.ThrowIfNull(value, "value");
             PrepareBuilder();
-            result.hasName = true;
-            result.name_ = value;
+            result.hasCreatorId = true;
+            result.creatorId_ = value;
             return this;
           }
-          public Builder ClearName() {
+          public Builder ClearCreatorId() {
             PrepareBuilder();
-            result.hasName = false;
-            result.name_ = "";
+            result.hasCreatorId = false;
+            result.creatorId_ = "";
+            return this;
+          }
+          
+          public bool HasCreatorName {
+            get { return result.hasCreatorName; }
+          }
+          public string CreatorName {
+            get { return result.CreatorName; }
+            set { SetCreatorName(value); }
+          }
+          public Builder SetCreatorName(string value) {
+            pb::ThrowHelper.ThrowIfNull(value, "value");
+            PrepareBuilder();
+            result.hasCreatorName = true;
+            result.creatorName_ = value;
+            return this;
+          }
+          public Builder ClearCreatorName() {
+            PrepareBuilder();
+            result.hasCreatorName = false;
+            result.creatorName_ = "";
             return this;
           }
           
@@ -3867,8 +3875,8 @@ namespace comm {
   public sealed partial class LeaveSessionReply : pb::GeneratedMessage<LeaveSessionReply, LeaveSessionReply.Builder> {
     private LeaveSessionReply() { }
     private static readonly LeaveSessionReply defaultInstance = new LeaveSessionReply().MakeReadOnly();
-    private static readonly string[] _leaveSessionReplyFieldNames = new string[] {  };
-    private static readonly uint[] _leaveSessionReplyFieldTags = new uint[] {  };
+    private static readonly string[] _leaveSessionReplyFieldNames = new string[] { "type" };
+    private static readonly uint[] _leaveSessionReplyFieldTags = new uint[] { 8 };
     public static LeaveSessionReply DefaultInstance {
       get { return defaultInstance; }
     }
@@ -3889,8 +3897,19 @@ namespace comm {
       get { return global::comm.Comm.internal__static_comm_LeaveSessionReply__FieldAccessorTable; }
     }
     
+    public const int TypeFieldNumber = 1;
+    private bool hasType;
+    private int type_;
+    public bool HasType {
+      get { return hasType; }
+    }
+    public int Type {
+      get { return type_; }
+    }
+    
     public override bool IsInitialized {
       get {
+        if (!hasType) return false;
         return true;
       }
     }
@@ -3898,6 +3917,9 @@ namespace comm {
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
       string[] field_names = _leaveSessionReplyFieldNames;
+      if (hasType) {
+        output.WriteInt32(1, field_names[0], Type);
+      }
       UnknownFields.WriteTo(output);
     }
     
@@ -3908,6 +3930,9 @@ namespace comm {
         if (size != -1) return size;
         
         size = 0;
+        if (hasType) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, Type);
+        }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
         return size;
@@ -4032,6 +4057,9 @@ namespace comm {
       public override Builder MergeFrom(LeaveSessionReply other) {
         if (other == global::comm.LeaveSessionReply.DefaultInstance) return this;
         PrepareBuilder();
+        if (other.HasType) {
+          Type = other.Type;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -4075,6 +4103,10 @@ namespace comm {
               ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
               break;
             }
+            case 8: {
+              result.hasType = input.ReadInt32(ref result.type_);
+              break;
+            }
           }
         }
         
@@ -4084,6 +4116,26 @@ namespace comm {
         return this;
       }
       
+      
+      public bool HasType {
+        get { return result.hasType; }
+      }
+      public int Type {
+        get { return result.Type; }
+        set { SetType(value); }
+      }
+      public Builder SetType(int value) {
+        PrepareBuilder();
+        result.hasType = true;
+        result.type_ = value;
+        return this;
+      }
+      public Builder ClearType() {
+        PrepareBuilder();
+        result.hasType = false;
+        result.type_ = 0;
+        return this;
+      }
     }
     static LeaveSessionReply() {
       object.ReferenceEquals(global::comm.Comm.Descriptor, null);
