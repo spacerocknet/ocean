@@ -20,13 +20,19 @@ namespace Ocean
 		private Thread thread;
 
 		private string id;
+		public string Id
+		{ 
+			get
+			{
+				return id;	
+			}
+		}
 		bool running;
 
 		public Session (string id)
 		{
 			this.id = id;
 			running = false;
-			Console.WriteLine (this.id);
 		}
 
 		public void Open(string host, int port)
@@ -40,15 +46,14 @@ namespace Ocean
 		}
 		public void Close()
 		{
-			/*
-			if (running) 
+			/*			
+ 			lock(REPLY_LOCK)
 			{
 				running = false;
-				thread.Join ();
+				stream.Close ();
+				client.Close ();
 			}
-			stream.Close ();
-			client.Close();
-			 */
+			*/
 		}
 
 		public bool IsOpened()
@@ -163,23 +168,9 @@ namespace Ocean
 			if (rep.Type == 0) 
 			{
 				/* TODO: do something with reply data */
-				Console.WriteLine ("Session joined");
 				return true;
 			} 
 			else return false;
-		}
-
-		public void PingPong()
-		{
-			PingpongRequest.Builder tmp = PingpongRequest.CreateBuilder ();
-			tmp.SetText("PING");
-			PingpongRequest req = tmp.BuildPartial();
-			MemoryStream stream = new MemoryStream ();
-			req.WriteTo(stream);
-			byte[] data1 = stream.ToArray();
-			byte[] data2 = SendTcpRequest ((int)comm.Service.PINGPONG, data1);
-			PingpongReply rep  = PingpongReply.CreateBuilder().MergeFrom(data2).BuildPartial();
-			Console.WriteLine (rep.Text);
 		}
 	}
 }

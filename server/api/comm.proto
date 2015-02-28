@@ -3,9 +3,6 @@ package comm;
 /* service type */
 enum Service
 {
-	HELLO = 1;
-	PINGPONG = 2;
-
 	CREATE_SESSION = 100;
 	JOIN_SESSION = 101;
 	LEAVE_SESSION = 102;
@@ -17,29 +14,6 @@ enum Error
 	INVALID_REQUEST = 2;
 }
 
-message HelloRequest
-{
-	required string name = 1;
-}
-
-message HelloReply
-{
-	required int32 type = 1;
-	required string text = 2;
-}
-
-message PingpongRequest
-{
-	required string text = 1;
-}
-
-message PingpongReply
-{
-	required int32 type = 1;
-	required string text = 2;
-}
-
-/**/
 message SigninRequest
 {
 	required string uid = 1;

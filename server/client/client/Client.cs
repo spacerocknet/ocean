@@ -32,19 +32,6 @@ namespace Ocean
 			}
 		}
 
-		public void SayHello()
-		{
-			HelloRequest.Builder tmp = HelloRequest.CreateBuilder ();
-			tmp.SetName ("NGUYEN Hong San");
-			HelloRequest req = tmp.BuildPartial();
-			MemoryStream stream = new MemoryStream ();
-			req.WriteTo(stream);
-			byte[] data1 = stream.ToArray();
-			byte[] data2 = Post((int)Service.HELLO, data1);
-			HelloReply rep  = HelloReply.CreateBuilder().MergeFrom(data2).BuildPartial();
-			Console.WriteLine (rep.Text);
-		}
-
 		public Session CreateSession()
 		{
 			CreateSessionRequest.Builder tmp = CreateSessionRequest.CreateBuilder ();
@@ -78,11 +65,12 @@ namespace Ocean
 		public static void Main (string[] args)
 		{
 			Client c = new Client ();
-			c.SayHello();
 			Session session = c.CreateSession();
 			if (session != null) 
 			{
-				session.PingPong ();
+				Console.WriteLine ("Session created:"+ session.Id);
+				Thread.Sleep (100);
+				session.Close ();
 			}
 		}
 	}

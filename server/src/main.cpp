@@ -54,8 +54,6 @@ int main(int argc, char **argv)
 		hook_interrupt(server.get());
 
 		/* register services */
-		REG_SERVICE(HelloService);
-		REG_SERVICE(PingPongService);
 		REG_SERVICE(CreateSessionService);
 		REG_SERVICE(JoinSessionService);
 
