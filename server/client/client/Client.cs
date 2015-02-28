@@ -62,10 +62,8 @@ namespace Ocean
 			{
 				Session ret = new Session (rep.Sid);
 				ret.Open (rep.Host, rep.Port);
-				return ret;
+				if (ret.Join (this.token)) return ret;
 			}
-
-			/* TODO: join session here */
 			return null;
 		}
 
@@ -73,16 +71,14 @@ namespace Ocean
 		{
 			Session ret = new Session (sid);
 			ret.Open (host, port);
-			/* TODO: join session here */
-
-			return ret;
+			if (ret.Join (this.token)) return ret;
+			return null;
 		}
 
 		public static void Main (string[] args)
 		{
 			Client c = new Client ();
 			c.SayHello();
-			//Session session = c.CreateSession("127.0.0.1", 5678);
 			Session session = c.CreateSession();
 			if (session != null) 
 			{

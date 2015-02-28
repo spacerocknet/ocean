@@ -951,14 +951,14 @@ class JoinSessionRequest : public ::google::protobuf::Message {
   inline ::std::string* release_token();
   inline void set_allocated_token(::std::string* token);
 
-  // required bytes sid = 2;
+  // required string sid = 2;
   inline bool has_sid() const;
   inline void clear_sid();
   static const int kSidFieldNumber = 2;
   inline const ::std::string& sid() const;
   inline void set_sid(const ::std::string& value);
   inline void set_sid(const char* value);
-  inline void set_sid(const void* value, size_t size);
+  inline void set_sid(const char* value, size_t size);
   inline ::std::string* mutable_sid();
   inline ::std::string* release_sid();
   inline void set_allocated_sid(::std::string* sid);
@@ -2663,7 +2663,7 @@ inline void JoinSessionRequest::set_allocated_token(::std::string* token) {
   }
 }
 
-// required bytes sid = 2;
+// required string sid = 2;
 inline bool JoinSessionRequest::has_sid() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -2696,7 +2696,7 @@ inline void JoinSessionRequest::set_sid(const char* value) {
   }
   sid_->assign(value);
 }
-inline void JoinSessionRequest::set_sid(const void* value, size_t size) {
+inline void JoinSessionRequest::set_sid(const char* value, size_t size) {
   set_has_sid();
   if (sid_ == &::google::protobuf::internal::kEmptyString) {
     sid_ = new ::std::string;

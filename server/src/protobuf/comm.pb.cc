@@ -438,7 +438,7 @@ void protobuf_AddDesc_comm_2eproto() {
     "uest\022\r\n\005token\030\001 \002(\t\022\014\n\004name\030\002 \002(\t\"K\n\022Cre"
     "ateSessionReply\022\014\n\004type\030\001 \002(\005\022\013\n\003sid\030\002 \002"
     "(\t\022\014\n\004host\030\003 \002(\t\022\014\n\004port\030\004 \002(\005\"0\n\022JoinSe"
-    "ssionRequest\022\r\n\005token\030\001 \002(\t\022\013\n\003sid\030\002 \002(\014"
+    "ssionRequest\022\r\n\005token\030\001 \002(\t\022\013\n\003sid\030\002 \002(\t"
     "\"\222\001\n\020JoinSessionReply\022\014\n\004type\030\001 \002(\005\022\014\n\004n"
     "ame\030\002 \002(\t\022-\n\006player\030\003 \003(\n2\035.comm.JoinSes"
     "sionReply.Player\0323\n\006Player\022\013\n\003uid\030\001 \002(\014\022"
@@ -2810,13 +2810,16 @@ bool JoinSessionRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // required bytes sid = 2;
+      // required string sid = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_sid:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_sid()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->sid().data(), this->sid().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -2851,9 +2854,12 @@ void JoinSessionRequest::SerializeWithCachedSizes(
       1, this->token(), output);
   }
 
-  // required bytes sid = 2;
+  // required string sid = 2;
   if (has_sid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->sid().data(), this->sid().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
       2, this->sid(), output);
   }
 
@@ -2875,10 +2881,13 @@ void JoinSessionRequest::SerializeWithCachedSizes(
         1, this->token(), target);
   }
 
-  // required bytes sid = 2;
+  // required string sid = 2;
   if (has_sid()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->sid().data(), this->sid().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         2, this->sid(), target);
   }
 
@@ -2900,10 +2909,10 @@ int JoinSessionRequest::ByteSize() const {
           this->token());
     }
 
-    // required bytes sid = 2;
+    // required string sid = 2;
     if (has_sid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
+        ::google::protobuf::internal::WireFormatLite::StringSize(
           this->sid());
     }
 

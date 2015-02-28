@@ -10,6 +10,9 @@ namespace Ocean
 {
 	public class Session
 	{
+		readonly object REPLY_LOCK = new object();
+		byte[] received = null;
+
 		const int HEADER_LENGTH = 8;
 		const byte PACKET_MAGIC = 0xEE;
 		public TcpClient client;
@@ -89,20 +92,36 @@ namespace Ocean
 					if (header [7] == 2) offset += 8;
 					byte[] buf = new byte[size - offset];
 					Array.Copy (content, offset, buf, 0, buf.Length);
-					this.MessageReceived (type, buf); 
+
+					if (type == 0) /* reply message */ 
+					{ 
+						lock (REPLY_LOCK) 
+						{
+							this.received = buf;
+							Monitor.PulseAll (REPLY_LOCK);
+						}
+					} 
+					else /* notification message */
+					{
+						this.NotificationReceived (type, buf); 
+					}
 					received = 0;
 				}
 			}
 			Console.WriteLine ("End of loop");
 		}
 
-		public void MessageReceived(int type, byte[] data)
+		public void NotificationReceived(int type, byte[] data)
 		{
-			Console.WriteLine ("Message received");
+			Console.WriteLine ("Notification received");
+			/* TODO: process notification here */
 		}
 
-		public string SendTcpRequest(int type, byte[] data)
+		public byte[] SendTcpRequest(int type, byte[] data)
 		{
+			/*TODO: add lock here for synchonization and thread-safe*/
+
+			/* encode message */ 
 			int size = HEADER_LENGTH + data.Length;
 			byte[] buf = new byte[size];
 			buf[0] = 0xEE;
@@ -118,12 +137,36 @@ namespace Ocean
 			int offset = 8;
 			Array.Copy (data, 0, buf, offset, data.Length);
 			stream.Write(buf,0,buf.Length);
-			//TODO: wait for reply here and return
-			return "";
+
+			/* wait for reply here and return */
+			lock (REPLY_LOCK) 
+			{
+				while (running && received==null) Monitor.Wait (REPLY_LOCK);
+				if (!running) return null;
+				byte[] ret = received;
+				received = null;
+				return ret;
+			}
 		}
 
-		public bool Join()
+		public bool Join(string token)
 		{
+			JoinSessionRequest.Builder tmp = JoinSessionRequest.CreateBuilder ();
+			tmp.SetSid(this.id);
+			tmp.SetToken (token);
+			JoinSessionRequest req = tmp.BuildPartial();
+			MemoryStream stream = new MemoryStream ();
+			req.WriteTo(stream);
+			byte[] data1 = stream.ToArray();
+			byte[] data2 = SendTcpRequest ((int)comm.Service.JOIN_SESSION, data1);
+			JoinSessionReply rep  = JoinSessionReply.CreateBuilder().MergeFrom(data2).BuildPartial();
+			if (rep.Type == 0) 
+			{
+				/* TODO: do something with reply data */
+				Console.WriteLine ("Session joined");
+				return true;
+			} 
+			else return false;
 		}
 
 		public void PingPong()
@@ -134,9 +177,9 @@ namespace Ocean
 			MemoryStream stream = new MemoryStream ();
 			req.WriteTo(stream);
 			byte[] data1 = stream.ToArray();
-
-			string text = SendTcpRequest (2, data1);
-			Console.WriteLine (text);
+			byte[] data2 = SendTcpRequest ((int)comm.Service.PINGPONG, data1);
+			PingpongReply rep  = PingpongReply.CreateBuilder().MergeFrom(data2).BuildPartial();
+			Console.WriteLine (rep.Text);
 		}
 	}
 }

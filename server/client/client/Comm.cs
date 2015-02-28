@@ -66,7 +66,7 @@ namespace comm {
           "U2Vzc2lvblJlcXVlc3QSDQoFdG9rZW4YASACKAkSDAoEbmFtZRgCIAIoCSJL" + 
           "ChJDcmVhdGVTZXNzaW9uUmVwbHkSDAoEdHlwZRgBIAIoBRILCgNzaWQYAiAC" + 
           "KAkSDAoEaG9zdBgDIAIoCRIMCgRwb3J0GAQgAigFIjAKEkpvaW5TZXNzaW9u" + 
-          "UmVxdWVzdBINCgV0b2tlbhgBIAIoCRILCgNzaWQYAiACKAwikgEKEEpvaW5T" + 
+          "UmVxdWVzdBINCgV0b2tlbhgBIAIoCRILCgNzaWQYAiACKAkikgEKEEpvaW5T" + 
           "ZXNzaW9uUmVwbHkSDAoEdHlwZRgBIAIoBRIMCgRuYW1lGAIgAigJEi0KBnBs" + 
           "YXllchgDIAMoCjIdLmNvbW0uSm9pblNlc3Npb25SZXBseS5QbGF5ZXIaMwoG" + 
           "UGxheWVyEgsKA3VpZBgBIAIoDBIMCgRuYW1lGAIgAigJEg4KBmF2YXRhchgD" + 
@@ -2740,11 +2740,11 @@ namespace comm {
     
     public const int SidFieldNumber = 2;
     private bool hasSid;
-    private pb::ByteString sid_ = pb::ByteString.Empty;
+    private string sid_ = "";
     public bool HasSid {
       get { return hasSid; }
     }
-    public pb::ByteString Sid {
+    public string Sid {
       get { return sid_; }
     }
     
@@ -2763,7 +2763,7 @@ namespace comm {
         output.WriteString(1, field_names[1], Token);
       }
       if (hasSid) {
-        output.WriteBytes(2, field_names[0], Sid);
+        output.WriteString(2, field_names[0], Sid);
       }
       UnknownFields.WriteTo(output);
     }
@@ -2779,7 +2779,7 @@ namespace comm {
           size += pb::CodedOutputStream.ComputeStringSize(1, Token);
         }
         if (hasSid) {
-          size += pb::CodedOutputStream.ComputeBytesSize(2, Sid);
+          size += pb::CodedOutputStream.ComputeStringSize(2, Sid);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -2959,7 +2959,7 @@ namespace comm {
               break;
             }
             case 18: {
-              result.hasSid = input.ReadBytes(ref result.sid_);
+              result.hasSid = input.ReadString(ref result.sid_);
               break;
             }
           }
@@ -2996,11 +2996,11 @@ namespace comm {
       public bool HasSid {
         get { return result.hasSid; }
       }
-      public pb::ByteString Sid {
+      public string Sid {
         get { return result.Sid; }
         set { SetSid(value); }
       }
-      public Builder SetSid(pb::ByteString value) {
+      public Builder SetSid(string value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasSid = true;
@@ -3010,7 +3010,7 @@ namespace comm {
       public Builder ClearSid() {
         PrepareBuilder();
         result.hasSid = false;
-        result.sid_ = pb::ByteString.Empty;
+        result.sid_ = "";
         return this;
       }
     }
