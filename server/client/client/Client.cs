@@ -32,6 +32,26 @@ namespace Ocean
 			}
 		}
 
+		public bool Signin(string uid, string password)
+		{
+			SigninRequest.Builder tmp = SigninRequest.CreateBuilder ();
+			tmp.SetUid (uid);
+			tmp.SetPassword(password);
+			SigninRequest req = tmp.BuildPartial();
+			MemoryStream stream = new MemoryStream ();
+			req.WriteTo(stream);
+			byte[] data1 = stream.ToArray();
+			byte[] data2 = Post((int)comm.Service.CREATE_SESSION, data1);
+			SigninReply rep  = SigninReply.CreateBuilder().MergeFrom(data2).BuildPartial();
+
+			if (rep.Type == (int)Error.OK)
+			{
+				this.token = rep.Token;
+				return true;
+			}
+			return false;
+
+		}
 		public Session CreateSession()
 		{
 			CreateSessionRequest.Builder tmp = CreateSessionRequest.CreateBuilder ();

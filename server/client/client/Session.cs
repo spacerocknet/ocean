@@ -125,7 +125,6 @@ namespace Ocean
 		public byte[] SendTcpRequest(int type, byte[] data)
 		{
 			/*TODO: add lock here for synchonization and thread-safe*/
-
 			/* encode message */ 
 			int size = HEADER_LENGTH + data.Length;
 			byte[] buf = new byte[size];
