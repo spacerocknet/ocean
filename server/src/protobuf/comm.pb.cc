@@ -58,6 +58,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
   LeaveSessionReply_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* Service_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* Error_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* Game_descriptor_ = NULL;
 
 }  // namespace
 
@@ -103,7 +104,7 @@ void protobuf_AssignDesc_comm_2eproto() {
   CreateSessionRequest_descriptor_ = file->message_type(2);
   static const int CreateSessionRequest_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CreateSessionRequest, token_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CreateSessionRequest, name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CreateSessionRequest, game_),
   };
   CreateSessionRequest_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -151,9 +152,8 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(JoinSessionRequest));
   JoinSessionReply_descriptor_ = file->message_type(5);
-  static const int JoinSessionReply_offsets_[3] = {
+  static const int JoinSessionReply_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinSessionReply, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinSessionReply, name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinSessionReply, player_),
   };
   JoinSessionReply_reflection_ =
@@ -217,8 +217,9 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ListSessionReply));
   ListSessionReply_Session_descriptor_ = ListSessionReply_descriptor_->nested_type(0);
-  static const int ListSessionReply_Session_offsets_[4] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ListSessionReply_Session, name_),
+  static const int ListSessionReply_Session_offsets_[5] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ListSessionReply_Session, creator_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ListSessionReply_Session, creator_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ListSessionReply_Session, host_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ListSessionReply_Session, port_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ListSessionReply_Session, player_count_),
@@ -250,6 +251,7 @@ void protobuf_AssignDesc_comm_2eproto() {
       sizeof(LeaveSessionRequest));
   LeaveSessionReply_descriptor_ = file->message_type(9);
   static const int LeaveSessionReply_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LeaveSessionReply, type_),
   };
   LeaveSessionReply_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -264,6 +266,7 @@ void protobuf_AssignDesc_comm_2eproto() {
       sizeof(LeaveSessionReply));
   Service_descriptor_ = file->enum_type(0);
   Error_descriptor_ = file->enum_type(1);
+  Game_descriptor_ = file->enum_type(2);
 }
 
 namespace {
@@ -341,23 +344,26 @@ void protobuf_AddDesc_comm_2eproto() {
     "\n\ncomm.proto\022\004comm\".\n\rSigninRequest\022\013\n\003u"
     "id\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"*\n\013SigninRepl"
     "y\022\014\n\004type\030\001 \002(\005\022\r\n\005token\030\002 \002(\t\"3\n\024Create"
-    "SessionRequest\022\r\n\005token\030\001 \002(\t\022\014\n\004name\030\002 "
-    "\002(\t\"K\n\022CreateSessionReply\022\014\n\004type\030\001 \002(\005\022"
+    "SessionRequest\022\r\n\005token\030\001 \002(\t\022\014\n\004game\030\002 "
+    "\002(\005\"K\n\022CreateSessionReply\022\014\n\004type\030\001 \002(\005\022"
     "\013\n\003sid\030\002 \002(\t\022\014\n\004host\030\003 \002(\t\022\014\n\004port\030\004 \002(\005"
     "\"0\n\022JoinSessionRequest\022\r\n\005token\030\001 \002(\t\022\013\n"
-    "\003sid\030\002 \002(\t\"\222\001\n\020JoinSessionReply\022\014\n\004type\030"
-    "\001 \002(\005\022\014\n\004name\030\002 \002(\t\022-\n\006player\030\003 \003(\n2\035.co"
-    "mm.JoinSessionReply.Player\0323\n\006Player\022\013\n\003"
-    "uid\030\001 \002(\014\022\014\n\004name\030\002 \002(\t\022\016\n\006avatar\030\003 \001(\t\""
-    "2\n\022ListSessionRequest\022\r\n\005token\030\001 \002(\t\022\r\n\005"
-    "count\030\002 \001(\r\"\234\001\n\020ListSessionReply\022\014\n\004type"
-    "\030\001 \002(\005\022/\n\007session\030\002 \003(\n2\036.comm.ListSessi"
-    "onReply.Session\032I\n\007Session\022\014\n\004name\030\001 \002(\t"
-    "\022\014\n\004host\030\002 \002(\t\022\014\n\004port\030\003 \002(\005\022\024\n\014player_c"
-    "ount\030\004 \002(\005\"\025\n\023LeaveSessionRequest\"\023\n\021Lea"
-    "veSessionReply*B\n\007Service\022\022\n\016CREATE_SESS"
-    "ION\020d\022\020\n\014JOIN_SESSION\020e\022\021\n\rLEAVE_SESSION"
-    "\020f*$\n\005Error\022\006\n\002OK\020\000\022\023\n\017INVALID_REQUEST\020\002", 800);
+    "\003sid\030\002 \002(\t\"\204\001\n\020JoinSessionReply\022\014\n\004type\030"
+    "\001 \002(\005\022-\n\006player\030\003 \003(\n2\035.comm.JoinSession"
+    "Reply.Player\0323\n\006Player\022\013\n\003uid\030\001 \002(\014\022\014\n\004n"
+    "ame\030\002 \002(\t\022\016\n\006avatar\030\003 \001(\t\"2\n\022ListSession"
+    "Request\022\r\n\005token\030\001 \002(\t\022\r\n\005count\030\002 \001(\r\"\270\001"
+    "\n\020ListSessionReply\022\014\n\004type\030\001 \002(\005\022/\n\007sess"
+    "ion\030\002 \003(\n2\036.comm.ListSessionReply.Sessio"
+    "n\032e\n\007Session\022\022\n\ncreator_id\030\001 \002(\t\022\024\n\014crea"
+    "tor_name\030\005 \002(\t\022\014\n\004host\030\002 \002(\t\022\014\n\004port\030\003 \002"
+    "(\005\022\024\n\014player_count\030\004 \002(\005\"\025\n\023LeaveSession"
+    "Request\"!\n\021LeaveSessionReply\022\014\n\004type\030\001 \002"
+    "(\005*o\n\007Service\022\022\n\016CREATE_SESSION\020d\022\020\n\014JOI"
+    "N_SESSION\020e\022\021\n\rLEAVE_SESSION\020f\022\016\n\nSTART_"
+    "GAME\020g\022\014\n\010END_GAME\020h\022\r\n\010TTT_MOVE\020\310\001*$\n\005E"
+    "rror\022\006\n\002OK\020\000\022\023\n\017INVALID_REQUEST\020\002*\025\n\004Gam"
+    "e\022\r\n\tTICTACTOE\020\001", 896);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "comm.proto", &protobuf_RegisterTypes);
   SigninRequest::default_instance_ = new SigninRequest();
@@ -402,6 +408,9 @@ bool Service_IsValid(int value) {
     case 100:
     case 101:
     case 102:
+    case 103:
+    case 104:
+    case 200:
       return true;
     default:
       return false;
@@ -416,6 +425,19 @@ bool Error_IsValid(int value) {
   switch(value) {
     case 0:
     case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* Game_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return Game_descriptor_;
+}
+bool Game_IsValid(int value) {
+  switch(value) {
+    case 1:
       return true;
     default:
       return false;
@@ -976,7 +998,7 @@ void SigninReply::Swap(SigninReply* other) {
 
 #ifndef _MSC_VER
 const int CreateSessionRequest::kTokenFieldNumber;
-const int CreateSessionRequest::kNameFieldNumber;
+const int CreateSessionRequest::kGameFieldNumber;
 #endif  // !_MSC_VER
 
 CreateSessionRequest::CreateSessionRequest()
@@ -996,7 +1018,7 @@ CreateSessionRequest::CreateSessionRequest(const CreateSessionRequest& from)
 void CreateSessionRequest::SharedCtor() {
   _cached_size_ = 0;
   token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  game_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1007,9 +1029,6 @@ CreateSessionRequest::~CreateSessionRequest() {
 void CreateSessionRequest::SharedDtor() {
   if (token_ != &::google::protobuf::internal::kEmptyString) {
     delete token_;
-  }
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    delete name_;
   }
   if (this != default_instance_) {
   }
@@ -1043,11 +1062,7 @@ void CreateSessionRequest::Clear() {
         token_->clear();
       }
     }
-    if (has_name()) {
-      if (name_ != &::google::protobuf::internal::kEmptyString) {
-        name_->clear();
-      }
-    }
+    game_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -1071,20 +1086,19 @@ bool CreateSessionRequest::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_name;
+        if (input->ExpectTag(16)) goto parse_game;
         break;
       }
 
-      // required string name = 2;
+      // required int32 game = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_name:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->name().data(), this->name().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_game:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &game_)));
+          set_has_game();
         } else {
           goto handle_uninterpreted;
         }
@@ -1119,13 +1133,9 @@ void CreateSessionRequest::SerializeWithCachedSizes(
       1, this->token(), output);
   }
 
-  // required string name = 2;
-  if (has_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->name(), output);
+  // required int32 game = 2;
+  if (has_game()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->game(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -1146,14 +1156,9 @@ void CreateSessionRequest::SerializeWithCachedSizes(
         1, this->token(), target);
   }
 
-  // required string name = 2;
-  if (has_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->name(), target);
+  // required int32 game = 2;
+  if (has_game()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->game(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1174,11 +1179,11 @@ int CreateSessionRequest::ByteSize() const {
           this->token());
     }
 
-    // required string name = 2;
-    if (has_name()) {
+    // required int32 game = 2;
+    if (has_game()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->name());
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->game());
     }
 
   }
@@ -1211,8 +1216,8 @@ void CreateSessionRequest::MergeFrom(const CreateSessionRequest& from) {
     if (from.has_token()) {
       set_token(from.token());
     }
-    if (from.has_name()) {
-      set_name(from.name());
+    if (from.has_game()) {
+      set_game(from.game());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -1239,7 +1244,7 @@ bool CreateSessionRequest::IsInitialized() const {
 void CreateSessionRequest::Swap(CreateSessionRequest* other) {
   if (other != this) {
     std::swap(token_, other->token_);
-    std::swap(name_, other->name_);
+    std::swap(game_, other->game_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -2236,7 +2241,6 @@ void JoinSessionReply_Player::Swap(JoinSessionReply_Player* other) {
 
 #ifndef _MSC_VER
 const int JoinSessionReply::kTypeFieldNumber;
-const int JoinSessionReply::kNameFieldNumber;
 const int JoinSessionReply::kPlayerFieldNumber;
 #endif  // !_MSC_VER
 
@@ -2257,7 +2261,6 @@ JoinSessionReply::JoinSessionReply(const JoinSessionReply& from)
 void JoinSessionReply::SharedCtor() {
   _cached_size_ = 0;
   type_ = 0;
-  name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -2266,9 +2269,6 @@ JoinSessionReply::~JoinSessionReply() {
 }
 
 void JoinSessionReply::SharedDtor() {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    delete name_;
-  }
   if (this != default_instance_) {
   }
 }
@@ -2297,11 +2297,6 @@ JoinSessionReply* JoinSessionReply::New() const {
 void JoinSessionReply::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     type_ = 0;
-    if (has_name()) {
-      if (name_ != &::google::protobuf::internal::kEmptyString) {
-        name_->clear();
-      }
-    }
   }
   player_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -2322,23 +2317,6 @@ bool JoinSessionReply::MergePartialFromCodedStream(
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &type_)));
           set_has_type();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(18)) goto parse_name;
-        break;
-      }
-
-      // required string name = 2;
-      case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_name:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->name().data(), this->name().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -2384,15 +2362,6 @@ void JoinSessionReply::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->type(), output);
   }
 
-  // required string name = 2;
-  if (has_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->name(), output);
-  }
-
   // repeated group Player = 3 {
   for (int i = 0; i < this->player_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteGroupMaybeToArray(
@@ -2410,16 +2379,6 @@ void JoinSessionReply::SerializeWithCachedSizes(
   // required int32 type = 1;
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->type(), target);
-  }
-
-  // required string name = 2;
-  if (has_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->name(), target);
   }
 
   // repeated group Player = 3 {
@@ -2445,13 +2404,6 @@ int JoinSessionReply::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->type());
-    }
-
-    // required string name = 2;
-    if (has_name()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->name());
     }
 
   }
@@ -2493,9 +2445,6 @@ void JoinSessionReply::MergeFrom(const JoinSessionReply& from) {
     if (from.has_type()) {
       set_type(from.type());
     }
-    if (from.has_name()) {
-      set_name(from.name());
-    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -2513,7 +2462,7 @@ void JoinSessionReply::CopyFrom(const JoinSessionReply& from) {
 }
 
 bool JoinSessionReply::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   for (int i = 0; i < player_size(); i++) {
     if (!this->player(i).IsInitialized()) return false;
@@ -2524,7 +2473,6 @@ bool JoinSessionReply::IsInitialized() const {
 void JoinSessionReply::Swap(JoinSessionReply* other) {
   if (other != this) {
     std::swap(type_, other->type_);
-    std::swap(name_, other->name_);
     player_.Swap(&other->player_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
@@ -2810,7 +2758,8 @@ void ListSessionRequest::Swap(ListSessionRequest* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int ListSessionReply_Session::kNameFieldNumber;
+const int ListSessionReply_Session::kCreatorIdFieldNumber;
+const int ListSessionReply_Session::kCreatorNameFieldNumber;
 const int ListSessionReply_Session::kHostFieldNumber;
 const int ListSessionReply_Session::kPortFieldNumber;
 const int ListSessionReply_Session::kPlayerCountFieldNumber;
@@ -2832,7 +2781,8 @@ ListSessionReply_Session::ListSessionReply_Session(const ListSessionReply_Sessio
 
 void ListSessionReply_Session::SharedCtor() {
   _cached_size_ = 0;
-  name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  creator_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  creator_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   host_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   port_ = 0;
   player_count_ = 0;
@@ -2844,8 +2794,11 @@ ListSessionReply_Session::~ListSessionReply_Session() {
 }
 
 void ListSessionReply_Session::SharedDtor() {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    delete name_;
+  if (creator_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete creator_id_;
+  }
+  if (creator_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete creator_name_;
   }
   if (host_ != &::google::protobuf::internal::kEmptyString) {
     delete host_;
@@ -2877,9 +2830,14 @@ ListSessionReply_Session* ListSessionReply_Session::New() const {
 
 void ListSessionReply_Session::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_name()) {
-      if (name_ != &::google::protobuf::internal::kEmptyString) {
-        name_->clear();
+    if (has_creator_id()) {
+      if (creator_id_ != &::google::protobuf::internal::kEmptyString) {
+        creator_id_->clear();
+      }
+    }
+    if (has_creator_name()) {
+      if (creator_name_ != &::google::protobuf::internal::kEmptyString) {
+        creator_name_->clear();
       }
     }
     if (has_host()) {
@@ -2900,14 +2858,14 @@ bool ListSessionReply_Session::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string name = 1;
+      // required string creator_id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
+                input, this->mutable_creator_id()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->name().data(), this->name().length(),
+            this->creator_id().data(), this->creator_id().length(),
             ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
@@ -2961,6 +2919,23 @@ bool ListSessionReply_Session::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(42)) goto parse_creator_name;
+        break;
+      }
+
+      // required string creator_name = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_creator_name:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_creator_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->creator_name().data(), this->creator_name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -2983,13 +2958,13 @@ bool ListSessionReply_Session::MergePartialFromCodedStream(
 
 void ListSessionReply_Session::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string name = 1;
-  if (has_name()) {
+  // required string creator_id = 1;
+  if (has_creator_id()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
+      this->creator_id().data(), this->creator_id().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->name(), output);
+      1, this->creator_id(), output);
   }
 
   // required string host = 2;
@@ -3011,6 +2986,15 @@ void ListSessionReply_Session::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->player_count(), output);
   }
 
+  // required string creator_name = 5;
+  if (has_creator_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->creator_name().data(), this->creator_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      5, this->creator_name(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -3019,14 +3003,14 @@ void ListSessionReply_Session::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ListSessionReply_Session::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required string name = 1;
-  if (has_name()) {
+  // required string creator_id = 1;
+  if (has_creator_id()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
+      this->creator_id().data(), this->creator_id().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->name(), target);
+        1, this->creator_id(), target);
   }
 
   // required string host = 2;
@@ -3049,6 +3033,16 @@ void ListSessionReply_Session::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->player_count(), target);
   }
 
+  // required string creator_name = 5;
+  if (has_creator_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->creator_name().data(), this->creator_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->creator_name(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -3060,11 +3054,18 @@ int ListSessionReply_Session::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string name = 1;
-    if (has_name()) {
+    // required string creator_id = 1;
+    if (has_creator_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->name());
+          this->creator_id());
+    }
+
+    // required string creator_name = 5;
+    if (has_creator_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->creator_name());
     }
 
     // required string host = 2;
@@ -3115,8 +3116,11 @@ void ListSessionReply_Session::MergeFrom(const ::google::protobuf::Message& from
 void ListSessionReply_Session::MergeFrom(const ListSessionReply_Session& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_name()) {
-      set_name(from.name());
+    if (from.has_creator_id()) {
+      set_creator_id(from.creator_id());
+    }
+    if (from.has_creator_name()) {
+      set_creator_name(from.creator_name());
     }
     if (from.has_host()) {
       set_host(from.host());
@@ -3144,14 +3148,15 @@ void ListSessionReply_Session::CopyFrom(const ListSessionReply_Session& from) {
 }
 
 bool ListSessionReply_Session::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
 
   return true;
 }
 
 void ListSessionReply_Session::Swap(ListSessionReply_Session* other) {
   if (other != this) {
-    std::swap(name_, other->name_);
+    std::swap(creator_id_, other->creator_id_);
+    std::swap(creator_name_, other->creator_name_);
     std::swap(host_, other->host_);
     std::swap(port_, other->port_);
     std::swap(player_count_, other->player_count_);
@@ -3581,6 +3586,7 @@ void LeaveSessionRequest::Swap(LeaveSessionRequest* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int LeaveSessionReply::kTypeFieldNumber;
 #endif  // !_MSC_VER
 
 LeaveSessionReply::LeaveSessionReply()
@@ -3599,6 +3605,7 @@ LeaveSessionReply::LeaveSessionReply(const LeaveSessionReply& from)
 
 void LeaveSessionReply::SharedCtor() {
   _cached_size_ = 0;
+  type_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -3633,6 +3640,9 @@ LeaveSessionReply* LeaveSessionReply::New() const {
 }
 
 void LeaveSessionReply::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    type_ = 0;
+  }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -3642,12 +3652,33 @@ bool LeaveSessionReply::MergePartialFromCodedStream(
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
-    if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-      return true;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 type = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &type_)));
+          set_has_type();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
     }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, mutable_unknown_fields()));
   }
   return true;
 #undef DO_
@@ -3655,6 +3686,11 @@ bool LeaveSessionReply::MergePartialFromCodedStream(
 
 void LeaveSessionReply::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 type = 1;
+  if (has_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->type(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -3663,6 +3699,11 @@ void LeaveSessionReply::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* LeaveSessionReply::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // required int32 type = 1;
+  if (has_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->type(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -3673,6 +3714,15 @@ void LeaveSessionReply::SerializeWithCachedSizes(
 int LeaveSessionReply::ByteSize() const {
   int total_size = 0;
 
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 type = 1;
+    if (has_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->type());
+    }
+
+  }
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -3698,6 +3748,11 @@ void LeaveSessionReply::MergeFrom(const ::google::protobuf::Message& from) {
 
 void LeaveSessionReply::MergeFrom(const LeaveSessionReply& from) {
   GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_type()) {
+      set_type(from.type());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -3714,12 +3769,15 @@ void LeaveSessionReply::CopyFrom(const LeaveSessionReply& from) {
 }
 
 bool LeaveSessionReply::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
 
 void LeaveSessionReply::Swap(LeaveSessionReply* other) {
   if (other != this) {
+    std::swap(type_, other->type_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }

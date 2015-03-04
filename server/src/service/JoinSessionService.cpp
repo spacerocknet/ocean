@@ -13,7 +13,6 @@ void JoinSessionService::execute(comm::JoinSessionRequest& request, comm::JoinSe
 	/*TODO: validate request data */
 	/*TODO: send notification to all players in this session */
 	reply.set_type(0);
-	reply.set_name("test");
 }
 
 
