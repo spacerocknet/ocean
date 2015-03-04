@@ -56,9 +56,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* LeaveSessionReply_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   LeaveSessionReply_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* Service_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* Error_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* Game_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* ServiceType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* ErrorType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* GameType_descriptor_ = NULL;
 
 }  // namespace
 
@@ -264,9 +264,9 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(LeaveSessionReply));
-  Service_descriptor_ = file->enum_type(0);
-  Error_descriptor_ = file->enum_type(1);
-  Game_descriptor_ = file->enum_type(2);
+  ServiceType_descriptor_ = file->enum_type(0);
+  ErrorType_descriptor_ = file->enum_type(1);
+  GameType_descriptor_ = file->enum_type(2);
 }
 
 namespace {
@@ -359,11 +359,15 @@ void protobuf_AddDesc_comm_2eproto() {
     "tor_name\030\005 \002(\t\022\014\n\004host\030\002 \002(\t\022\014\n\004port\030\003 \002"
     "(\005\022\024\n\014player_count\030\004 \002(\005\"\025\n\023LeaveSession"
     "Request\"!\n\021LeaveSessionReply\022\014\n\004type\030\001 \002"
-    "(\005*o\n\007Service\022\022\n\016CREATE_SESSION\020d\022\020\n\014JOI"
-    "N_SESSION\020e\022\021\n\rLEAVE_SESSION\020f\022\016\n\nSTART_"
-    "GAME\020g\022\014\n\010END_GAME\020h\022\r\n\010TTT_MOVE\020\310\001*$\n\005E"
-    "rror\022\006\n\002OK\020\000\022\023\n\017INVALID_REQUEST\020\002*\025\n\004Gam"
-    "e\022\r\n\tTICTACTOE\020\001", 896);
+    "(\005*s\n\013ServiceType\022\022\n\016CREATE_SESSION\020d\022\020\n"
+    "\014JOIN_SESSION\020e\022\021\n\rLEAVE_SESSION\020f\022\016\n\nST"
+    "ART_GAME\020g\022\014\n\010END_GAME\020h\022\r\n\010TTT_MOVE\020\310\001*"
+    "\274\001\n\tErrorType\022\006\n\002OK\020\000\022\023\n\017INVALID_REQUEST"
+    "\020\002\022\022\n\016ENTITY_INVALID\020\003\022\024\n\020ENTITY_NOT_FOU"
+    "ND\020\004\022\020\n\014NAME_INVALID\020\005\022\021\n\rEMAIL_INVALID\020"
+    "\006\022\024\n\020PASSWORD_INVALID\020\007\022\024\n\020EMAIL_DUPLICA"
+    "TED\020\010\022\027\n\023USERNAME_DUPLICATED\020\t*\031\n\010GameTy"
+    "pe\022\r\n\tTICTACTOE\020\001", 1057);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "comm.proto", &protobuf_RegisterTypes);
   SigninRequest::default_instance_ = new SigninRequest();
@@ -399,11 +403,11 @@ struct StaticDescriptorInitializer_comm_2eproto {
     protobuf_AddDesc_comm_2eproto();
   }
 } static_descriptor_initializer_comm_2eproto_;
-const ::google::protobuf::EnumDescriptor* Service_descriptor() {
+const ::google::protobuf::EnumDescriptor* ServiceType_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Service_descriptor_;
+  return ServiceType_descriptor_;
 }
-bool Service_IsValid(int value) {
+bool ServiceType_IsValid(int value) {
   switch(value) {
     case 100:
     case 101:
@@ -417,25 +421,32 @@ bool Service_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* Error_descriptor() {
+const ::google::protobuf::EnumDescriptor* ErrorType_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Error_descriptor_;
+  return ErrorType_descriptor_;
 }
-bool Error_IsValid(int value) {
+bool ErrorType_IsValid(int value) {
   switch(value) {
     case 0:
     case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
       return true;
     default:
       return false;
   }
 }
 
-const ::google::protobuf::EnumDescriptor* Game_descriptor() {
+const ::google::protobuf::EnumDescriptor* GameType_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Game_descriptor_;
+  return GameType_descriptor_;
 }
-bool Game_IsValid(int value) {
+bool GameType_IsValid(int value) {
   switch(value) {
     case 1:
       return true;

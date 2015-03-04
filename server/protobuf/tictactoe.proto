@@ -1,0 +1,34 @@
+import "model.proto";
+import "type.proto";
+
+package tictactoe;
+
+message Player
+{
+	enum State{REGISTED = 1; ACTIVE = 2; DELETED = 3;}
+	extend model.Entity	 { optional Player PLAYER = 4; }
+	required string uid = 1;
+	required string password = 2;
+	required string name = 8;
+	optional string avatar = 6;
+	required uint32 state = 7;
+	optional bytes session = 9; //current session
+}
+
+message Session
+{
+	enum State{CREATED = 1; PLAYING = 2; FINISHED = 3;}
+	extend model.Entity	 { optional Session SESSION = 5; }
+	required bytes creator = 1;
+	required bytes game = 9;
+	required string ip = 10;
+	required uint32 state = 7;
+}
+
+message Game
+{
+	extend model.Entity	 { optional Game GAME = 6; }
+	required string name = 1;
+	optional string description = 11;
+}
+

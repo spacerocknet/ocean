@@ -47,7 +47,7 @@ class ListSessionReply_Session;
 class LeaveSessionRequest;
 class LeaveSessionReply;
 
-enum Service {
+enum ServiceType {
   CREATE_SESSION = 100,
   JOIN_SESSION = 101,
   LEAVE_SESSION = 102,
@@ -55,57 +55,64 @@ enum Service {
   END_GAME = 104,
   TTT_MOVE = 200
 };
-bool Service_IsValid(int value);
-const Service Service_MIN = CREATE_SESSION;
-const Service Service_MAX = TTT_MOVE;
-const int Service_ARRAYSIZE = Service_MAX + 1;
+bool ServiceType_IsValid(int value);
+const ServiceType ServiceType_MIN = CREATE_SESSION;
+const ServiceType ServiceType_MAX = TTT_MOVE;
+const int ServiceType_ARRAYSIZE = ServiceType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* Service_descriptor();
-inline const ::std::string& Service_Name(Service value) {
+const ::google::protobuf::EnumDescriptor* ServiceType_descriptor();
+inline const ::std::string& ServiceType_Name(ServiceType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    Service_descriptor(), value);
+    ServiceType_descriptor(), value);
 }
-inline bool Service_Parse(
-    const ::std::string& name, Service* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Service>(
-    Service_descriptor(), name, value);
+inline bool ServiceType_Parse(
+    const ::std::string& name, ServiceType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ServiceType>(
+    ServiceType_descriptor(), name, value);
 }
-enum Error {
+enum ErrorType {
   OK = 0,
-  INVALID_REQUEST = 2
+  INVALID_REQUEST = 2,
+  ENTITY_INVALID = 3,
+  ENTITY_NOT_FOUND = 4,
+  NAME_INVALID = 5,
+  EMAIL_INVALID = 6,
+  PASSWORD_INVALID = 7,
+  EMAIL_DUPLICATED = 8,
+  USERNAME_DUPLICATED = 9
 };
-bool Error_IsValid(int value);
-const Error Error_MIN = OK;
-const Error Error_MAX = INVALID_REQUEST;
-const int Error_ARRAYSIZE = Error_MAX + 1;
+bool ErrorType_IsValid(int value);
+const ErrorType ErrorType_MIN = OK;
+const ErrorType ErrorType_MAX = USERNAME_DUPLICATED;
+const int ErrorType_ARRAYSIZE = ErrorType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* Error_descriptor();
-inline const ::std::string& Error_Name(Error value) {
+const ::google::protobuf::EnumDescriptor* ErrorType_descriptor();
+inline const ::std::string& ErrorType_Name(ErrorType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    Error_descriptor(), value);
+    ErrorType_descriptor(), value);
 }
-inline bool Error_Parse(
-    const ::std::string& name, Error* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Error>(
-    Error_descriptor(), name, value);
+inline bool ErrorType_Parse(
+    const ::std::string& name, ErrorType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ErrorType>(
+    ErrorType_descriptor(), name, value);
 }
-enum Game {
+enum GameType {
   TICTACTOE = 1
 };
-bool Game_IsValid(int value);
-const Game Game_MIN = TICTACTOE;
-const Game Game_MAX = TICTACTOE;
-const int Game_ARRAYSIZE = Game_MAX + 1;
+bool GameType_IsValid(int value);
+const GameType GameType_MIN = TICTACTOE;
+const GameType GameType_MAX = TICTACTOE;
+const int GameType_ARRAYSIZE = GameType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* Game_descriptor();
-inline const ::std::string& Game_Name(Game value) {
+const ::google::protobuf::EnumDescriptor* GameType_descriptor();
+inline const ::std::string& GameType_Name(GameType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    Game_descriptor(), value);
+    GameType_descriptor(), value);
 }
-inline bool Game_Parse(
-    const ::std::string& name, Game* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Game>(
-    Game_descriptor(), name, value);
+inline bool GameType_Parse(
+    const ::std::string& name, GameType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<GameType>(
+    GameType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -2707,16 +2714,16 @@ namespace google {
 namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::comm::Service>() {
-  return ::comm::Service_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::comm::ServiceType>() {
+  return ::comm::ServiceType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::comm::Error>() {
-  return ::comm::Error_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::comm::ErrorType>() {
+  return ::comm::ErrorType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::comm::Game>() {
-  return ::comm::Game_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::comm::GameType>() {
+  return ::comm::GameType_descriptor();
 }
 
 }  // namespace google

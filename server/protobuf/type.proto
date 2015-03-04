@@ -1,0 +1,36 @@
+import "model.proto";
+package chat;
+
+/* entity type */
+message EntityType
+{
+	enum Type
+	{
+		CHAT = 1;
+		USER = 3;
+		GROUP_CHAT = 4;
+		NOTIFICATION = 5;
+		MESSAGE = 6;
+	}
+}
+
+/* relation type */
+message RelationType
+{
+	enum Type
+	{
+		HAS_CHAT = 6;
+		HAS_MEMBER = 7;
+		HAS_MESSAGE = 9;
+		HAS_NOTIFICATION = 10;
+	}
+}
+
+/* index type */
+message IndexType
+{
+	enum Type
+	{
+		ACCOUNT = 1;
+	}
+}

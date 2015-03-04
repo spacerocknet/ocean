@@ -1,7 +1,7 @@
 package comm;
 
 /* service type */
-enum Service
+enum ServiceType
 {
 	CREATE_SESSION = 100;
 	JOIN_SESSION = 101;
@@ -14,14 +14,21 @@ enum Service
 }
 
 /* error type */
-enum Error
+enum ErrorType
 {
 	OK = 0;
 	INVALID_REQUEST = 2;
+	ENTITY_INVALID = 3;
+	ENTITY_NOT_FOUND = 4;
+	NAME_INVALID = 5;
+	EMAIL_INVALID = 6;
+	PASSWORD_INVALID = 7;
+	EMAIL_DUPLICATED = 8;
+	USERNAME_DUPLICATED = 9;
 }
 
 /* game type */
-enum Game
+enum GameType
 {
 	TICTACTOE = 1;
 }

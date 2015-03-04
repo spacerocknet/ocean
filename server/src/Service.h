@@ -69,8 +69,8 @@ public:
 		try
 		{
 			auto data = c->request().raw_post_data();
-			if (data.second == 0) throw EXCEPTION(comm::Error::INVALID_REQUEST);
-			if (!request.ParseFromArray(data.first, data.second)) throw EXCEPTION(comm::Error::INVALID_REQUEST);
+			if (data.second == 0) throw EXCEPTION(comm::ErrorType::INVALID_REQUEST);
+			if (!request.ParseFromArray(data.first, data.second)) throw EXCEPTION(comm::ErrorType::INVALID_REQUEST);
 			execute(request, reply);
 		}
 		catch (Exception &e)
@@ -111,7 +111,7 @@ public:
 
 		try
 		{
-			if (!request.ParseFromArray(msg->get_content_data(), msg->get_content_size())) throw EXCEPTION(comm::Error::INVALID_REQUEST);
+			if (!request.ParseFromArray(msg->get_content_data(), msg->get_content_size())) throw EXCEPTION(comm::ErrorType::INVALID_REQUEST);
 			execute(request, reply);
 		}
 		catch (Exception &e)

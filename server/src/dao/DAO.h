@@ -53,10 +53,11 @@ public:
 	entity_ptr get_entity(string id, uint32_t type);
 
 	/*USER*/
-	entity_ptr get_user_by_email(string email);
-	entity_ptr get_user_by_tel(string tel);
-	entity_ptr create_user(User& data);
+	entity_ptr get_player(string uid);
+	entity_ptr create_player(User& data);
 
+	/*SESSION*/
+	entity_ptr create_session();
 };
 
 #endif /* DAO_H_ */
