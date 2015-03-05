@@ -9,23 +9,7 @@
 using namespace comm;
 
 
-entity_ptr DAO::get_player(string id)
-{
-	auto ret = boost::make_shared<model::Entity>();
-	int r = db->en_get(id, *ret.get());
-
-	/* Check if index existed */
-	if (r == db::OK)
-	{
-		if (ret->type() != EntityType::PLAYER) throw EXCEPTION(ErrorType::ENTITY_INVALID);
-		return ret;
-	}
-	if (r == db::IS_NOT_FOUND) throw EXCEPTION(ErrorType::ENTITY_NOT_FOUND);
-	else throw EXCEPTION(ErrorType::DB_ERROR);
-
-}
-
-entity_ptr DAO::get_player_by_uid(string uid)
+entity_ptr DAO::get_player(string uid)
 {
 	entity_ptr ret = boost::make_shared<model::Entity>();
 	int r = db->index_get(IndexType::PLAYER, uid, *ret.get());
