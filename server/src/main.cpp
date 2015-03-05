@@ -61,8 +61,8 @@ int main(int argc, char **argv)
 		server->register_component(dao);
 
 		/* register services */
-		REG_SERVICE(CreateSessionService);
-		REG_SERVICE(JoinSessionService);
+		//REG_SERVICE(CreateSessionService);
+		//REG_SERVICE(JoinSessionService);
 
 		/* start server */
 		service.applications_pool().mount(server);

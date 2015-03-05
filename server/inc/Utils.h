@@ -169,6 +169,15 @@ public:
 		if (str.empty()) return false;
 		return true;
 	}
+
+	static bool normalize_email(string &str)
+	{
+		/* TODO: validate */
+		trim(str);
+		if (str.empty()) return false;
+		return true;
+	}
+
 };
 
 }

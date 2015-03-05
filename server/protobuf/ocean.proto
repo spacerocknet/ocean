@@ -7,36 +7,21 @@ message Player
 {
 	enum State{REGISTED = 1; ACTIVE = 2; DELETED = 3;}
 	extend model.Entity	 { optional Player PLAYER = 4; }
-	required string uid = 1;
+	required string email = 1;
 	required string password = 2;
-	required string name = 8;
-	optional string avatar = 6;
-	required uint32 state = 7;
-	optional bytes session = 9; //current session
-}
-
-message Session
-{
-	enum State{CREATED = 1; PLAYING = 2; FINISHED = 3;}
-	extend model.Entity	 { optional Session SESSION = 5; }
-	required bytes creator = 1;
-	required bytes game = 9;
-	required string ip = 10;
-	required uint32 state = 7;
-	extensions 100 to max;
-}
-
-message Game
-{
-	extend model.Entity	 { optional Game GAME = 6; }
-	required string name = 1;
-	optional string description = 11;
+	required string name = 3;
+	optional string avatar = 4;
 }
 
 message Tictactoe
 {
-	enum State{EMPTY = 1; X = 2; O = 3;}
-	extend Session	{ optional Tictactoe TICTACTOE = 100; }
-	repeated uint32 state = 1;
+	enum State{CREATED = 1; PLAYING = 2; ENDED = 3;}
+	enum Value{E = 1; X = 2; O = 3;}
+	extend model.Entity	 { optional Tictactoe TICTACTOE = 5; }
+	required bytes player1 = 2;
+	optional bytes player2 = 3;
+	required string ip = 4;
+	repeated uint32 values = 1;
+	required uint32 state = 5;
 }
 

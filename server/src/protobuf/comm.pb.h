@@ -36,28 +36,25 @@ void protobuf_ShutdownFile_comm_2eproto();
 
 class SigninRequest;
 class SigninReply;
-class CreateSessionRequest;
-class CreateSessionReply;
-class JoinSessionRequest;
-class JoinSessionReply;
-class JoinSessionReply_Player;
-class ListSessionRequest;
-class ListSessionReply;
-class ListSessionReply_Session;
-class LeaveSessionRequest;
+class TictactoeCreateRequest;
+class TictactoeCreateReply;
+class TictactoeJoinRequest;
+class TictactoeJoinReply;
+class TictactoeListRequest;
+class TictactoeListReply;
+class TictactoeLeaveRequest;
 class LeaveSessionReply;
 
 enum ServiceType {
-  CREATE_SESSION = 100,
-  JOIN_SESSION = 101,
-  LEAVE_SESSION = 102,
-  START_GAME = 103,
-  END_GAME = 104,
-  TTT_MOVE = 200
+  SIGNIN = 100,
+  SIGNOUT = 101,
+  TICTACTOE_CREATE = 200,
+  TICTACTOE_JOIN = 201,
+  TICTACTOE_MOVE = 202
 };
 bool ServiceType_IsValid(int value);
-const ServiceType ServiceType_MIN = CREATE_SESSION;
-const ServiceType ServiceType_MAX = TTT_MOVE;
+const ServiceType ServiceType_MIN = SIGNIN;
+const ServiceType ServiceType_MAX = TICTACTOE_MOVE;
 const int ServiceType_ARRAYSIZE = ServiceType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ServiceType_descriptor();
@@ -95,24 +92,6 @@ inline bool ErrorType_Parse(
     const ::std::string& name, ErrorType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<ErrorType>(
     ErrorType_descriptor(), name, value);
-}
-enum GameType {
-  TICTACTOE = 1
-};
-bool GameType_IsValid(int value);
-const GameType GameType_MIN = TICTACTOE;
-const GameType GameType_MAX = TICTACTOE;
-const int GameType_ARRAYSIZE = GameType_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* GameType_descriptor();
-inline const ::std::string& GameType_Name(GameType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    GameType_descriptor(), value);
-}
-inline bool GameType_Parse(
-    const ::std::string& name, GameType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<GameType>(
-    GameType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -279,28 +258,28 @@ class SigninReply : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 type() const;
   inline void set_type(::google::protobuf::int32 value);
 
-  // required string token = 2;
-  inline bool has_token() const;
-  inline void clear_token();
-  static const int kTokenFieldNumber = 2;
-  inline const ::std::string& token() const;
-  inline void set_token(const ::std::string& value);
-  inline void set_token(const char* value);
-  inline void set_token(const char* value, size_t size);
-  inline ::std::string* mutable_token();
-  inline ::std::string* release_token();
-  inline void set_allocated_token(::std::string* token);
+  // required string auth = 2;
+  inline bool has_auth() const;
+  inline void clear_auth();
+  static const int kAuthFieldNumber = 2;
+  inline const ::std::string& auth() const;
+  inline void set_auth(const ::std::string& value);
+  inline void set_auth(const char* value);
+  inline void set_auth(const char* value, size_t size);
+  inline ::std::string* mutable_auth();
+  inline ::std::string* release_auth();
+  inline void set_allocated_auth(::std::string* auth);
 
   // @@protoc_insertion_point(class_scope:comm.SigninReply)
  private:
   inline void set_has_type();
   inline void clear_has_type();
-  inline void set_has_token();
-  inline void clear_has_token();
+  inline void set_has_auth();
+  inline void clear_has_auth();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* token_;
+  ::std::string* auth_;
   ::google::protobuf::int32 type_;
 
   mutable int _cached_size_;
@@ -315,14 +294,14 @@ class SigninReply : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class CreateSessionRequest : public ::google::protobuf::Message {
+class TictactoeCreateRequest : public ::google::protobuf::Message {
  public:
-  CreateSessionRequest();
-  virtual ~CreateSessionRequest();
+  TictactoeCreateRequest();
+  virtual ~TictactoeCreateRequest();
 
-  CreateSessionRequest(const CreateSessionRequest& from);
+  TictactoeCreateRequest(const TictactoeCreateRequest& from);
 
-  inline CreateSessionRequest& operator=(const CreateSessionRequest& from) {
+  inline TictactoeCreateRequest& operator=(const TictactoeCreateRequest& from) {
     CopyFrom(from);
     return *this;
   }
@@ -336,17 +315,17 @@ class CreateSessionRequest : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const CreateSessionRequest& default_instance();
+  static const TictactoeCreateRequest& default_instance();
 
-  void Swap(CreateSessionRequest* other);
+  void Swap(TictactoeCreateRequest* other);
 
   // implements Message ----------------------------------------------
 
-  CreateSessionRequest* New() const;
+  TictactoeCreateRequest* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const CreateSessionRequest& from);
-  void MergeFrom(const CreateSessionRequest& from);
+  void CopyFrom(const TictactoeCreateRequest& from);
+  void MergeFrom(const TictactoeCreateRequest& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -369,57 +348,47 @@ class CreateSessionRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string token = 1;
-  inline bool has_token() const;
-  inline void clear_token();
-  static const int kTokenFieldNumber = 1;
-  inline const ::std::string& token() const;
-  inline void set_token(const ::std::string& value);
-  inline void set_token(const char* value);
-  inline void set_token(const char* value, size_t size);
-  inline ::std::string* mutable_token();
-  inline ::std::string* release_token();
-  inline void set_allocated_token(::std::string* token);
+  // required string auth = 1;
+  inline bool has_auth() const;
+  inline void clear_auth();
+  static const int kAuthFieldNumber = 1;
+  inline const ::std::string& auth() const;
+  inline void set_auth(const ::std::string& value);
+  inline void set_auth(const char* value);
+  inline void set_auth(const char* value, size_t size);
+  inline ::std::string* mutable_auth();
+  inline ::std::string* release_auth();
+  inline void set_allocated_auth(::std::string* auth);
 
-  // required int32 game = 2;
-  inline bool has_game() const;
-  inline void clear_game();
-  static const int kGameFieldNumber = 2;
-  inline ::google::protobuf::int32 game() const;
-  inline void set_game(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:comm.CreateSessionRequest)
+  // @@protoc_insertion_point(class_scope:comm.TictactoeCreateRequest)
  private:
-  inline void set_has_token();
-  inline void clear_has_token();
-  inline void set_has_game();
-  inline void clear_has_game();
+  inline void set_has_auth();
+  inline void clear_has_auth();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* token_;
-  ::google::protobuf::int32 game_;
+  ::std::string* auth_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
   friend void  protobuf_AddDesc_comm_2eproto();
   friend void protobuf_AssignDesc_comm_2eproto();
   friend void protobuf_ShutdownFile_comm_2eproto();
 
   void InitAsDefaultInstance();
-  static CreateSessionRequest* default_instance_;
+  static TictactoeCreateRequest* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class CreateSessionReply : public ::google::protobuf::Message {
+class TictactoeCreateReply : public ::google::protobuf::Message {
  public:
-  CreateSessionReply();
-  virtual ~CreateSessionReply();
+  TictactoeCreateReply();
+  virtual ~TictactoeCreateReply();
 
-  CreateSessionReply(const CreateSessionReply& from);
+  TictactoeCreateReply(const TictactoeCreateReply& from);
 
-  inline CreateSessionReply& operator=(const CreateSessionReply& from) {
+  inline TictactoeCreateReply& operator=(const TictactoeCreateReply& from) {
     CopyFrom(from);
     return *this;
   }
@@ -433,17 +402,17 @@ class CreateSessionReply : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const CreateSessionReply& default_instance();
+  static const TictactoeCreateReply& default_instance();
 
-  void Swap(CreateSessionReply* other);
+  void Swap(TictactoeCreateReply* other);
 
   // implements Message ----------------------------------------------
 
-  CreateSessionReply* New() const;
+  TictactoeCreateReply* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const CreateSessionReply& from);
-  void MergeFrom(const CreateSessionReply& from);
+  void CopyFrom(const TictactoeCreateReply& from);
+  void MergeFrom(const TictactoeCreateReply& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -473,273 +442,44 @@ class CreateSessionReply : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 type() const;
   inline void set_type(::google::protobuf::int32 value);
 
-  // required string sid = 2;
-  inline bool has_sid() const;
-  inline void clear_sid();
-  static const int kSidFieldNumber = 2;
-  inline const ::std::string& sid() const;
-  inline void set_sid(const ::std::string& value);
-  inline void set_sid(const char* value);
-  inline void set_sid(const char* value, size_t size);
-  inline ::std::string* mutable_sid();
-  inline ::std::string* release_sid();
-  inline void set_allocated_sid(::std::string* sid);
+  // required string session_id = 2;
+  inline bool has_session_id() const;
+  inline void clear_session_id();
+  static const int kSessionIdFieldNumber = 2;
+  inline const ::std::string& session_id() const;
+  inline void set_session_id(const ::std::string& value);
+  inline void set_session_id(const char* value);
+  inline void set_session_id(const char* value, size_t size);
+  inline ::std::string* mutable_session_id();
+  inline ::std::string* release_session_id();
+  inline void set_allocated_session_id(::std::string* session_id);
 
-  // required string host = 3;
-  inline bool has_host() const;
-  inline void clear_host();
-  static const int kHostFieldNumber = 3;
-  inline const ::std::string& host() const;
-  inline void set_host(const ::std::string& value);
-  inline void set_host(const char* value);
-  inline void set_host(const char* value, size_t size);
-  inline ::std::string* mutable_host();
-  inline ::std::string* release_host();
-  inline void set_allocated_host(::std::string* host);
+  // required string ip = 3;
+  inline bool has_ip() const;
+  inline void clear_ip();
+  static const int kIpFieldNumber = 3;
+  inline const ::std::string& ip() const;
+  inline void set_ip(const ::std::string& value);
+  inline void set_ip(const char* value);
+  inline void set_ip(const char* value, size_t size);
+  inline ::std::string* mutable_ip();
+  inline ::std::string* release_ip();
+  inline void set_allocated_ip(::std::string* ip);
 
-  // required int32 port = 4;
-  inline bool has_port() const;
-  inline void clear_port();
-  static const int kPortFieldNumber = 4;
-  inline ::google::protobuf::int32 port() const;
-  inline void set_port(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:comm.CreateSessionReply)
+  // @@protoc_insertion_point(class_scope:comm.TictactoeCreateReply)
  private:
   inline void set_has_type();
   inline void clear_has_type();
-  inline void set_has_sid();
-  inline void clear_has_sid();
-  inline void set_has_host();
-  inline void clear_has_host();
-  inline void set_has_port();
-  inline void clear_has_port();
+  inline void set_has_session_id();
+  inline void clear_has_session_id();
+  inline void set_has_ip();
+  inline void clear_has_ip();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* sid_;
+  ::std::string* session_id_;
+  ::std::string* ip_;
   ::google::protobuf::int32 type_;
-  ::google::protobuf::int32 port_;
-  ::std::string* host_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
-
-  friend void  protobuf_AddDesc_comm_2eproto();
-  friend void protobuf_AssignDesc_comm_2eproto();
-  friend void protobuf_ShutdownFile_comm_2eproto();
-
-  void InitAsDefaultInstance();
-  static CreateSessionReply* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class JoinSessionRequest : public ::google::protobuf::Message {
- public:
-  JoinSessionRequest();
-  virtual ~JoinSessionRequest();
-
-  JoinSessionRequest(const JoinSessionRequest& from);
-
-  inline JoinSessionRequest& operator=(const JoinSessionRequest& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const JoinSessionRequest& default_instance();
-
-  void Swap(JoinSessionRequest* other);
-
-  // implements Message ----------------------------------------------
-
-  JoinSessionRequest* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const JoinSessionRequest& from);
-  void MergeFrom(const JoinSessionRequest& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required string token = 1;
-  inline bool has_token() const;
-  inline void clear_token();
-  static const int kTokenFieldNumber = 1;
-  inline const ::std::string& token() const;
-  inline void set_token(const ::std::string& value);
-  inline void set_token(const char* value);
-  inline void set_token(const char* value, size_t size);
-  inline ::std::string* mutable_token();
-  inline ::std::string* release_token();
-  inline void set_allocated_token(::std::string* token);
-
-  // required string sid = 2;
-  inline bool has_sid() const;
-  inline void clear_sid();
-  static const int kSidFieldNumber = 2;
-  inline const ::std::string& sid() const;
-  inline void set_sid(const ::std::string& value);
-  inline void set_sid(const char* value);
-  inline void set_sid(const char* value, size_t size);
-  inline ::std::string* mutable_sid();
-  inline ::std::string* release_sid();
-  inline void set_allocated_sid(::std::string* sid);
-
-  // @@protoc_insertion_point(class_scope:comm.JoinSessionRequest)
- private:
-  inline void set_has_token();
-  inline void clear_has_token();
-  inline void set_has_sid();
-  inline void clear_has_sid();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::std::string* token_;
-  ::std::string* sid_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
-
-  friend void  protobuf_AddDesc_comm_2eproto();
-  friend void protobuf_AssignDesc_comm_2eproto();
-  friend void protobuf_ShutdownFile_comm_2eproto();
-
-  void InitAsDefaultInstance();
-  static JoinSessionRequest* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class JoinSessionReply_Player : public ::google::protobuf::Message {
- public:
-  JoinSessionReply_Player();
-  virtual ~JoinSessionReply_Player();
-
-  JoinSessionReply_Player(const JoinSessionReply_Player& from);
-
-  inline JoinSessionReply_Player& operator=(const JoinSessionReply_Player& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const JoinSessionReply_Player& default_instance();
-
-  void Swap(JoinSessionReply_Player* other);
-
-  // implements Message ----------------------------------------------
-
-  JoinSessionReply_Player* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const JoinSessionReply_Player& from);
-  void MergeFrom(const JoinSessionReply_Player& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required bytes uid = 1;
-  inline bool has_uid() const;
-  inline void clear_uid();
-  static const int kUidFieldNumber = 1;
-  inline const ::std::string& uid() const;
-  inline void set_uid(const ::std::string& value);
-  inline void set_uid(const char* value);
-  inline void set_uid(const void* value, size_t size);
-  inline ::std::string* mutable_uid();
-  inline ::std::string* release_uid();
-  inline void set_allocated_uid(::std::string* uid);
-
-  // required string name = 2;
-  inline bool has_name() const;
-  inline void clear_name();
-  static const int kNameFieldNumber = 2;
-  inline const ::std::string& name() const;
-  inline void set_name(const ::std::string& value);
-  inline void set_name(const char* value);
-  inline void set_name(const char* value, size_t size);
-  inline ::std::string* mutable_name();
-  inline ::std::string* release_name();
-  inline void set_allocated_name(::std::string* name);
-
-  // optional string avatar = 3;
-  inline bool has_avatar() const;
-  inline void clear_avatar();
-  static const int kAvatarFieldNumber = 3;
-  inline const ::std::string& avatar() const;
-  inline void set_avatar(const ::std::string& value);
-  inline void set_avatar(const char* value);
-  inline void set_avatar(const char* value, size_t size);
-  inline ::std::string* mutable_avatar();
-  inline ::std::string* release_avatar();
-  inline void set_allocated_avatar(::std::string* avatar);
-
-  // @@protoc_insertion_point(class_scope:comm.JoinSessionReply.Player)
- private:
-  inline void set_has_uid();
-  inline void clear_has_uid();
-  inline void set_has_name();
-  inline void clear_has_name();
-  inline void set_has_avatar();
-  inline void clear_has_avatar();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::std::string* uid_;
-  ::std::string* name_;
-  ::std::string* avatar_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
@@ -749,18 +489,18 @@ class JoinSessionReply_Player : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_comm_2eproto();
 
   void InitAsDefaultInstance();
-  static JoinSessionReply_Player* default_instance_;
+  static TictactoeCreateReply* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class JoinSessionReply : public ::google::protobuf::Message {
+class TictactoeJoinRequest : public ::google::protobuf::Message {
  public:
-  JoinSessionReply();
-  virtual ~JoinSessionReply();
+  TictactoeJoinRequest();
+  virtual ~TictactoeJoinRequest();
 
-  JoinSessionReply(const JoinSessionReply& from);
+  TictactoeJoinRequest(const TictactoeJoinRequest& from);
 
-  inline JoinSessionReply& operator=(const JoinSessionReply& from) {
+  inline TictactoeJoinRequest& operator=(const TictactoeJoinRequest& from) {
     CopyFrom(from);
     return *this;
   }
@@ -774,17 +514,17 @@ class JoinSessionReply : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const JoinSessionReply& default_instance();
+  static const TictactoeJoinRequest& default_instance();
 
-  void Swap(JoinSessionReply* other);
+  void Swap(TictactoeJoinRequest* other);
 
   // implements Message ----------------------------------------------
 
-  JoinSessionReply* New() const;
+  TictactoeJoinRequest* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const JoinSessionReply& from);
-  void MergeFrom(const JoinSessionReply& from);
+  void CopyFrom(const TictactoeJoinRequest& from);
+  void MergeFrom(const TictactoeJoinRequest& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -805,7 +545,92 @@ class JoinSessionReply : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
-  typedef JoinSessionReply_Player Player;
+  // accessors -------------------------------------------------------
+
+  // required string auth = 1;
+  inline bool has_auth() const;
+  inline void clear_auth();
+  static const int kAuthFieldNumber = 1;
+  inline const ::std::string& auth() const;
+  inline void set_auth(const ::std::string& value);
+  inline void set_auth(const char* value);
+  inline void set_auth(const char* value, size_t size);
+  inline ::std::string* mutable_auth();
+  inline ::std::string* release_auth();
+  inline void set_allocated_auth(::std::string* auth);
+
+  // @@protoc_insertion_point(class_scope:comm.TictactoeJoinRequest)
+ private:
+  inline void set_has_auth();
+  inline void clear_has_auth();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* auth_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_comm_2eproto();
+  friend void protobuf_AssignDesc_comm_2eproto();
+  friend void protobuf_ShutdownFile_comm_2eproto();
+
+  void InitAsDefaultInstance();
+  static TictactoeJoinRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class TictactoeJoinReply : public ::google::protobuf::Message {
+ public:
+  TictactoeJoinReply();
+  virtual ~TictactoeJoinReply();
+
+  TictactoeJoinReply(const TictactoeJoinReply& from);
+
+  inline TictactoeJoinReply& operator=(const TictactoeJoinReply& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TictactoeJoinReply& default_instance();
+
+  void Swap(TictactoeJoinReply* other);
+
+  // implements Message ----------------------------------------------
+
+  TictactoeJoinReply* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const TictactoeJoinReply& from);
+  void MergeFrom(const TictactoeJoinReply& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
@@ -816,48 +641,80 @@ class JoinSessionReply : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 type() const;
   inline void set_type(::google::protobuf::int32 value);
 
-  // repeated group Player = 3 {
-  inline int player_size() const;
-  inline void clear_player();
-  static const int kPlayerFieldNumber = 3;
-  inline const ::comm::JoinSessionReply_Player& player(int index) const;
-  inline ::comm::JoinSessionReply_Player* mutable_player(int index);
-  inline ::comm::JoinSessionReply_Player* add_player();
-  inline const ::google::protobuf::RepeatedPtrField< ::comm::JoinSessionReply_Player >&
-      player() const;
-  inline ::google::protobuf::RepeatedPtrField< ::comm::JoinSessionReply_Player >*
-      mutable_player();
+  // required string creator_id = 2;
+  inline bool has_creator_id() const;
+  inline void clear_creator_id();
+  static const int kCreatorIdFieldNumber = 2;
+  inline const ::std::string& creator_id() const;
+  inline void set_creator_id(const ::std::string& value);
+  inline void set_creator_id(const char* value);
+  inline void set_creator_id(const char* value, size_t size);
+  inline ::std::string* mutable_creator_id();
+  inline ::std::string* release_creator_id();
+  inline void set_allocated_creator_id(::std::string* creator_id);
 
-  // @@protoc_insertion_point(class_scope:comm.JoinSessionReply)
+  // required string creator_name = 3;
+  inline bool has_creator_name() const;
+  inline void clear_creator_name();
+  static const int kCreatorNameFieldNumber = 3;
+  inline const ::std::string& creator_name() const;
+  inline void set_creator_name(const ::std::string& value);
+  inline void set_creator_name(const char* value);
+  inline void set_creator_name(const char* value, size_t size);
+  inline ::std::string* mutable_creator_name();
+  inline ::std::string* release_creator_name();
+  inline void set_allocated_creator_name(::std::string* creator_name);
+
+  // optional string creator_avatar = 4;
+  inline bool has_creator_avatar() const;
+  inline void clear_creator_avatar();
+  static const int kCreatorAvatarFieldNumber = 4;
+  inline const ::std::string& creator_avatar() const;
+  inline void set_creator_avatar(const ::std::string& value);
+  inline void set_creator_avatar(const char* value);
+  inline void set_creator_avatar(const char* value, size_t size);
+  inline ::std::string* mutable_creator_avatar();
+  inline ::std::string* release_creator_avatar();
+  inline void set_allocated_creator_avatar(::std::string* creator_avatar);
+
+  // @@protoc_insertion_point(class_scope:comm.TictactoeJoinReply)
  private:
   inline void set_has_type();
   inline void clear_has_type();
+  inline void set_has_creator_id();
+  inline void clear_has_creator_id();
+  inline void set_has_creator_name();
+  inline void clear_has_creator_name();
+  inline void set_has_creator_avatar();
+  inline void clear_has_creator_avatar();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedPtrField< ::comm::JoinSessionReply_Player > player_;
+  ::std::string* creator_id_;
+  ::std::string* creator_name_;
+  ::std::string* creator_avatar_;
   ::google::protobuf::int32 type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_comm_2eproto();
   friend void protobuf_AssignDesc_comm_2eproto();
   friend void protobuf_ShutdownFile_comm_2eproto();
 
   void InitAsDefaultInstance();
-  static JoinSessionReply* default_instance_;
+  static TictactoeJoinReply* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class ListSessionRequest : public ::google::protobuf::Message {
+class TictactoeListRequest : public ::google::protobuf::Message {
  public:
-  ListSessionRequest();
-  virtual ~ListSessionRequest();
+  TictactoeListRequest();
+  virtual ~TictactoeListRequest();
 
-  ListSessionRequest(const ListSessionRequest& from);
+  TictactoeListRequest(const TictactoeListRequest& from);
 
-  inline ListSessionRequest& operator=(const ListSessionRequest& from) {
+  inline TictactoeListRequest& operator=(const TictactoeListRequest& from) {
     CopyFrom(from);
     return *this;
   }
@@ -871,17 +728,17 @@ class ListSessionRequest : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ListSessionRequest& default_instance();
+  static const TictactoeListRequest& default_instance();
 
-  void Swap(ListSessionRequest* other);
+  void Swap(TictactoeListRequest* other);
 
   // implements Message ----------------------------------------------
 
-  ListSessionRequest* New() const;
+  TictactoeListRequest* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ListSessionRequest& from);
-  void MergeFrom(const ListSessionRequest& from);
+  void CopyFrom(const TictactoeListRequest& from);
+  void MergeFrom(const TictactoeListRequest& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -904,17 +761,17 @@ class ListSessionRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string token = 1;
-  inline bool has_token() const;
-  inline void clear_token();
-  static const int kTokenFieldNumber = 1;
-  inline const ::std::string& token() const;
-  inline void set_token(const ::std::string& value);
-  inline void set_token(const char* value);
-  inline void set_token(const char* value, size_t size);
-  inline ::std::string* mutable_token();
-  inline ::std::string* release_token();
-  inline void set_allocated_token(::std::string* token);
+  // required string auth = 1;
+  inline bool has_auth() const;
+  inline void clear_auth();
+  static const int kAuthFieldNumber = 1;
+  inline const ::std::string& auth() const;
+  inline void set_auth(const ::std::string& value);
+  inline void set_auth(const char* value);
+  inline void set_auth(const char* value, size_t size);
+  inline ::std::string* mutable_auth();
+  inline ::std::string* release_auth();
+  inline void set_allocated_auth(::std::string* auth);
 
   // optional uint32 count = 2;
   inline bool has_count() const;
@@ -923,16 +780,16 @@ class ListSessionRequest : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 count() const;
   inline void set_count(::google::protobuf::uint32 value);
 
-  // @@protoc_insertion_point(class_scope:comm.ListSessionRequest)
+  // @@protoc_insertion_point(class_scope:comm.TictactoeListRequest)
  private:
-  inline void set_has_token();
-  inline void clear_has_token();
+  inline void set_has_auth();
+  inline void clear_has_auth();
   inline void set_has_count();
   inline void clear_has_count();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* token_;
+  ::std::string* auth_;
   ::google::protobuf::uint32 count_;
 
   mutable int _cached_size_;
@@ -943,18 +800,18 @@ class ListSessionRequest : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_comm_2eproto();
 
   void InitAsDefaultInstance();
-  static ListSessionRequest* default_instance_;
+  static TictactoeListRequest* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class ListSessionReply_Session : public ::google::protobuf::Message {
+class TictactoeListReply : public ::google::protobuf::Message {
  public:
-  ListSessionReply_Session();
-  virtual ~ListSessionReply_Session();
+  TictactoeListReply();
+  virtual ~TictactoeListReply();
 
-  ListSessionReply_Session(const ListSessionReply_Session& from);
+  TictactoeListReply(const TictactoeListReply& from);
 
-  inline ListSessionReply_Session& operator=(const ListSessionReply_Session& from) {
+  inline TictactoeListReply& operator=(const TictactoeListReply& from) {
     CopyFrom(from);
     return *this;
   }
@@ -968,17 +825,17 @@ class ListSessionReply_Session : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ListSessionReply_Session& default_instance();
+  static const TictactoeListReply& default_instance();
 
-  void Swap(ListSessionReply_Session* other);
+  void Swap(TictactoeListReply* other);
 
   // implements Message ----------------------------------------------
 
-  ListSessionReply_Session* New() const;
+  TictactoeListReply* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ListSessionReply_Session& from);
-  void MergeFrom(const ListSessionReply_Session& from);
+  void CopyFrom(const TictactoeListReply& from);
+  void MergeFrom(const TictactoeListReply& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -998,145 +855,6 @@ class ListSessionReply_Session : public ::google::protobuf::Message {
   ::google::protobuf::Metadata GetMetadata() const;
 
   // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required string creator_id = 1;
-  inline bool has_creator_id() const;
-  inline void clear_creator_id();
-  static const int kCreatorIdFieldNumber = 1;
-  inline const ::std::string& creator_id() const;
-  inline void set_creator_id(const ::std::string& value);
-  inline void set_creator_id(const char* value);
-  inline void set_creator_id(const char* value, size_t size);
-  inline ::std::string* mutable_creator_id();
-  inline ::std::string* release_creator_id();
-  inline void set_allocated_creator_id(::std::string* creator_id);
-
-  // required string creator_name = 5;
-  inline bool has_creator_name() const;
-  inline void clear_creator_name();
-  static const int kCreatorNameFieldNumber = 5;
-  inline const ::std::string& creator_name() const;
-  inline void set_creator_name(const ::std::string& value);
-  inline void set_creator_name(const char* value);
-  inline void set_creator_name(const char* value, size_t size);
-  inline ::std::string* mutable_creator_name();
-  inline ::std::string* release_creator_name();
-  inline void set_allocated_creator_name(::std::string* creator_name);
-
-  // required string host = 2;
-  inline bool has_host() const;
-  inline void clear_host();
-  static const int kHostFieldNumber = 2;
-  inline const ::std::string& host() const;
-  inline void set_host(const ::std::string& value);
-  inline void set_host(const char* value);
-  inline void set_host(const char* value, size_t size);
-  inline ::std::string* mutable_host();
-  inline ::std::string* release_host();
-  inline void set_allocated_host(::std::string* host);
-
-  // required int32 port = 3;
-  inline bool has_port() const;
-  inline void clear_port();
-  static const int kPortFieldNumber = 3;
-  inline ::google::protobuf::int32 port() const;
-  inline void set_port(::google::protobuf::int32 value);
-
-  // required int32 player_count = 4;
-  inline bool has_player_count() const;
-  inline void clear_player_count();
-  static const int kPlayerCountFieldNumber = 4;
-  inline ::google::protobuf::int32 player_count() const;
-  inline void set_player_count(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:comm.ListSessionReply.Session)
- private:
-  inline void set_has_creator_id();
-  inline void clear_has_creator_id();
-  inline void set_has_creator_name();
-  inline void clear_has_creator_name();
-  inline void set_has_host();
-  inline void clear_has_host();
-  inline void set_has_port();
-  inline void clear_has_port();
-  inline void set_has_player_count();
-  inline void clear_has_player_count();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::std::string* creator_id_;
-  ::std::string* creator_name_;
-  ::std::string* host_;
-  ::google::protobuf::int32 port_;
-  ::google::protobuf::int32 player_count_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
-
-  friend void  protobuf_AddDesc_comm_2eproto();
-  friend void protobuf_AssignDesc_comm_2eproto();
-  friend void protobuf_ShutdownFile_comm_2eproto();
-
-  void InitAsDefaultInstance();
-  static ListSessionReply_Session* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class ListSessionReply : public ::google::protobuf::Message {
- public:
-  ListSessionReply();
-  virtual ~ListSessionReply();
-
-  ListSessionReply(const ListSessionReply& from);
-
-  inline ListSessionReply& operator=(const ListSessionReply& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const ListSessionReply& default_instance();
-
-  void Swap(ListSessionReply* other);
-
-  // implements Message ----------------------------------------------
-
-  ListSessionReply* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ListSessionReply& from);
-  void MergeFrom(const ListSessionReply& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  typedef ListSessionReply_Session Session;
 
   // accessors -------------------------------------------------------
 
@@ -1147,48 +865,95 @@ class ListSessionReply : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 type() const;
   inline void set_type(::google::protobuf::int32 value);
 
-  // repeated group Session = 2 {
-  inline int session_size() const;
-  inline void clear_session();
-  static const int kSessionFieldNumber = 2;
-  inline const ::comm::ListSessionReply_Session& session(int index) const;
-  inline ::comm::ListSessionReply_Session* mutable_session(int index);
-  inline ::comm::ListSessionReply_Session* add_session();
-  inline const ::google::protobuf::RepeatedPtrField< ::comm::ListSessionReply_Session >&
-      session() const;
-  inline ::google::protobuf::RepeatedPtrField< ::comm::ListSessionReply_Session >*
-      mutable_session();
+  // required string creator_id = 2;
+  inline bool has_creator_id() const;
+  inline void clear_creator_id();
+  static const int kCreatorIdFieldNumber = 2;
+  inline const ::std::string& creator_id() const;
+  inline void set_creator_id(const ::std::string& value);
+  inline void set_creator_id(const char* value);
+  inline void set_creator_id(const char* value, size_t size);
+  inline ::std::string* mutable_creator_id();
+  inline ::std::string* release_creator_id();
+  inline void set_allocated_creator_id(::std::string* creator_id);
 
-  // @@protoc_insertion_point(class_scope:comm.ListSessionReply)
+  // required string creator_name = 3;
+  inline bool has_creator_name() const;
+  inline void clear_creator_name();
+  static const int kCreatorNameFieldNumber = 3;
+  inline const ::std::string& creator_name() const;
+  inline void set_creator_name(const ::std::string& value);
+  inline void set_creator_name(const char* value);
+  inline void set_creator_name(const char* value, size_t size);
+  inline ::std::string* mutable_creator_name();
+  inline ::std::string* release_creator_name();
+  inline void set_allocated_creator_name(::std::string* creator_name);
+
+  // optional string creator_avatar = 4;
+  inline bool has_creator_avatar() const;
+  inline void clear_creator_avatar();
+  static const int kCreatorAvatarFieldNumber = 4;
+  inline const ::std::string& creator_avatar() const;
+  inline void set_creator_avatar(const ::std::string& value);
+  inline void set_creator_avatar(const char* value);
+  inline void set_creator_avatar(const char* value, size_t size);
+  inline ::std::string* mutable_creator_avatar();
+  inline ::std::string* release_creator_avatar();
+  inline void set_allocated_creator_avatar(::std::string* creator_avatar);
+
+  // required string ip = 5;
+  inline bool has_ip() const;
+  inline void clear_ip();
+  static const int kIpFieldNumber = 5;
+  inline const ::std::string& ip() const;
+  inline void set_ip(const ::std::string& value);
+  inline void set_ip(const char* value);
+  inline void set_ip(const char* value, size_t size);
+  inline ::std::string* mutable_ip();
+  inline ::std::string* release_ip();
+  inline void set_allocated_ip(::std::string* ip);
+
+  // @@protoc_insertion_point(class_scope:comm.TictactoeListReply)
  private:
   inline void set_has_type();
   inline void clear_has_type();
+  inline void set_has_creator_id();
+  inline void clear_has_creator_id();
+  inline void set_has_creator_name();
+  inline void clear_has_creator_name();
+  inline void set_has_creator_avatar();
+  inline void clear_has_creator_avatar();
+  inline void set_has_ip();
+  inline void clear_has_ip();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedPtrField< ::comm::ListSessionReply_Session > session_;
+  ::std::string* creator_id_;
+  ::std::string* creator_name_;
+  ::std::string* creator_avatar_;
+  ::std::string* ip_;
   ::google::protobuf::int32 type_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_comm_2eproto();
   friend void protobuf_AssignDesc_comm_2eproto();
   friend void protobuf_ShutdownFile_comm_2eproto();
 
   void InitAsDefaultInstance();
-  static ListSessionReply* default_instance_;
+  static TictactoeListReply* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class LeaveSessionRequest : public ::google::protobuf::Message {
+class TictactoeLeaveRequest : public ::google::protobuf::Message {
  public:
-  LeaveSessionRequest();
-  virtual ~LeaveSessionRequest();
+  TictactoeLeaveRequest();
+  virtual ~TictactoeLeaveRequest();
 
-  LeaveSessionRequest(const LeaveSessionRequest& from);
+  TictactoeLeaveRequest(const TictactoeLeaveRequest& from);
 
-  inline LeaveSessionRequest& operator=(const LeaveSessionRequest& from) {
+  inline TictactoeLeaveRequest& operator=(const TictactoeLeaveRequest& from) {
     CopyFrom(from);
     return *this;
   }
@@ -1202,17 +967,17 @@ class LeaveSessionRequest : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const LeaveSessionRequest& default_instance();
+  static const TictactoeLeaveRequest& default_instance();
 
-  void Swap(LeaveSessionRequest* other);
+  void Swap(TictactoeLeaveRequest* other);
 
   // implements Message ----------------------------------------------
 
-  LeaveSessionRequest* New() const;
+  TictactoeLeaveRequest* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const LeaveSessionRequest& from);
-  void MergeFrom(const LeaveSessionRequest& from);
+  void CopyFrom(const TictactoeLeaveRequest& from);
+  void MergeFrom(const TictactoeLeaveRequest& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -1235,7 +1000,7 @@ class LeaveSessionRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // @@protoc_insertion_point(class_scope:comm.LeaveSessionRequest)
+  // @@protoc_insertion_point(class_scope:comm.TictactoeLeaveRequest)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
@@ -1249,7 +1014,7 @@ class LeaveSessionRequest : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_comm_2eproto();
 
   void InitAsDefaultInstance();
-  static LeaveSessionRequest* default_instance_;
+  static TictactoeLeaveRequest* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -1506,917 +1271,464 @@ inline void SigninReply::set_type(::google::protobuf::int32 value) {
   type_ = value;
 }
 
-// required string token = 2;
-inline bool SigninReply::has_token() const {
+// required string auth = 2;
+inline bool SigninReply::has_auth() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void SigninReply::set_has_token() {
+inline void SigninReply::set_has_auth() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void SigninReply::clear_has_token() {
+inline void SigninReply::clear_has_auth() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void SigninReply::clear_token() {
-  if (token_ != &::google::protobuf::internal::kEmptyString) {
-    token_->clear();
+inline void SigninReply::clear_auth() {
+  if (auth_ != &::google::protobuf::internal::kEmptyString) {
+    auth_->clear();
   }
-  clear_has_token();
+  clear_has_auth();
 }
-inline const ::std::string& SigninReply::token() const {
-  return *token_;
+inline const ::std::string& SigninReply::auth() const {
+  return *auth_;
 }
-inline void SigninReply::set_token(const ::std::string& value) {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
+inline void SigninReply::set_auth(const ::std::string& value) {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
   }
-  token_->assign(value);
+  auth_->assign(value);
 }
-inline void SigninReply::set_token(const char* value) {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
+inline void SigninReply::set_auth(const char* value) {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
   }
-  token_->assign(value);
+  auth_->assign(value);
 }
-inline void SigninReply::set_token(const char* value, size_t size) {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
+inline void SigninReply::set_auth(const char* value, size_t size) {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
   }
-  token_->assign(reinterpret_cast<const char*>(value), size);
+  auth_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* SigninReply::mutable_token() {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
+inline ::std::string* SigninReply::mutable_auth() {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
   }
-  return token_;
+  return auth_;
 }
-inline ::std::string* SigninReply::release_token() {
-  clear_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* SigninReply::release_auth() {
+  clear_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = token_;
-    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = auth_;
+    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void SigninReply::set_allocated_token(::std::string* token) {
-  if (token_ != &::google::protobuf::internal::kEmptyString) {
-    delete token_;
+inline void SigninReply::set_allocated_auth(::std::string* auth) {
+  if (auth_ != &::google::protobuf::internal::kEmptyString) {
+    delete auth_;
   }
-  if (token) {
-    set_has_token();
-    token_ = token;
+  if (auth) {
+    set_has_auth();
+    auth_ = auth;
   } else {
-    clear_has_token();
-    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_auth();
+    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
 // -------------------------------------------------------------------
 
-// CreateSessionRequest
+// TictactoeCreateRequest
 
-// required string token = 1;
-inline bool CreateSessionRequest::has_token() const {
+// required string auth = 1;
+inline bool TictactoeCreateRequest::has_auth() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void CreateSessionRequest::set_has_token() {
+inline void TictactoeCreateRequest::set_has_auth() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void CreateSessionRequest::clear_has_token() {
+inline void TictactoeCreateRequest::clear_has_auth() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void CreateSessionRequest::clear_token() {
-  if (token_ != &::google::protobuf::internal::kEmptyString) {
-    token_->clear();
+inline void TictactoeCreateRequest::clear_auth() {
+  if (auth_ != &::google::protobuf::internal::kEmptyString) {
+    auth_->clear();
   }
-  clear_has_token();
+  clear_has_auth();
 }
-inline const ::std::string& CreateSessionRequest::token() const {
-  return *token_;
+inline const ::std::string& TictactoeCreateRequest::auth() const {
+  return *auth_;
 }
-inline void CreateSessionRequest::set_token(const ::std::string& value) {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
+inline void TictactoeCreateRequest::set_auth(const ::std::string& value) {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
   }
-  token_->assign(value);
+  auth_->assign(value);
 }
-inline void CreateSessionRequest::set_token(const char* value) {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
+inline void TictactoeCreateRequest::set_auth(const char* value) {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
   }
-  token_->assign(value);
+  auth_->assign(value);
 }
-inline void CreateSessionRequest::set_token(const char* value, size_t size) {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
+inline void TictactoeCreateRequest::set_auth(const char* value, size_t size) {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
   }
-  token_->assign(reinterpret_cast<const char*>(value), size);
+  auth_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* CreateSessionRequest::mutable_token() {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
+inline ::std::string* TictactoeCreateRequest::mutable_auth() {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
   }
-  return token_;
+  return auth_;
 }
-inline ::std::string* CreateSessionRequest::release_token() {
-  clear_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* TictactoeCreateRequest::release_auth() {
+  clear_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = token_;
-    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = auth_;
+    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void CreateSessionRequest::set_allocated_token(::std::string* token) {
-  if (token_ != &::google::protobuf::internal::kEmptyString) {
-    delete token_;
+inline void TictactoeCreateRequest::set_allocated_auth(::std::string* auth) {
+  if (auth_ != &::google::protobuf::internal::kEmptyString) {
+    delete auth_;
   }
-  if (token) {
-    set_has_token();
-    token_ = token;
+  if (auth) {
+    set_has_auth();
+    auth_ = auth;
   } else {
-    clear_has_token();
-    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_auth();
+    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
-}
-
-// required int32 game = 2;
-inline bool CreateSessionRequest::has_game() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void CreateSessionRequest::set_has_game() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void CreateSessionRequest::clear_has_game() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void CreateSessionRequest::clear_game() {
-  game_ = 0;
-  clear_has_game();
-}
-inline ::google::protobuf::int32 CreateSessionRequest::game() const {
-  return game_;
-}
-inline void CreateSessionRequest::set_game(::google::protobuf::int32 value) {
-  set_has_game();
-  game_ = value;
 }
 
 // -------------------------------------------------------------------
 
-// CreateSessionReply
+// TictactoeCreateReply
 
 // required int32 type = 1;
-inline bool CreateSessionReply::has_type() const {
+inline bool TictactoeCreateReply::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void CreateSessionReply::set_has_type() {
+inline void TictactoeCreateReply::set_has_type() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void CreateSessionReply::clear_has_type() {
+inline void TictactoeCreateReply::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void CreateSessionReply::clear_type() {
+inline void TictactoeCreateReply::clear_type() {
   type_ = 0;
   clear_has_type();
 }
-inline ::google::protobuf::int32 CreateSessionReply::type() const {
+inline ::google::protobuf::int32 TictactoeCreateReply::type() const {
   return type_;
 }
-inline void CreateSessionReply::set_type(::google::protobuf::int32 value) {
+inline void TictactoeCreateReply::set_type(::google::protobuf::int32 value) {
   set_has_type();
   type_ = value;
 }
 
-// required string sid = 2;
-inline bool CreateSessionReply::has_sid() const {
+// required string session_id = 2;
+inline bool TictactoeCreateReply::has_session_id() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void CreateSessionReply::set_has_sid() {
+inline void TictactoeCreateReply::set_has_session_id() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void CreateSessionReply::clear_has_sid() {
+inline void TictactoeCreateReply::clear_has_session_id() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void CreateSessionReply::clear_sid() {
-  if (sid_ != &::google::protobuf::internal::kEmptyString) {
-    sid_->clear();
+inline void TictactoeCreateReply::clear_session_id() {
+  if (session_id_ != &::google::protobuf::internal::kEmptyString) {
+    session_id_->clear();
   }
-  clear_has_sid();
+  clear_has_session_id();
 }
-inline const ::std::string& CreateSessionReply::sid() const {
-  return *sid_;
+inline const ::std::string& TictactoeCreateReply::session_id() const {
+  return *session_id_;
 }
-inline void CreateSessionReply::set_sid(const ::std::string& value) {
-  set_has_sid();
-  if (sid_ == &::google::protobuf::internal::kEmptyString) {
-    sid_ = new ::std::string;
+inline void TictactoeCreateReply::set_session_id(const ::std::string& value) {
+  set_has_session_id();
+  if (session_id_ == &::google::protobuf::internal::kEmptyString) {
+    session_id_ = new ::std::string;
   }
-  sid_->assign(value);
+  session_id_->assign(value);
 }
-inline void CreateSessionReply::set_sid(const char* value) {
-  set_has_sid();
-  if (sid_ == &::google::protobuf::internal::kEmptyString) {
-    sid_ = new ::std::string;
+inline void TictactoeCreateReply::set_session_id(const char* value) {
+  set_has_session_id();
+  if (session_id_ == &::google::protobuf::internal::kEmptyString) {
+    session_id_ = new ::std::string;
   }
-  sid_->assign(value);
+  session_id_->assign(value);
 }
-inline void CreateSessionReply::set_sid(const char* value, size_t size) {
-  set_has_sid();
-  if (sid_ == &::google::protobuf::internal::kEmptyString) {
-    sid_ = new ::std::string;
+inline void TictactoeCreateReply::set_session_id(const char* value, size_t size) {
+  set_has_session_id();
+  if (session_id_ == &::google::protobuf::internal::kEmptyString) {
+    session_id_ = new ::std::string;
   }
-  sid_->assign(reinterpret_cast<const char*>(value), size);
+  session_id_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* CreateSessionReply::mutable_sid() {
-  set_has_sid();
-  if (sid_ == &::google::protobuf::internal::kEmptyString) {
-    sid_ = new ::std::string;
+inline ::std::string* TictactoeCreateReply::mutable_session_id() {
+  set_has_session_id();
+  if (session_id_ == &::google::protobuf::internal::kEmptyString) {
+    session_id_ = new ::std::string;
   }
-  return sid_;
+  return session_id_;
 }
-inline ::std::string* CreateSessionReply::release_sid() {
-  clear_has_sid();
-  if (sid_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* TictactoeCreateReply::release_session_id() {
+  clear_has_session_id();
+  if (session_id_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = sid_;
-    sid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = session_id_;
+    session_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void CreateSessionReply::set_allocated_sid(::std::string* sid) {
-  if (sid_ != &::google::protobuf::internal::kEmptyString) {
-    delete sid_;
+inline void TictactoeCreateReply::set_allocated_session_id(::std::string* session_id) {
+  if (session_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete session_id_;
   }
-  if (sid) {
-    set_has_sid();
-    sid_ = sid;
+  if (session_id) {
+    set_has_session_id();
+    session_id_ = session_id;
   } else {
-    clear_has_sid();
-    sid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_session_id();
+    session_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
-// required string host = 3;
-inline bool CreateSessionReply::has_host() const {
+// required string ip = 3;
+inline bool TictactoeCreateReply::has_ip() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void CreateSessionReply::set_has_host() {
+inline void TictactoeCreateReply::set_has_ip() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void CreateSessionReply::clear_has_host() {
+inline void TictactoeCreateReply::clear_has_ip() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void CreateSessionReply::clear_host() {
-  if (host_ != &::google::protobuf::internal::kEmptyString) {
-    host_->clear();
+inline void TictactoeCreateReply::clear_ip() {
+  if (ip_ != &::google::protobuf::internal::kEmptyString) {
+    ip_->clear();
   }
-  clear_has_host();
+  clear_has_ip();
 }
-inline const ::std::string& CreateSessionReply::host() const {
-  return *host_;
+inline const ::std::string& TictactoeCreateReply::ip() const {
+  return *ip_;
 }
-inline void CreateSessionReply::set_host(const ::std::string& value) {
-  set_has_host();
-  if (host_ == &::google::protobuf::internal::kEmptyString) {
-    host_ = new ::std::string;
+inline void TictactoeCreateReply::set_ip(const ::std::string& value) {
+  set_has_ip();
+  if (ip_ == &::google::protobuf::internal::kEmptyString) {
+    ip_ = new ::std::string;
   }
-  host_->assign(value);
+  ip_->assign(value);
 }
-inline void CreateSessionReply::set_host(const char* value) {
-  set_has_host();
-  if (host_ == &::google::protobuf::internal::kEmptyString) {
-    host_ = new ::std::string;
+inline void TictactoeCreateReply::set_ip(const char* value) {
+  set_has_ip();
+  if (ip_ == &::google::protobuf::internal::kEmptyString) {
+    ip_ = new ::std::string;
   }
-  host_->assign(value);
+  ip_->assign(value);
 }
-inline void CreateSessionReply::set_host(const char* value, size_t size) {
-  set_has_host();
-  if (host_ == &::google::protobuf::internal::kEmptyString) {
-    host_ = new ::std::string;
+inline void TictactoeCreateReply::set_ip(const char* value, size_t size) {
+  set_has_ip();
+  if (ip_ == &::google::protobuf::internal::kEmptyString) {
+    ip_ = new ::std::string;
   }
-  host_->assign(reinterpret_cast<const char*>(value), size);
+  ip_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* CreateSessionReply::mutable_host() {
-  set_has_host();
-  if (host_ == &::google::protobuf::internal::kEmptyString) {
-    host_ = new ::std::string;
+inline ::std::string* TictactoeCreateReply::mutable_ip() {
+  set_has_ip();
+  if (ip_ == &::google::protobuf::internal::kEmptyString) {
+    ip_ = new ::std::string;
   }
-  return host_;
+  return ip_;
 }
-inline ::std::string* CreateSessionReply::release_host() {
-  clear_has_host();
-  if (host_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* TictactoeCreateReply::release_ip() {
+  clear_has_ip();
+  if (ip_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = host_;
-    host_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = ip_;
+    ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void CreateSessionReply::set_allocated_host(::std::string* host) {
-  if (host_ != &::google::protobuf::internal::kEmptyString) {
-    delete host_;
+inline void TictactoeCreateReply::set_allocated_ip(::std::string* ip) {
+  if (ip_ != &::google::protobuf::internal::kEmptyString) {
+    delete ip_;
   }
-  if (host) {
-    set_has_host();
-    host_ = host;
+  if (ip) {
+    set_has_ip();
+    ip_ = ip;
   } else {
-    clear_has_host();
-    host_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_ip();
+    ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
-}
-
-// required int32 port = 4;
-inline bool CreateSessionReply::has_port() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void CreateSessionReply::set_has_port() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void CreateSessionReply::clear_has_port() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void CreateSessionReply::clear_port() {
-  port_ = 0;
-  clear_has_port();
-}
-inline ::google::protobuf::int32 CreateSessionReply::port() const {
-  return port_;
-}
-inline void CreateSessionReply::set_port(::google::protobuf::int32 value) {
-  set_has_port();
-  port_ = value;
 }
 
 // -------------------------------------------------------------------
 
-// JoinSessionRequest
+// TictactoeJoinRequest
 
-// required string token = 1;
-inline bool JoinSessionRequest::has_token() const {
+// required string auth = 1;
+inline bool TictactoeJoinRequest::has_auth() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void JoinSessionRequest::set_has_token() {
+inline void TictactoeJoinRequest::set_has_auth() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void JoinSessionRequest::clear_has_token() {
+inline void TictactoeJoinRequest::clear_has_auth() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void JoinSessionRequest::clear_token() {
-  if (token_ != &::google::protobuf::internal::kEmptyString) {
-    token_->clear();
+inline void TictactoeJoinRequest::clear_auth() {
+  if (auth_ != &::google::protobuf::internal::kEmptyString) {
+    auth_->clear();
   }
-  clear_has_token();
+  clear_has_auth();
 }
-inline const ::std::string& JoinSessionRequest::token() const {
-  return *token_;
+inline const ::std::string& TictactoeJoinRequest::auth() const {
+  return *auth_;
 }
-inline void JoinSessionRequest::set_token(const ::std::string& value) {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
+inline void TictactoeJoinRequest::set_auth(const ::std::string& value) {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
   }
-  token_->assign(value);
+  auth_->assign(value);
 }
-inline void JoinSessionRequest::set_token(const char* value) {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
+inline void TictactoeJoinRequest::set_auth(const char* value) {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
   }
-  token_->assign(value);
+  auth_->assign(value);
 }
-inline void JoinSessionRequest::set_token(const char* value, size_t size) {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
+inline void TictactoeJoinRequest::set_auth(const char* value, size_t size) {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
   }
-  token_->assign(reinterpret_cast<const char*>(value), size);
+  auth_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* JoinSessionRequest::mutable_token() {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
+inline ::std::string* TictactoeJoinRequest::mutable_auth() {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
   }
-  return token_;
+  return auth_;
 }
-inline ::std::string* JoinSessionRequest::release_token() {
-  clear_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* TictactoeJoinRequest::release_auth() {
+  clear_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = token_;
-    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = auth_;
+    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void JoinSessionRequest::set_allocated_token(::std::string* token) {
-  if (token_ != &::google::protobuf::internal::kEmptyString) {
-    delete token_;
+inline void TictactoeJoinRequest::set_allocated_auth(::std::string* auth) {
+  if (auth_ != &::google::protobuf::internal::kEmptyString) {
+    delete auth_;
   }
-  if (token) {
-    set_has_token();
-    token_ = token;
+  if (auth) {
+    set_has_auth();
+    auth_ = auth;
   } else {
-    clear_has_token();
-    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string sid = 2;
-inline bool JoinSessionRequest::has_sid() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void JoinSessionRequest::set_has_sid() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void JoinSessionRequest::clear_has_sid() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void JoinSessionRequest::clear_sid() {
-  if (sid_ != &::google::protobuf::internal::kEmptyString) {
-    sid_->clear();
-  }
-  clear_has_sid();
-}
-inline const ::std::string& JoinSessionRequest::sid() const {
-  return *sid_;
-}
-inline void JoinSessionRequest::set_sid(const ::std::string& value) {
-  set_has_sid();
-  if (sid_ == &::google::protobuf::internal::kEmptyString) {
-    sid_ = new ::std::string;
-  }
-  sid_->assign(value);
-}
-inline void JoinSessionRequest::set_sid(const char* value) {
-  set_has_sid();
-  if (sid_ == &::google::protobuf::internal::kEmptyString) {
-    sid_ = new ::std::string;
-  }
-  sid_->assign(value);
-}
-inline void JoinSessionRequest::set_sid(const char* value, size_t size) {
-  set_has_sid();
-  if (sid_ == &::google::protobuf::internal::kEmptyString) {
-    sid_ = new ::std::string;
-  }
-  sid_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* JoinSessionRequest::mutable_sid() {
-  set_has_sid();
-  if (sid_ == &::google::protobuf::internal::kEmptyString) {
-    sid_ = new ::std::string;
-  }
-  return sid_;
-}
-inline ::std::string* JoinSessionRequest::release_sid() {
-  clear_has_sid();
-  if (sid_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = sid_;
-    sid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void JoinSessionRequest::set_allocated_sid(::std::string* sid) {
-  if (sid_ != &::google::protobuf::internal::kEmptyString) {
-    delete sid_;
-  }
-  if (sid) {
-    set_has_sid();
-    sid_ = sid;
-  } else {
-    clear_has_sid();
-    sid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_auth();
+    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
 // -------------------------------------------------------------------
 
-// JoinSessionReply_Player
-
-// required bytes uid = 1;
-inline bool JoinSessionReply_Player::has_uid() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void JoinSessionReply_Player::set_has_uid() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void JoinSessionReply_Player::clear_has_uid() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void JoinSessionReply_Player::clear_uid() {
-  if (uid_ != &::google::protobuf::internal::kEmptyString) {
-    uid_->clear();
-  }
-  clear_has_uid();
-}
-inline const ::std::string& JoinSessionReply_Player::uid() const {
-  return *uid_;
-}
-inline void JoinSessionReply_Player::set_uid(const ::std::string& value) {
-  set_has_uid();
-  if (uid_ == &::google::protobuf::internal::kEmptyString) {
-    uid_ = new ::std::string;
-  }
-  uid_->assign(value);
-}
-inline void JoinSessionReply_Player::set_uid(const char* value) {
-  set_has_uid();
-  if (uid_ == &::google::protobuf::internal::kEmptyString) {
-    uid_ = new ::std::string;
-  }
-  uid_->assign(value);
-}
-inline void JoinSessionReply_Player::set_uid(const void* value, size_t size) {
-  set_has_uid();
-  if (uid_ == &::google::protobuf::internal::kEmptyString) {
-    uid_ = new ::std::string;
-  }
-  uid_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* JoinSessionReply_Player::mutable_uid() {
-  set_has_uid();
-  if (uid_ == &::google::protobuf::internal::kEmptyString) {
-    uid_ = new ::std::string;
-  }
-  return uid_;
-}
-inline ::std::string* JoinSessionReply_Player::release_uid() {
-  clear_has_uid();
-  if (uid_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = uid_;
-    uid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void JoinSessionReply_Player::set_allocated_uid(::std::string* uid) {
-  if (uid_ != &::google::protobuf::internal::kEmptyString) {
-    delete uid_;
-  }
-  if (uid) {
-    set_has_uid();
-    uid_ = uid;
-  } else {
-    clear_has_uid();
-    uid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string name = 2;
-inline bool JoinSessionReply_Player::has_name() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void JoinSessionReply_Player::set_has_name() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void JoinSessionReply_Player::clear_has_name() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void JoinSessionReply_Player::clear_name() {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    name_->clear();
-  }
-  clear_has_name();
-}
-inline const ::std::string& JoinSessionReply_Player::name() const {
-  return *name_;
-}
-inline void JoinSessionReply_Player::set_name(const ::std::string& value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(value);
-}
-inline void JoinSessionReply_Player::set_name(const char* value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(value);
-}
-inline void JoinSessionReply_Player::set_name(const char* value, size_t size) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* JoinSessionReply_Player::mutable_name() {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  return name_;
-}
-inline ::std::string* JoinSessionReply_Player::release_name() {
-  clear_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = name_;
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void JoinSessionReply_Player::set_allocated_name(::std::string* name) {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    delete name_;
-  }
-  if (name) {
-    set_has_name();
-    name_ = name;
-  } else {
-    clear_has_name();
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// optional string avatar = 3;
-inline bool JoinSessionReply_Player::has_avatar() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void JoinSessionReply_Player::set_has_avatar() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void JoinSessionReply_Player::clear_has_avatar() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void JoinSessionReply_Player::clear_avatar() {
-  if (avatar_ != &::google::protobuf::internal::kEmptyString) {
-    avatar_->clear();
-  }
-  clear_has_avatar();
-}
-inline const ::std::string& JoinSessionReply_Player::avatar() const {
-  return *avatar_;
-}
-inline void JoinSessionReply_Player::set_avatar(const ::std::string& value) {
-  set_has_avatar();
-  if (avatar_ == &::google::protobuf::internal::kEmptyString) {
-    avatar_ = new ::std::string;
-  }
-  avatar_->assign(value);
-}
-inline void JoinSessionReply_Player::set_avatar(const char* value) {
-  set_has_avatar();
-  if (avatar_ == &::google::protobuf::internal::kEmptyString) {
-    avatar_ = new ::std::string;
-  }
-  avatar_->assign(value);
-}
-inline void JoinSessionReply_Player::set_avatar(const char* value, size_t size) {
-  set_has_avatar();
-  if (avatar_ == &::google::protobuf::internal::kEmptyString) {
-    avatar_ = new ::std::string;
-  }
-  avatar_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* JoinSessionReply_Player::mutable_avatar() {
-  set_has_avatar();
-  if (avatar_ == &::google::protobuf::internal::kEmptyString) {
-    avatar_ = new ::std::string;
-  }
-  return avatar_;
-}
-inline ::std::string* JoinSessionReply_Player::release_avatar() {
-  clear_has_avatar();
-  if (avatar_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = avatar_;
-    avatar_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void JoinSessionReply_Player::set_allocated_avatar(::std::string* avatar) {
-  if (avatar_ != &::google::protobuf::internal::kEmptyString) {
-    delete avatar_;
-  }
-  if (avatar) {
-    set_has_avatar();
-    avatar_ = avatar;
-  } else {
-    clear_has_avatar();
-    avatar_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// -------------------------------------------------------------------
-
-// JoinSessionReply
+// TictactoeJoinReply
 
 // required int32 type = 1;
-inline bool JoinSessionReply::has_type() const {
+inline bool TictactoeJoinReply::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void JoinSessionReply::set_has_type() {
+inline void TictactoeJoinReply::set_has_type() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void JoinSessionReply::clear_has_type() {
+inline void TictactoeJoinReply::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void JoinSessionReply::clear_type() {
+inline void TictactoeJoinReply::clear_type() {
   type_ = 0;
   clear_has_type();
 }
-inline ::google::protobuf::int32 JoinSessionReply::type() const {
+inline ::google::protobuf::int32 TictactoeJoinReply::type() const {
   return type_;
 }
-inline void JoinSessionReply::set_type(::google::protobuf::int32 value) {
+inline void TictactoeJoinReply::set_type(::google::protobuf::int32 value) {
   set_has_type();
   type_ = value;
 }
 
-// repeated group Player = 3 {
-inline int JoinSessionReply::player_size() const {
-  return player_.size();
-}
-inline void JoinSessionReply::clear_player() {
-  player_.Clear();
-}
-inline const ::comm::JoinSessionReply_Player& JoinSessionReply::player(int index) const {
-  return player_.Get(index);
-}
-inline ::comm::JoinSessionReply_Player* JoinSessionReply::mutable_player(int index) {
-  return player_.Mutable(index);
-}
-inline ::comm::JoinSessionReply_Player* JoinSessionReply::add_player() {
-  return player_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::comm::JoinSessionReply_Player >&
-JoinSessionReply::player() const {
-  return player_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::comm::JoinSessionReply_Player >*
-JoinSessionReply::mutable_player() {
-  return &player_;
-}
-
-// -------------------------------------------------------------------
-
-// ListSessionRequest
-
-// required string token = 1;
-inline bool ListSessionRequest::has_token() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ListSessionRequest::set_has_token() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ListSessionRequest::clear_has_token() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ListSessionRequest::clear_token() {
-  if (token_ != &::google::protobuf::internal::kEmptyString) {
-    token_->clear();
-  }
-  clear_has_token();
-}
-inline const ::std::string& ListSessionRequest::token() const {
-  return *token_;
-}
-inline void ListSessionRequest::set_token(const ::std::string& value) {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
-  }
-  token_->assign(value);
-}
-inline void ListSessionRequest::set_token(const char* value) {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
-  }
-  token_->assign(value);
-}
-inline void ListSessionRequest::set_token(const char* value, size_t size) {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
-  }
-  token_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ListSessionRequest::mutable_token() {
-  set_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    token_ = new ::std::string;
-  }
-  return token_;
-}
-inline ::std::string* ListSessionRequest::release_token() {
-  clear_has_token();
-  if (token_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = token_;
-    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void ListSessionRequest::set_allocated_token(::std::string* token) {
-  if (token_ != &::google::protobuf::internal::kEmptyString) {
-    delete token_;
-  }
-  if (token) {
-    set_has_token();
-    token_ = token;
-  } else {
-    clear_has_token();
-    token_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// optional uint32 count = 2;
-inline bool ListSessionRequest::has_count() const {
+// required string creator_id = 2;
+inline bool TictactoeJoinReply::has_creator_id() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ListSessionRequest::set_has_count() {
+inline void TictactoeJoinReply::set_has_creator_id() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void ListSessionRequest::clear_has_count() {
+inline void TictactoeJoinReply::clear_has_creator_id() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void ListSessionRequest::clear_count() {
-  count_ = 0u;
-  clear_has_count();
-}
-inline ::google::protobuf::uint32 ListSessionRequest::count() const {
-  return count_;
-}
-inline void ListSessionRequest::set_count(::google::protobuf::uint32 value) {
-  set_has_count();
-  count_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// ListSessionReply_Session
-
-// required string creator_id = 1;
-inline bool ListSessionReply_Session::has_creator_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ListSessionReply_Session::set_has_creator_id() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ListSessionReply_Session::clear_has_creator_id() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ListSessionReply_Session::clear_creator_id() {
+inline void TictactoeJoinReply::clear_creator_id() {
   if (creator_id_ != &::google::protobuf::internal::kEmptyString) {
     creator_id_->clear();
   }
   clear_has_creator_id();
 }
-inline const ::std::string& ListSessionReply_Session::creator_id() const {
+inline const ::std::string& TictactoeJoinReply::creator_id() const {
   return *creator_id_;
 }
-inline void ListSessionReply_Session::set_creator_id(const ::std::string& value) {
+inline void TictactoeJoinReply::set_creator_id(const ::std::string& value) {
   set_has_creator_id();
   if (creator_id_ == &::google::protobuf::internal::kEmptyString) {
     creator_id_ = new ::std::string;
   }
   creator_id_->assign(value);
 }
-inline void ListSessionReply_Session::set_creator_id(const char* value) {
+inline void TictactoeJoinReply::set_creator_id(const char* value) {
   set_has_creator_id();
   if (creator_id_ == &::google::protobuf::internal::kEmptyString) {
     creator_id_ = new ::std::string;
   }
   creator_id_->assign(value);
 }
-inline void ListSessionReply_Session::set_creator_id(const char* value, size_t size) {
+inline void TictactoeJoinReply::set_creator_id(const char* value, size_t size) {
   set_has_creator_id();
   if (creator_id_ == &::google::protobuf::internal::kEmptyString) {
     creator_id_ = new ::std::string;
   }
   creator_id_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* ListSessionReply_Session::mutable_creator_id() {
+inline ::std::string* TictactoeJoinReply::mutable_creator_id() {
   set_has_creator_id();
   if (creator_id_ == &::google::protobuf::internal::kEmptyString) {
     creator_id_ = new ::std::string;
   }
   return creator_id_;
 }
-inline ::std::string* ListSessionReply_Session::release_creator_id() {
+inline ::std::string* TictactoeJoinReply::release_creator_id() {
   clear_has_creator_id();
   if (creator_id_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
@@ -2426,7 +1738,7 @@ inline ::std::string* ListSessionReply_Session::release_creator_id() {
     return temp;
   }
 }
-inline void ListSessionReply_Session::set_allocated_creator_id(::std::string* creator_id) {
+inline void TictactoeJoinReply::set_allocated_creator_id(::std::string* creator_id) {
   if (creator_id_ != &::google::protobuf::internal::kEmptyString) {
     delete creator_id_;
   }
@@ -2439,54 +1751,54 @@ inline void ListSessionReply_Session::set_allocated_creator_id(::std::string* cr
   }
 }
 
-// required string creator_name = 5;
-inline bool ListSessionReply_Session::has_creator_name() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+// required string creator_name = 3;
+inline bool TictactoeJoinReply::has_creator_name() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void ListSessionReply_Session::set_has_creator_name() {
-  _has_bits_[0] |= 0x00000002u;
+inline void TictactoeJoinReply::set_has_creator_name() {
+  _has_bits_[0] |= 0x00000004u;
 }
-inline void ListSessionReply_Session::clear_has_creator_name() {
-  _has_bits_[0] &= ~0x00000002u;
+inline void TictactoeJoinReply::clear_has_creator_name() {
+  _has_bits_[0] &= ~0x00000004u;
 }
-inline void ListSessionReply_Session::clear_creator_name() {
+inline void TictactoeJoinReply::clear_creator_name() {
   if (creator_name_ != &::google::protobuf::internal::kEmptyString) {
     creator_name_->clear();
   }
   clear_has_creator_name();
 }
-inline const ::std::string& ListSessionReply_Session::creator_name() const {
+inline const ::std::string& TictactoeJoinReply::creator_name() const {
   return *creator_name_;
 }
-inline void ListSessionReply_Session::set_creator_name(const ::std::string& value) {
+inline void TictactoeJoinReply::set_creator_name(const ::std::string& value) {
   set_has_creator_name();
   if (creator_name_ == &::google::protobuf::internal::kEmptyString) {
     creator_name_ = new ::std::string;
   }
   creator_name_->assign(value);
 }
-inline void ListSessionReply_Session::set_creator_name(const char* value) {
+inline void TictactoeJoinReply::set_creator_name(const char* value) {
   set_has_creator_name();
   if (creator_name_ == &::google::protobuf::internal::kEmptyString) {
     creator_name_ = new ::std::string;
   }
   creator_name_->assign(value);
 }
-inline void ListSessionReply_Session::set_creator_name(const char* value, size_t size) {
+inline void TictactoeJoinReply::set_creator_name(const char* value, size_t size) {
   set_has_creator_name();
   if (creator_name_ == &::google::protobuf::internal::kEmptyString) {
     creator_name_ = new ::std::string;
   }
   creator_name_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* ListSessionReply_Session::mutable_creator_name() {
+inline ::std::string* TictactoeJoinReply::mutable_creator_name() {
   set_has_creator_name();
   if (creator_name_ == &::google::protobuf::internal::kEmptyString) {
     creator_name_ = new ::std::string;
   }
   return creator_name_;
 }
-inline ::std::string* ListSessionReply_Session::release_creator_name() {
+inline ::std::string* TictactoeJoinReply::release_creator_name() {
   clear_has_creator_name();
   if (creator_name_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
@@ -2496,7 +1808,7 @@ inline ::std::string* ListSessionReply_Session::release_creator_name() {
     return temp;
   }
 }
-inline void ListSessionReply_Session::set_allocated_creator_name(::std::string* creator_name) {
+inline void TictactoeJoinReply::set_allocated_creator_name(::std::string* creator_name) {
   if (creator_name_ != &::google::protobuf::internal::kEmptyString) {
     delete creator_name_;
   }
@@ -2509,174 +1821,481 @@ inline void ListSessionReply_Session::set_allocated_creator_name(::std::string* 
   }
 }
 
-// required string host = 2;
-inline bool ListSessionReply_Session::has_host() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+// optional string creator_avatar = 4;
+inline bool TictactoeJoinReply::has_creator_avatar() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void ListSessionReply_Session::set_has_host() {
-  _has_bits_[0] |= 0x00000004u;
+inline void TictactoeJoinReply::set_has_creator_avatar() {
+  _has_bits_[0] |= 0x00000008u;
 }
-inline void ListSessionReply_Session::clear_has_host() {
-  _has_bits_[0] &= ~0x00000004u;
+inline void TictactoeJoinReply::clear_has_creator_avatar() {
+  _has_bits_[0] &= ~0x00000008u;
 }
-inline void ListSessionReply_Session::clear_host() {
-  if (host_ != &::google::protobuf::internal::kEmptyString) {
-    host_->clear();
+inline void TictactoeJoinReply::clear_creator_avatar() {
+  if (creator_avatar_ != &::google::protobuf::internal::kEmptyString) {
+    creator_avatar_->clear();
   }
-  clear_has_host();
+  clear_has_creator_avatar();
 }
-inline const ::std::string& ListSessionReply_Session::host() const {
-  return *host_;
+inline const ::std::string& TictactoeJoinReply::creator_avatar() const {
+  return *creator_avatar_;
 }
-inline void ListSessionReply_Session::set_host(const ::std::string& value) {
-  set_has_host();
-  if (host_ == &::google::protobuf::internal::kEmptyString) {
-    host_ = new ::std::string;
+inline void TictactoeJoinReply::set_creator_avatar(const ::std::string& value) {
+  set_has_creator_avatar();
+  if (creator_avatar_ == &::google::protobuf::internal::kEmptyString) {
+    creator_avatar_ = new ::std::string;
   }
-  host_->assign(value);
+  creator_avatar_->assign(value);
 }
-inline void ListSessionReply_Session::set_host(const char* value) {
-  set_has_host();
-  if (host_ == &::google::protobuf::internal::kEmptyString) {
-    host_ = new ::std::string;
+inline void TictactoeJoinReply::set_creator_avatar(const char* value) {
+  set_has_creator_avatar();
+  if (creator_avatar_ == &::google::protobuf::internal::kEmptyString) {
+    creator_avatar_ = new ::std::string;
   }
-  host_->assign(value);
+  creator_avatar_->assign(value);
 }
-inline void ListSessionReply_Session::set_host(const char* value, size_t size) {
-  set_has_host();
-  if (host_ == &::google::protobuf::internal::kEmptyString) {
-    host_ = new ::std::string;
+inline void TictactoeJoinReply::set_creator_avatar(const char* value, size_t size) {
+  set_has_creator_avatar();
+  if (creator_avatar_ == &::google::protobuf::internal::kEmptyString) {
+    creator_avatar_ = new ::std::string;
   }
-  host_->assign(reinterpret_cast<const char*>(value), size);
+  creator_avatar_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* ListSessionReply_Session::mutable_host() {
-  set_has_host();
-  if (host_ == &::google::protobuf::internal::kEmptyString) {
-    host_ = new ::std::string;
+inline ::std::string* TictactoeJoinReply::mutable_creator_avatar() {
+  set_has_creator_avatar();
+  if (creator_avatar_ == &::google::protobuf::internal::kEmptyString) {
+    creator_avatar_ = new ::std::string;
   }
-  return host_;
+  return creator_avatar_;
 }
-inline ::std::string* ListSessionReply_Session::release_host() {
-  clear_has_host();
-  if (host_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* TictactoeJoinReply::release_creator_avatar() {
+  clear_has_creator_avatar();
+  if (creator_avatar_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = host_;
-    host_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = creator_avatar_;
+    creator_avatar_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void ListSessionReply_Session::set_allocated_host(::std::string* host) {
-  if (host_ != &::google::protobuf::internal::kEmptyString) {
-    delete host_;
+inline void TictactoeJoinReply::set_allocated_creator_avatar(::std::string* creator_avatar) {
+  if (creator_avatar_ != &::google::protobuf::internal::kEmptyString) {
+    delete creator_avatar_;
   }
-  if (host) {
-    set_has_host();
-    host_ = host;
+  if (creator_avatar) {
+    set_has_creator_avatar();
+    creator_avatar_ = creator_avatar;
   } else {
-    clear_has_host();
-    host_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_creator_avatar();
+    creator_avatar_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
-}
-
-// required int32 port = 3;
-inline bool ListSessionReply_Session::has_port() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void ListSessionReply_Session::set_has_port() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void ListSessionReply_Session::clear_has_port() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void ListSessionReply_Session::clear_port() {
-  port_ = 0;
-  clear_has_port();
-}
-inline ::google::protobuf::int32 ListSessionReply_Session::port() const {
-  return port_;
-}
-inline void ListSessionReply_Session::set_port(::google::protobuf::int32 value) {
-  set_has_port();
-  port_ = value;
-}
-
-// required int32 player_count = 4;
-inline bool ListSessionReply_Session::has_player_count() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void ListSessionReply_Session::set_has_player_count() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void ListSessionReply_Session::clear_has_player_count() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void ListSessionReply_Session::clear_player_count() {
-  player_count_ = 0;
-  clear_has_player_count();
-}
-inline ::google::protobuf::int32 ListSessionReply_Session::player_count() const {
-  return player_count_;
-}
-inline void ListSessionReply_Session::set_player_count(::google::protobuf::int32 value) {
-  set_has_player_count();
-  player_count_ = value;
 }
 
 // -------------------------------------------------------------------
 
-// ListSessionReply
+// TictactoeListRequest
 
-// required int32 type = 1;
-inline bool ListSessionReply::has_type() const {
+// required string auth = 1;
+inline bool TictactoeListRequest::has_auth() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ListSessionReply::set_has_type() {
+inline void TictactoeListRequest::set_has_auth() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ListSessionReply::clear_has_type() {
+inline void TictactoeListRequest::clear_has_auth() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ListSessionReply::clear_type() {
+inline void TictactoeListRequest::clear_auth() {
+  if (auth_ != &::google::protobuf::internal::kEmptyString) {
+    auth_->clear();
+  }
+  clear_has_auth();
+}
+inline const ::std::string& TictactoeListRequest::auth() const {
+  return *auth_;
+}
+inline void TictactoeListRequest::set_auth(const ::std::string& value) {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
+  }
+  auth_->assign(value);
+}
+inline void TictactoeListRequest::set_auth(const char* value) {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
+  }
+  auth_->assign(value);
+}
+inline void TictactoeListRequest::set_auth(const char* value, size_t size) {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
+  }
+  auth_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* TictactoeListRequest::mutable_auth() {
+  set_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    auth_ = new ::std::string;
+  }
+  return auth_;
+}
+inline ::std::string* TictactoeListRequest::release_auth() {
+  clear_has_auth();
+  if (auth_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = auth_;
+    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void TictactoeListRequest::set_allocated_auth(::std::string* auth) {
+  if (auth_ != &::google::protobuf::internal::kEmptyString) {
+    delete auth_;
+  }
+  if (auth) {
+    set_has_auth();
+    auth_ = auth;
+  } else {
+    clear_has_auth();
+    auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional uint32 count = 2;
+inline bool TictactoeListRequest::has_count() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void TictactoeListRequest::set_has_count() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void TictactoeListRequest::clear_has_count() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void TictactoeListRequest::clear_count() {
+  count_ = 0u;
+  clear_has_count();
+}
+inline ::google::protobuf::uint32 TictactoeListRequest::count() const {
+  return count_;
+}
+inline void TictactoeListRequest::set_count(::google::protobuf::uint32 value) {
+  set_has_count();
+  count_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// TictactoeListReply
+
+// required int32 type = 1;
+inline bool TictactoeListReply::has_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void TictactoeListReply::set_has_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void TictactoeListReply::clear_has_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void TictactoeListReply::clear_type() {
   type_ = 0;
   clear_has_type();
 }
-inline ::google::protobuf::int32 ListSessionReply::type() const {
+inline ::google::protobuf::int32 TictactoeListReply::type() const {
   return type_;
 }
-inline void ListSessionReply::set_type(::google::protobuf::int32 value) {
+inline void TictactoeListReply::set_type(::google::protobuf::int32 value) {
   set_has_type();
   type_ = value;
 }
 
-// repeated group Session = 2 {
-inline int ListSessionReply::session_size() const {
-  return session_.size();
+// required string creator_id = 2;
+inline bool TictactoeListReply::has_creator_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ListSessionReply::clear_session() {
-  session_.Clear();
+inline void TictactoeListReply::set_has_creator_id() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline const ::comm::ListSessionReply_Session& ListSessionReply::session(int index) const {
-  return session_.Get(index);
+inline void TictactoeListReply::clear_has_creator_id() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline ::comm::ListSessionReply_Session* ListSessionReply::mutable_session(int index) {
-  return session_.Mutable(index);
+inline void TictactoeListReply::clear_creator_id() {
+  if (creator_id_ != &::google::protobuf::internal::kEmptyString) {
+    creator_id_->clear();
+  }
+  clear_has_creator_id();
 }
-inline ::comm::ListSessionReply_Session* ListSessionReply::add_session() {
-  return session_.Add();
+inline const ::std::string& TictactoeListReply::creator_id() const {
+  return *creator_id_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::comm::ListSessionReply_Session >&
-ListSessionReply::session() const {
-  return session_;
+inline void TictactoeListReply::set_creator_id(const ::std::string& value) {
+  set_has_creator_id();
+  if (creator_id_ == &::google::protobuf::internal::kEmptyString) {
+    creator_id_ = new ::std::string;
+  }
+  creator_id_->assign(value);
 }
-inline ::google::protobuf::RepeatedPtrField< ::comm::ListSessionReply_Session >*
-ListSessionReply::mutable_session() {
-  return &session_;
+inline void TictactoeListReply::set_creator_id(const char* value) {
+  set_has_creator_id();
+  if (creator_id_ == &::google::protobuf::internal::kEmptyString) {
+    creator_id_ = new ::std::string;
+  }
+  creator_id_->assign(value);
+}
+inline void TictactoeListReply::set_creator_id(const char* value, size_t size) {
+  set_has_creator_id();
+  if (creator_id_ == &::google::protobuf::internal::kEmptyString) {
+    creator_id_ = new ::std::string;
+  }
+  creator_id_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* TictactoeListReply::mutable_creator_id() {
+  set_has_creator_id();
+  if (creator_id_ == &::google::protobuf::internal::kEmptyString) {
+    creator_id_ = new ::std::string;
+  }
+  return creator_id_;
+}
+inline ::std::string* TictactoeListReply::release_creator_id() {
+  clear_has_creator_id();
+  if (creator_id_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = creator_id_;
+    creator_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void TictactoeListReply::set_allocated_creator_id(::std::string* creator_id) {
+  if (creator_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete creator_id_;
+  }
+  if (creator_id) {
+    set_has_creator_id();
+    creator_id_ = creator_id;
+  } else {
+    clear_has_creator_id();
+    creator_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string creator_name = 3;
+inline bool TictactoeListReply::has_creator_name() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void TictactoeListReply::set_has_creator_name() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void TictactoeListReply::clear_has_creator_name() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void TictactoeListReply::clear_creator_name() {
+  if (creator_name_ != &::google::protobuf::internal::kEmptyString) {
+    creator_name_->clear();
+  }
+  clear_has_creator_name();
+}
+inline const ::std::string& TictactoeListReply::creator_name() const {
+  return *creator_name_;
+}
+inline void TictactoeListReply::set_creator_name(const ::std::string& value) {
+  set_has_creator_name();
+  if (creator_name_ == &::google::protobuf::internal::kEmptyString) {
+    creator_name_ = new ::std::string;
+  }
+  creator_name_->assign(value);
+}
+inline void TictactoeListReply::set_creator_name(const char* value) {
+  set_has_creator_name();
+  if (creator_name_ == &::google::protobuf::internal::kEmptyString) {
+    creator_name_ = new ::std::string;
+  }
+  creator_name_->assign(value);
+}
+inline void TictactoeListReply::set_creator_name(const char* value, size_t size) {
+  set_has_creator_name();
+  if (creator_name_ == &::google::protobuf::internal::kEmptyString) {
+    creator_name_ = new ::std::string;
+  }
+  creator_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* TictactoeListReply::mutable_creator_name() {
+  set_has_creator_name();
+  if (creator_name_ == &::google::protobuf::internal::kEmptyString) {
+    creator_name_ = new ::std::string;
+  }
+  return creator_name_;
+}
+inline ::std::string* TictactoeListReply::release_creator_name() {
+  clear_has_creator_name();
+  if (creator_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = creator_name_;
+    creator_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void TictactoeListReply::set_allocated_creator_name(::std::string* creator_name) {
+  if (creator_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete creator_name_;
+  }
+  if (creator_name) {
+    set_has_creator_name();
+    creator_name_ = creator_name;
+  } else {
+    clear_has_creator_name();
+    creator_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional string creator_avatar = 4;
+inline bool TictactoeListReply::has_creator_avatar() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void TictactoeListReply::set_has_creator_avatar() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void TictactoeListReply::clear_has_creator_avatar() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void TictactoeListReply::clear_creator_avatar() {
+  if (creator_avatar_ != &::google::protobuf::internal::kEmptyString) {
+    creator_avatar_->clear();
+  }
+  clear_has_creator_avatar();
+}
+inline const ::std::string& TictactoeListReply::creator_avatar() const {
+  return *creator_avatar_;
+}
+inline void TictactoeListReply::set_creator_avatar(const ::std::string& value) {
+  set_has_creator_avatar();
+  if (creator_avatar_ == &::google::protobuf::internal::kEmptyString) {
+    creator_avatar_ = new ::std::string;
+  }
+  creator_avatar_->assign(value);
+}
+inline void TictactoeListReply::set_creator_avatar(const char* value) {
+  set_has_creator_avatar();
+  if (creator_avatar_ == &::google::protobuf::internal::kEmptyString) {
+    creator_avatar_ = new ::std::string;
+  }
+  creator_avatar_->assign(value);
+}
+inline void TictactoeListReply::set_creator_avatar(const char* value, size_t size) {
+  set_has_creator_avatar();
+  if (creator_avatar_ == &::google::protobuf::internal::kEmptyString) {
+    creator_avatar_ = new ::std::string;
+  }
+  creator_avatar_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* TictactoeListReply::mutable_creator_avatar() {
+  set_has_creator_avatar();
+  if (creator_avatar_ == &::google::protobuf::internal::kEmptyString) {
+    creator_avatar_ = new ::std::string;
+  }
+  return creator_avatar_;
+}
+inline ::std::string* TictactoeListReply::release_creator_avatar() {
+  clear_has_creator_avatar();
+  if (creator_avatar_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = creator_avatar_;
+    creator_avatar_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void TictactoeListReply::set_allocated_creator_avatar(::std::string* creator_avatar) {
+  if (creator_avatar_ != &::google::protobuf::internal::kEmptyString) {
+    delete creator_avatar_;
+  }
+  if (creator_avatar) {
+    set_has_creator_avatar();
+    creator_avatar_ = creator_avatar;
+  } else {
+    clear_has_creator_avatar();
+    creator_avatar_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string ip = 5;
+inline bool TictactoeListReply::has_ip() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void TictactoeListReply::set_has_ip() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void TictactoeListReply::clear_has_ip() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void TictactoeListReply::clear_ip() {
+  if (ip_ != &::google::protobuf::internal::kEmptyString) {
+    ip_->clear();
+  }
+  clear_has_ip();
+}
+inline const ::std::string& TictactoeListReply::ip() const {
+  return *ip_;
+}
+inline void TictactoeListReply::set_ip(const ::std::string& value) {
+  set_has_ip();
+  if (ip_ == &::google::protobuf::internal::kEmptyString) {
+    ip_ = new ::std::string;
+  }
+  ip_->assign(value);
+}
+inline void TictactoeListReply::set_ip(const char* value) {
+  set_has_ip();
+  if (ip_ == &::google::protobuf::internal::kEmptyString) {
+    ip_ = new ::std::string;
+  }
+  ip_->assign(value);
+}
+inline void TictactoeListReply::set_ip(const char* value, size_t size) {
+  set_has_ip();
+  if (ip_ == &::google::protobuf::internal::kEmptyString) {
+    ip_ = new ::std::string;
+  }
+  ip_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* TictactoeListReply::mutable_ip() {
+  set_has_ip();
+  if (ip_ == &::google::protobuf::internal::kEmptyString) {
+    ip_ = new ::std::string;
+  }
+  return ip_;
+}
+inline ::std::string* TictactoeListReply::release_ip() {
+  clear_has_ip();
+  if (ip_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = ip_;
+    ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void TictactoeListReply::set_allocated_ip(::std::string* ip) {
+  if (ip_ != &::google::protobuf::internal::kEmptyString) {
+    delete ip_;
+  }
+  if (ip) {
+    set_has_ip();
+    ip_ = ip;
+  } else {
+    clear_has_ip();
+    ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
 
-// LeaveSessionRequest
+// TictactoeLeaveRequest
 
 // -------------------------------------------------------------------
 
@@ -2720,10 +2339,6 @@ inline const EnumDescriptor* GetEnumDescriptor< ::comm::ServiceType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::comm::ErrorType>() {
   return ::comm::ErrorType_descriptor();
-}
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::comm::GameType>() {
-  return ::comm::GameType_descriptor();
 }
 
 }  // namespace google

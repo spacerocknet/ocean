@@ -126,11 +126,11 @@ void protobuf_AddDesc_type_2eproto() {
 
   ::model::protobuf_AddDesc_model_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\ntype.proto\022\005ocean\032\013model.proto\"B\n\nEnti"
-    "tyType\"4\n\004Type\022\n\n\006PLAYER\020\001\022\013\n\007SESSION\020\002\022"
-    "\010\n\004GAME\020\003\022\t\n\005ADMIN\020\004\"&\n\014RelationType\"\026\n\004"
-    "Type\022\016\n\nHAS_PLAYER\020\006\"7\n\tIndexType\"*\n\004Typ"
-    "e\022\n\n\006PLAYER\020\001\022\t\n\005ADMIN\020\002\022\013\n\007SESSION\020\003", 197);
+    "\n\ntype.proto\022\005ocean\032\013model.proto\"/\n\nEnti"
+    "tyType\"!\n\004Type\022\n\n\006PLAYER\020\001\022\r\n\tTICTACTOE\020"
+    "\002\"&\n\014RelationType\"\026\n\004Type\022\016\n\nHAS_PLAYER\020"
+    "\006\".\n\tIndexType\"!\n\004Type\022\n\n\006PLAYER\020\001\022\r\n\tTI"
+    "CTACTOE\020\002", 169);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "type.proto", &protobuf_RegisterTypes);
   EntityType::default_instance_ = new EntityType();
@@ -159,8 +159,6 @@ bool EntityType_Type_IsValid(int value) {
   switch(value) {
     case 1:
     case 2:
-    case 3:
-    case 4:
       return true;
     default:
       return false;
@@ -169,9 +167,7 @@ bool EntityType_Type_IsValid(int value) {
 
 #ifndef _MSC_VER
 const EntityType_Type EntityType::PLAYER;
-const EntityType_Type EntityType::SESSION;
-const EntityType_Type EntityType::GAME;
-const EntityType_Type EntityType::ADMIN;
+const EntityType_Type EntityType::TICTACTOE;
 const EntityType_Type EntityType::Type_MIN;
 const EntityType_Type EntityType::Type_MAX;
 const int EntityType::Type_ARRAYSIZE;
@@ -515,7 +511,6 @@ bool IndexType_Type_IsValid(int value) {
   switch(value) {
     case 1:
     case 2:
-    case 3:
       return true;
     default:
       return false;
@@ -524,8 +519,7 @@ bool IndexType_Type_IsValid(int value) {
 
 #ifndef _MSC_VER
 const IndexType_Type IndexType::PLAYER;
-const IndexType_Type IndexType::ADMIN;
-const IndexType_Type IndexType::SESSION;
+const IndexType_Type IndexType::TICTACTOE;
 const IndexType_Type IndexType::Type_MIN;
 const IndexType_Type IndexType::Type_MAX;
 const int IndexType::Type_ARRAYSIZE;

@@ -41,13 +41,11 @@ class IndexType;
 
 enum EntityType_Type {
   EntityType_Type_PLAYER = 1,
-  EntityType_Type_SESSION = 2,
-  EntityType_Type_GAME = 3,
-  EntityType_Type_ADMIN = 4
+  EntityType_Type_TICTACTOE = 2
 };
 bool EntityType_Type_IsValid(int value);
 const EntityType_Type EntityType_Type_Type_MIN = EntityType_Type_PLAYER;
-const EntityType_Type EntityType_Type_Type_MAX = EntityType_Type_ADMIN;
+const EntityType_Type EntityType_Type_Type_MAX = EntityType_Type_TICTACTOE;
 const int EntityType_Type_Type_ARRAYSIZE = EntityType_Type_Type_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EntityType_Type_descriptor();
@@ -80,12 +78,11 @@ inline bool RelationType_Type_Parse(
 }
 enum IndexType_Type {
   IndexType_Type_PLAYER = 1,
-  IndexType_Type_ADMIN = 2,
-  IndexType_Type_SESSION = 3
+  IndexType_Type_TICTACTOE = 2
 };
 bool IndexType_Type_IsValid(int value);
 const IndexType_Type IndexType_Type_Type_MIN = IndexType_Type_PLAYER;
-const IndexType_Type IndexType_Type_Type_MAX = IndexType_Type_SESSION;
+const IndexType_Type IndexType_Type_Type_MAX = IndexType_Type_TICTACTOE;
 const int IndexType_Type_Type_ARRAYSIZE = IndexType_Type_Type_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* IndexType_Type_descriptor();
@@ -154,9 +151,7 @@ class EntityType : public ::google::protobuf::Message {
 
   typedef EntityType_Type Type;
   static const Type PLAYER = EntityType_Type_PLAYER;
-  static const Type SESSION = EntityType_Type_SESSION;
-  static const Type GAME = EntityType_Type_GAME;
-  static const Type ADMIN = EntityType_Type_ADMIN;
+  static const Type TICTACTOE = EntityType_Type_TICTACTOE;
   static inline bool Type_IsValid(int value) {
     return EntityType_Type_IsValid(value);
   }
@@ -347,8 +342,7 @@ class IndexType : public ::google::protobuf::Message {
 
   typedef IndexType_Type Type;
   static const Type PLAYER = IndexType_Type_PLAYER;
-  static const Type ADMIN = IndexType_Type_ADMIN;
-  static const Type SESSION = IndexType_Type_SESSION;
+  static const Type TICTACTOE = IndexType_Type_TICTACTOE;
   static inline bool Type_IsValid(int value) {
     return IndexType_Type_IsValid(value);
   }

@@ -56,13 +56,12 @@ public:
 	entity_ptr get_player(string uid);
 	entity_ptr create_player(Player& data);
 
-	/*SESSION*/
-	entity_ptr create_session(Session& data);
-	void update_session(string id, Session& data);
-	void delete_session(string id);
-
 	/*TICTACTOE*/
-	void tictactoe_move(string player, string session,int row, int col, int value);
+	entity_ptr ttt_create(string player_id);
+	void ttt_join(string player_id, string ttt_id);
+	void ttt_list(list<entity_ptr>& list);
+	void ttt_move(string player, string session,int row, int col, int value);
+
 };
 
 #endif /* DAO_H_ */

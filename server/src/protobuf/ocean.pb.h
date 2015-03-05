@@ -37,8 +37,6 @@ void protobuf_AssignDesc_ocean_2eproto();
 void protobuf_ShutdownFile_ocean_2eproto();
 
 class Player;
-class Session;
-class Game;
 class Tictactoe;
 
 enum Player_State {
@@ -61,34 +59,14 @@ inline bool Player_State_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<Player_State>(
     Player_State_descriptor(), name, value);
 }
-enum Session_State {
-  Session_State_CREATED = 1,
-  Session_State_PLAYING = 2,
-  Session_State_FINISHED = 3
-};
-bool Session_State_IsValid(int value);
-const Session_State Session_State_State_MIN = Session_State_CREATED;
-const Session_State Session_State_State_MAX = Session_State_FINISHED;
-const int Session_State_State_ARRAYSIZE = Session_State_State_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* Session_State_descriptor();
-inline const ::std::string& Session_State_Name(Session_State value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    Session_State_descriptor(), value);
-}
-inline bool Session_State_Parse(
-    const ::std::string& name, Session_State* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Session_State>(
-    Session_State_descriptor(), name, value);
-}
 enum Tictactoe_State {
-  Tictactoe_State_EMPTY = 1,
-  Tictactoe_State_X = 2,
-  Tictactoe_State_O = 3
+  Tictactoe_State_CREATED = 1,
+  Tictactoe_State_PLAYING = 2,
+  Tictactoe_State_ENDED = 3
 };
 bool Tictactoe_State_IsValid(int value);
-const Tictactoe_State Tictactoe_State_State_MIN = Tictactoe_State_EMPTY;
-const Tictactoe_State Tictactoe_State_State_MAX = Tictactoe_State_O;
+const Tictactoe_State Tictactoe_State_State_MIN = Tictactoe_State_CREATED;
+const Tictactoe_State Tictactoe_State_State_MAX = Tictactoe_State_ENDED;
 const int Tictactoe_State_State_ARRAYSIZE = Tictactoe_State_State_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Tictactoe_State_descriptor();
@@ -100,6 +78,26 @@ inline bool Tictactoe_State_Parse(
     const ::std::string& name, Tictactoe_State* value) {
   return ::google::protobuf::internal::ParseNamedEnum<Tictactoe_State>(
     Tictactoe_State_descriptor(), name, value);
+}
+enum Tictactoe_Value {
+  Tictactoe_Value_E = 1,
+  Tictactoe_Value_X = 2,
+  Tictactoe_Value_O = 3
+};
+bool Tictactoe_Value_IsValid(int value);
+const Tictactoe_Value Tictactoe_Value_Value_MIN = Tictactoe_Value_E;
+const Tictactoe_Value Tictactoe_Value_Value_MAX = Tictactoe_Value_O;
+const int Tictactoe_Value_Value_ARRAYSIZE = Tictactoe_Value_Value_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* Tictactoe_Value_descriptor();
+inline const ::std::string& Tictactoe_Value_Name(Tictactoe_Value value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    Tictactoe_Value_descriptor(), value);
+}
+inline bool Tictactoe_Value_Parse(
+    const ::std::string& name, Tictactoe_Value* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<Tictactoe_Value>(
+    Tictactoe_Value_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -182,17 +180,17 @@ class Player : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string uid = 1;
-  inline bool has_uid() const;
-  inline void clear_uid();
-  static const int kUidFieldNumber = 1;
-  inline const ::std::string& uid() const;
-  inline void set_uid(const ::std::string& value);
-  inline void set_uid(const char* value);
-  inline void set_uid(const char* value, size_t size);
-  inline ::std::string* mutable_uid();
-  inline ::std::string* release_uid();
-  inline void set_allocated_uid(::std::string* uid);
+  // required string email = 1;
+  inline bool has_email() const;
+  inline void clear_email();
+  static const int kEmailFieldNumber = 1;
+  inline const ::std::string& email() const;
+  inline void set_email(const ::std::string& value);
+  inline void set_email(const char* value);
+  inline void set_email(const char* value, size_t size);
+  inline ::std::string* mutable_email();
+  inline ::std::string* release_email();
+  inline void set_allocated_email(::std::string* email);
 
   // required string password = 2;
   inline bool has_password() const;
@@ -206,10 +204,10 @@ class Player : public ::google::protobuf::Message {
   inline ::std::string* release_password();
   inline void set_allocated_password(::std::string* password);
 
-  // required string name = 8;
+  // required string name = 3;
   inline bool has_name() const;
   inline void clear_name();
-  static const int kNameFieldNumber = 8;
+  static const int kNameFieldNumber = 3;
   inline const ::std::string& name() const;
   inline void set_name(const ::std::string& value);
   inline void set_name(const char* value);
@@ -218,10 +216,10 @@ class Player : public ::google::protobuf::Message {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
-  // optional string avatar = 6;
+  // optional string avatar = 4;
   inline bool has_avatar() const;
   inline void clear_avatar();
-  static const int kAvatarFieldNumber = 6;
+  static const int kAvatarFieldNumber = 4;
   inline const ::std::string& avatar() const;
   inline void set_avatar(const ::std::string& value);
   inline void set_avatar(const char* value);
@@ -230,211 +228,27 @@ class Player : public ::google::protobuf::Message {
   inline ::std::string* release_avatar();
   inline void set_allocated_avatar(::std::string* avatar);
 
-  // required uint32 state = 7;
-  inline bool has_state() const;
-  inline void clear_state();
-  static const int kStateFieldNumber = 7;
-  inline ::google::protobuf::uint32 state() const;
-  inline void set_state(::google::protobuf::uint32 value);
-
-  // optional bytes session = 9;
-  inline bool has_session() const;
-  inline void clear_session();
-  static const int kSessionFieldNumber = 9;
-  inline const ::std::string& session() const;
-  inline void set_session(const ::std::string& value);
-  inline void set_session(const char* value);
-  inline void set_session(const void* value, size_t size);
-  inline ::std::string* mutable_session();
-  inline ::std::string* release_session();
-  inline void set_allocated_session(::std::string* session);
-
   static const int kPLAYERFieldNumber = 4;
   static ::google::protobuf::internal::ExtensionIdentifier< ::model::Entity,
       ::google::protobuf::internal::MessageTypeTraits< ::ocean::Player >, 11, false >
     PLAYER;
   // @@protoc_insertion_point(class_scope:ocean.Player)
  private:
-  inline void set_has_uid();
-  inline void clear_has_uid();
+  inline void set_has_email();
+  inline void clear_has_email();
   inline void set_has_password();
   inline void clear_has_password();
   inline void set_has_name();
   inline void clear_has_name();
   inline void set_has_avatar();
   inline void clear_has_avatar();
-  inline void set_has_state();
-  inline void clear_has_state();
-  inline void set_has_session();
-  inline void clear_has_session();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* uid_;
+  ::std::string* email_;
   ::std::string* password_;
   ::std::string* name_;
   ::std::string* avatar_;
-  ::std::string* session_;
-  ::google::protobuf::uint32 state_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
-
-  friend void  protobuf_AddDesc_ocean_2eproto();
-  friend void protobuf_AssignDesc_ocean_2eproto();
-  friend void protobuf_ShutdownFile_ocean_2eproto();
-
-  void InitAsDefaultInstance();
-  static Player* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class Session : public ::google::protobuf::Message {
- public:
-  Session();
-  virtual ~Session();
-
-  Session(const Session& from);
-
-  inline Session& operator=(const Session& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const Session& default_instance();
-
-  void Swap(Session* other);
-
-  // implements Message ----------------------------------------------
-
-  Session* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Session& from);
-  void MergeFrom(const Session& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  typedef Session_State State;
-  static const State CREATED = Session_State_CREATED;
-  static const State PLAYING = Session_State_PLAYING;
-  static const State FINISHED = Session_State_FINISHED;
-  static inline bool State_IsValid(int value) {
-    return Session_State_IsValid(value);
-  }
-  static const State State_MIN =
-    Session_State_State_MIN;
-  static const State State_MAX =
-    Session_State_State_MAX;
-  static const int State_ARRAYSIZE =
-    Session_State_State_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  State_descriptor() {
-    return Session_State_descriptor();
-  }
-  static inline const ::std::string& State_Name(State value) {
-    return Session_State_Name(value);
-  }
-  static inline bool State_Parse(const ::std::string& name,
-      State* value) {
-    return Session_State_Parse(name, value);
-  }
-
-  // accessors -------------------------------------------------------
-
-  // required bytes creator = 1;
-  inline bool has_creator() const;
-  inline void clear_creator();
-  static const int kCreatorFieldNumber = 1;
-  inline const ::std::string& creator() const;
-  inline void set_creator(const ::std::string& value);
-  inline void set_creator(const char* value);
-  inline void set_creator(const void* value, size_t size);
-  inline ::std::string* mutable_creator();
-  inline ::std::string* release_creator();
-  inline void set_allocated_creator(::std::string* creator);
-
-  // required bytes game = 9;
-  inline bool has_game() const;
-  inline void clear_game();
-  static const int kGameFieldNumber = 9;
-  inline const ::std::string& game() const;
-  inline void set_game(const ::std::string& value);
-  inline void set_game(const char* value);
-  inline void set_game(const void* value, size_t size);
-  inline ::std::string* mutable_game();
-  inline ::std::string* release_game();
-  inline void set_allocated_game(::std::string* game);
-
-  // required string ip = 10;
-  inline bool has_ip() const;
-  inline void clear_ip();
-  static const int kIpFieldNumber = 10;
-  inline const ::std::string& ip() const;
-  inline void set_ip(const ::std::string& value);
-  inline void set_ip(const char* value);
-  inline void set_ip(const char* value, size_t size);
-  inline ::std::string* mutable_ip();
-  inline ::std::string* release_ip();
-  inline void set_allocated_ip(::std::string* ip);
-
-  // required uint32 state = 7;
-  inline bool has_state() const;
-  inline void clear_state();
-  static const int kStateFieldNumber = 7;
-  inline ::google::protobuf::uint32 state() const;
-  inline void set_state(::google::protobuf::uint32 value);
-
-  GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(Session)
-  static const int kSESSIONFieldNumber = 5;
-  static ::google::protobuf::internal::ExtensionIdentifier< ::model::Entity,
-      ::google::protobuf::internal::MessageTypeTraits< ::ocean::Session >, 11, false >
-    SESSION;
-  // @@protoc_insertion_point(class_scope:ocean.Session)
- private:
-  inline void set_has_creator();
-  inline void clear_has_creator();
-  inline void set_has_game();
-  inline void clear_has_game();
-  inline void set_has_ip();
-  inline void clear_has_ip();
-  inline void set_has_state();
-  inline void clear_has_state();
-
-  ::google::protobuf::internal::ExtensionSet _extensions_;
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::std::string* creator_;
-  ::std::string* game_;
-  ::std::string* ip_;
-  ::google::protobuf::uint32 state_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
@@ -444,113 +258,7 @@ class Session : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_ocean_2eproto();
 
   void InitAsDefaultInstance();
-  static Session* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class Game : public ::google::protobuf::Message {
- public:
-  Game();
-  virtual ~Game();
-
-  Game(const Game& from);
-
-  inline Game& operator=(const Game& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const Game& default_instance();
-
-  void Swap(Game* other);
-
-  // implements Message ----------------------------------------------
-
-  Game* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Game& from);
-  void MergeFrom(const Game& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required string name = 1;
-  inline bool has_name() const;
-  inline void clear_name();
-  static const int kNameFieldNumber = 1;
-  inline const ::std::string& name() const;
-  inline void set_name(const ::std::string& value);
-  inline void set_name(const char* value);
-  inline void set_name(const char* value, size_t size);
-  inline ::std::string* mutable_name();
-  inline ::std::string* release_name();
-  inline void set_allocated_name(::std::string* name);
-
-  // optional string description = 11;
-  inline bool has_description() const;
-  inline void clear_description();
-  static const int kDescriptionFieldNumber = 11;
-  inline const ::std::string& description() const;
-  inline void set_description(const ::std::string& value);
-  inline void set_description(const char* value);
-  inline void set_description(const char* value, size_t size);
-  inline ::std::string* mutable_description();
-  inline ::std::string* release_description();
-  inline void set_allocated_description(::std::string* description);
-
-  static const int kGAMEFieldNumber = 6;
-  static ::google::protobuf::internal::ExtensionIdentifier< ::model::Entity,
-      ::google::protobuf::internal::MessageTypeTraits< ::ocean::Game >, 11, false >
-    GAME;
-  // @@protoc_insertion_point(class_scope:ocean.Game)
- private:
-  inline void set_has_name();
-  inline void clear_has_name();
-  inline void set_has_description();
-  inline void clear_has_description();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::std::string* name_;
-  ::std::string* description_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
-
-  friend void  protobuf_AddDesc_ocean_2eproto();
-  friend void protobuf_AssignDesc_ocean_2eproto();
-  friend void protobuf_ShutdownFile_ocean_2eproto();
-
-  void InitAsDefaultInstance();
-  static Game* default_instance_;
+  static Player* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -607,9 +315,9 @@ class Tictactoe : public ::google::protobuf::Message {
   // nested types ----------------------------------------------------
 
   typedef Tictactoe_State State;
-  static const State EMPTY = Tictactoe_State_EMPTY;
-  static const State X = Tictactoe_State_X;
-  static const State O = Tictactoe_State_O;
+  static const State CREATED = Tictactoe_State_CREATED;
+  static const State PLAYING = Tictactoe_State_PLAYING;
+  static const State ENDED = Tictactoe_State_ENDED;
   static inline bool State_IsValid(int value) {
     return Tictactoe_State_IsValid(value);
   }
@@ -631,33 +339,113 @@ class Tictactoe : public ::google::protobuf::Message {
     return Tictactoe_State_Parse(name, value);
   }
 
+  typedef Tictactoe_Value Value;
+  static const Value E = Tictactoe_Value_E;
+  static const Value X = Tictactoe_Value_X;
+  static const Value O = Tictactoe_Value_O;
+  static inline bool Value_IsValid(int value) {
+    return Tictactoe_Value_IsValid(value);
+  }
+  static const Value Value_MIN =
+    Tictactoe_Value_Value_MIN;
+  static const Value Value_MAX =
+    Tictactoe_Value_Value_MAX;
+  static const int Value_ARRAYSIZE =
+    Tictactoe_Value_Value_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  Value_descriptor() {
+    return Tictactoe_Value_descriptor();
+  }
+  static inline const ::std::string& Value_Name(Value value) {
+    return Tictactoe_Value_Name(value);
+  }
+  static inline bool Value_Parse(const ::std::string& name,
+      Value* value) {
+    return Tictactoe_Value_Parse(name, value);
+  }
+
   // accessors -------------------------------------------------------
 
-  // repeated uint32 state = 1;
-  inline int state_size() const;
-  inline void clear_state();
-  static const int kStateFieldNumber = 1;
-  inline ::google::protobuf::uint32 state(int index) const;
-  inline void set_state(int index, ::google::protobuf::uint32 value);
-  inline void add_state(::google::protobuf::uint32 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
-      state() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
-      mutable_state();
+  // required bytes player1 = 2;
+  inline bool has_player1() const;
+  inline void clear_player1();
+  static const int kPlayer1FieldNumber = 2;
+  inline const ::std::string& player1() const;
+  inline void set_player1(const ::std::string& value);
+  inline void set_player1(const char* value);
+  inline void set_player1(const void* value, size_t size);
+  inline ::std::string* mutable_player1();
+  inline ::std::string* release_player1();
+  inline void set_allocated_player1(::std::string* player1);
 
-  static const int kTICTACTOEFieldNumber = 100;
-  static ::google::protobuf::internal::ExtensionIdentifier< ::ocean::Session,
+  // optional bytes player2 = 3;
+  inline bool has_player2() const;
+  inline void clear_player2();
+  static const int kPlayer2FieldNumber = 3;
+  inline const ::std::string& player2() const;
+  inline void set_player2(const ::std::string& value);
+  inline void set_player2(const char* value);
+  inline void set_player2(const void* value, size_t size);
+  inline ::std::string* mutable_player2();
+  inline ::std::string* release_player2();
+  inline void set_allocated_player2(::std::string* player2);
+
+  // required string ip = 4;
+  inline bool has_ip() const;
+  inline void clear_ip();
+  static const int kIpFieldNumber = 4;
+  inline const ::std::string& ip() const;
+  inline void set_ip(const ::std::string& value);
+  inline void set_ip(const char* value);
+  inline void set_ip(const char* value, size_t size);
+  inline ::std::string* mutable_ip();
+  inline ::std::string* release_ip();
+  inline void set_allocated_ip(::std::string* ip);
+
+  // repeated uint32 values = 1;
+  inline int values_size() const;
+  inline void clear_values();
+  static const int kValuesFieldNumber = 1;
+  inline ::google::protobuf::uint32 values(int index) const;
+  inline void set_values(int index, ::google::protobuf::uint32 value);
+  inline void add_values(::google::protobuf::uint32 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      values() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_values();
+
+  // required uint32 state = 5;
+  inline bool has_state() const;
+  inline void clear_state();
+  static const int kStateFieldNumber = 5;
+  inline ::google::protobuf::uint32 state() const;
+  inline void set_state(::google::protobuf::uint32 value);
+
+  static const int kTICTACTOEFieldNumber = 5;
+  static ::google::protobuf::internal::ExtensionIdentifier< ::model::Entity,
       ::google::protobuf::internal::MessageTypeTraits< ::ocean::Tictactoe >, 11, false >
     TICTACTOE;
   // @@protoc_insertion_point(class_scope:ocean.Tictactoe)
  private:
+  inline void set_has_player1();
+  inline void clear_has_player1();
+  inline void set_has_player2();
+  inline void clear_has_player2();
+  inline void set_has_ip();
+  inline void clear_has_ip();
+  inline void set_has_state();
+  inline void clear_has_state();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > state_;
+  ::std::string* player1_;
+  ::std::string* player2_;
+  ::std::string* ip_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > values_;
+  ::google::protobuf::uint32 state_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_ocean_2eproto();
   friend void protobuf_AssignDesc_ocean_2eproto();
@@ -673,73 +461,73 @@ class Tictactoe : public ::google::protobuf::Message {
 
 // Player
 
-// required string uid = 1;
-inline bool Player::has_uid() const {
+// required string email = 1;
+inline bool Player::has_email() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Player::set_has_uid() {
+inline void Player::set_has_email() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Player::clear_has_uid() {
+inline void Player::clear_has_email() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void Player::clear_uid() {
-  if (uid_ != &::google::protobuf::internal::kEmptyString) {
-    uid_->clear();
+inline void Player::clear_email() {
+  if (email_ != &::google::protobuf::internal::kEmptyString) {
+    email_->clear();
   }
-  clear_has_uid();
+  clear_has_email();
 }
-inline const ::std::string& Player::uid() const {
-  return *uid_;
+inline const ::std::string& Player::email() const {
+  return *email_;
 }
-inline void Player::set_uid(const ::std::string& value) {
-  set_has_uid();
-  if (uid_ == &::google::protobuf::internal::kEmptyString) {
-    uid_ = new ::std::string;
+inline void Player::set_email(const ::std::string& value) {
+  set_has_email();
+  if (email_ == &::google::protobuf::internal::kEmptyString) {
+    email_ = new ::std::string;
   }
-  uid_->assign(value);
+  email_->assign(value);
 }
-inline void Player::set_uid(const char* value) {
-  set_has_uid();
-  if (uid_ == &::google::protobuf::internal::kEmptyString) {
-    uid_ = new ::std::string;
+inline void Player::set_email(const char* value) {
+  set_has_email();
+  if (email_ == &::google::protobuf::internal::kEmptyString) {
+    email_ = new ::std::string;
   }
-  uid_->assign(value);
+  email_->assign(value);
 }
-inline void Player::set_uid(const char* value, size_t size) {
-  set_has_uid();
-  if (uid_ == &::google::protobuf::internal::kEmptyString) {
-    uid_ = new ::std::string;
+inline void Player::set_email(const char* value, size_t size) {
+  set_has_email();
+  if (email_ == &::google::protobuf::internal::kEmptyString) {
+    email_ = new ::std::string;
   }
-  uid_->assign(reinterpret_cast<const char*>(value), size);
+  email_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* Player::mutable_uid() {
-  set_has_uid();
-  if (uid_ == &::google::protobuf::internal::kEmptyString) {
-    uid_ = new ::std::string;
+inline ::std::string* Player::mutable_email() {
+  set_has_email();
+  if (email_ == &::google::protobuf::internal::kEmptyString) {
+    email_ = new ::std::string;
   }
-  return uid_;
+  return email_;
 }
-inline ::std::string* Player::release_uid() {
-  clear_has_uid();
-  if (uid_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* Player::release_email() {
+  clear_has_email();
+  if (email_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = uid_;
-    uid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = email_;
+    email_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void Player::set_allocated_uid(::std::string* uid) {
-  if (uid_ != &::google::protobuf::internal::kEmptyString) {
-    delete uid_;
+inline void Player::set_allocated_email(::std::string* email) {
+  if (email_ != &::google::protobuf::internal::kEmptyString) {
+    delete email_;
   }
-  if (uid) {
-    set_has_uid();
-    uid_ = uid;
+  if (email) {
+    set_has_email();
+    email_ = email;
   } else {
-    clear_has_uid();
-    uid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_email();
+    email_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
@@ -813,7 +601,7 @@ inline void Player::set_allocated_password(::std::string* password) {
   }
 }
 
-// required string name = 8;
+// required string name = 3;
 inline bool Player::has_name() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -883,7 +671,7 @@ inline void Player::set_allocated_name(::std::string* name) {
   }
 }
 
-// optional string avatar = 6;
+// optional string avatar = 4;
 inline bool Player::has_avatar() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -953,290 +741,198 @@ inline void Player::set_allocated_avatar(::std::string* avatar) {
   }
 }
 
-// required uint32 state = 7;
-inline bool Player::has_state() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void Player::set_has_state() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void Player::clear_has_state() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void Player::clear_state() {
-  state_ = 0u;
-  clear_has_state();
-}
-inline ::google::protobuf::uint32 Player::state() const {
-  return state_;
-}
-inline void Player::set_state(::google::protobuf::uint32 value) {
-  set_has_state();
-  state_ = value;
-}
-
-// optional bytes session = 9;
-inline bool Player::has_session() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void Player::set_has_session() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void Player::clear_has_session() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void Player::clear_session() {
-  if (session_ != &::google::protobuf::internal::kEmptyString) {
-    session_->clear();
-  }
-  clear_has_session();
-}
-inline const ::std::string& Player::session() const {
-  return *session_;
-}
-inline void Player::set_session(const ::std::string& value) {
-  set_has_session();
-  if (session_ == &::google::protobuf::internal::kEmptyString) {
-    session_ = new ::std::string;
-  }
-  session_->assign(value);
-}
-inline void Player::set_session(const char* value) {
-  set_has_session();
-  if (session_ == &::google::protobuf::internal::kEmptyString) {
-    session_ = new ::std::string;
-  }
-  session_->assign(value);
-}
-inline void Player::set_session(const void* value, size_t size) {
-  set_has_session();
-  if (session_ == &::google::protobuf::internal::kEmptyString) {
-    session_ = new ::std::string;
-  }
-  session_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Player::mutable_session() {
-  set_has_session();
-  if (session_ == &::google::protobuf::internal::kEmptyString) {
-    session_ = new ::std::string;
-  }
-  return session_;
-}
-inline ::std::string* Player::release_session() {
-  clear_has_session();
-  if (session_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = session_;
-    session_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void Player::set_allocated_session(::std::string* session) {
-  if (session_ != &::google::protobuf::internal::kEmptyString) {
-    delete session_;
-  }
-  if (session) {
-    set_has_session();
-    session_ = session;
-  } else {
-    clear_has_session();
-    session_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
 // -------------------------------------------------------------------
 
-// Session
+// Tictactoe
 
-// required bytes creator = 1;
-inline bool Session::has_creator() const {
+// required bytes player1 = 2;
+inline bool Tictactoe::has_player1() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Session::set_has_creator() {
+inline void Tictactoe::set_has_player1() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Session::clear_has_creator() {
+inline void Tictactoe::clear_has_player1() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void Session::clear_creator() {
-  if (creator_ != &::google::protobuf::internal::kEmptyString) {
-    creator_->clear();
+inline void Tictactoe::clear_player1() {
+  if (player1_ != &::google::protobuf::internal::kEmptyString) {
+    player1_->clear();
   }
-  clear_has_creator();
+  clear_has_player1();
 }
-inline const ::std::string& Session::creator() const {
-  return *creator_;
+inline const ::std::string& Tictactoe::player1() const {
+  return *player1_;
 }
-inline void Session::set_creator(const ::std::string& value) {
-  set_has_creator();
-  if (creator_ == &::google::protobuf::internal::kEmptyString) {
-    creator_ = new ::std::string;
+inline void Tictactoe::set_player1(const ::std::string& value) {
+  set_has_player1();
+  if (player1_ == &::google::protobuf::internal::kEmptyString) {
+    player1_ = new ::std::string;
   }
-  creator_->assign(value);
+  player1_->assign(value);
 }
-inline void Session::set_creator(const char* value) {
-  set_has_creator();
-  if (creator_ == &::google::protobuf::internal::kEmptyString) {
-    creator_ = new ::std::string;
+inline void Tictactoe::set_player1(const char* value) {
+  set_has_player1();
+  if (player1_ == &::google::protobuf::internal::kEmptyString) {
+    player1_ = new ::std::string;
   }
-  creator_->assign(value);
+  player1_->assign(value);
 }
-inline void Session::set_creator(const void* value, size_t size) {
-  set_has_creator();
-  if (creator_ == &::google::protobuf::internal::kEmptyString) {
-    creator_ = new ::std::string;
+inline void Tictactoe::set_player1(const void* value, size_t size) {
+  set_has_player1();
+  if (player1_ == &::google::protobuf::internal::kEmptyString) {
+    player1_ = new ::std::string;
   }
-  creator_->assign(reinterpret_cast<const char*>(value), size);
+  player1_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* Session::mutable_creator() {
-  set_has_creator();
-  if (creator_ == &::google::protobuf::internal::kEmptyString) {
-    creator_ = new ::std::string;
+inline ::std::string* Tictactoe::mutable_player1() {
+  set_has_player1();
+  if (player1_ == &::google::protobuf::internal::kEmptyString) {
+    player1_ = new ::std::string;
   }
-  return creator_;
+  return player1_;
 }
-inline ::std::string* Session::release_creator() {
-  clear_has_creator();
-  if (creator_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* Tictactoe::release_player1() {
+  clear_has_player1();
+  if (player1_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = creator_;
-    creator_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = player1_;
+    player1_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void Session::set_allocated_creator(::std::string* creator) {
-  if (creator_ != &::google::protobuf::internal::kEmptyString) {
-    delete creator_;
+inline void Tictactoe::set_allocated_player1(::std::string* player1) {
+  if (player1_ != &::google::protobuf::internal::kEmptyString) {
+    delete player1_;
   }
-  if (creator) {
-    set_has_creator();
-    creator_ = creator;
+  if (player1) {
+    set_has_player1();
+    player1_ = player1;
   } else {
-    clear_has_creator();
-    creator_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_player1();
+    player1_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
-// required bytes game = 9;
-inline bool Session::has_game() const {
+// optional bytes player2 = 3;
+inline bool Tictactoe::has_player2() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void Session::set_has_game() {
+inline void Tictactoe::set_has_player2() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void Session::clear_has_game() {
+inline void Tictactoe::clear_has_player2() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void Session::clear_game() {
-  if (game_ != &::google::protobuf::internal::kEmptyString) {
-    game_->clear();
+inline void Tictactoe::clear_player2() {
+  if (player2_ != &::google::protobuf::internal::kEmptyString) {
+    player2_->clear();
   }
-  clear_has_game();
+  clear_has_player2();
 }
-inline const ::std::string& Session::game() const {
-  return *game_;
+inline const ::std::string& Tictactoe::player2() const {
+  return *player2_;
 }
-inline void Session::set_game(const ::std::string& value) {
-  set_has_game();
-  if (game_ == &::google::protobuf::internal::kEmptyString) {
-    game_ = new ::std::string;
+inline void Tictactoe::set_player2(const ::std::string& value) {
+  set_has_player2();
+  if (player2_ == &::google::protobuf::internal::kEmptyString) {
+    player2_ = new ::std::string;
   }
-  game_->assign(value);
+  player2_->assign(value);
 }
-inline void Session::set_game(const char* value) {
-  set_has_game();
-  if (game_ == &::google::protobuf::internal::kEmptyString) {
-    game_ = new ::std::string;
+inline void Tictactoe::set_player2(const char* value) {
+  set_has_player2();
+  if (player2_ == &::google::protobuf::internal::kEmptyString) {
+    player2_ = new ::std::string;
   }
-  game_->assign(value);
+  player2_->assign(value);
 }
-inline void Session::set_game(const void* value, size_t size) {
-  set_has_game();
-  if (game_ == &::google::protobuf::internal::kEmptyString) {
-    game_ = new ::std::string;
+inline void Tictactoe::set_player2(const void* value, size_t size) {
+  set_has_player2();
+  if (player2_ == &::google::protobuf::internal::kEmptyString) {
+    player2_ = new ::std::string;
   }
-  game_->assign(reinterpret_cast<const char*>(value), size);
+  player2_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* Session::mutable_game() {
-  set_has_game();
-  if (game_ == &::google::protobuf::internal::kEmptyString) {
-    game_ = new ::std::string;
+inline ::std::string* Tictactoe::mutable_player2() {
+  set_has_player2();
+  if (player2_ == &::google::protobuf::internal::kEmptyString) {
+    player2_ = new ::std::string;
   }
-  return game_;
+  return player2_;
 }
-inline ::std::string* Session::release_game() {
-  clear_has_game();
-  if (game_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* Tictactoe::release_player2() {
+  clear_has_player2();
+  if (player2_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = game_;
-    game_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = player2_;
+    player2_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void Session::set_allocated_game(::std::string* game) {
-  if (game_ != &::google::protobuf::internal::kEmptyString) {
-    delete game_;
+inline void Tictactoe::set_allocated_player2(::std::string* player2) {
+  if (player2_ != &::google::protobuf::internal::kEmptyString) {
+    delete player2_;
   }
-  if (game) {
-    set_has_game();
-    game_ = game;
+  if (player2) {
+    set_has_player2();
+    player2_ = player2;
   } else {
-    clear_has_game();
-    game_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_player2();
+    player2_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
-// required string ip = 10;
-inline bool Session::has_ip() const {
+// required string ip = 4;
+inline bool Tictactoe::has_ip() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void Session::set_has_ip() {
+inline void Tictactoe::set_has_ip() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void Session::clear_has_ip() {
+inline void Tictactoe::clear_has_ip() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void Session::clear_ip() {
+inline void Tictactoe::clear_ip() {
   if (ip_ != &::google::protobuf::internal::kEmptyString) {
     ip_->clear();
   }
   clear_has_ip();
 }
-inline const ::std::string& Session::ip() const {
+inline const ::std::string& Tictactoe::ip() const {
   return *ip_;
 }
-inline void Session::set_ip(const ::std::string& value) {
+inline void Tictactoe::set_ip(const ::std::string& value) {
   set_has_ip();
   if (ip_ == &::google::protobuf::internal::kEmptyString) {
     ip_ = new ::std::string;
   }
   ip_->assign(value);
 }
-inline void Session::set_ip(const char* value) {
+inline void Tictactoe::set_ip(const char* value) {
   set_has_ip();
   if (ip_ == &::google::protobuf::internal::kEmptyString) {
     ip_ = new ::std::string;
   }
   ip_->assign(value);
 }
-inline void Session::set_ip(const char* value, size_t size) {
+inline void Tictactoe::set_ip(const char* value, size_t size) {
   set_has_ip();
   if (ip_ == &::google::protobuf::internal::kEmptyString) {
     ip_ = new ::std::string;
   }
   ip_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* Session::mutable_ip() {
+inline ::std::string* Tictactoe::mutable_ip() {
   set_has_ip();
   if (ip_ == &::google::protobuf::internal::kEmptyString) {
     ip_ = new ::std::string;
   }
   return ip_;
 }
-inline ::std::string* Session::release_ip() {
+inline ::std::string* Tictactoe::release_ip() {
   clear_has_ip();
   if (ip_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
@@ -1246,7 +942,7 @@ inline ::std::string* Session::release_ip() {
     return temp;
   }
 }
-inline void Session::set_allocated_ip(::std::string* ip) {
+inline void Tictactoe::set_allocated_ip(::std::string* ip) {
   if (ip_ != &::google::protobuf::internal::kEmptyString) {
     delete ip_;
   }
@@ -1259,199 +955,51 @@ inline void Session::set_allocated_ip(::std::string* ip) {
   }
 }
 
-// required uint32 state = 7;
-inline bool Session::has_state() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+// repeated uint32 values = 1;
+inline int Tictactoe::values_size() const {
+  return values_.size();
 }
-inline void Session::set_has_state() {
-  _has_bits_[0] |= 0x00000008u;
+inline void Tictactoe::clear_values() {
+  values_.Clear();
 }
-inline void Session::clear_has_state() {
-  _has_bits_[0] &= ~0x00000008u;
+inline ::google::protobuf::uint32 Tictactoe::values(int index) const {
+  return values_.Get(index);
 }
-inline void Session::clear_state() {
+inline void Tictactoe::set_values(int index, ::google::protobuf::uint32 value) {
+  values_.Set(index, value);
+}
+inline void Tictactoe::add_values(::google::protobuf::uint32 value) {
+  values_.Add(value);
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+Tictactoe::values() const {
+  return values_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+Tictactoe::mutable_values() {
+  return &values_;
+}
+
+// required uint32 state = 5;
+inline bool Tictactoe::has_state() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void Tictactoe::set_has_state() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void Tictactoe::clear_has_state() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void Tictactoe::clear_state() {
   state_ = 0u;
   clear_has_state();
 }
-inline ::google::protobuf::uint32 Session::state() const {
+inline ::google::protobuf::uint32 Tictactoe::state() const {
   return state_;
 }
-inline void Session::set_state(::google::protobuf::uint32 value) {
+inline void Tictactoe::set_state(::google::protobuf::uint32 value) {
   set_has_state();
   state_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// Game
-
-// required string name = 1;
-inline bool Game::has_name() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void Game::set_has_name() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void Game::clear_has_name() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void Game::clear_name() {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    name_->clear();
-  }
-  clear_has_name();
-}
-inline const ::std::string& Game::name() const {
-  return *name_;
-}
-inline void Game::set_name(const ::std::string& value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(value);
-}
-inline void Game::set_name(const char* value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(value);
-}
-inline void Game::set_name(const char* value, size_t size) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Game::mutable_name() {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  return name_;
-}
-inline ::std::string* Game::release_name() {
-  clear_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = name_;
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void Game::set_allocated_name(::std::string* name) {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    delete name_;
-  }
-  if (name) {
-    set_has_name();
-    name_ = name;
-  } else {
-    clear_has_name();
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// optional string description = 11;
-inline bool Game::has_description() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void Game::set_has_description() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void Game::clear_has_description() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void Game::clear_description() {
-  if (description_ != &::google::protobuf::internal::kEmptyString) {
-    description_->clear();
-  }
-  clear_has_description();
-}
-inline const ::std::string& Game::description() const {
-  return *description_;
-}
-inline void Game::set_description(const ::std::string& value) {
-  set_has_description();
-  if (description_ == &::google::protobuf::internal::kEmptyString) {
-    description_ = new ::std::string;
-  }
-  description_->assign(value);
-}
-inline void Game::set_description(const char* value) {
-  set_has_description();
-  if (description_ == &::google::protobuf::internal::kEmptyString) {
-    description_ = new ::std::string;
-  }
-  description_->assign(value);
-}
-inline void Game::set_description(const char* value, size_t size) {
-  set_has_description();
-  if (description_ == &::google::protobuf::internal::kEmptyString) {
-    description_ = new ::std::string;
-  }
-  description_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Game::mutable_description() {
-  set_has_description();
-  if (description_ == &::google::protobuf::internal::kEmptyString) {
-    description_ = new ::std::string;
-  }
-  return description_;
-}
-inline ::std::string* Game::release_description() {
-  clear_has_description();
-  if (description_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = description_;
-    description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void Game::set_allocated_description(::std::string* description) {
-  if (description_ != &::google::protobuf::internal::kEmptyString) {
-    delete description_;
-  }
-  if (description) {
-    set_has_description();
-    description_ = description;
-  } else {
-    clear_has_description();
-    description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// -------------------------------------------------------------------
-
-// Tictactoe
-
-// repeated uint32 state = 1;
-inline int Tictactoe::state_size() const {
-  return state_.size();
-}
-inline void Tictactoe::clear_state() {
-  state_.Clear();
-}
-inline ::google::protobuf::uint32 Tictactoe::state(int index) const {
-  return state_.Get(index);
-}
-inline void Tictactoe::set_state(int index, ::google::protobuf::uint32 value) {
-  state_.Set(index, value);
-}
-inline void Tictactoe::add_state(::google::protobuf::uint32 value) {
-  state_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
-Tictactoe::state() const {
-  return state_;
-}
-inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
-Tictactoe::mutable_state() {
-  return &state_;
 }
 
 
@@ -1468,12 +1016,12 @@ inline const EnumDescriptor* GetEnumDescriptor< ::ocean::Player_State>() {
   return ::ocean::Player_State_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::ocean::Session_State>() {
-  return ::ocean::Session_State_descriptor();
-}
-template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::ocean::Tictactoe_State>() {
   return ::ocean::Tictactoe_State_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::ocean::Tictactoe_Value>() {
+  return ::ocean::Tictactoe_Value_descriptor();
 }
 
 }  // namespace google

@@ -3,14 +3,12 @@ package comm;
 /* service type */
 enum ServiceType
 {
-	CREATE_SESSION = 100;
-	JOIN_SESSION = 101;
-	LEAVE_SESSION = 102;
-	START_GAME = 103;
-	END_GAME = 104;
+	SIGNIN =100;
+	SIGNOUT =101;
 
-	/* TIC TAC TOE */
-	TTT_MOVE = 200;
+	TICTACTOE_CREATE = 200;
+	TICTACTOE_JOIN = 201;
+	TICTACTOE_MOVE = 202;
 }
 
 /* error type */
@@ -27,12 +25,6 @@ enum ErrorType
 	UID_DUPLICATED = 9;
 }
 
-/* game type */
-enum GameType
-{
-	TICTACTOE = 1;
-}
-
 /* SIGNIN */
 message SigninRequest
 {
@@ -43,64 +35,54 @@ message SigninRequest
 message SigninReply
 {
 	required int32 type = 1;
-	required string token = 2;
+	required string auth = 2;
 }
 
 /* CREATE_SESSION*/
-message CreateSessionRequest
+message TictactoeCreateRequest
 {
-	required string token = 1;
-	required int32 game = 2;
+	required string auth = 1;
 }
 
-message CreateSessionReply
+message TictactoeCreateReply
 {
 	required int32 type = 1;
-	required string sid = 2;
-	required string host = 3;
-	required int32 port = 4;
+	required string session_id = 2;
+	required string ip = 3;
 }
 
 /* JOIN_SESSION */
-message JoinSessionRequest
+message TictactoeJoinRequest
 {
-	required string token = 1;
-	required string sid = 2;
+	required string auth = 1;
 }
 
-message JoinSessionReply
+message TictactoeJoinReply
 {
 	required int32 type = 1;
-	repeated group Player = 3
-	{
-		required bytes uid = 1;
-		required string name = 2;
-		optional string avatar = 3;
-	}
+	required string creator_id = 2;
+	required string creator_name = 3;
+	optional string creator_avatar = 4;
 }
 
 /* LIST_SESSION */
-message ListSessionRequest
+message TictactoeListRequest
 {
-	required string token = 1;
+	required string auth = 1;
 	optional uint32 count = 2;
 }
 
-message ListSessionReply
+message TictactoeListReply
 {
 	required int32 type = 1;
-	repeated group Session = 2
-	{
-		required string creator_id = 1;
-		required string creator_name = 5;
-		required string host = 2;
-		required int32 port = 3;
-		required int32 player_count = 4;
-	}
+	required string creator_id = 2;
+	required string creator_name = 3;
+	optional string creator_avatar = 4;
+	required string ip = 5;
 }
 
 /* LEAVE_SESSION */
-message LeaveSessionRequest
+message TictactoeLeaveRequest
 {
 
 }
