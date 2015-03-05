@@ -1,7 +1,7 @@
 import "model.proto";
 import "type.proto";
 
-package tictactoe;
+package ocean;
 
 message Player
 {
@@ -23,6 +23,7 @@ message Session
 	required bytes game = 9;
 	required string ip = 10;
 	required uint32 state = 7;
+	extensions 100 to max;
 }
 
 message Game
@@ -30,5 +31,12 @@ message Game
 	extend model.Entity	 { optional Game GAME = 6; }
 	required string name = 1;
 	optional string description = 11;
+}
+
+message Tictactoe
+{
+	enum State{EMPTY = 1; X = 2; O = 3;}
+	extend Session	{ optional Tictactoe TICTACTOE = 100; }
+	repeated uint32 state = 1;
 }
 

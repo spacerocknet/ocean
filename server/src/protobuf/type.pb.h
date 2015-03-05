@@ -28,7 +28,7 @@
 #include "model.pb.h"
 // @@protoc_insertion_point(includes)
 
-namespace tictactoe {
+namespace ocean {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_type_2eproto();
@@ -180,7 +180,7 @@ class EntityType : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // @@protoc_insertion_point(class_scope:tictactoe.EntityType)
+  // @@protoc_insertion_point(class_scope:ocean.EntityType)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
@@ -275,7 +275,7 @@ class RelationType : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // @@protoc_insertion_point(class_scope:tictactoe.RelationType)
+  // @@protoc_insertion_point(class_scope:ocean.RelationType)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
@@ -372,7 +372,7 @@ class IndexType : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // @@protoc_insertion_point(class_scope:tictactoe.IndexType)
+  // @@protoc_insertion_point(class_scope:ocean.IndexType)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
@@ -406,23 +406,23 @@ class IndexType : public ::google::protobuf::Message {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace tictactoe
+}  // namespace ocean
 
 #ifndef SWIG
 namespace google {
 namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::tictactoe::EntityType_Type>() {
-  return ::tictactoe::EntityType_Type_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::ocean::EntityType_Type>() {
+  return ::ocean::EntityType_Type_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::tictactoe::RelationType_Type>() {
-  return ::tictactoe::RelationType_Type_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::ocean::RelationType_Type>() {
+  return ::ocean::RelationType_Type_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::tictactoe::IndexType_Type>() {
-  return ::tictactoe::IndexType_Type_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::ocean::IndexType_Type>() {
+  return ::ocean::IndexType_Type_descriptor();
 }
 
 }  // namespace google

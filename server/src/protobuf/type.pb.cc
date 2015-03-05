@@ -16,7 +16,7 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
-namespace tictactoe {
+namespace ocean {
 
 namespace {
 
@@ -126,12 +126,11 @@ void protobuf_AddDesc_type_2eproto() {
 
   ::model::protobuf_AddDesc_model_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\ntype.proto\022\ttictactoe\032\013model.proto\"B\n\n"
-    "EntityType\"4\n\004Type\022\n\n\006PLAYER\020\001\022\013\n\007SESSIO"
-    "N\020\002\022\010\n\004GAME\020\003\022\t\n\005ADMIN\020\004\"&\n\014RelationType"
-    "\"\026\n\004Type\022\016\n\nHAS_PLAYER\020\006\"7\n\tIndexType\"*\n"
-    "\004Type\022\n\n\006PLAYER\020\001\022\t\n\005ADMIN\020\002\022\013\n\007SESSION\020"
-    "\003", 201);
+    "\n\ntype.proto\022\005ocean\032\013model.proto\"B\n\nEnti"
+    "tyType\"4\n\004Type\022\n\n\006PLAYER\020\001\022\013\n\007SESSION\020\002\022"
+    "\010\n\004GAME\020\003\022\t\n\005ADMIN\020\004\"&\n\014RelationType\"\026\n\004"
+    "Type\022\016\n\nHAS_PLAYER\020\006\"7\n\tIndexType\"*\n\004Typ"
+    "e\022\n\n\006PLAYER\020\001\022\t\n\005ADMIN\020\002\022\013\n\007SESSION\020\003", 197);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "type.proto", &protobuf_RegisterTypes);
   EntityType::default_instance_ = new EntityType();
@@ -687,6 +686,6 @@ void IndexType::Swap(IndexType* other) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace tictactoe
+}  // namespace ocean
 
 // @@protoc_insertion_point(global_scope)

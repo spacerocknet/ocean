@@ -10,7 +10,7 @@
 
 #define DAO_COMP "DAO"
 
-#include "tictactoe.pb.h"
+#include "ocean.pb.h"
 #include "comm.pb.h"
 #include "type.pb.h"
 
@@ -30,7 +30,7 @@
 
 using namespace db;
 using namespace std;
-using namespace tictactoe;
+using namespace ocean;
 
 
 #define count_key(e,count, key, k)\
@@ -60,6 +60,9 @@ public:
 	entity_ptr create_session(Session& data);
 	void update_session(string id, Session& data);
 	void delete_session(string id);
+
+	/*TICTACTOE*/
+	void tictactoe_move(string player, string session,int row, int col, int value);
 };
 
 #endif /* DAO_H_ */
