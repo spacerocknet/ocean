@@ -1,16 +1,15 @@
 import "model.proto";
-package chat;
+package tictactoe;
 
 /* entity type */
 message EntityType
 {
 	enum Type
 	{
-		CHAT = 1;
-		USER = 3;
-		GROUP_CHAT = 4;
-		NOTIFICATION = 5;
-		MESSAGE = 6;
+		PLAYER = 1;
+		SESSION = 2;
+		GAME = 3;
+		ADMIN = 4;
 	}
 }
 
@@ -19,10 +18,7 @@ message RelationType
 {
 	enum Type
 	{
-		HAS_CHAT = 6;
-		HAS_MEMBER = 7;
-		HAS_MESSAGE = 9;
-		HAS_NOTIFICATION = 10;
+		HAS_PLAYER = 6;
 	}
 }
 
@@ -31,6 +27,8 @@ message IndexType
 {
 	enum Type
 	{
-		ACCOUNT = 1;
+		PLAYER = 1;
+		ADMIN = 2;
+		SESSION = 3;
 	}
 }

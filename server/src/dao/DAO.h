@@ -10,7 +10,7 @@
 
 #define DAO_COMP "DAO"
 
-#include "chat.pb.h"
+#include "tictactoe.pb.h"
 #include "comm.pb.h"
 #include "type.pb.h"
 
@@ -30,7 +30,7 @@
 
 using namespace db;
 using namespace std;
-using namespace chat;
+using namespace tictactoe;
 
 
 #define count_key(e,count, key, k)\
@@ -53,8 +53,9 @@ public:
 	entity_ptr get_entity(string id, uint32_t type);
 
 	/*USER*/
-	entity_ptr get_player(string uid);
-	entity_ptr create_player(User& data);
+	entity_ptr get_player(string id);
+	entity_ptr get_player_by_uid(string uid);
+	entity_ptr create_player(Player& data);
 
 	/*SESSION*/
 	entity_ptr create_session();

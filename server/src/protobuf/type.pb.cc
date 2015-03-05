@@ -16,7 +16,7 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
-namespace chat {
+namespace tictactoe {
 
 namespace {
 
@@ -126,13 +126,12 @@ void protobuf_AddDesc_type_2eproto() {
 
   ::model::protobuf_AddDesc_model_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\ntype.proto\022\004chat\032\013model.proto\"W\n\nEntit"
-    "yType\"I\n\004Type\022\010\n\004CHAT\020\001\022\010\n\004USER\020\003\022\016\n\nGRO"
-    "UP_CHAT\020\004\022\020\n\014NOTIFICATION\020\005\022\013\n\007MESSAGE\020\006"
-    "\"[\n\014RelationType\"K\n\004Type\022\014\n\010HAS_CHAT\020\006\022\016"
-    "\n\nHAS_MEMBER\020\007\022\017\n\013HAS_MESSAGE\020\t\022\024\n\020HAS_N"
-    "OTIFICATION\020\n\" \n\tIndexType\"\023\n\004Type\022\013\n\007AC"
-    "COUNT\020\001", 247);
+    "\n\ntype.proto\022\ttictactoe\032\013model.proto\"B\n\n"
+    "EntityType\"4\n\004Type\022\n\n\006PLAYER\020\001\022\013\n\007SESSIO"
+    "N\020\002\022\010\n\004GAME\020\003\022\t\n\005ADMIN\020\004\"&\n\014RelationType"
+    "\"\026\n\004Type\022\016\n\nHAS_PLAYER\020\006\"7\n\tIndexType\"*\n"
+    "\004Type\022\n\n\006PLAYER\020\001\022\t\n\005ADMIN\020\002\022\013\n\007SESSION\020"
+    "\003", 201);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "type.proto", &protobuf_RegisterTypes);
   EntityType::default_instance_ = new EntityType();
@@ -160,10 +159,9 @@ const ::google::protobuf::EnumDescriptor* EntityType_Type_descriptor() {
 bool EntityType_Type_IsValid(int value) {
   switch(value) {
     case 1:
+    case 2:
     case 3:
     case 4:
-    case 5:
-    case 6:
       return true;
     default:
       return false;
@@ -171,11 +169,10 @@ bool EntityType_Type_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
-const EntityType_Type EntityType::CHAT;
-const EntityType_Type EntityType::USER;
-const EntityType_Type EntityType::GROUP_CHAT;
-const EntityType_Type EntityType::NOTIFICATION;
-const EntityType_Type EntityType::MESSAGE;
+const EntityType_Type EntityType::PLAYER;
+const EntityType_Type EntityType::SESSION;
+const EntityType_Type EntityType::GAME;
+const EntityType_Type EntityType::ADMIN;
 const EntityType_Type EntityType::Type_MIN;
 const EntityType_Type EntityType::Type_MAX;
 const int EntityType::Type_ARRAYSIZE;
@@ -343,9 +340,6 @@ const ::google::protobuf::EnumDescriptor* RelationType_Type_descriptor() {
 bool RelationType_Type_IsValid(int value) {
   switch(value) {
     case 6:
-    case 7:
-    case 9:
-    case 10:
       return true;
     default:
       return false;
@@ -353,10 +347,7 @@ bool RelationType_Type_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
-const RelationType_Type RelationType::HAS_CHAT;
-const RelationType_Type RelationType::HAS_MEMBER;
-const RelationType_Type RelationType::HAS_MESSAGE;
-const RelationType_Type RelationType::HAS_NOTIFICATION;
+const RelationType_Type RelationType::HAS_PLAYER;
 const RelationType_Type RelationType::Type_MIN;
 const RelationType_Type RelationType::Type_MAX;
 const int RelationType::Type_ARRAYSIZE;
@@ -524,6 +515,8 @@ const ::google::protobuf::EnumDescriptor* IndexType_Type_descriptor() {
 bool IndexType_Type_IsValid(int value) {
   switch(value) {
     case 1:
+    case 2:
+    case 3:
       return true;
     default:
       return false;
@@ -531,7 +524,9 @@ bool IndexType_Type_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
-const IndexType_Type IndexType::ACCOUNT;
+const IndexType_Type IndexType::PLAYER;
+const IndexType_Type IndexType::ADMIN;
+const IndexType_Type IndexType::SESSION;
 const IndexType_Type IndexType::Type_MIN;
 const IndexType_Type IndexType::Type_MAX;
 const int IndexType::Type_ARRAYSIZE;
@@ -692,6 +687,6 @@ void IndexType::Swap(IndexType* other) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace chat
+}  // namespace tictactoe
 
 // @@protoc_insertion_point(global_scope)

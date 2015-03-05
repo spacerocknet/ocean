@@ -135,7 +135,7 @@ void protobuf_AddDesc_tictactoe_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::model::protobuf_AddDesc_model_2eproto();
-  ::chat::protobuf_AddDesc_type_2eproto();
+  ::tictactoe::protobuf_AddDesc_type_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\017tictactoe.proto\022\ttictactoe\032\013model.prot"
     "o\032\ntype.proto\"\307\001\n\006Player\022\013\n\003uid\030\001 \002(\t\022\020\n"

@@ -14,7 +14,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
-using namespace boost::filesystem;
+#include "db/Database.h"
+#include "dao/DAO.h"
 
 #define REG_SERVICE(name)\
 server->register_service(boost::make_shared<name>(server.get()));\
@@ -52,6 +53,12 @@ int main(int argc, char **argv)
 		cppcms::service service(argc, argv);
 		booster::intrusive_ptr<Server> server = new Server(service);
 		hook_interrupt(server.get());
+
+		/* register components */
+		auto database = boost::make_shared<db::Database>();
+		server->register_component(database);
+		auto dao = boost::make_shared<DAO>(database.get());
+		server->register_component(dao);
 
 		/* register services */
 		REG_SERVICE(CreateSessionService);

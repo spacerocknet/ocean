@@ -28,7 +28,7 @@
 #include "model.pb.h"
 // @@protoc_insertion_point(includes)
 
-namespace chat {
+namespace tictactoe {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_type_2eproto();
@@ -40,15 +40,14 @@ class RelationType;
 class IndexType;
 
 enum EntityType_Type {
-  EntityType_Type_CHAT = 1,
-  EntityType_Type_USER = 3,
-  EntityType_Type_GROUP_CHAT = 4,
-  EntityType_Type_NOTIFICATION = 5,
-  EntityType_Type_MESSAGE = 6
+  EntityType_Type_PLAYER = 1,
+  EntityType_Type_SESSION = 2,
+  EntityType_Type_GAME = 3,
+  EntityType_Type_ADMIN = 4
 };
 bool EntityType_Type_IsValid(int value);
-const EntityType_Type EntityType_Type_Type_MIN = EntityType_Type_CHAT;
-const EntityType_Type EntityType_Type_Type_MAX = EntityType_Type_MESSAGE;
+const EntityType_Type EntityType_Type_Type_MIN = EntityType_Type_PLAYER;
+const EntityType_Type EntityType_Type_Type_MAX = EntityType_Type_ADMIN;
 const int EntityType_Type_Type_ARRAYSIZE = EntityType_Type_Type_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EntityType_Type_descriptor();
@@ -62,14 +61,11 @@ inline bool EntityType_Type_Parse(
     EntityType_Type_descriptor(), name, value);
 }
 enum RelationType_Type {
-  RelationType_Type_HAS_CHAT = 6,
-  RelationType_Type_HAS_MEMBER = 7,
-  RelationType_Type_HAS_MESSAGE = 9,
-  RelationType_Type_HAS_NOTIFICATION = 10
+  RelationType_Type_HAS_PLAYER = 6
 };
 bool RelationType_Type_IsValid(int value);
-const RelationType_Type RelationType_Type_Type_MIN = RelationType_Type_HAS_CHAT;
-const RelationType_Type RelationType_Type_Type_MAX = RelationType_Type_HAS_NOTIFICATION;
+const RelationType_Type RelationType_Type_Type_MIN = RelationType_Type_HAS_PLAYER;
+const RelationType_Type RelationType_Type_Type_MAX = RelationType_Type_HAS_PLAYER;
 const int RelationType_Type_Type_ARRAYSIZE = RelationType_Type_Type_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* RelationType_Type_descriptor();
@@ -83,11 +79,13 @@ inline bool RelationType_Type_Parse(
     RelationType_Type_descriptor(), name, value);
 }
 enum IndexType_Type {
-  IndexType_Type_ACCOUNT = 1
+  IndexType_Type_PLAYER = 1,
+  IndexType_Type_ADMIN = 2,
+  IndexType_Type_SESSION = 3
 };
 bool IndexType_Type_IsValid(int value);
-const IndexType_Type IndexType_Type_Type_MIN = IndexType_Type_ACCOUNT;
-const IndexType_Type IndexType_Type_Type_MAX = IndexType_Type_ACCOUNT;
+const IndexType_Type IndexType_Type_Type_MIN = IndexType_Type_PLAYER;
+const IndexType_Type IndexType_Type_Type_MAX = IndexType_Type_SESSION;
 const int IndexType_Type_Type_ARRAYSIZE = IndexType_Type_Type_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* IndexType_Type_descriptor();
@@ -155,11 +153,10 @@ class EntityType : public ::google::protobuf::Message {
   // nested types ----------------------------------------------------
 
   typedef EntityType_Type Type;
-  static const Type CHAT = EntityType_Type_CHAT;
-  static const Type USER = EntityType_Type_USER;
-  static const Type GROUP_CHAT = EntityType_Type_GROUP_CHAT;
-  static const Type NOTIFICATION = EntityType_Type_NOTIFICATION;
-  static const Type MESSAGE = EntityType_Type_MESSAGE;
+  static const Type PLAYER = EntityType_Type_PLAYER;
+  static const Type SESSION = EntityType_Type_SESSION;
+  static const Type GAME = EntityType_Type_GAME;
+  static const Type ADMIN = EntityType_Type_ADMIN;
   static inline bool Type_IsValid(int value) {
     return EntityType_Type_IsValid(value);
   }
@@ -183,7 +180,7 @@ class EntityType : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // @@protoc_insertion_point(class_scope:chat.EntityType)
+  // @@protoc_insertion_point(class_scope:tictactoe.EntityType)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
@@ -254,10 +251,7 @@ class RelationType : public ::google::protobuf::Message {
   // nested types ----------------------------------------------------
 
   typedef RelationType_Type Type;
-  static const Type HAS_CHAT = RelationType_Type_HAS_CHAT;
-  static const Type HAS_MEMBER = RelationType_Type_HAS_MEMBER;
-  static const Type HAS_MESSAGE = RelationType_Type_HAS_MESSAGE;
-  static const Type HAS_NOTIFICATION = RelationType_Type_HAS_NOTIFICATION;
+  static const Type HAS_PLAYER = RelationType_Type_HAS_PLAYER;
   static inline bool Type_IsValid(int value) {
     return RelationType_Type_IsValid(value);
   }
@@ -281,7 +275,7 @@ class RelationType : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // @@protoc_insertion_point(class_scope:chat.RelationType)
+  // @@protoc_insertion_point(class_scope:tictactoe.RelationType)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
@@ -352,7 +346,9 @@ class IndexType : public ::google::protobuf::Message {
   // nested types ----------------------------------------------------
 
   typedef IndexType_Type Type;
-  static const Type ACCOUNT = IndexType_Type_ACCOUNT;
+  static const Type PLAYER = IndexType_Type_PLAYER;
+  static const Type ADMIN = IndexType_Type_ADMIN;
+  static const Type SESSION = IndexType_Type_SESSION;
   static inline bool Type_IsValid(int value) {
     return IndexType_Type_IsValid(value);
   }
@@ -376,7 +372,7 @@ class IndexType : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // @@protoc_insertion_point(class_scope:chat.IndexType)
+  // @@protoc_insertion_point(class_scope:tictactoe.IndexType)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
@@ -410,23 +406,23 @@ class IndexType : public ::google::protobuf::Message {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace chat
+}  // namespace tictactoe
 
 #ifndef SWIG
 namespace google {
 namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::chat::EntityType_Type>() {
-  return ::chat::EntityType_Type_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::tictactoe::EntityType_Type>() {
+  return ::tictactoe::EntityType_Type_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::chat::RelationType_Type>() {
-  return ::chat::RelationType_Type_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::tictactoe::RelationType_Type>() {
+  return ::tictactoe::RelationType_Type_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::chat::IndexType_Type>() {
-  return ::chat::IndexType_Type_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::tictactoe::IndexType_Type>() {
+  return ::tictactoe::IndexType_Type_descriptor();
 }
 
 }  // namespace google
