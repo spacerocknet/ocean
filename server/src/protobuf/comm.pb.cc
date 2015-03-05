@@ -362,12 +362,12 @@ void protobuf_AddDesc_comm_2eproto() {
     "(\005*s\n\013ServiceType\022\022\n\016CREATE_SESSION\020d\022\020\n"
     "\014JOIN_SESSION\020e\022\021\n\rLEAVE_SESSION\020f\022\016\n\nST"
     "ART_GAME\020g\022\014\n\010END_GAME\020h\022\r\n\010TTT_MOVE\020\310\001*"
-    "\274\001\n\tErrorType\022\006\n\002OK\020\000\022\023\n\017INVALID_REQUEST"
-    "\020\002\022\022\n\016ENTITY_INVALID\020\003\022\024\n\020ENTITY_NOT_FOU"
-    "ND\020\004\022\020\n\014NAME_INVALID\020\005\022\021\n\rEMAIL_INVALID\020"
-    "\006\022\024\n\020PASSWORD_INVALID\020\007\022\024\n\020EMAIL_DUPLICA"
-    "TED\020\010\022\027\n\023USERNAME_DUPLICATED\020\t*\031\n\010GameTy"
-    "pe\022\r\n\tTICTACTOE\020\001", 1057);
+    "\255\001\n\tErrorType\022\006\n\002OK\020\000\022\014\n\010DB_ERROR\020\001\022\023\n\017I"
+    "NVALID_REQUEST\020\002\022\022\n\016ENTITY_INVALID\020\003\022\024\n\020"
+    "ENTITY_NOT_FOUND\020\004\022\017\n\013UID_INVALID\020\005\022\020\n\014C"
+    "OMMIT_ERROR\020\006\022\024\n\020PASSWORD_INVALID\020\007\022\022\n\016U"
+    "ID_DUPLICATED\020\t*\031\n\010GameType\022\r\n\tTICTACTOE"
+    "\020\001", 1042);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "comm.proto", &protobuf_RegisterTypes);
   SigninRequest::default_instance_ = new SigninRequest();
@@ -428,13 +428,13 @@ const ::google::protobuf::EnumDescriptor* ErrorType_descriptor() {
 bool ErrorType_IsValid(int value) {
   switch(value) {
     case 0:
+    case 1:
     case 2:
     case 3:
     case 4:
     case 5:
     case 6:
     case 7:
-    case 8:
     case 9:
       return true;
     default:

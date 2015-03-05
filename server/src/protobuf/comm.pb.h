@@ -72,18 +72,18 @@ inline bool ServiceType_Parse(
 }
 enum ErrorType {
   OK = 0,
+  DB_ERROR = 1,
   INVALID_REQUEST = 2,
   ENTITY_INVALID = 3,
   ENTITY_NOT_FOUND = 4,
-  NAME_INVALID = 5,
-  EMAIL_INVALID = 6,
+  UID_INVALID = 5,
+  COMMIT_ERROR = 6,
   PASSWORD_INVALID = 7,
-  EMAIL_DUPLICATED = 8,
-  USERNAME_DUPLICATED = 9
+  UID_DUPLICATED = 9
 };
 bool ErrorType_IsValid(int value);
 const ErrorType ErrorType_MIN = OK;
-const ErrorType ErrorType_MAX = USERNAME_DUPLICATED;
+const ErrorType ErrorType_MAX = UID_DUPLICATED;
 const int ErrorType_ARRAYSIZE = ErrorType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ErrorType_descriptor();
