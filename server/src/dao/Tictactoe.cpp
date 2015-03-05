@@ -35,7 +35,7 @@ void DAO::ttt_join(string player_id, string ttt_id)
 {
 	auto p = get_entity(player_id, EntityType::PLAYER);
 	model::Entity t;
-	if (db->index_get(IndexType::TICTACTOE,ttt_id,t)!=db::OK)  throw EXCEPTION(comm::ErrorType::ENTITY_INVALID);
+	if (db->index_get(IndexType::TICTACTOE, ttt_id, t) != db::OK) throw EXCEPTION(comm::ErrorType::ENTITY_INVALID);
 	/* check if player is creator */
 	/* update Tictactoe data */
 	/* remove Tictactoe index */

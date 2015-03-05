@@ -9,6 +9,8 @@ enum ServiceType
 	TICTACTOE_CREATE = 200;
 	TICTACTOE_JOIN = 201;
 	TICTACTOE_MOVE = 202;
+	TICTACTOE_LIST = 203;
+	TICTACTOE_LEAVE = 203;
 }
 
 /* error type */
@@ -55,6 +57,7 @@ message TictactoeCreateReply
 message TictactoeJoinRequest
 {
 	required string auth = 1;
+	required string session_id = 2;
 }
 
 message TictactoeJoinReply
@@ -84,10 +87,22 @@ message TictactoeListReply
 /* LEAVE_SESSION */
 message TictactoeLeaveRequest
 {
-
+	required string player_id = 1;
+	required string session_id = 2;
 }
 
-message LeaveSessionReply
+message TictactoeLeavenReply
+{
+	required int32 type = 1;
+}
+
+message TictactoeMoveRequest
+{
+	required string auth = 1;
+	required string session_id = 2;
+}
+
+message TictactoeMoveReply
 {
 	required int32 type = 1;
 }

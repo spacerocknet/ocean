@@ -47,9 +47,15 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* TictactoeLeaveRequest_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   TictactoeLeaveRequest_reflection_ = NULL;
-const ::google::protobuf::Descriptor* LeaveSessionReply_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* TictactoeLeavenReply_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  LeaveSessionReply_reflection_ = NULL;
+  TictactoeLeavenReply_reflection_ = NULL;
+const ::google::protobuf::Descriptor* TictactoeMoveRequest_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  TictactoeMoveRequest_reflection_ = NULL;
+const ::google::protobuf::Descriptor* TictactoeMoveReply_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  TictactoeMoveReply_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* ServiceType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ErrorType_descriptor_ = NULL;
 
@@ -127,8 +133,9 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(TictactoeCreateReply));
   TictactoeJoinRequest_descriptor_ = file->message_type(4);
-  static const int TictactoeJoinRequest_offsets_[1] = {
+  static const int TictactoeJoinRequest_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TictactoeJoinRequest, auth_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TictactoeJoinRequest, session_id_),
   };
   TictactoeJoinRequest_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -195,7 +202,9 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(TictactoeListReply));
   TictactoeLeaveRequest_descriptor_ = file->message_type(8);
-  static const int TictactoeLeaveRequest_offsets_[1] = {
+  static const int TictactoeLeaveRequest_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TictactoeLeaveRequest, player_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TictactoeLeaveRequest, session_id_),
   };
   TictactoeLeaveRequest_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -208,21 +217,52 @@ void protobuf_AssignDesc_comm_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(TictactoeLeaveRequest));
-  LeaveSessionReply_descriptor_ = file->message_type(9);
-  static const int LeaveSessionReply_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LeaveSessionReply, type_),
+  TictactoeLeavenReply_descriptor_ = file->message_type(9);
+  static const int TictactoeLeavenReply_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TictactoeLeavenReply, type_),
   };
-  LeaveSessionReply_reflection_ =
+  TictactoeLeavenReply_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      LeaveSessionReply_descriptor_,
-      LeaveSessionReply::default_instance_,
-      LeaveSessionReply_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LeaveSessionReply, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LeaveSessionReply, _unknown_fields_),
+      TictactoeLeavenReply_descriptor_,
+      TictactoeLeavenReply::default_instance_,
+      TictactoeLeavenReply_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TictactoeLeavenReply, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TictactoeLeavenReply, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(LeaveSessionReply));
+      sizeof(TictactoeLeavenReply));
+  TictactoeMoveRequest_descriptor_ = file->message_type(10);
+  static const int TictactoeMoveRequest_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TictactoeMoveRequest, auth_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TictactoeMoveRequest, session_id_),
+  };
+  TictactoeMoveRequest_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      TictactoeMoveRequest_descriptor_,
+      TictactoeMoveRequest::default_instance_,
+      TictactoeMoveRequest_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TictactoeMoveRequest, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TictactoeMoveRequest, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(TictactoeMoveRequest));
+  TictactoeMoveReply_descriptor_ = file->message_type(11);
+  static const int TictactoeMoveReply_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TictactoeMoveReply, type_),
+  };
+  TictactoeMoveReply_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      TictactoeMoveReply_descriptor_,
+      TictactoeMoveReply::default_instance_,
+      TictactoeMoveReply_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TictactoeMoveReply, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TictactoeMoveReply, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(TictactoeMoveReply));
   ServiceType_descriptor_ = file->enum_type(0);
   ErrorType_descriptor_ = file->enum_type(1);
 }
@@ -256,7 +296,11 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     TictactoeLeaveRequest_descriptor_, &TictactoeLeaveRequest::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    LeaveSessionReply_descriptor_, &LeaveSessionReply::default_instance());
+    TictactoeLeavenReply_descriptor_, &TictactoeLeavenReply::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    TictactoeMoveRequest_descriptor_, &TictactoeMoveRequest::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    TictactoeMoveReply_descriptor_, &TictactoeMoveReply::default_instance());
 }
 
 }  // namespace
@@ -280,8 +324,12 @@ void protobuf_ShutdownFile_comm_2eproto() {
   delete TictactoeListReply_reflection_;
   delete TictactoeLeaveRequest::default_instance_;
   delete TictactoeLeaveRequest_reflection_;
-  delete LeaveSessionReply::default_instance_;
-  delete LeaveSessionReply_reflection_;
+  delete TictactoeLeavenReply::default_instance_;
+  delete TictactoeLeavenReply_reflection_;
+  delete TictactoeMoveRequest::default_instance_;
+  delete TictactoeMoveRequest_reflection_;
+  delete TictactoeMoveReply::default_instance_;
+  delete TictactoeMoveReply_reflection_;
 }
 
 void protobuf_AddDesc_comm_2eproto() {
@@ -296,23 +344,28 @@ void protobuf_AddDesc_comm_2eproto() {
     "y\022\014\n\004type\030\001 \002(\005\022\014\n\004auth\030\002 \002(\t\"&\n\026Tictact"
     "oeCreateRequest\022\014\n\004auth\030\001 \002(\t\"D\n\024Tictact"
     "oeCreateReply\022\014\n\004type\030\001 \002(\005\022\022\n\nsession_i"
-    "d\030\002 \002(\t\022\n\n\002ip\030\003 \002(\t\"$\n\024TictactoeJoinRequ"
-    "est\022\014\n\004auth\030\001 \002(\t\"d\n\022TictactoeJoinReply\022"
-    "\014\n\004type\030\001 \002(\005\022\022\n\ncreator_id\030\002 \002(\t\022\024\n\014cre"
-    "ator_name\030\003 \002(\t\022\026\n\016creator_avatar\030\004 \001(\t\""
-    "3\n\024TictactoeListRequest\022\014\n\004auth\030\001 \002(\t\022\r\n"
-    "\005count\030\002 \001(\r\"p\n\022TictactoeListReply\022\014\n\004ty"
-    "pe\030\001 \002(\005\022\022\n\ncreator_id\030\002 \002(\t\022\024\n\014creator_"
-    "name\030\003 \002(\t\022\026\n\016creator_avatar\030\004 \001(\t\022\n\n\002ip"
-    "\030\005 \002(\t\"\027\n\025TictactoeLeaveRequest\"!\n\021Leave"
-    "SessionReply\022\014\n\004type\030\001 \002(\005*g\n\013ServiceTyp"
-    "e\022\n\n\006SIGNIN\020d\022\013\n\007SIGNOUT\020e\022\025\n\020TICTACTOE_"
-    "CREATE\020\310\001\022\023\n\016TICTACTOE_JOIN\020\311\001\022\023\n\016TICTAC"
-    "TOE_MOVE\020\312\001*\255\001\n\tErrorType\022\006\n\002OK\020\000\022\014\n\010DB_"
+    "d\030\002 \002(\t\022\n\n\002ip\030\003 \002(\t\"8\n\024TictactoeJoinRequ"
+    "est\022\014\n\004auth\030\001 \002(\t\022\022\n\nsession_id\030\002 \002(\t\"d\n"
+    "\022TictactoeJoinReply\022\014\n\004type\030\001 \002(\005\022\022\n\ncre"
+    "ator_id\030\002 \002(\t\022\024\n\014creator_name\030\003 \002(\t\022\026\n\016c"
+    "reator_avatar\030\004 \001(\t\"3\n\024TictactoeListRequ"
+    "est\022\014\n\004auth\030\001 \002(\t\022\r\n\005count\030\002 \001(\r\"p\n\022Tict"
+    "actoeListReply\022\014\n\004type\030\001 \002(\005\022\022\n\ncreator_"
+    "id\030\002 \002(\t\022\024\n\014creator_name\030\003 \002(\t\022\026\n\016creato"
+    "r_avatar\030\004 \001(\t\022\n\n\002ip\030\005 \002(\t\">\n\025TictactoeL"
+    "eaveRequest\022\021\n\tplayer_id\030\001 \002(\t\022\022\n\nsessio"
+    "n_id\030\002 \002(\t\"$\n\024TictactoeLeavenReply\022\014\n\004ty"
+    "pe\030\001 \002(\005\"8\n\024TictactoeMoveRequest\022\014\n\004auth"
+    "\030\001 \002(\t\022\022\n\nsession_id\030\002 \002(\t\"\"\n\022TictactoeM"
+    "oveReply\022\014\n\004type\030\001 \002(\005*\222\001\n\013ServiceType\022\n"
+    "\n\006SIGNIN\020d\022\013\n\007SIGNOUT\020e\022\025\n\020TICTACTOE_CRE"
+    "ATE\020\310\001\022\023\n\016TICTACTOE_JOIN\020\311\001\022\023\n\016TICTACTOE"
+    "_MOVE\020\312\001\022\023\n\016TICTACTOE_LIST\020\313\001\022\024\n\017TICTACT"
+    "OE_LEAVE\020\313\001*\255\001\n\tErrorType\022\006\n\002OK\020\000\022\014\n\010DB_"
     "ERROR\020\001\022\023\n\017INVALID_REQUEST\020\002\022\022\n\016ENTITY_I"
     "NVALID\020\003\022\024\n\020ENTITY_NOT_FOUND\020\004\022\017\n\013UID_IN"
     "VALID\020\005\022\020\n\014COMMIT_ERROR\020\006\022\024\n\020PASSWORD_IN"
-    "VALID\020\007\022\022\n\016UID_DUPLICATED\020\t", 867);
+    "VALID\020\007\022\022\n\016UID_DUPLICATED\020\t", 1067);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "comm.proto", &protobuf_RegisterTypes);
   SigninRequest::default_instance_ = new SigninRequest();
@@ -324,7 +377,9 @@ void protobuf_AddDesc_comm_2eproto() {
   TictactoeListRequest::default_instance_ = new TictactoeListRequest();
   TictactoeListReply::default_instance_ = new TictactoeListReply();
   TictactoeLeaveRequest::default_instance_ = new TictactoeLeaveRequest();
-  LeaveSessionReply::default_instance_ = new LeaveSessionReply();
+  TictactoeLeavenReply::default_instance_ = new TictactoeLeavenReply();
+  TictactoeMoveRequest::default_instance_ = new TictactoeMoveRequest();
+  TictactoeMoveReply::default_instance_ = new TictactoeMoveReply();
   SigninRequest::default_instance_->InitAsDefaultInstance();
   SigninReply::default_instance_->InitAsDefaultInstance();
   TictactoeCreateRequest::default_instance_->InitAsDefaultInstance();
@@ -334,7 +389,9 @@ void protobuf_AddDesc_comm_2eproto() {
   TictactoeListRequest::default_instance_->InitAsDefaultInstance();
   TictactoeListReply::default_instance_->InitAsDefaultInstance();
   TictactoeLeaveRequest::default_instance_->InitAsDefaultInstance();
-  LeaveSessionReply::default_instance_->InitAsDefaultInstance();
+  TictactoeLeavenReply::default_instance_->InitAsDefaultInstance();
+  TictactoeMoveRequest::default_instance_->InitAsDefaultInstance();
+  TictactoeMoveReply::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_comm_2eproto);
 }
 
@@ -355,6 +412,7 @@ bool ServiceType_IsValid(int value) {
     case 200:
     case 201:
     case 202:
+    case 203:
       return true;
     default:
       return false;
@@ -1485,6 +1543,7 @@ void TictactoeCreateReply::Swap(TictactoeCreateReply* other) {
 
 #ifndef _MSC_VER
 const int TictactoeJoinRequest::kAuthFieldNumber;
+const int TictactoeJoinRequest::kSessionIdFieldNumber;
 #endif  // !_MSC_VER
 
 TictactoeJoinRequest::TictactoeJoinRequest()
@@ -1504,6 +1563,7 @@ TictactoeJoinRequest::TictactoeJoinRequest(const TictactoeJoinRequest& from)
 void TictactoeJoinRequest::SharedCtor() {
   _cached_size_ = 0;
   auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  session_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1514,6 +1574,9 @@ TictactoeJoinRequest::~TictactoeJoinRequest() {
 void TictactoeJoinRequest::SharedDtor() {
   if (auth_ != &::google::protobuf::internal::kEmptyString) {
     delete auth_;
+  }
+  if (session_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete session_id_;
   }
   if (this != default_instance_) {
   }
@@ -1547,6 +1610,11 @@ void TictactoeJoinRequest::Clear() {
         auth_->clear();
       }
     }
+    if (has_session_id()) {
+      if (session_id_ != &::google::protobuf::internal::kEmptyString) {
+        session_id_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -1566,6 +1634,23 @@ bool TictactoeJoinRequest::MergePartialFromCodedStream(
                 input, this->mutable_auth()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
             this->auth().data(), this->auth().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_session_id;
+        break;
+      }
+
+      // required string session_id = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_session_id:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_session_id()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->session_id().data(), this->session_id().length(),
             ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
@@ -1601,6 +1686,15 @@ void TictactoeJoinRequest::SerializeWithCachedSizes(
       1, this->auth(), output);
   }
 
+  // required string session_id = 2;
+  if (has_session_id()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->session_id().data(), this->session_id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->session_id(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -1619,6 +1713,16 @@ void TictactoeJoinRequest::SerializeWithCachedSizes(
         1, this->auth(), target);
   }
 
+  // required string session_id = 2;
+  if (has_session_id()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->session_id().data(), this->session_id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->session_id(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -1635,6 +1739,13 @@ int TictactoeJoinRequest::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->auth());
+    }
+
+    // required string session_id = 2;
+    if (has_session_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->session_id());
     }
 
   }
@@ -1667,6 +1778,9 @@ void TictactoeJoinRequest::MergeFrom(const TictactoeJoinRequest& from) {
     if (from.has_auth()) {
       set_auth(from.auth());
     }
+    if (from.has_session_id()) {
+      set_session_id(from.session_id());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -1684,7 +1798,7 @@ void TictactoeJoinRequest::CopyFrom(const TictactoeJoinRequest& from) {
 }
 
 bool TictactoeJoinRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
@@ -1692,6 +1806,7 @@ bool TictactoeJoinRequest::IsInitialized() const {
 void TictactoeJoinRequest::Swap(TictactoeJoinRequest* other) {
   if (other != this) {
     std::swap(auth_, other->auth_);
+    std::swap(session_id_, other->session_id_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -2793,6 +2908,8 @@ void TictactoeListReply::Swap(TictactoeListReply* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int TictactoeLeaveRequest::kPlayerIdFieldNumber;
+const int TictactoeLeaveRequest::kSessionIdFieldNumber;
 #endif  // !_MSC_VER
 
 TictactoeLeaveRequest::TictactoeLeaveRequest()
@@ -2811,6 +2928,8 @@ TictactoeLeaveRequest::TictactoeLeaveRequest(const TictactoeLeaveRequest& from)
 
 void TictactoeLeaveRequest::SharedCtor() {
   _cached_size_ = 0;
+  player_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  session_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -2819,6 +2938,12 @@ TictactoeLeaveRequest::~TictactoeLeaveRequest() {
 }
 
 void TictactoeLeaveRequest::SharedDtor() {
+  if (player_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete player_id_;
+  }
+  if (session_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete session_id_;
+  }
   if (this != default_instance_) {
   }
 }
@@ -2845,6 +2970,18 @@ TictactoeLeaveRequest* TictactoeLeaveRequest::New() const {
 }
 
 void TictactoeLeaveRequest::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_player_id()) {
+      if (player_id_ != &::google::protobuf::internal::kEmptyString) {
+        player_id_->clear();
+      }
+    }
+    if (has_session_id()) {
+      if (session_id_ != &::google::protobuf::internal::kEmptyString) {
+        session_id_->clear();
+      }
+    }
+  }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -2854,12 +2991,51 @@ bool TictactoeLeaveRequest::MergePartialFromCodedStream(
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
-    if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-      return true;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required string player_id = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_player_id()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->player_id().data(), this->player_id().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_session_id;
+        break;
+      }
+
+      // required string session_id = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_session_id:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_session_id()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->session_id().data(), this->session_id().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
     }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, mutable_unknown_fields()));
   }
   return true;
 #undef DO_
@@ -2867,6 +3043,24 @@ bool TictactoeLeaveRequest::MergePartialFromCodedStream(
 
 void TictactoeLeaveRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // required string player_id = 1;
+  if (has_player_id()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->player_id().data(), this->player_id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      1, this->player_id(), output);
+  }
+
+  // required string session_id = 2;
+  if (has_session_id()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->session_id().data(), this->session_id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->session_id(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -2875,6 +3069,26 @@ void TictactoeLeaveRequest::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* TictactoeLeaveRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // required string player_id = 1;
+  if (has_player_id()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->player_id().data(), this->player_id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->player_id(), target);
+  }
+
+  // required string session_id = 2;
+  if (has_session_id()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->session_id().data(), this->session_id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->session_id(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -2885,6 +3099,22 @@ void TictactoeLeaveRequest::SerializeWithCachedSizes(
 int TictactoeLeaveRequest::ByteSize() const {
   int total_size = 0;
 
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required string player_id = 1;
+    if (has_player_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->player_id());
+    }
+
+    // required string session_id = 2;
+    if (has_session_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->session_id());
+    }
+
+  }
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -2910,6 +3140,14 @@ void TictactoeLeaveRequest::MergeFrom(const ::google::protobuf::Message& from) {
 
 void TictactoeLeaveRequest::MergeFrom(const TictactoeLeaveRequest& from) {
   GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_player_id()) {
+      set_player_id(from.player_id());
+    }
+    if (from.has_session_id()) {
+      set_session_id(from.session_id());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -2926,12 +3164,16 @@ void TictactoeLeaveRequest::CopyFrom(const TictactoeLeaveRequest& from) {
 }
 
 bool TictactoeLeaveRequest::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
 
 void TictactoeLeaveRequest::Swap(TictactoeLeaveRequest* other) {
   if (other != this) {
+    std::swap(player_id_, other->player_id_);
+    std::swap(session_id_, other->session_id_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
@@ -2949,60 +3191,60 @@ void TictactoeLeaveRequest::Swap(TictactoeLeaveRequest* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int LeaveSessionReply::kTypeFieldNumber;
+const int TictactoeLeavenReply::kTypeFieldNumber;
 #endif  // !_MSC_VER
 
-LeaveSessionReply::LeaveSessionReply()
+TictactoeLeavenReply::TictactoeLeavenReply()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void LeaveSessionReply::InitAsDefaultInstance() {
+void TictactoeLeavenReply::InitAsDefaultInstance() {
 }
 
-LeaveSessionReply::LeaveSessionReply(const LeaveSessionReply& from)
+TictactoeLeavenReply::TictactoeLeavenReply(const TictactoeLeavenReply& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void LeaveSessionReply::SharedCtor() {
+void TictactoeLeavenReply::SharedCtor() {
   _cached_size_ = 0;
   type_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-LeaveSessionReply::~LeaveSessionReply() {
+TictactoeLeavenReply::~TictactoeLeavenReply() {
   SharedDtor();
 }
 
-void LeaveSessionReply::SharedDtor() {
+void TictactoeLeavenReply::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-void LeaveSessionReply::SetCachedSize(int size) const {
+void TictactoeLeavenReply::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* LeaveSessionReply::descriptor() {
+const ::google::protobuf::Descriptor* TictactoeLeavenReply::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return LeaveSessionReply_descriptor_;
+  return TictactoeLeavenReply_descriptor_;
 }
 
-const LeaveSessionReply& LeaveSessionReply::default_instance() {
+const TictactoeLeavenReply& TictactoeLeavenReply::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_comm_2eproto();
   return *default_instance_;
 }
 
-LeaveSessionReply* LeaveSessionReply::default_instance_ = NULL;
+TictactoeLeavenReply* TictactoeLeavenReply::default_instance_ = NULL;
 
-LeaveSessionReply* LeaveSessionReply::New() const {
-  return new LeaveSessionReply;
+TictactoeLeavenReply* TictactoeLeavenReply::New() const {
+  return new TictactoeLeavenReply;
 }
 
-void LeaveSessionReply::Clear() {
+void TictactoeLeavenReply::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     type_ = 0;
   }
@@ -3010,7 +3252,7 @@ void LeaveSessionReply::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool LeaveSessionReply::MergePartialFromCodedStream(
+bool TictactoeLeavenReply::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
@@ -3047,7 +3289,7 @@ bool LeaveSessionReply::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void LeaveSessionReply::SerializeWithCachedSizes(
+void TictactoeLeavenReply::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required int32 type = 1;
   if (has_type()) {
@@ -3060,7 +3302,7 @@ void LeaveSessionReply::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* LeaveSessionReply::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* TictactoeLeavenReply::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // required int32 type = 1;
   if (has_type()) {
@@ -3074,7 +3316,7 @@ void LeaveSessionReply::SerializeWithCachedSizes(
   return target;
 }
 
-int LeaveSessionReply::ByteSize() const {
+int TictactoeLeavenReply::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -3097,10 +3339,10 @@ int LeaveSessionReply::ByteSize() const {
   return total_size;
 }
 
-void LeaveSessionReply::MergeFrom(const ::google::protobuf::Message& from) {
+void TictactoeLeavenReply::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const LeaveSessionReply* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const LeaveSessionReply*>(
+  const TictactoeLeavenReply* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const TictactoeLeavenReply*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -3109,7 +3351,7 @@ void LeaveSessionReply::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void LeaveSessionReply::MergeFrom(const LeaveSessionReply& from) {
+void TictactoeLeavenReply::MergeFrom(const TictactoeLeavenReply& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_type()) {
@@ -3119,25 +3361,25 @@ void LeaveSessionReply::MergeFrom(const LeaveSessionReply& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void LeaveSessionReply::CopyFrom(const ::google::protobuf::Message& from) {
+void TictactoeLeavenReply::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void LeaveSessionReply::CopyFrom(const LeaveSessionReply& from) {
+void TictactoeLeavenReply::CopyFrom(const TictactoeLeavenReply& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool LeaveSessionReply::IsInitialized() const {
+bool TictactoeLeavenReply::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
 
-void LeaveSessionReply::Swap(LeaveSessionReply* other) {
+void TictactoeLeavenReply::Swap(TictactoeLeavenReply* other) {
   if (other != this) {
     std::swap(type_, other->type_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -3146,11 +3388,503 @@ void LeaveSessionReply::Swap(LeaveSessionReply* other) {
   }
 }
 
-::google::protobuf::Metadata LeaveSessionReply::GetMetadata() const {
+::google::protobuf::Metadata TictactoeLeavenReply::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = LeaveSessionReply_descriptor_;
-  metadata.reflection = LeaveSessionReply_reflection_;
+  metadata.descriptor = TictactoeLeavenReply_descriptor_;
+  metadata.reflection = TictactoeLeavenReply_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int TictactoeMoveRequest::kAuthFieldNumber;
+const int TictactoeMoveRequest::kSessionIdFieldNumber;
+#endif  // !_MSC_VER
+
+TictactoeMoveRequest::TictactoeMoveRequest()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void TictactoeMoveRequest::InitAsDefaultInstance() {
+}
+
+TictactoeMoveRequest::TictactoeMoveRequest(const TictactoeMoveRequest& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void TictactoeMoveRequest::SharedCtor() {
+  _cached_size_ = 0;
+  auth_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  session_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+TictactoeMoveRequest::~TictactoeMoveRequest() {
+  SharedDtor();
+}
+
+void TictactoeMoveRequest::SharedDtor() {
+  if (auth_ != &::google::protobuf::internal::kEmptyString) {
+    delete auth_;
+  }
+  if (session_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete session_id_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void TictactoeMoveRequest::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* TictactoeMoveRequest::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return TictactoeMoveRequest_descriptor_;
+}
+
+const TictactoeMoveRequest& TictactoeMoveRequest::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_comm_2eproto();
+  return *default_instance_;
+}
+
+TictactoeMoveRequest* TictactoeMoveRequest::default_instance_ = NULL;
+
+TictactoeMoveRequest* TictactoeMoveRequest::New() const {
+  return new TictactoeMoveRequest;
+}
+
+void TictactoeMoveRequest::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_auth()) {
+      if (auth_ != &::google::protobuf::internal::kEmptyString) {
+        auth_->clear();
+      }
+    }
+    if (has_session_id()) {
+      if (session_id_ != &::google::protobuf::internal::kEmptyString) {
+        session_id_->clear();
+      }
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool TictactoeMoveRequest::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required string auth = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_auth()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->auth().data(), this->auth().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_session_id;
+        break;
+      }
+
+      // required string session_id = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_session_id:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_session_id()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->session_id().data(), this->session_id().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void TictactoeMoveRequest::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required string auth = 1;
+  if (has_auth()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->auth().data(), this->auth().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      1, this->auth(), output);
+  }
+
+  // required string session_id = 2;
+  if (has_session_id()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->session_id().data(), this->session_id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->session_id(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* TictactoeMoveRequest::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required string auth = 1;
+  if (has_auth()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->auth().data(), this->auth().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->auth(), target);
+  }
+
+  // required string session_id = 2;
+  if (has_session_id()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->session_id().data(), this->session_id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->session_id(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int TictactoeMoveRequest::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required string auth = 1;
+    if (has_auth()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->auth());
+    }
+
+    // required string session_id = 2;
+    if (has_session_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->session_id());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void TictactoeMoveRequest::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const TictactoeMoveRequest* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const TictactoeMoveRequest*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void TictactoeMoveRequest::MergeFrom(const TictactoeMoveRequest& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_auth()) {
+      set_auth(from.auth());
+    }
+    if (from.has_session_id()) {
+      set_session_id(from.session_id());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void TictactoeMoveRequest::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void TictactoeMoveRequest::CopyFrom(const TictactoeMoveRequest& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool TictactoeMoveRequest::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void TictactoeMoveRequest::Swap(TictactoeMoveRequest* other) {
+  if (other != this) {
+    std::swap(auth_, other->auth_);
+    std::swap(session_id_, other->session_id_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata TictactoeMoveRequest::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = TictactoeMoveRequest_descriptor_;
+  metadata.reflection = TictactoeMoveRequest_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int TictactoeMoveReply::kTypeFieldNumber;
+#endif  // !_MSC_VER
+
+TictactoeMoveReply::TictactoeMoveReply()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void TictactoeMoveReply::InitAsDefaultInstance() {
+}
+
+TictactoeMoveReply::TictactoeMoveReply(const TictactoeMoveReply& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void TictactoeMoveReply::SharedCtor() {
+  _cached_size_ = 0;
+  type_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+TictactoeMoveReply::~TictactoeMoveReply() {
+  SharedDtor();
+}
+
+void TictactoeMoveReply::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void TictactoeMoveReply::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* TictactoeMoveReply::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return TictactoeMoveReply_descriptor_;
+}
+
+const TictactoeMoveReply& TictactoeMoveReply::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_comm_2eproto();
+  return *default_instance_;
+}
+
+TictactoeMoveReply* TictactoeMoveReply::default_instance_ = NULL;
+
+TictactoeMoveReply* TictactoeMoveReply::New() const {
+  return new TictactoeMoveReply;
+}
+
+void TictactoeMoveReply::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    type_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool TictactoeMoveReply::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 type = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &type_)));
+          set_has_type();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void TictactoeMoveReply::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 type = 1;
+  if (has_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->type(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* TictactoeMoveReply::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int32 type = 1;
+  if (has_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->type(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int TictactoeMoveReply::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 type = 1;
+    if (has_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->type());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void TictactoeMoveReply::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const TictactoeMoveReply* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const TictactoeMoveReply*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void TictactoeMoveReply::MergeFrom(const TictactoeMoveReply& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_type()) {
+      set_type(from.type());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void TictactoeMoveReply::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void TictactoeMoveReply::CopyFrom(const TictactoeMoveReply& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool TictactoeMoveReply::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void TictactoeMoveReply::Swap(TictactoeMoveReply* other) {
+  if (other != this) {
+    std::swap(type_, other->type_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata TictactoeMoveReply::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = TictactoeMoveReply_descriptor_;
+  metadata.reflection = TictactoeMoveReply_reflection_;
   return metadata;
 }
 

@@ -13,9 +13,10 @@
 using namespace comm;
 
 
-//HTTP_SERVICE_DEC(HelloService,comm::Service::HELLO, comm::HelloRequest, comm::HelloReply);
-//HTTP_SERVICE_DEC(CreateSessionService,ServiceType::CREATE_SESSION, CreateSessionRequest, CreateSessionReply);
-//TCP_SERVICE_DEC(JoinSessionService,ServiceType::JOIN_SESSION, JoinSessionRequest, JoinSessionReply);
-//TCP_SERVICE_DEC(PingPongService,comm::Service::PINGPONG, comm::PingpongRequest, comm::PingpongReply);
+HTTP_SERVICE_DEC(TictactoeCreateService,ServiceType::TICTACTOE_CREATE, TictactoeCreateRequest, TictactoeCreateReply);
+HTTP_SERVICE_DEC(TictactoeJoinService,ServiceType::TICTACTOE_JOIN, TictactoeJoinRequest, TictactoeJoinReply);
+HTTP_SERVICE_DEC(TictactoeMoveService,ServiceType::TICTACTOE_MOVE, TictactoeMoveRequest, TictactoeMoveReply);
+HTTP_SERVICE_DEC(TictactoeListService,ServiceType::TICTACTOE_LIST, TictactoeListRequest, TictactoeListReply);
+
 
 #endif /* SERVICES_H_ */
