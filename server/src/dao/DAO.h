@@ -58,6 +58,7 @@ public:
 
 	/*TICTACTOE*/
 	entity_ptr ttt_create(string player_id);
+	entity_ptr ttt_load(string ttt_id);
 	void ttt_join(string player_id, string ttt_id);
 	void ttt_list(list<entity_ptr>& list);
 	void ttt_move(string player, string session,int row, int col, int value);

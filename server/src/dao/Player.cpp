@@ -37,7 +37,6 @@ entity_ptr DAO::create_player(Player& data)
 	u->set_type(EntityType::PLAYER);
 	u->MutableExtension(Player::PLAYER)->CopyFrom(data);
 	trans.en_add(*u.get());
-
 	trans.index_set(IndexType::PLAYER, data.email(), u->id());
 	if (!trans.commit(true)) throw EXCEPTION(ErrorType::COMMIT_ERROR);
 	return u;
