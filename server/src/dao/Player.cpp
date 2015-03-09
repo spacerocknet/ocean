@@ -9,12 +9,12 @@
 using namespace comm;
 
 
-entity_ptr DAO::get_player(string uid)
+entity_ptr DAO::get_player(string email)
 {
 	entity_ptr ret = boost::make_shared<model::Entity>();
-	int r = db->index_get(IndexType::PLAYER, uid, *ret.get());
+	int r = db->index_get(IndexType::PLAYER, email, *ret.get());
 
-	/* Check if index existed */
+	/* check if index existed */
 	if (r == db::OK)
 	{
 		if (ret->type() != EntityType::PLAYER) throw EXCEPTION(ErrorType::ENTITY_INVALID);

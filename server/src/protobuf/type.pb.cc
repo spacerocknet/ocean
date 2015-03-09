@@ -128,9 +128,9 @@ void protobuf_AddDesc_type_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\ntype.proto\022\005ocean\032\013model.proto\"/\n\nEnti"
     "tyType\"!\n\004Type\022\n\n\006PLAYER\020\001\022\r\n\tTICTACTOE\020"
-    "\002\"&\n\014RelationType\"\026\n\004Type\022\016\n\nHAS_PLAYER\020"
-    "\006\".\n\tIndexType\"!\n\004Type\022\n\n\006PLAYER\020\001\022\r\n\tTI"
-    "CTACTOE\020\002", 169);
+    "\002\")\n\014RelationType\"\031\n\004Type\022\021\n\rHAS_TICTACT"
+    "OE\020\006\".\n\tIndexType\"!\n\004Type\022\n\n\006PLAYER\020\001\022\r\n"
+    "\tTICTACTOE\020\002", 172);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "type.proto", &protobuf_RegisterTypes);
   EntityType::default_instance_ = new EntityType();
@@ -342,7 +342,7 @@ bool RelationType_Type_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
-const RelationType_Type RelationType::HAS_PLAYER;
+const RelationType_Type RelationType::HAS_TICTACTOE;
 const RelationType_Type RelationType::Type_MIN;
 const RelationType_Type RelationType::Type_MAX;
 const int RelationType::Type_ARRAYSIZE;

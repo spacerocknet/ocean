@@ -361,11 +361,12 @@ void protobuf_AddDesc_comm_2eproto() {
     "\n\006SIGNIN\020d\022\013\n\007SIGNOUT\020e\022\025\n\020TICTACTOE_CRE"
     "ATE\020\310\001\022\023\n\016TICTACTOE_JOIN\020\311\001\022\023\n\016TICTACTOE"
     "_MOVE\020\312\001\022\023\n\016TICTACTOE_LIST\020\313\001\022\024\n\017TICTACT"
-    "OE_LEAVE\020\313\001*\255\001\n\tErrorType\022\006\n\002OK\020\000\022\014\n\010DB_"
+    "OE_LEAVE\020\313\001*\301\001\n\tErrorType\022\006\n\002OK\020\000\022\014\n\010DB_"
     "ERROR\020\001\022\023\n\017INVALID_REQUEST\020\002\022\022\n\016ENTITY_I"
     "NVALID\020\003\022\024\n\020ENTITY_NOT_FOUND\020\004\022\017\n\013UID_IN"
     "VALID\020\005\022\020\n\014COMMIT_ERROR\020\006\022\024\n\020PASSWORD_IN"
-    "VALID\020\007\022\022\n\016UID_DUPLICATED\020\t", 1067);
+    "VALID\020\007\022\022\n\016UID_DUPLICATED\020\t\022\022\n\016INVALID_P"
+    "LAYER\020\n", 1087);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "comm.proto", &protobuf_RegisterTypes);
   SigninRequest::default_instance_ = new SigninRequest();
@@ -434,6 +435,7 @@ bool ErrorType_IsValid(int value) {
     case 6:
     case 7:
     case 9:
+    case 10:
       return true;
     default:
       return false;

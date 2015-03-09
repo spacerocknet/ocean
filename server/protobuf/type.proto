@@ -16,7 +16,7 @@ message RelationType
 {
 	enum Type
 	{
-		HAS_PLAYER = 6;
+		HAS_TICTACTOE = 6;
 	}
 }
 

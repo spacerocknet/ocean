@@ -59,11 +59,11 @@ inline bool EntityType_Type_Parse(
     EntityType_Type_descriptor(), name, value);
 }
 enum RelationType_Type {
-  RelationType_Type_HAS_PLAYER = 6
+  RelationType_Type_HAS_TICTACTOE = 6
 };
 bool RelationType_Type_IsValid(int value);
-const RelationType_Type RelationType_Type_Type_MIN = RelationType_Type_HAS_PLAYER;
-const RelationType_Type RelationType_Type_Type_MAX = RelationType_Type_HAS_PLAYER;
+const RelationType_Type RelationType_Type_Type_MIN = RelationType_Type_HAS_TICTACTOE;
+const RelationType_Type RelationType_Type_Type_MAX = RelationType_Type_HAS_TICTACTOE;
 const int RelationType_Type_Type_ARRAYSIZE = RelationType_Type_Type_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* RelationType_Type_descriptor();
@@ -246,7 +246,7 @@ class RelationType : public ::google::protobuf::Message {
   // nested types ----------------------------------------------------
 
   typedef RelationType_Type Type;
-  static const Type HAS_PLAYER = RelationType_Type_HAS_PLAYER;
+  static const Type HAS_TICTACTOE = RelationType_Type_HAS_TICTACTOE;
   static inline bool Type_IsValid(int value) {
     return RelationType_Type_IsValid(value);
   }

@@ -25,6 +25,9 @@ enum ErrorType
 	COMMIT_ERROR = 6;
 	PASSWORD_INVALID = 7;
 	UID_DUPLICATED = 9;
+
+	/* TICTACTOE */
+	INVALID_PLAYER = 10;
 }
 
 /* SIGNIN */

@@ -15,7 +15,7 @@ message Player
 
 message Tictactoe
 {
-	enum State{CREATED = 1; PLAYING = 2; ENDED = 3;}
+	enum State{CREATED = 1; STARTED = 2; ENDED = 3;}
 	enum Value{E = 1; X = 2; O = 3;}
 	extend model.Entity	 { optional Tictactoe TICTACTOE = 5; }
 	required bytes player1 = 2;

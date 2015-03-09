@@ -61,7 +61,7 @@ inline bool Player_State_Parse(
 }
 enum Tictactoe_State {
   Tictactoe_State_CREATED = 1,
-  Tictactoe_State_PLAYING = 2,
+  Tictactoe_State_STARTED = 2,
   Tictactoe_State_ENDED = 3
 };
 bool Tictactoe_State_IsValid(int value);
@@ -316,7 +316,7 @@ class Tictactoe : public ::google::protobuf::Message {
 
   typedef Tictactoe_State State;
   static const State CREATED = Tictactoe_State_CREATED;
-  static const State PLAYING = Tictactoe_State_PLAYING;
+  static const State STARTED = Tictactoe_State_STARTED;
   static const State ENDED = Tictactoe_State_ENDED;
   static inline bool State_IsValid(int value) {
     return Tictactoe_State_IsValid(value);

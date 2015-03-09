@@ -80,11 +80,12 @@ enum ErrorType {
   UID_INVALID = 5,
   COMMIT_ERROR = 6,
   PASSWORD_INVALID = 7,
-  UID_DUPLICATED = 9
+  UID_DUPLICATED = 9,
+  INVALID_PLAYER = 10
 };
 bool ErrorType_IsValid(int value);
 const ErrorType ErrorType_MIN = OK;
-const ErrorType ErrorType_MAX = UID_DUPLICATED;
+const ErrorType ErrorType_MAX = INVALID_PLAYER;
 const int ErrorType_ARRAYSIZE = ErrorType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ErrorType_descriptor();

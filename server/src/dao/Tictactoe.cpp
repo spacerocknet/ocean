@@ -6,15 +6,15 @@
  */
 #include "DAO.h"
 
-entity_ptr DAO::ttt_create(string player)
+entity_ptr DAO::ttt_create(string player_id)
 {
-	auto en = get_entity(player, EntityType::PLAYER);
+	auto en = get_entity(player_id, EntityType::PLAYER);
 
 	/* default */
 	auto ret = boost::make_shared<model::Entity>();
 	ret->set_type(EntityType::TICTACTOE);
 	auto ttt = ret->MutableExtension(Tictactoe::TICTACTOE);
-	ttt->set_player1(player);
+	ttt->set_player1(player_id);
 	ttt->set_ip("127.0.0.1");
 	ttt->set_state(Tictactoe::CREATED);
 
@@ -33,24 +33,41 @@ entity_ptr DAO::ttt_create(string player)
 
 void DAO::ttt_join(string player_id, string ttt_id)
 {
-	auto p = get_entity(player_id, EntityType::PLAYER);
-	model::Entity t;
-	if (db->index_get(IndexType::TICTACTOE, ttt_id, t) != db::OK) throw EXCEPTION(comm::ErrorType::ENTITY_INVALID);
-	auto player = p->GetExtension(Player::PLAYER);
-	auto ttt = t.MutableExtension(Tictactoe::TICTACTOE);
+	auto player = get_entity(player_id, EntityType::PLAYER);
+	model::Entity ttt;
+
+	if (db->index_get(IndexType::TICTACTOE, ttt_id, ttt) != db::OK) throw EXCEPTION(comm::ErrorType::ENTITY_INVALID);
+	auto p = player->GetExtension(Player::PLAYER);
+	auto t = ttt.MutableExtension(Tictactoe::TICTACTOE);
 
 	/* check if player is creator */
+	if (t->player1() == player_id) throw EXCEPTION(comm::ErrorType::INVALID_PLAYER);
 	/* update Tictactoe data */
+	t->set_player2(player_id);
+	t->set_state(Tictactoe::STARTED);
+
+	Transaction trans(db);
+	trans.en_update(ttt);
+
 	/* remove Tictactoe index */
+	trans.index_del(IndexType::TICTACTOE, ttt_id);
 	/* make relation to players */
+	trans.rel_put(t->player1(), RelationType::HAS_TICTACTOE, ttt_id);
+	trans.rel_put(t->player2(), RelationType::HAS_TICTACTOE, ttt_id);
+	if (!trans.commit(true)) throw EXCEPTION(comm::ErrorType::COMMIT_ERROR);
 }
 
-void DAO::ttt_move(string player, string session, int row, int col, int value)
+void DAO::ttt_move(string player_id, string session, int row, int col, int value)
 {
+	/*TODO: TICTACTOE game logic here*/
 }
 
 void DAO::ttt_list(list<entity_ptr>& list)
 {
-
+	auto iter = db->index_iter(IndexType::TICTACTOE);
+	entity_ptr entity;
+	while ((entity = iter->next2()) != nullptr)
+	{
+		list.push_back(entity);
+	}
 }
-

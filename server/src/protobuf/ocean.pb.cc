@@ -123,7 +123,7 @@ void protobuf_AddDesc_ocean_2eproto() {
     ".ocean.Player\"\330\001\n\tTictactoe\022\017\n\007player1\030\002"
     " \002(\014\022\017\n\007player2\030\003 \001(\014\022\n\n\002ip\030\004 \002(\t\022\016\n\006val"
     "ues\030\001 \003(\r\022\r\n\005state\030\005 \002(\r\",\n\005State\022\013\n\007CRE"
-    "ATED\020\001\022\013\n\007PLAYING\020\002\022\t\n\005ENDED\020\003\"\034\n\005Value\022"
+    "ATED\020\001\022\013\n\007STARTED\020\002\022\t\n\005ENDED\020\003\"\034\n\005Value\022"
     "\005\n\001E\020\001\022\005\n\001X\020\002\022\005\n\001O\020\00322\n\tTICTACTOE\022\r.mode"
     "l.Entity\030\005 \001(\0132\020.ocean.Tictactoe", 432);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
@@ -595,7 +595,7 @@ bool Tictactoe_State_IsValid(int value) {
 
 #ifndef _MSC_VER
 const Tictactoe_State Tictactoe::CREATED;
-const Tictactoe_State Tictactoe::PLAYING;
+const Tictactoe_State Tictactoe::STARTED;
 const Tictactoe_State Tictactoe::ENDED;
 const Tictactoe_State Tictactoe::State_MIN;
 const Tictactoe_State Tictactoe::State_MAX;
